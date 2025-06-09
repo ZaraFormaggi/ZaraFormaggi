@@ -1,16 +1,22 @@
-
+ 
 <!DOCTYPE html>
-
 <html lang="it">
 <head>
-<!-- script pdf-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>ZARA FORMAGGI di Zara Maurizio</title>
-<!-- Leaflet CSS -->
-<link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/>
-<style>
+
+
+     
+     <!-- script pdf-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ZARA FORMAGGI di Zara Maurizio</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <style>
     :root {
       --verde-scuro: #2f4f2f;
       --verde-chiaro: #8fbc8f;
@@ -151,119 +157,218 @@
   </style>
 </head>
 <body>
+
 <!-- CARRELLO FISSO IN ALTO A DESTRA -->
-<!-- Sidebar Carrello -->
-<div id="cart-sidebar" style="position:fixed;top:0;right:-400px;width:350px;height:100%;background:#fff;border-left:2px solid #ccc;box-shadow:-2px 0 5px rgba(0,0,0,0.1);z-index:9999;padding:1rem;transition:right 0.3s;overflow-y:auto;">
-<h3>🛒 Il tuo carrello</h3>
-<ul id="cart-items"></ul>
-<p><strong>Totale: <span id="cart-sidebar-total">€0.00</span></strong></p>
-<button onclick="svuotaCarrello()" style="background:#c00;color:white;padding:8px 12px;border:none;border-radius:5px;">🧹 Svuota</button>
-<button onclick="toggleCartSidebar()" style="margin-top:10px;">Chiudi</button>
+<div id="floating-cart" style="position:fixed;top:20px;right:20px;background:#fff;border:1px solid #ccc;padding:10px 15px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.2);z-index:999;">
+  <strong>🛒 Carrello:</strong> <span id="floating-total">€0.00</span>
 </div>
-<div id="floating-cart" onclick="toggleCartSidebar()" style="position:fixed;top:20px;right:20px;background:#4CAF50;color:#fff;padding:15px 20px;border-radius:50px;font-size:16px;font-weight:bold;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:9999;cursor:pointer;" title="Clicca per vedere il carrello">🛒 Carrello: €0.00</div>
-<header>
-<div class="header-logo">
-<img alt="Logo Zara Formaggi" src="logo.png"/>
-</div>
-<div class="header-title">
-<h1>ZARA FORMAGGI</h1>
-<div class="header-subtitle">di Zara Maurizio</div>
-</div>
-<p>Rivendita di Prodotti tipici Sardi e tanto altro</p>
-</header>
-<nav>
-<a onclick="showSection('home')">Home</a>
-<a onclick="showSection('prodotti')">Acquista i nostri prodotti</a>
-<a onclick="showSection('galleria')">Galleria</a>
-<a onclick="showSection('chi-siamo')">Chi siamo</a>
-<a onclick="showSection('servizi')">Servizi</a>
-<a onclick="showSection('dove')">Dove ci trovi</a>
-<a onclick="showSection('contatti')">Contatti</a>
-</nav>
-<div class="search-bar">
-<input placeholder="Cerca nel sito..." type="text"/>
-</div>
-<main>
-<section class="section active" id="home">
-<h2>Benvenuti!</h2>
-<p>Visita il sito per scoprire i nostri prodotti. Offriamo una selezione di eccellenze enogastronomiche sarde, con attenzione alla qualità, alla tradizione e al gusto autentico.</p>
-</section>
-<section class="section" id="chi-siamo">
-<h2>Chi siamo</h2>
-<p>ZARA FORMAGGI nasce dalla passione per i sapori autentici della Sardegna. Fondata da Maurizio Zara, l’attività si dedica alla selezione e vendita di prodotti tipici come formaggi, salumi, dolci e molto altro. Tradizione e qualità sono il nostro marchio.</p>
-</section>
-<section class="section" id="prodotti">
-<h2 style="text-align:center;">🧀 I nostri prodotti</h2>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
-<div class="card" style="background:#fff8ed; border-radius:8px; padding:1rem; text-align:center;">
-<img alt="Formaggio Cuore" src="https://via.placeholder.com/200" style="width:100%; border-radius:6px;"/>
-<h3>Formaggio Cuore</h3>
-<p>Formaggio a pasta compatta, gusto delicato.</p>
-<button onclick="aggiungiAlCarrello('Formaggio Cuore', 8.50)">Aggiungi al carrello (€8.50)</button>
-</div>
-<div class="card" style="background:#fff8ed; border-radius:8px; padding:1rem; text-align:center;">
-<img alt="Gran Sirai" src="https://via.placeholder.com/200" style="width:100%; border-radius:6px;"/>
-<h3>Formaggio Gran Sirai</h3>
-<p>Stagionato intenso, profumo deciso.</p>
-<button onclick="aggiungiAlCarrello('Gran Sirai', 11.00)">Aggiungi al carrello (€11.00)</button>
-</div>
-<div class="card" style="background:#fff8ed; border-radius:8px; padding:1rem; text-align:center;">
-<img alt="Sirai Maturo" src="https://via.placeholder.com/200" style="width:100%; border-radius:6px;"/>
-<h3>Sirai Maturo</h3>
-<p>Sapore forte e persistente.</p>
-<button onclick="aggiungiAlCarrello('Sirai Maturo', 10.00)">Aggiungi al carrello (€10.00)</button>
-</div>
-</div>
-</section>
-<section class="section" id="dove">
-<h2>Dove ci trovi</h2>
-<p>Ci trovi in <strong>Via Gramsci, Iglesias (CI), Sardegna</strong>, presso il Mercato Civico.</p>
-<div id="map"></div>
-</section>
-<section class="section" id="servizi">
-<h2>I nostri servizi</h2>
-<ul>
-<li>Vendita al dettaglio di prodotti tipici sardi</li>
-<li>Confezioni regalo personalizzate</li>
-<li>Spedizioni in tutta Italia</li>
-<li>Degustazioni su prenotazione</li>
-</ul>
-<button onclick="svuotaCarrello()" style="background: #c00; color: white; margin-top: 10px; padding: 8px 12px; border: none; border-radius: 5px;" type="button">🧹 Svuota Carrello</button>
-</section>
-<section class="section" id="galleria">
-<h2>Galleria</h2>
-<div class="gallery-placeholder">
-<p>Qui sarà inserita la galleria di foto e video dei nostri prodotti e del punto vendita.</p>
-</div>
-</section>
-<section class="section" id="contatti">
-<h2>Contatti</h2>
-<p>Per informazioni, ordini o richieste particolari, contattaci via email o telefono. (Spazio per modulo contatti e informazioni)</p>
+  
+  <header>
+    <div class="header-logo">
+      <img src="logo.png" alt="Logo Zara Formaggi" />
+    </div>
+    <div class="header-title">
+      <h1>ZARA FORMAGGI</h1>
+      <div class="header-subtitle">di Zara Maurizio</div>
+    </div>
+    <p>Rivendita di Prodotti tipici Sardi e tanto altro</p>
+  </header>
+
+  <nav>
+    <a onclick="showSection('home')">Home</a>
+    <a onclick="showSection('prodotti')">Acquista i nostri prodotti</a>
+    <a onclick="showSection('galleria')">Galleria</a>
+    <a onclick="showSection('chi-siamo')">Chi siamo</a>
+    <a onclick="showSection('servizi')">Servizi</a>
+    <a onclick="showSection('dove')">Dove ci trovi</a>
+    <a onclick="showSection('contatti')">Contatti</a>
+  </nav>
+
+  <div class="search-bar">
+    <input type="text" placeholder="Cerca nel sito..." />
+  </div>
+
+  <main>
+    <section id="home" class="section active">
+      <h2>Benvenuti!</h2>
+      <p>Visita il sito per scoprire i nostri prodotti. Offriamo una selezione di eccellenze enogastronomiche sarde, con attenzione alla qualità, alla tradizione e al gusto autentico.</p>
+    </section>
+
+    <section id="chi-siamo" class="section">
+      <h2>Chi siamo</h2>
+      <p>ZARA FORMAGGI nasce dalla passione per i sapori autentici della Sardegna. Fondata da Maurizio Zara, l’attività si dedica alla selezione e vendita di prodotti tipici come formaggi, salumi, dolci e molto altro. Tradizione e qualità sono il nostro marchio.</p>
+    </section>
+
+<section id="prodotti" class="section">
+      <h2>I nostri prodotti</h2>
+      <div class="card-container">
+        <div class="card">
+          <img src="https://images" alt="Vecchio Capraro" />
+          <h3>Vecchio Capraro</h3>
+          <p>Caprino stagionato da latte crudo, aromatico e dal gusto deciso.</p>
+        </div>
+        <div class="card">
+          <img src="https" alt="Cuor di Latte" />
+          <h3>Cuor di Latte</h3>
+          <p>Formaggio fresco caprino, soffice e delicato. Perfetto da spalmare o gustare con miele e confetture.</p>
+        </div>
+        
+        <!-- SHOPPING AVANZATO -->
+<section id="shop" style="padding: 2rem; font-family: Arial, sans-serif; background-color: #fff8f0;">
+  <div style="max-width: 800px; margin: auto;">
+    <h2 style="text-align: center; color: #6b3e26;">🧀 Acquista i nostri prodotti</h2>
+
+    <div id="product-list" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 2rem;"></div>
+
+    <form id="order-form" action="https://formspree.io/f/xpwrplgn" method="POST">
+      <h3>🛒 Carrello</h3>
+      <ul id="cart" style="list-style: none; padding: 0;"></ul>
+<button type="button" onclick="svuotaCarrello()" style="background: #c00; color: white; margin-top: 10px; padding: 8px 12px; border: none; border-radius: 5px;">🧹 Svuota Carrello</button>
+      <p><strong>Totale: <span id="total">€0.00</span></strong></p>
+
+      <h4>📦 Consegna</h4>
+      <label><input type="radio" name="consegna" value="spedizione" required> Spedizione</label><br>
+      <label><input type="radio" name="consegna" value="ritiro"> Ritiro in sede</label><br><br>
+
+      <input type="text" name="nome" placeholder="Nome e Cognome" required><br><br>
+      <input type="email" name="email" placeholder="Email" required><br><br>
+      <textarea name="indirizzo" placeholder="Indirizzo per spedizione (se richiesto)" rows="3"></textarea><br><br>
+
+      <input type="hidden" name="ordine" id="ordineHidden">
+
+      <button type="submit" style="background-color: #6b3e26; color: white; padding: 0.75rem; border: none; border-radius: 5px;">📨 Invia Ordine</button>
+      <button type="button" onclick="downloadPDF()" style="margin-left:10px;background:#555;color:white;padding:10px 20px;border:none;border-radius:5px;">💾 Salva Ordine in PDF</button>
+    </form>
+
+    <br>
+    <h4>Paga con PayPal:</h4>
+    <div id="paypal-button-container"></div>
+  </div>
 </section>
 
-<section class="section" id="checkout" style="padding: 2rem;">
-<h2>🛍️ Completa il tuo Ordine</h2>
-<ul id="cart" style="list-style:none; padding-left:0;"></ul>
-<p><strong>Subtotale: <span id="subtotal">€0.00</span></strong></p>
-<p><strong>Spedizione: <span id="shipping">€0.00</span></strong></p>
-<p><strong>Totale: <span id="total">€0.00</span></strong></p>
-<form id="order-form" method="POST">
-<input name="nome" placeholder="Nome completo" required="" type="text"/><br/><br/>
-<input name="email" placeholder="Email" required="" type="email"/><br/><br/>
-<textarea name="indirizzo" placeholder="Indirizzo per la spedizione" rows="3"></textarea><br/><br/>
-<input id="ordineHidden" name="ordine" type="hidden"/>
-<button onclick="generaPDF()" style="margin-bottom:10px;" type="button">📄 Scarica PDF</button><br/>
-<div id="express-checkout-element"></div>
-<div id="payment-message" style="color:red;"></div>
-</form>
-</section>
-</main>
-<footer>
-<p>© 2025 ZARA FORMAGGI di Zara Maurizio - Tutti i diritti riservati</p>
-</footer>
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- SCRIPT: prodotti, carrello, PayPal -->
+<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR"></script>
 <script>
+const products = [
+  { id: 1, name: "Cuor di Latte", price: 6.5 },
+  { id: 2, name: "Vecchio Capraro", price: 9.0 },
+  { id: 3, name: "Gran Sirai", price: 12.0 }
+];
+let cart = [];
+
+function renderProducts() {
+  const list = document.getElementById("product-list");
+  list.innerHTML = "";
+  products.forEach(p => {
+    const box = document.createElement("div");
+    box.style = "border:1px solid #ccc; padding:1rem; width:200px; border-radius:10px; background:#fff;";
+    box.innerHTML = `
+      <h4>${p.name}</h4>
+      <p>€${p.price.toFixed(2)}</p>
+      <button onclick="addToCart(${p.id})" style="background:#8c5b3f; color:#fff; border:none; padding:0.5rem; border-radius:5px;">Aggiungi</button>
+    `;
+    list.appendChild(box);
+  });
+}
+
+function addToCart(id) {
+  const prod = products.find(p => p.id === id);
+  const found = cart.find(c => c.id === id);
+  if (found) found.qty++;
+  else cart.push({ ...prod, qty: 1 });
+  renderCart();
+}
+
+function renderCart() {
+  const list = document.getElementById("cart");
+  list.innerHTML = '';
+  let total = 0;
+  cart.forEach(item => {
+    total += item.price * item.qty;
+    const li = document.createElement("li");
+    li.textContent = `${item.name} x${item.qty} = €${(item.qty * item.price).toFixed(2)}`;
+    list.appendChild(li);
+  });
+  document.getElementById("total").textContent = `€${total.toFixed(2)}`;
+  document.getElementById("ordineHidden").value = cart.map(i => `${i.name} x${i.qty}`).join(', ') + ` | Totale: €${total.toFixed(2)}`;
+}
+
+paypal.Buttons({
+  createOrder: function(data, actions) {
+    const total = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
+    return actions.order.create({
+      purchase_units: [{
+        amount: {
+          value: total.toFixed(2)
+        }
+      }]
+    });
+  },
+  onApprove: function(data, actions) {
+    return actions.order.capture().then(function(details) {
+      alert('Pagamento completato da ' + details.payer.name.given_name);
+    });
+  }
+}).render('#paypal-button-container');
+
+renderProducts();
+</script>
+
+<style>
+@media (max-width: 600px) {
+  #product-list div {
+    width: 100% !important;
+  }
+  section#shop {
+    padding: 1rem;
+  }
+}
+</style>
+      </div>
+    </section>
+
+
+    
+    <section id="dove" class="section">
+      <h2>Dove ci trovi</h2>
+      <p>Ci trovi in <strong>Via Gramsci, Iglesias (CI), Sardegna</strong>, presso il Mercato Civico.</p>
+      <div id="map"></div>
+    </section>
+
+    <section id="servizi" class="section">
+      <h2>I nostri servizi</h2>
+      <ul>
+        <li>Vendita al dettaglio di prodotti tipici sardi</li>
+        <li>Confezioni regalo personalizzate</li>
+        <li>Spedizioni in tutta Italia</li>
+        <li>Degustazioni su prenotazione</li>
+      </ul>
+<button type="button" onclick="svuotaCarrello()" style="background: #c00; color: white; margin-top: 10px; padding: 8px 12px; border: none; border-radius: 5px;">🧹 Svuota Carrello</button>
+    </section>
+
+    <section id="galleria" class="section">
+      <h2>Galleria</h2>
+      <div class="gallery-placeholder">
+        <p>Qui sarà inserita la galleria di foto e video dei nostri prodotti e del punto vendita.</p>
+      </div>
+    </section>
+
+    
+
+    <section id="contatti" class="section">
+      <h2>Contatti</h2>
+      <p>Per informazioni, ordini o richieste particolari, contattaci via email o telefono. (Spazio per modulo contatti e informazioni)</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 ZARA FORMAGGI di Zara Maurizio - Tutti i diritti riservati</p>
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
     let mapInitialized = false;
     let map;
 
@@ -286,7 +391,10 @@
       }
     }
   </script>
-<script>
+
+<!-- aggiornamento carrello  -->
+
+  <script>
   const products = [
     { name: "Pecorino Sardo", price: 12.90 },
     { name: "Ricotta Mustia", price: 9.50 },
@@ -353,12 +461,16 @@
     });
   });
 </script>
-<!-- AGGIUNGI QUESTO PRIMA DI 
+
+  
+
+  
+  <!-- AGGIUNGI QUESTO PRIMA DI 
 <script>
-let carrello = JSON.parse(// localStorage.getItem("carrello")) || [];
+let carrello = JSON.parse(localStorage.getItem("carrello")) || [];
 
 function salvaCarrello() {
-  // localStorage.setItem("carrello", JSON.stringify(carrello));
+  localStorage.setItem("carrello", JSON.stringify(carrello));
 }
 
 function aggiornaCarrello() {
@@ -433,7 +545,7 @@ function rimuoviDalCarrello(nome) {
 function svuotaCarrello() {
   if (confirm("Sei sicuro di voler svuotare il carrello?")) {
     carrello = [];
-    // localStorage.removeItem("carrello");
+    localStorage.removeItem("carrello");
     aggiornaCarrello();
   }
 }
@@ -446,118 +558,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-
-  <script>
-    function toggleCartSidebar() {
-      const sidebar = document.getElementById("cart-sidebar");
-      sidebar.style.right = sidebar.style.right === "0px" ? "-400px" : "0px";
-    }
-  </script>
-
-<script>
-function renderCartSidebar() {
-  const ul = document.getElementById("cart-items");
-  const totalEl = document.getElementById("cart-sidebar-total");
-  if (!ul || !totalEl) return;
-
-  ul.innerHTML = "";
-  let total = 0;
-
-  carrello.forEach(item => {
-    const li = document.createElement("li");
-    const itemTotal = item.prezzo * item.quantita;
-    total += itemTotal;
-    li.innerHTML = `
-      <strong>${item.nome}</strong><br>
-      <button onclick="decrementa('${item.nome}')">➖</button>
-      <span>${item.quantita}</span>
-      <button onclick="incrementa('${item.nome}')">➕</button>
-      <button onclick="rimuoviDalCarrello('${item.nome}')">🗑</button>
-      = €${itemTotal.toFixed(2)}
-    `;
-    ul.appendChild(li);
-  });
-
-  totalEl.textContent = `€${total.toFixed(2)}`;
-}
-
-function incrementa(nome) {
-  const item = carrello.find(i => i.nome === nome);
-  if (item) {
-    item.quantita++;
-    salvaCarrello();
-    aggiornaCarrello();
-    renderCartSidebar();
-  }
-}
-
-function decrementa(nome) {
-  const item = carrello.find(i => i.nome === nome);
-  if (item && item.quantita > 1) {
-    item.quantita--;
-    salvaCarrello();
-    aggiornaCarrello();
-    renderCartSidebar();
-  }
-}
-
-const originalAggiornaCarrello = aggiornaCarrello;
-aggiornaCarrello = function() {
-  originalAggiornaCarrello();
-  renderCartSidebar();
-};
-
-document.addEventListener("DOMContentLoaded", () => {
-  renderCartSidebar();
-});
-</script>
-
-
-<!-- Stripe Checkout Integration -->
-<script src="https://js.stripe.com/v3/"></script>
-
-
-<script>
-  const stripe = Stripe("pk_test_1234567890"); // replace with real key
-  fetch("/create-payment-intent")  // endpoint to your backend
-    .then(res => res.json())
-    .then(({ clientSecret }) => {
-      const elements = stripe.elements({ clientSecret });
-      const express = elements.create("expressCheckout", {
-        buttonType: { card: 'pay', applePay: 'buy', googlePay: 'buy', paypal: 'buynow' }
-      });
-      express.mount("#express-checkout-element");
-      express.on("confirm", async (e) => {
-        const { error } = await stripe.confirmPayment({ elements, confirmParams: { return_url: "https://zaraformaggi.com/thank-you" }});
-        if (error) {
-          document.getElementById("payment-message").textContent = error.message;
-        }
-      });
-    });
-</script>
-
-<script src="https://js.stripe.com/v3/"></script>
-<script>
-  const stripe = Stripe("pk_test_TUACHIAVE");
-  fetch("/create-payment-intent", { method: "POST", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ amount: 1200 }) })
-    .then(res => res.json())
-    .then(({ clientSecret }) => {
-      const elements = stripe.elements({ clientSecret });
-      const express = elements.create("expressCheckout", {
-        buttonType: { card: 'pay', applePay: 'buy', googlePay: 'buy', paypal: 'buynow' }
-      });
-      express.mount("#express-checkout-element");
-      express.on("confirm", async (e) => {
-        const { error } = await stripe.confirmPayment({ elements, confirmParams: { return_url: "https://zaraformaggi.com/thank-you" }});
-        if (error) {
-          document.getElementById("payment-message").textContent = error.message;
-        }
-      });
-    });
-</script>
-
-</body> --&gt;
-<script src="https://www.paypal.com/sdk/js?client-id=sb¤cy=EUR"></script>
+</body> -->
+<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR"></script>
 <script>
   const prodotti = [
     { id: 1, nome: "Pecorino Sardo", prezzo: 20, disponibile: 10 },
@@ -636,6 +638,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }).render("#paypal-button-container");
 </script>
+
+
+     
+  
+<-- script pdf -->
 <script>
   async function downloadPDF() {
     const { jsPDF } = window.jspdf;
@@ -657,6 +664,8 @@ document.addEventListener("DOMContentLoaded", () => {
     doc.save('ordine_zaraformaggi.pdf');
   }
 </script>
+
+
 <script>
   const { jsPDF } = window.jspdf;
 
@@ -705,8 +714,11 @@ document.addEventListener("DOMContentLoaded", () => {
     doc.save("ordine_zaraformaggi.pdf");
   }
 </script>
-<script>
-  let carrello = JSON.parse(// localStorage.getItem("carrello")) || [];
+
+<-- aggiornamento carrello -->
+
+     <script>
+  let carrello = JSON.parse(localStorage.getItem("carrello")) || [];
 
   // Aggiungi prodotto
   function aggiungiAlCarrello(button) {
@@ -746,7 +758,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  
+  // Salva nel Local Storage
+  function salvaCarrello() {
+    localStorage.setItem("carrello", JSON.stringify(carrello));
   }
 
   // Aggiorna visualizzazione carrello
@@ -782,11 +796,17 @@ document.addEventListener("DOMContentLoaded", () => {
 }   
           
 </script>
+     
+function svuotaCarrello() {
+  carrello = [];
+  localStorage.removeItem("carrello");
+  
+
 <script>
-let carrello = JSON.parse(// localStorage.getItem("carrello")) || [];
+let carrello = JSON.parse(localStorage.getItem("carrello")) || [];
 
 function salvaCarrello() {
-  // localStorage.setItem("carrello", JSON.stringify(carrello));
+  localStorage.setItem("carrello", JSON.stringify(carrello));
 }
 
 function aggiornaCarrello() {
@@ -861,7 +881,7 @@ function rimuoviDalCarrello(nome) {
 function svuotaCarrello() {
   if (confirm("Sei sicuro di voler svuotare il carrello?")) {
     carrello = [];
-    // localStorage.removeItem("carrello");
+    localStorage.removeItem("carrello");
     aggiornaCarrello();
   }
 }
@@ -873,96 +893,16 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
-<script>
-    function toggleCartSidebar() {
-      const sidebar = document.getElementById("cart-sidebar");
-      sidebar.style.right = sidebar.style.right === "0px" ? "-400px" : "0px";
-    }
-  </script>
-<script>
-function renderCartSidebar() {
-  const ul = document.getElementById("cart-items");
-  const totalEl = document.getElementById("cart-sidebar-total");
-  if (!ul || !totalEl) return;
 
-  ul.innerHTML = "";
-  let total = 0;
-
-  carrello.forEach(item => {
-    const li = document.createElement("li");
-    const itemTotal = item.prezzo * item.quantita;
-    total += itemTotal;
-    li.innerHTML = `
-      <strong>${item.nome}</strong><br>
-      <button onclick="decrementa('${item.nome}')">➖</button>
-      <span>${item.quantita}</span>
-      <button onclick="incrementa('${item.nome}')">➕</button>
-      <button onclick="rimuoviDalCarrello('${item.nome}')">🗑</button>
-      = €${itemTotal.toFixed(2)}
-    `;
-    ul.appendChild(li);
-  });
-
-  totalEl.textContent = `€${total.toFixed(2)}`;
-}
-
-function incrementa(nome) {
-  const item = carrello.find(i => i.nome === nome);
-  if (item) {
-    item.quantita++;
-    salvaCarrello();
-    aggiornaCarrello();
-    renderCartSidebar();
-  }
-}
-
-function decrementa(nome) {
-  const item = carrello.find(i => i.nome === nome);
-  if (item && item.quantita > 1) {
-    item.quantita--;
-    salvaCarrello();
-    aggiornaCarrello();
-    renderCartSidebar();
-  }
-}
-
-const originalAggiornaCarrello = aggiornaCarrello;
-aggiornaCarrello = function() {
-  originalAggiornaCarrello();
-  renderCartSidebar();
-};
-
-document.addEventListener("DOMContentLoaded", () => {
-  renderCartSidebar();
-});
-</script>
-<!-- Stripe Checkout Integration -->
-<script src="https://js.stripe.com/v3/"></script>
-<div id="express-checkout-element" style="margin: 2rem auto; max-width: 400px;"></div>
-<div id="payment-message" style="text-align: center; color: red;"></div>
-<script>
-  const stripe = Stripe("pk_test_1234567890"); // replace with real key
-  fetch("/create-payment-intent")  // endpoint to your backend
-    .then(res => res.json())
-    .then(({ clientSecret }) => {
-      const elements = stripe.elements({ clientSecret });
-      const express = elements.create("expressCheckout", {
-        buttonType: { card: 'pay', applePay: 'buy', googlePay: 'buy', paypal: 'buynow' }
-      });
-      express.mount("#express-checkout-element");
-      express.on("confirm", async (e) => {
-        const { error } = await stripe.confirmPayment({ elements, confirmParams: { return_url: "https://zaraformaggi.com/thank-you" }});
-        if (error) {
-          document.getElementById("payment-message").textContent = error.message;
-        }
-      });
-    });
-</script>
-
+</body>
 </html>
 
 
+
+  
+       
   
 
 
   
+            
