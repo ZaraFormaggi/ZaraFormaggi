@@ -17,93 +17,6 @@
       --caldo: #f4e2d8;
     }
 
-
-<!-- AGGIUNGI QUESTO PRIMA DI </body> -->
-<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR"></script>
-<script>
-  const prodotti = [
-    { id: 1, nome: "Pecorino Sardo", prezzo: 12.5, disponibile: 10 },
-    { id: 2, nome: "Ricotta Fresca", prezzo: 6.0, disponibile: 20 },
-    { id: 3, nome: "Fiore Sardo", prezzo: 15.0, disponibile: 5 }
-  ];
-
-  let carrello = [];
-
-  function aggiornaUI() {
-    const elenco = document.getElementById("product-list");
-    elenco.innerHTML = prodotti.map(p => `
-      <div class="card">
-        <h3>${p.nome}</h3>
-        <p>Prezzo: €${p.prezzo.toFixed(2)}</p>
-        <p>Disponibili: ${p.disponibile}</p>
-        <button onclick="aggiungiAlCarrello(${p.id})">Aggiungi</button>
-      </div>
-    `).join("");
-  }
-
-  function aggiornaCarrello() {
-    const ul = document.getElementById("cart");
-    ul.innerHTML = carrello.map(item => `<li>${item.nome} x${item.quantita} = €${(item.prezzo * item.quantita).toFixed(2)}</li>`).join("");
-
-    const subtotal = carrello.reduce((sum, item) => sum + item.prezzo * item.quantita, 0);
-    document.getElementById("subtotal").innerText = `€${subtotal.toFixed(2)}`;
-
-    const spedizione = document.querySelector("input[name='spedizione']:checked").value === "spedizione" ? 7 : 0;
-    document.getElementById("shipping").innerText = `€${spedizione.toFixed(2)}`;
-
-    const totale = subtotal + spedizione;
-    document.getElementById("total").innerText = `€${totale.toFixed(2)}`;
-    document.getElementById("floating-total").innerText = `€${totale.toFixed(2)}`;
-
-    document.getElementById("ordineHidden").value = carrello.map(c => `${c.nome} x${c.quantita}`).join(", ");
-  }
-
-  function aggiungiAlCarrello(id) {
-    const prodotto = prodotti.find(p => p.id === id);
-    if (!prodotto || prodotto.disponibile <= 0) return;
-    const esiste = carrello.find(c => c.id === id);
-    if (esiste) {
-      if (esiste.quantita < prodotto.disponibile) {
-        esiste.quantita++;
-      }
-    } else {
-      carrello.push({ ...prodotto, quantita: 1 });
-    }
-    aggiornaCarrello();
-  }
-
-  document.querySelectorAll("input[name='spedizione']").forEach(r => {
-    r.addEventListener("change", aggiornaCarrello);
-  });
-
-  aggiornaUI();
-
-  paypal.Buttons({
-    createOrder: (data, actions) => {
-      const totale = document.getElementById("total").innerText.replace("€", "");
-      return actions.order.create({
-        purchase_units: [{ amount: { value: totale } }]
-      });
-    },
-    onApprove: (data, actions) => {
-      return actions.order.capture().then(function(details) {
-        alert("Pagamento completato da " + details.payer.name.given_name);
-      });
-    }
-  }).render("#paypal-button-container");
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
     
     body {
       margin: 0;
@@ -112,10 +25,6 @@
       color: #333;
     }
 
-<!-- CARRELLO FISSO IN ALTO A DESTRA -->
-<div id="floating-cart" style="position:fixed;top:20px;right:20px;background:#fff;border:1px solid #ccc;padding:10px 15px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.2);z-index:999;">
-  <strong>🛒 Carrello:</strong> <span id="floating-total">€0.00</span>
-</div>
 
 
 
@@ -246,6 +155,11 @@
   </style>
 </head>
 <body>
+  <!-- CARRELLO FISSO IN ALTO A DESTRA -->
+<div id="floating-cart" style="position:fixed;top:20px;right:20px;background:#fff;border:1px solid #ccc;padding:10px 15px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.2);z-index:999;">
+  <strong>🛒 Carrello:</strong> <span id="floating-total">€0.00</span>
+</div>
+
   <header>
     <div class="header-logo">
       <img src="logo.png" alt="Logo Zara Formaggi" />
@@ -392,5 +306,85 @@
       }
     }
   </script>
+
+  <!-- AGGIUNGI QUESTO PRIMA DI </body> -->
+<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR"></script>
+<script>
+  const prodotti = [
+    { id: 1, nome: "Pecorino Sardo", prezzo: 12.5, disponibile: 10 },
+    { id: 2, nome: "Ricotta Fresca", prezzo: 6.0, disponibile: 20 },
+    { id: 3, nome: "Fiore Sardo", prezzo: 15.0, disponibile: 5 }
+  ];
+
+  let carrello = [];
+
+  function aggiornaUI() {
+    const elenco = document.getElementById("product-list");
+    elenco.innerHTML = prodotti.map(p => `
+      <div class="card">
+        <h3>${p.nome}</h3>
+        <p>Prezzo: €${p.prezzo.toFixed(2)}</p>
+        <p>Disponibili: ${p.disponibile}</p>
+        <button onclick="aggiungiAlCarrello(${p.id})">Aggiungi</button>
+      </div>
+    `).join("");
+  }
+
+  function aggiornaCarrello() {
+    const ul = document.getElementById("cart");
+    ul.innerHTML = carrello.map(item => `<li>${item.nome} x${item.quantita} = €${(item.prezzo * item.quantita).toFixed(2)}</li>`).join("");
+
+    const subtotal = carrello.reduce((sum, item) => sum + item.prezzo * item.quantita, 0);
+    document.getElementById("subtotal").innerText = `€${subtotal.toFixed(2)}`;
+
+    const spedizione = document.querySelector("input[name='spedizione']:checked").value === "spedizione" ? 7 : 0;
+    document.getElementById("shipping").innerText = `€${spedizione.toFixed(2)}`;
+
+    const totale = subtotal + spedizione;
+    document.getElementById("total").innerText = `€${totale.toFixed(2)}`;
+    document.getElementById("floating-total").innerText = `€${totale.toFixed(2)}`;
+
+    document.getElementById("ordineHidden").value = carrello.map(c => `${c.nome} x${c.quantita}`).join(", ");
+  }
+
+  function aggiungiAlCarrello(id) {
+    const prodotto = prodotti.find(p => p.id === id);
+    if (!prodotto || prodotto.disponibile <= 0) return;
+    const esiste = carrello.find(c => c.id === id);
+    if (esiste) {
+      if (esiste.quantita < prodotto.disponibile) {
+        esiste.quantita++;
+      }
+    } else {
+      carrello.push({ ...prodotto, quantita: 1 });
+    }
+    aggiornaCarrello();
+  }
+
+  document.querySelectorAll("input[name='spedizione']").forEach(r => {
+    r.addEventListener("change", aggiornaCarrello);
+  });
+
+  aggiornaUI();
+
+  paypal.Buttons({
+    createOrder: (data, actions) => {
+      const totale = document.getElementById("total").innerText.replace("€", "");
+      return actions.order.create({
+        purchase_units: [{ amount: { value: totale } }]
+      });
+    },
+    onApprove: (data, actions) => {
+      return actions.order.capture().then(function(details) {
+        alert("Pagamento completato da " + details.payer.name.given_name);
+      });
+    }
+  }).render("#paypal-button-container");
+</script>
+
+
+
+
+  
 </body>
 </html>
