@@ -193,120 +193,26 @@
 <p>ZARA FORMAGGI nasce dalla passione per i sapori autentici della Sardegna. Fondata da Maurizio Zara, l’attività si dedica alla selezione e vendita di prodotti tipici come formaggi, salumi, dolci e molto altro. Tradizione e qualità sono il nostro marchio.</p>
 </section>
 <section class="section" id="prodotti">
-<h2>I nostri prodotti</h2>
-<div class="card-container">
-<div class="card">
-<img alt="Vecchio Capraro" src="https://images"/>
-<h3>Vecchio Capraro</h3>
-<p>Caprino stagionato da latte crudo, aromatico e dal gusto deciso.</p>
+<h2 style="text-align:center;">🧀 I nostri prodotti</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+<div class="card" style="background:#fff8ed; border-radius:8px; padding:1rem; text-align:center;">
+<img alt="Formaggio Cuore" src="https://via.placeholder.com/200" style="width:100%; border-radius:6px;"/>
+<h3>Formaggio Cuore</h3>
+<p>Formaggio a pasta compatta, gusto delicato.</p>
+<button onclick="aggiungiAlCarrello('Formaggio Cuore', 8.50)">Aggiungi al carrello (€8.50)</button>
 </div>
-<div class="card">
-<img alt="Cuor di Latte" src="https"/>
-<h3>Cuor di Latte</h3>
-<p>Formaggio fresco caprino, soffice e delicato. Perfetto da spalmare o gustare con miele e confetture.</p>
+<div class="card" style="background:#fff8ed; border-radius:8px; padding:1rem; text-align:center;">
+<img alt="Gran Sirai" src="https://via.placeholder.com/200" style="width:100%; border-radius:6px;"/>
+<h3>Formaggio Gran Sirai</h3>
+<p>Stagionato intenso, profumo deciso.</p>
+<button onclick="aggiungiAlCarrello('Gran Sirai', 11.00)">Aggiungi al carrello (€11.00)</button>
 </div>
-<!-- SHOPPING AVANZATO -->
-<section id="shop" style="padding: 2rem; font-family: Arial, sans-serif; background-color: #fff8f0;">
-<div style="max-width: 800px; margin: auto;">
-<h2 style="text-align: center; color: #6b3e26;">🧀 Acquista i nostri prodotti</h2>
-<div id="product-list" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 2rem;"></div>
-<form action="https://formspree.io/f/xpwrplgn" id="order-form" method="POST">
-<h3>🛒 Carrello</h3>
-<ul id="cart" style="list-style: none; padding: 0;"></ul>
-<button onclick="svuotaCarrello()" style="background: #c00; color: white; margin-top: 10px; padding: 8px 12px; border: none; border-radius: 5px;" type="button">🧹 Svuota Carrello</button>
-<p><strong>Totale: <span id="total">€0.00</span></strong></p>
-<h4>📦 Consegna</h4>
-<label><input name="consegna" required="" type="radio" value="spedizione"/> Spedizione</label><br/>
-<label><input name="consegna" type="radio" value="ritiro"/> Ritiro in sede</label><br/><br/>
-<input name="nome" placeholder="Nome e Cognome" required="" type="text"/><br/><br/>
-<input name="email" placeholder="Email" required="" type="email"/><br/><br/>
-<textarea name="indirizzo" placeholder="Indirizzo per spedizione (se richiesto)" rows="3"></textarea><br/><br/>
-<input id="ordineHidden" name="ordine" type="hidden"/>
-<button style="background-color: #6b3e26; color: white; padding: 0.75rem; border: none; border-radius: 5px;" type="submit">📨 Invia Ordine</button>
-<button onclick="downloadPDF()" style="margin-left:10px;background:#555;color:white;padding:10px 20px;border:none;border-radius:5px;" type="button">💾 Salva Ordine in PDF</button>
-</form>
-<br/>
-<h4>Paga con PayPal:</h4>
-<div id="paypal-button-container"></div>
+<div class="card" style="background:#fff8ed; border-radius:8px; padding:1rem; text-align:center;">
+<img alt="Sirai Maturo" src="https://via.placeholder.com/200" style="width:100%; border-radius:6px;"/>
+<h3>Sirai Maturo</h3>
+<p>Sapore forte e persistente.</p>
+<button onclick="aggiungiAlCarrello('Sirai Maturo', 10.00)">Aggiungi al carrello (€10.00)</button>
 </div>
-</section>
-<!-- SCRIPT: prodotti, carrello, PayPal -->
-<script src="https://www.paypal.com/sdk/js?client-id=sb¤cy=EUR"></script>
-<script>
-const products = [
-  { id: 1, name: "Cuor di Latte", price: 6.5 },
-  { id: 2, name: "Vecchio Capraro", price: 9.0 },
-  { id: 3, name: "Gran Sirai", price: 12.0 }
-];
-let cart = [];
-
-function renderProducts() {
-  const list = document.getElementById("product-list");
-  list.innerHTML = "";
-  products.forEach(p => {
-    const box = document.createElement("div");
-    box.style = "border:1px solid #ccc; padding:1rem; width:200px; border-radius:10px; background:#fff;";
-    box.innerHTML = `
-      <h4>${p.name}</h4>
-      <p>€${p.price.toFixed(2)}</p>
-      <button onclick="addToCart(${p.id})" style="background:#8c5b3f; color:#fff; border:none; padding:0.5rem; border-radius:5px;">Aggiungi</button>
-    `;
-    list.appendChild(box);
-  });
-}
-
-function addToCart(id) {
-  const prod = products.find(p => p.id === id);
-  const found = cart.find(c => c.id === id);
-  if (found) found.qty++;
-  else cart.push({ ...prod, qty: 1 });
-  renderCart();
-}
-
-function renderCart() {
-  const list = document.getElementById("cart");
-  list.innerHTML = '';
-  let total = 0;
-  cart.forEach(item => {
-    total += item.price * item.qty;
-    const li = document.createElement("li");
-    li.textContent = `${item.name} x${item.qty} = €${(item.qty * item.price).toFixed(2)}`;
-    list.appendChild(li);
-  });
-  document.getElementById("total").textContent = `€${total.toFixed(2)}`;
-  document.getElementById("ordineHidden").value = cart.map(i => `${i.name} x${i.qty}`).join(', ') + ` | Totale: €${total.toFixed(2)}`;
-}
-
-paypal.Buttons({
-  createOrder: function(data, actions) {
-    const total = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
-    return actions.order.create({
-      purchase_units: [{
-        amount: {
-          value: total.toFixed(2)
-        }
-      }]
-    });
-  },
-  onApprove: function(data, actions) {
-    return actions.order.capture().then(function(details) {
-      alert('Pagamento completato da ' + details.payer.name.given_name);
-    });
-  }
-}).render('#paypal-button-container');
-
-renderProducts();
-</script>
-<style>
-@media (max-width: 600px) {
-  #product-list div {
-    width: 100% !important;
-  }
-  section#shop {
-    padding: 1rem;
-  }
-}
-</style>
 </div>
 </section>
 <section class="section" id="dove">
@@ -587,6 +493,30 @@ aggiornaCarrello = function() {
 document.addEventListener("DOMContentLoaded", () => {
   renderCartSidebar();
 });
+</script>
+
+
+<!-- Stripe Checkout Integration -->
+<script src="https://js.stripe.com/v3/"></script>
+<div id="express-checkout-element" style="margin: 2rem auto; max-width: 400px;"></div>
+<div id="payment-message" style="text-align: center; color: red;"></div>
+<script>
+  const stripe = Stripe("pk_test_1234567890"); // replace with real key
+  fetch("/create-payment-intent")  // endpoint to your backend
+    .then(res => res.json())
+    .then(({ clientSecret }) => {
+      const elements = stripe.elements({ clientSecret });
+      const express = elements.create("expressCheckout", {
+        buttonType: { card: 'pay', applePay: 'buy', googlePay: 'buy', paypal: 'buynow' }
+      });
+      express.mount("#express-checkout-element");
+      express.on("confirm", async (e) => {
+        const { error } = await stripe.confirmPayment({ elements, confirmParams: { return_url: "https://zaraformaggi.com/thank-you" }});
+        if (error) {
+          document.getElementById("payment-message").textContent = error.message;
+        }
+      });
+    });
 </script>
 
 </body> -->
@@ -969,6 +899,30 @@ document.addEventListener("DOMContentLoaded", () => {
   renderCartSidebar();
 });
 </script>
+
+<!-- Stripe Checkout Integration -->
+<script src="https://js.stripe.com/v3/"></script>
+<div id="express-checkout-element" style="margin: 2rem auto; max-width: 400px;"></div>
+<div id="payment-message" style="text-align: center; color: red;"></div>
+<script>
+  const stripe = Stripe("pk_test_1234567890"); // replace with real key
+  fetch("/create-payment-intent")  // endpoint to your backend
+    .then(res => res.json())
+    .then(({ clientSecret }) => {
+      const elements = stripe.elements({ clientSecret });
+      const express = elements.create("expressCheckout", {
+        buttonType: { card: 'pay', applePay: 'buy', googlePay: 'buy', paypal: 'buynow' }
+      });
+      express.mount("#express-checkout-element");
+      express.on("confirm", async (e) => {
+        const { error } = await stripe.confirmPayment({ elements, confirmParams: { return_url: "https://zaraformaggi.com/thank-you" }});
+        if (error) {
+          document.getElementById("payment-message").textContent = error.message;
+        }
+      });
+    });
+</script>
+
 </body>
 </html>
 
