@@ -206,13 +206,21 @@
     <hr>
     
     
-    <form id="checkout-form" action="https://formspree.io/f/xpwrplgn" method="POST">
+    <form id="checkout-form" action="ordine.php" method="POST">
       <input type="text" name="Nome" placeholder="Nome" required>
       <input type="text" name="Cognome" placeholder="Cognome" required>
       <input type="tel" name="Telefono" placeholder="Numero di telefono" required>
       <input type="email" name="Email" placeholder="Email" required>
       <input type="text" name="Indirizzo" placeholder="Indirizzo di consegna (se richiesto)">
-      <label><input type="checkbox" name="Ritiro in loco"> Ritiro in loco presso il negozio</label>
+      <label><input type="checkbox" name="Ritiro in loco" id="pickup"> Ritiro in loco presso il negozio</label>
+      
+      <label><input type="checkbox" name="Sottovuoto"> Richiedi confezionamento sottovuoto</label>
+      <label><input type="checkbox" name="Confezione regalo"> Confezione regalo (+€5)</label>
+      <label>Regala un buono:
+        <input type="number" name="Buono regalo" placeholder="Importo in €" min="10">
+        <button type="button" onclick="alert('Procedura pagamento buono da implementare')">Paga buono</button>
+      </label>
+
       <input type="hidden" name="Ordine" id="ordine-dettaglio">
       <button type="submit" onclick="prepareOrder()">Invia Ordine</button>
       <button type="button" onclick="downloadPDF()">Salva in PDF</button>
@@ -264,7 +272,7 @@
 
     <section id="dove" class="section">
       <h2>Dove ci trovi</h2>
-      <p>Ci trovi in <strong>Via Gramsci, Iglesias (CI), Sardegna</strong>, presso il Mercato Civico Box n° 27 .</p>
+      <p>Ci trovi in <strong>Via Gramsci, Iglesias (CI), Sardegna</strong>, presso il Mercato Civico.</p>
       
       <h3>Orari di apertura</h3>
       <ul>
@@ -290,12 +298,7 @@
       </ul>
     </section>
 
-    <section id="galleria" class="section">
-      <h2>Galleria</h2>
-      <div class="gallery-placeholder">
-        <p>Qui sarà inserita la galleria di foto e video dei nostri prodotti e del punto vendita.</p>
-      </div>
-    </section>
+    
 
     <section id="prodotti" class="section">
       <h2>I nostri prodotti</h2>
@@ -303,12 +306,12 @@
         <div class="card">
           <img src="https://images.openai.com/thumbnails/e2612354a9f11115f0fd444ca441070b.jpeg" alt="Vecchio Capraro" />
           <h3>Vecchio Capraro</h3>
-          <p>Caprino stagionato da latte crudo, aromatico e dal gusto deciso. </p>
+          <p>Caprino stagionato da latte crudo, aromatico e dal gusto deciso. Prodotti dalla Talaroga, ideale per abbinamenti sofisticati.</p>
         </div>
         <div class="card">
           <img src="https://images.openai.com/thumbnails/561ca8fe4a0a0e02deb1b6bfb4915d74.jpeg" alt="Cuor di Latte" />
           <h3>Cuor di Latte</h3>
-          <p>Formaggio fresco caprino, soffice e delicato. Perfetto da spalmare o gustare con miele e confetture.</p>
+          <p>Formaggio fresco caprino, soffice e delicato. Perfetto da spalmare o gustare con miele e confetture. Anche questo della Talaroga.</p>
         </div>
       </div>
     </section>
@@ -396,17 +399,21 @@
       alert("Ordine inviato! (funzione dimostrativa)");
     }
 
-    function downloadPDF() {
-      let content = "Ordine Zara Formaggi\n\n";
-      cart.forEach(item => {
-        content += `${item.name} - Quantità: ${item.quantity}, Prezzo totale: €${(item.price * item.quantity).toFixed(2)}\n`;
-      });
-      const blob = new Blob([content], { type: "application/pdf" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = "ordine_zara_formaggi.pdf";
-      link.click();
-    }
+    
+function downloadPDF() {
+  let content = "Ordine Zara Formaggi
+
+";
+  cart.forEach(item => {
+    content += `${item.name} - Quantità: ${item.quantity}, Prezzo totale: €${(item.price * item.quantity).toFixed(2)}
+`;
+  });
+  const blob = new Blob([content], { type: "text/plain" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "ordine_zara_formaggi.txt";
+  link.click();
+}
 
 
     function simulatePayment() {
@@ -509,17 +516,21 @@
       alert("Ordine inviato! (funzione dimostrativa)");
     }
 
-    function downloadPDF() {
-      let content = "Ordine Zara Formaggi\n\n";
-      cart.forEach(item => {
-        content += `${item.name} - Quantità: ${item.quantity}, Prezzo totale: €${(item.price * item.quantity).toFixed(2)}\n`;
-      });
-      const blob = new Blob([content], { type: "application/pdf" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = "ordine_zara_formaggi.pdf";
-      link.click();
-    }
+    
+function downloadPDF() {
+  let content = "Ordine Zara Formaggi
+
+";
+  cart.forEach(item => {
+    content += `${item.name} - Quantità: ${item.quantity}, Prezzo totale: €${(item.price * item.quantity).toFixed(2)}
+`;
+  });
+  const blob = new Blob([content], { type: "text/plain" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "ordine_zara_formaggi.txt";
+  link.click();
+}
 
 
     function simulatePayment() {
