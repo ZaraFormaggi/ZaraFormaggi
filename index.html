@@ -30,6 +30,12 @@
       text-align: center;
     }
 
+    .header-logo img {
+      width: 100px;
+      height: auto;
+      margin-bottom: 0.5rem;
+    }
+
     .header-title h1 {
       margin: 0;
     }
@@ -113,6 +119,9 @@
 </head>
 <body>
   <header>
+    <div class="header-logo">
+      <img src="logo.png" alt="Logo Zara Formaggi" />
+    </div>
     <div class="header-title">
       <h1>ZARA FORMAGGI</h1>
       <div class="header-subtitle">di Zara Maurizio</div>
@@ -146,7 +155,7 @@
 
     <section id="dove" class="section">
       <h2>Dove ci trovi</h2>
-      <p>Ci trovi presso il Mercato Civico in Via Gramsci, Iglesias (CI), Sardegna.</p>
+      <p>Ci trovi in <strong>Via Gramsci, Iglesias (CI), Sardegna</strong>, presso il Mercato Civico.</p>
       <div id="map"></div>
     </section>
 
@@ -157,7 +166,6 @@
         <li>Confezioni regalo personalizzate</li>
         <li>Confezionamento dei prodotti sottovuoto </li>
         <li>Spedizioni in tutta Italia e Europa</li>
-       
       </ul>
     </section>
 
@@ -202,7 +210,7 @@
             }).addTo(map);
 
             L.marker([39.3081, 8.5292]).addTo(map)
-              .bindPopup('Mercato Civico - Via Gramsci, Iglesias')
+              .bindPopup('Via Gramsci, Mercato Civico - Iglesias, Sardegna')
               .openPopup();
 
             mapInitialized = true;
