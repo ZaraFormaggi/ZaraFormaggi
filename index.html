@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -110,10 +111,41 @@
       border-radius: 8px;
     }
 
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .card {
+      background-color: #fff8ed;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      width: 300px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+      height: auto;
+    }
+
+    .card h3 {
+      margin-top: 0.5rem;
+      color: #5d4037;
+    }
+
+    .card p {
+      font-size: 0.95em;
+      color: #4e342e;
+    }
+
     @media (max-width: 600px) {
-      nav a {
-        padding: 0.5rem;
-      }
+      nav a { padding: 0.5rem; }
+      .card { width: 100%; }
     }
   </style>
 </head>
@@ -131,11 +163,11 @@
 
   <nav>
     <a onclick="showSection('home')">Home</a>
-     <a onclick="showSection('i-nostri-prodotti')">I nostri prodotti</a>
     <a onclick="showSection('chi-siamo')">Chi siamo</a>
     <a onclick="showSection('dove')">Dove ci trovi</a>
     <a onclick="showSection('servizi')">Servizi</a>
     <a onclick="showSection('galleria')">Galleria</a>
+    <a onclick="showSection('prodotti')">I nostri prodotti</a>
     <a onclick="showSection('contatti')">Contatti</a>
   </nav>
 
@@ -149,117 +181,6 @@
       <p>Visita il sito per scoprire i nostri prodotti. Offriamo una selezione di eccellenze enogastronomiche sarde, con attenzione alla qualità, alla tradizione e al gusto autentico.</p>
     </section>
 
-<!DOCTYPE html>
-<html lang="it">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  
-  <section id="i-nostri-prodotti" class="section">
-      <h2>I nostri prodotti </h2>
-  <style>
-    body {
-      font-family: 'Georgia', serif;
-      background-color: #fdf7f0;
-      color: #4a3d2b;
-      margin: 0;
-      padding: 0;
-    }
-
-    header {
-      background-color: #8b5e3c;
-      color: #fff3e0;
-      padding: 20px;
-      text-align: center;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 2.5em;
-    }
-
-    section.prodotti {
-      padding: 40px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    h2 {
-      text-align: center;
-      color: #6d4c41;
-      margin-bottom: 30px;
-    }
-
-    .card-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-    }
-
-    .card {
-      background-color: #fff8ec;
-      border: 1px solid #d7ccc8;
-      border-radius: 12px;
-      padding: 16px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .card img {
-      width: 100%;
-      border-radius: 10px;
-      height: auto;
-    }
-
-    .card h3 {
-      margin-top: 15px;
-      margin-bottom: 10px;
-      font-size: 1.2em;
-      color: #5d4037;
-    }
-
-    .card p {
-      font-size: 0.95em;
-      color: #4e342e;
-    }
-  </style>
-</head>
-<body>
-
-<header>
-  <h1>I nostri Formaggi Artigianali</h1>
-</header>
-
-<section class="prodotti">
-  <h2>Specialità Caprine e Miste</h2>
-  <div class="card-container">
-
-    <!-- Caprino Cuor di Latte -->
-    <div class="card">
-      <img src="https://images.openai.com/thumbnails/e95bcfedaa116bf7ad7222ca2a6492a3.jpeg" alt="Caprino Cuor di Latte" />
-      <h3>Caprino “Cuor di Latte”</h3>
-      <p>Formaggio semi-stagionato, realizzato con latte di capra sarda. Sapore delicato e leggermente acidulo, perfetto per piatti freschi e antipasti.</p>
-    </div>
-    
-
-
-    <!-- Vecchio Capraro -->
-    <div class="card" style="background:#fff8ed;border:1px solid #ccc;border-radius:12px;width:300px;padding:1rem;">
-      <img src="URL_IMMAGINE_VCAPRARO" alt="Vecchio Capraro" style="width:100%;border-radius:8px;">
-      <h3>Vecchio Capraro</h3>
-      <p>Caprino stagionato da latte crudo, aromatico e dal gusto deciso, ma non piccante. Stagionatura minima 120‑180 gg, ottimo abbinato a vini passiti.</p>
-    </div>
-
- 
-
-  
-</section>
-    
-
-
-
-
-
-    
     <section id="chi-siamo" class="section">
       <h2>Chi siamo</h2>
       <p>ZARA FORMAGGI nasce dalla passione per i sapori autentici della Sardegna. Fondata da Maurizio Zara, l’attività si dedica alla selezione e vendita di prodotti tipici come formaggi, salumi, dolci e molto altro. Tradizione e qualità sono il nostro marchio.</p>
@@ -267,7 +188,7 @@
 
     <section id="dove" class="section">
       <h2>Dove ci trovi</h2>
-      <p>Ci trovi in <strong>Via Gramsci, Iglesias (CI), Sardegna</strong>, presso il Mercato Civico , Box n° 27.</p>
+      <p>Ci trovi in <strong>Via Gramsci, Iglesias (CI), Sardegna</strong>, presso il Mercato Civico.</p>
       <div id="map"></div>
     </section>
 
@@ -276,8 +197,8 @@
       <ul>
         <li>Vendita al dettaglio di prodotti tipici sardi</li>
         <li>Confezioni regalo personalizzate</li>
-        <li>Confezionamento dei prodotti sottovuoto </li>
-        <li>Spedizioni in tutta Italia e Europa</li>
+        <li>Spedizioni in tutta Italia</li>
+        <li>Degustazioni su prenotazione</li>
       </ul>
     </section>
 
@@ -288,9 +209,25 @@
       </div>
     </section>
 
+    <section id="prodotti" class="section">
+      <h2>I nostri prodotti</h2>
+      <div class="card-container">
+        <div class="card">
+          <img src="https://images.openai.com/thumbnails/e2612354a9f11115f0fd444ca441070b.jpeg" alt="Vecchio Capraro" />
+          <h3>Vecchio Capraro</h3>
+          <p>Caprino stagionato da latte crudo, aromatico e dal gusto deciso. Prodotti dalla Talaroga, ideale per abbinamenti sofisticati.</p>
+        </div>
+        <div class="card">
+          <img src="https://images.openai.com/thumbnails/561ca8fe4a0a0e02deb1b6bfb4915d74.jpeg" alt="Cuor di Latte" />
+          <h3>Cuor di Latte</h3>
+          <p>Formaggio fresco caprino, soffice e delicato. Perfetto da spalmare o gustare con miele e confetture. Anche questo della Talaroga.</p>
+        </div>
+      </div>
+    </section>
+
     <section id="contatti" class="section">
       <h2>Contatti</h2>
-      <p>Per informazioni, ordini o richieste particolari, contattaci via email. (Spazio per modulo contatti e informazioni)</p>
+      <p>Per informazioni, ordini o richieste particolari, contattaci via email o telefono. (Spazio per modulo contatti e informazioni)</p>
     </section>
   </main>
 
@@ -302,41 +239,27 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <script>
-  let mapInitialized = false;
-  let map;
+    let mapInitialized = false;
+    let map;
 
-  function showSection(id) {
-    const sections = document.querySelectorAll('.section');
-    sections.forEach(section => section.classList.remove('active'));
-
-    const target = document.getElementById(id);
-    if (target) {
-      target.classList.add('active');
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.getElementById(id)?.classList.add('active');
 
       if (id === 'dove') {
         if (!mapInitialized) {
-          // Posizione precisa: Mercato Civico Via Gramsci
           const coords = [39.3117602, 8.5351056];
-
           map = L.map('map').setView(coords, 18);
-
           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
           }).addTo(map);
-
-          L.marker(coords).addTo(map)
-            .bindPopup('Via Gramsci, Mercato Civico - Iglesias, Sardegna')
-            .openPopup();
-
+          L.marker(coords).addTo(map).bindPopup('Via Gramsci, Mercato Civico - Iglesias, Sardegna').openPopup();
           mapInitialized = true;
         } else {
-          setTimeout(() => {
-            map.invalidateSize();
-          }, 200);
+          setTimeout(() => map.invalidateSize(), 200);
         }
       }
     }
-  }
-</script>
+  </script>
 </body>
 </html>
