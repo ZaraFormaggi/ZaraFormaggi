@@ -159,7 +159,17 @@
 <body>
 
 <!-- CARRELLO FISSO IN ALTO A DESTRA -->
-<div id="floating-cart" style="position:fixed;top:20px;right:20px;background:#fff;border:1px solid #ccc;padding:10px 15px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.2);z-index:999;">
+
+<!-- Sidebar Carrello -->
+<div id="cart-sidebar" style="position:fixed;top:0;right:-400px;width:350px;height:100%;background:#fff;border-left:2px solid #ccc;box-shadow:-2px 0 5px rgba(0,0,0,0.1);z-index:9999;padding:1rem;transition:right 0.3s;overflow-y:auto;">
+  <h3>🛒 Il tuo carrello</h3>
+  <ul id="cart-items"></ul>
+  <p><strong>Totale: <span id="cart-sidebar-total">€0.00</span></strong></p>
+  <button onclick="svuotaCarrello()" style="background:#c00;color:white;padding:8px 12px;border:none;border-radius:5px;">🧹 Svuota</button>
+  <button onclick="toggleCartSidebar()" style="margin-top:10px;">Chiudi</button>
+</div>
+
+<div id="floating-cart" onclick="toggleCartSidebar()" title="Clicca per vedere il carrello" style="cursor:pointer;" style="position:fixed;top:20px;right:20px;background:#fff;border:1px solid #ccc;padding:10px 15px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.2);z-index:999;">
   <strong>🛒 Carrello:</strong> <span id="floating-total">€0.00</span>
 </div>
   
@@ -558,6 +568,119 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+
+  <script>
+    function toggleCartSidebar() {
+      const sidebar = document.getElementById("cart-sidebar");
+      sidebar.style.right = sidebar.style.right === "0px" ? "-400px" : "0px";
+    }
+  </script>
+
+<script>
+function renderCartSidebar() {
+  const ul = document.getElementById("cart-items");
+  const totalEl = document.getElementById("cart-sidebar-total");
+  if (!ul || !totalEl) return;
+
+  ul.innerHTML = "";
+  let total = 0;
+
+  carrello.forEach(item => {
+    const li = document.createElement("li");
+    const itemTotal = item.prezzo * item.quantita;
+    total += itemTotal;
+    li.innerHTML = `
+      <strong>${item.nome}</strong><br>
+      <button onclick="decrementa('${item.nome}')">➖</button>
+      <span>${item.quantita}</span>
+      <button onclick="incrementa('${item.nome}')">➕</button>
+      <button onclick="rimuoviDalCarrello('${item.nome}')">🗑</button>
+      = €${itemTotal.toFixed(2)}
+    `;
+    ul.appendChild(li);
+  });
+
+  totalEl.textContent = `€${total.toFixed(2)}`;
+}
+
+function incrementa(nome) {
+  const item = carrello.find(i => i.nome === nome);
+  if (item) {
+    item.quantita++;
+    salvaCarrello();
+    aggiornaCarrello();
+    renderCartSidebar();
+  }
+}
+
+function decrementa(nome) {
+  const item = carrello.find(i => i.nome === nome);
+  if (item && item.quantita > 1) {
+    item.quantita--;
+    salvaCarrello();
+    aggiornaCarrello();
+    renderCartSidebar();
+  }
+}
+
+const originalAggiornaCarrello = aggiornaCarrello;
+aggiornaCarrello = function() {
+  originalAggiornaCarrello();
+  renderCartSidebar();
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderCartSidebar();
+});
+</script>
+
+
+<!-- Stripe JS -->
+<script src="https://js.stripe.com/v3/"></script>
+
+<!-- Payment container -->
+<section style="margin-top:2rem;">
+  <h3>💳 Paga con Google Pay / Apple Pay</h3>
+  <div id="payment-request-button" style="max-width:400px;margin:auto;"></div>
+</section>
+
+<script>
+const stripe = Stripe('pk_test_51Nxxxxxx...'); // replace with your test/live Stripe publishable key
+
+const paymentRequest = stripe.paymentRequest({
+  country: 'IT',
+  currency: 'eur',
+  total: {
+    label: 'ZARA FORMAGGI',
+    amount: 2000,
+  },
+  requestPayerName: true,
+  requestPayerEmail: true,
+});
+
+const elements = stripe.elements();
+paymentRequest.canMakePayment().then(function(result) {
+  if (result) {
+    const prButton = elements.create('paymentRequestButton', {
+      paymentRequest: paymentRequest,
+    });
+    prButton.mount('#payment-request-button');
+  } else {
+    document.getElementById('payment-request-button').style.display = 'none';
+  }
+});
+</script>
+
+<!-- Simulazione notifica email con allegato PDF -->
+<script>
+function inviaOrdineViaEmail() {
+  alert("✅ Il tuo ordine è stato completato. Riceverai una copia via email con il PDF allegato (funzione da integrare con backend SMTP o servizio email esterno).");
+}
+</script>
+<button onclick="inviaOrdineViaEmail()" style="margin-top: 15px; background: #337ab7; color: white; padding: 10px; border: none; border-radius: 5px;">
+📧 Invia ordine via email
+</button>
+
 </body> -->
 <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR"></script>
 <script>
@@ -642,7 +765,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
      
   
-<-- script pdf -->
+
 <script>
   async function downloadPDF() {
     const { jsPDF } = window.jspdf;
@@ -715,7 +838,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 </script>
 
-<-- aggiornamento carrello -->
+
 
      <script>
   let carrello = JSON.parse(localStorage.getItem("carrello")) || [];
@@ -758,7 +881,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Salva nel Local Stora
+  // Salva nel Local Storage
+  function salvaCarrello() {
+    localStorage.setItem("carrello", JSON.stringify(carrello));
+  }
 
   // Aggiorna visualizzazione carrello
   function aggiornaCarrello() {
@@ -889,9 +1015,125 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+
+  <script>
+    function toggleCartSidebar() {
+      const sidebar = document.getElementById("cart-sidebar");
+      sidebar.style.right = sidebar.style.right === "0px" ? "-400px" : "0px";
+    }
+  </script>
+
+<script>
+function renderCartSidebar() {
+  const ul = document.getElementById("cart-items");
+  const totalEl = document.getElementById("cart-sidebar-total");
+  if (!ul || !totalEl) return;
+
+  ul.innerHTML = "";
+  let total = 0;
+
+  carrello.forEach(item => {
+    const li = document.createElement("li");
+    const itemTotal = item.prezzo * item.quantita;
+    total += itemTotal;
+    li.innerHTML = `
+      <strong>${item.nome}</strong><br>
+      <button onclick="decrementa('${item.nome}')">➖</button>
+      <span>${item.quantita}</span>
+      <button onclick="incrementa('${item.nome}')">➕</button>
+      <button onclick="rimuoviDalCarrello('${item.nome}')">🗑</button>
+      = €${itemTotal.toFixed(2)}
+    `;
+    ul.appendChild(li);
+  });
+
+  totalEl.textContent = `€${total.toFixed(2)}`;
+}
+
+function incrementa(nome) {
+  const item = carrello.find(i => i.nome === nome);
+  if (item) {
+    item.quantita++;
+    salvaCarrello();
+    aggiornaCarrello();
+    renderCartSidebar();
+  }
+}
+
+function decrementa(nome) {
+  const item = carrello.find(i => i.nome === nome);
+  if (item && item.quantita > 1) {
+    item.quantita--;
+    salvaCarrello();
+    aggiornaCarrello();
+    renderCartSidebar();
+  }
+}
+
+const originalAggiornaCarrello = aggiornaCarrello;
+aggiornaCarrello = function() {
+  originalAggiornaCarrello();
+  renderCartSidebar();
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderCartSidebar();
+});
+</script>
+
+
+<!-- Stripe JS -->
+<script src="https://js.stripe.com/v3/"></script>
+
+<!-- Payment container -->
+<section style="margin-top:2rem;">
+  <h3>💳 Paga con Google Pay / Apple Pay</h3>
+  <div id="payment-request-button" style="max-width:400px;margin:auto;"></div>
+</section>
+
+<script>
+const stripe = Stripe('pk_test_51Nxxxxxx...'); // replace with your test/live Stripe publishable key
+
+const paymentRequest = stripe.paymentRequest({
+  country: 'IT',
+  currency: 'eur',
+  total: {
+    label: 'ZARA FORMAGGI',
+    amount: 2000,
+  },
+  requestPayerName: true,
+  requestPayerEmail: true,
+});
+
+const elements = stripe.elements();
+paymentRequest.canMakePayment().then(function(result) {
+  if (result) {
+    const prButton = elements.create('paymentRequestButton', {
+      paymentRequest: paymentRequest,
+    });
+    prButton.mount('#payment-request-button');
+  } else {
+    document.getElementById('payment-request-button').style.display = 'none';
+  }
+});
+</script>
+
+<!-- Simulazione notifica email con allegato PDF -->
+<script>
+function inviaOrdineViaEmail() {
+  alert("✅ Il tuo ordine è stato completato. Riceverai una copia via email con il PDF allegato (funzione da integrare con backend SMTP o servizio email esterno).");
+}
+</script>
+<button onclick="inviaOrdineViaEmail()" style="margin-top: 15px; background: #337ab7; color: white; padding: 10px; border: none; border-radius: 5px;">
+📧 Invia ordine via email
+</button>
+
 </body>
 </html>
 
+
+
+  
 
 
   
