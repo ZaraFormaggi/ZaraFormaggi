@@ -5,7 +5,7 @@
 
 
      
-     <!-- script pdf-->
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   
@@ -465,7 +465,7 @@ renderProducts();
   
 
   
-  <!-- AGGIUNGI QUESTO PRIMA DI 
+ 
 <script>
 let carrello = JSON.parse(localStorage.getItem("carrello")) || [];
 
@@ -558,7 +558,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-</body> -->
+</body> 
 <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR"></script>
 <script>
   const prodotti = [
@@ -642,7 +642,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
      
   
-<-- script pdf -->
+
 <script>
   async function downloadPDF() {
     const { jsPDF } = window.jspdf;
@@ -819,8 +819,7 @@ function aggiornaCarrello() {
     totale += subtotale;
 
     const li = document.createElement("li");
-    li.innerHTML = `
-      <strong>${item.nome}</strong> - €${item.prezzo.toFixed(2)} x 
+    li.innerHTML = ' <strong>${item.nome}</strong> - €${item.prezzo.toFixed(2)} x 
       <input type="number" min="1" value="${item.quantita}" onchange="cambiaQuantita('${item.nome}', this.value)">
       = €${subtotale.toFixed(2)}
       <button onclick="rimuoviDalCarrello('${item.nome}')">🗑</button>
@@ -828,7 +827,7 @@ function aggiornaCarrello() {
     lista.appendChild(li);
     riepilogo += `${item.nome} x${item.quantita} = €${subtotale.toFixed(2)}\n`;
   });
-
+{
   const costoSpedizione = spedizione === "spedizione" ? 7 : 0;
   const totaleFinale = totale + costoSpedizione;
 
