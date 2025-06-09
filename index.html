@@ -392,7 +392,7 @@ renderProducts();
     }
   </script>
 
-<!-- aggiornamento carrello  -->
+
 
   <script>
   const products = [
@@ -715,7 +715,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 </script>
 
-<-- aggiornamento carrello -->
+
 
      <script>
   let carrello = JSON.parse(localStorage.getItem("carrello")) || [];
@@ -758,10 +758,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Salva nel Local Storage
-  function salvaCarrello() {
-    localStorage.setItem("carrello", JSON.stringify(carrello));
-  }
+ 
 
   // Aggiorna visualizzazione carrello
   function aggiornaCarrello() {
@@ -797,10 +794,7 @@ document.addEventListener("DOMContentLoaded", () => {
           
 </script>
      
-function svuotaCarrello() {
-  carrello = [];
-  localStorage.removeItem("carrello");
-  
+
 
 <script>
 let carrello = JSON.parse(localStorage.getItem("carrello")) || [];
@@ -897,6 +891,9 @@ document.addEventListener("DOMContentLoaded", () => {
 </body>
 </html>
 
+
+
+  
 
 
   
