@@ -240,6 +240,23 @@
 <h2>Contatti</h2>
 <p>Per informazioni, ordini o richieste particolari, contattaci via email o telefono. (Spazio per modulo contatti e informazioni)</p>
 </section>
+
+<section class="section" id="checkout" style="padding: 2rem;">
+<h2>🛍️ Completa il tuo Ordine</h2>
+<ul id="cart" style="list-style:none; padding-left:0;"></ul>
+<p><strong>Subtotale: <span id="subtotal">€0.00</span></strong></p>
+<p><strong>Spedizione: <span id="shipping">€0.00</span></strong></p>
+<p><strong>Totale: <span id="total">€0.00</span></strong></p>
+<form id="order-form" method="POST">
+<input name="nome" placeholder="Nome completo" required="" type="text"/><br/><br/>
+<input name="email" placeholder="Email" required="" type="email"/><br/><br/>
+<textarea name="indirizzo" placeholder="Indirizzo per la spedizione" rows="3"></textarea><br/><br/>
+<input id="ordineHidden" name="ordine" type="hidden"/>
+<button onclick="generaPDF()" style="margin-bottom:10px;" type="button">📄 Scarica PDF</button><br/>
+<div id="express-checkout-element"></div>
+<div id="payment-message" style="color:red;"></div>
+</form>
+</section>
 </main>
 <footer>
 <p>© 2025 ZARA FORMAGGI di Zara Maurizio - Tutti i diritti riservati</p>
@@ -498,8 +515,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <!-- Stripe Checkout Integration -->
 <script src="https://js.stripe.com/v3/"></script>
-<div id="express-checkout-element" style="margin: 2rem auto; max-width: 400px;"></div>
-<div id="payment-message" style="text-align: center; color: red;"></div>
+
+
 <script>
   const stripe = Stripe("pk_test_1234567890"); // replace with real key
   fetch("/create-payment-intent")  // endpoint to your backend
@@ -519,7 +536,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 </script>
 
-</body> -->
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  const stripe = Stripe("pk_test_TUACHIAVE");
+  fetch("/create-payment-intent", { method: "POST", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ amount: 1200 }) })
+    .then(res => res.json())
+    .then(({ clientSecret }) => {
+      const elements = stripe.elements({ clientSecret });
+      const express = elements.create("expressCheckout", {
+        buttonType: { card: 'pay', applePay: 'buy', googlePay: 'buy', paypal: 'buynow' }
+      });
+      express.mount("#express-checkout-element");
+      express.on("confirm", async (e) => {
+        const { error } = await stripe.confirmPayment({ elements, confirmParams: { return_url: "https://zaraformaggi.com/thank-you" }});
+        if (error) {
+          document.getElementById("payment-message").textContent = error.message;
+        }
+      });
+    });
+</script>
+
+</body> --&gt;
 <script src="https://www.paypal.com/sdk/js?client-id=sb¤cy=EUR"></script>
 <script>
   const prodotti = [
@@ -899,7 +936,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderCartSidebar();
 });
 </script>
-
 <!-- Stripe Checkout Integration -->
 <script src="https://js.stripe.com/v3/"></script>
 <div id="express-checkout-element" style="margin: 2rem auto; max-width: 400px;"></div>
@@ -923,7 +959,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 </script>
 
-</body>
 </html>
 
 
