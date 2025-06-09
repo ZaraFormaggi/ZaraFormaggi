@@ -2,8 +2,12 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ZARA FORMAGGI di Zara Maurizio</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
   <style>
     :root {
       --verde-scuro: #2f4f2f;
@@ -91,9 +95,13 @@
     }
 
     #map {
-      height: 400px;
-      margin-top: 1rem;
+      width: 100%;
+      max-width: 800px;
+      height: 50vh;
+      min-height: 300px;
+      margin: 1rem auto;
       border: 2px solid var(--verde-scuro);
+      border-radius: 8px;
     }
 
     @media (max-width: 600px) {
@@ -102,12 +110,6 @@
       }
     }
   </style>
-
-  <!-- Leaflet CSS -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet/dist/leaflet.css"
-  />
 </head>
 <body>
   <header>
@@ -134,29 +136,17 @@
   <main>
     <section id="home" class="section active">
       <h2>Benvenuti!</h2>
-      <p>
-        Visita il sito per scoprire i nostri prodotti. Offriamo una selezione di
-        eccellenze enogastronomiche sarde, con attenzione alla qualità, alla
-        tradizione e al gusto autentico.
-      </p>
+      <p>Visita il sito per scoprire i nostri prodotti. Offriamo una selezione di eccellenze enogastronomiche sarde, con attenzione alla qualità, alla tradizione e al gusto autentico.</p>
     </section>
 
     <section id="chi-siamo" class="section">
       <h2>Chi siamo</h2>
-      <p>
-        ZARA FORMAGGI nasce dalla passione per i sapori autentici della
-        Sardegna. Fondata da Maurizio Zara, l’attività si dedica alla selezione
-        e vendita di prodotti tipici come formaggi, salumi e molto altro.
-        Tradizione e qualità sono il nostro marchio.
-      </p>
+      <p>ZARA FORMAGGI nasce dalla passione per i sapori autentici della Sardegna. Fondata da Maurizio Zara, l’attività si dedica alla selezione e vendita di prodotti tipici come formaggi, salumi, dolci e molto altro. Tradizione e qualità sono il nostro marchio.</p>
     </section>
 
     <section id="dove" class="section">
       <h2>Dove ci trovi</h2>
-      <p>
-        Ci trovi nel cuore di Iglesias, presso il Mercato Civico in Via Gramsci.
-        Vieni a trovarci per assaporare i veri sapori sardi!
-      </p>
+      <p>Ci trovi presso il Mercato Civico in Via Gramsci, Iglesias (CI), Sardegna.</p>
       <div id="map"></div>
     </section>
 
@@ -165,7 +155,7 @@
       <ul>
         <li>Vendita al dettaglio di prodotti tipici sardi</li>
         <li>Confezioni regalo personalizzate</li>
-         <li>Confezionamento dei prodotti sottovuoto </li>
+        <li>Confezionamento dei prodotti sottovuoto </li>
         <li>Spedizioni in tutta Italia e Europa</li>
        
       </ul>
@@ -174,19 +164,13 @@
     <section id="galleria" class="section">
       <h2>Galleria</h2>
       <div class="gallery-placeholder">
-        <p>
-          Qui sarà inserita la galleria di foto e video dei nostri prodotti e
-          del punto vendita.
-        </p>
+        <p>Qui sarà inserita la galleria di foto e video dei nostri prodotti e del punto vendita.</p>
       </div>
     </section>
 
     <section id="contatti" class="section">
       <h2>Contatti</h2>
-      <p>
-        Per informazioni, ordini o richieste particolari, contattaci via email
-        o telefono. (formaggizaraiglesias@gmail.com)
-      </p>
+      <p>Per informazioni, ordini o richieste particolari, contattaci via email o telefono. (Spazio per modulo contatti e informazioni)</p>
     </section>
   </main>
 
@@ -195,23 +179,41 @@
   </footer>
 
   <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
   <script>
+    let mapInitialized = false;
+    let map;
+
     function showSection(id) {
       const sections = document.querySelectorAll('.section');
       sections.forEach(section => section.classList.remove('active'));
-      const target = document.getElementById(id);
-      if (target) target.classList.add('active');
-    }
 
-    // Mappa di Iglesias
-    const map = L.map('map').setView([39.3103, 8.5337], 16);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
-    L.marker([39.3103, 8.5337]).addTo(map)
-      .bindPopup('Mercato Civico - Via Gramsci, Iglesias')
-      .openPopup();
+      const target = document.getElementById(id);
+      if (target) {
+        target.classList.add('active');
+
+        if (id === 'dove') {
+          if (!mapInitialized) {
+            map = L.map('map').setView([39.3081, 8.5292], 17);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            L.marker([39.3081, 8.5292]).addTo(map)
+              .bindPopup('Mercato Civico - Via Gramsci, Iglesias')
+              .openPopup();
+
+            mapInitialized = true;
+          } else {
+            setTimeout(() => {
+              map.invalidateSize();
+            }, 200);
+          }
+        }
+      }
+    }
   </script>
 </body>
 </html>
