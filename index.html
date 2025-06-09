@@ -164,6 +164,7 @@
   <nav>
     <a onclick="showSection('home')">Home</a>
     <a onclick="showSection('prodotti')">I nostri prodotti</a>
+    <a onclick="showSelection('shop')">Shop</a>
     <a onclick="showSection('galleria')">Galleria</a>
     <a onclick="showSection('chi-siamo')">Chi siamo</a>
     <a onclick="showSection('servizi')">Servizi</a>
@@ -197,7 +198,120 @@
        
     </section>
 
+<!-- SHOPPING AVANZATO -->
+<section id="shop" style="padding: 2rem; font-family: Arial, sans-serif; background-color: #fff8f0;">
+  <div style="max-width: 800px; margin: auto;">
+    <h2 style="text-align: center; color: #6b3e26;">🧀 Acquista i nostri prodotti</h2>
 
+    <div id="product-list" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 2rem;"></div>
+
+    <form id="order-form" action="https://formspree.io/f/YOUR_ID" method="POST">
+      <h3>🛒 Carrello</h3>
+      <ul id="cart" style="list-style: none; padding: 0;"></ul>
+      <p><strong>Totale: <span id="total">€0.00</span></strong></p>
+
+      <h4>📦 Consegna</h4>
+      <label><input type="radio" name="consegna" value="spedizione" required> Spedizione</label><br>
+      <label><input type="radio" name="consegna" value="ritiro"> Ritiro in sede</label><br><br>
+
+      <input type="text" name="nome" placeholder="Nome e Cognome" required><br><br>
+      <input type="email" name="email" placeholder="Email" required><br><br>
+      <textarea name="indirizzo" placeholder="Indirizzo per spedizione (se richiesto)" rows="3"></textarea><br><br>
+
+      <input type="hidden" name="ordine" id="ordineHidden">
+
+      <button type="submit" style="background-color: #6b3e26; color: white; padding: 0.75rem; border: none; border-radius: 5px;">📨 Invia Ordine</button>
+    </form>
+
+    <br>
+    <h4>Paga con PayPal:</h4>
+    <div id="paypal-button-container"></div>
+  </div>
+</section>
+
+<!-- SCRIPT: prodotti, carrello, PayPal -->
+<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR"></script>
+<script>
+const products = [
+  { id: 1, name: "Cuor di Latte", price: 6.5 },
+  { id: 2, name: "Vecchio Capraro", price: 9.0 },
+  { id: 3, name: "Gran Sirai", price: 12.0 }
+];
+let cart = [];
+
+function renderProducts() {
+  const list = document.getElementById("product-list");
+  list.innerHTML = "";
+  products.forEach(p => {
+    const box = document.createElement("div");
+    box.style = "border:1px solid #ccc; padding:1rem; width:200px; border-radius:10px; background:#fff;";
+    box.innerHTML = `
+      <h4>${p.name}</h4>
+      <p>€${p.price.toFixed(2)}</p>
+      <button onclick="addToCart(${p.id})" style="background:#8c5b3f; color:#fff; border:none; padding:0.5rem; border-radius:5px;">Aggiungi</button>
+    `;
+    list.appendChild(box);
+  });
+}
+
+function addToCart(id) {
+  const prod = products.find(p => p.id === id);
+  const found = cart.find(c => c.id === id);
+  if (found) found.qty++;
+  else cart.push({ ...prod, qty: 1 });
+  renderCart();
+}
+
+function renderCart() {
+  const list = document.getElementById("cart");
+  list.innerHTML = '';
+  let total = 0;
+  cart.forEach(item => {
+    total += item.price * item.qty;
+    const li = document.createElement("li");
+    li.textContent = `${item.name} x${item.qty} = €${(item.qty * item.price).toFixed(2)}`;
+    list.appendChild(li);
+  });
+  document.getElementById("total").textContent = `€${total.toFixed(2)}`;
+  document.getElementById("ordineHidden").value = cart.map(i => `${i.name} x${i.qty}`).join(', ') + ` | Totale: €${total.toFixed(2)}`;
+}
+
+paypal.Buttons({
+  createOrder: function(data, actions) {
+    const total = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
+    return actions.order.create({
+      purchase_units: [{
+        amount: {
+          value: total.toFixed(2)
+        }
+      }]
+    });
+  },
+  onApprove: function(data, actions) {
+    return actions.order.capture().then(function(details) {
+      alert('Pagamento completato da ' + details.payer.name.given_name);
+    });
+  }
+}).render('#paypal-button-container');
+
+renderProducts();
+</script>
+
+<style>
+@media (max-width: 600px) {
+  #product-list div {
+    width: 100% !important;
+  }
+  section#shop {
+    padding: 1rem;
+  }
+}
+</style>
+
+
+
+
+    
     
     <section id="dove" class="section">
       <h2>Dove ci trovi</h2>
