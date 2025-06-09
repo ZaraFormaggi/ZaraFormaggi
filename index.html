@@ -212,15 +212,7 @@
       <input type="tel" name="Telefono" placeholder="Numero di telefono" required>
       <input type="email" name="Email" placeholder="Email" required>
       <input type="text" name="Indirizzo" placeholder="Indirizzo di consegna (se richiesto)">
-      <label><input type="checkbox" name="Ritiro in loco" id="pickup"> Ritiro in loco presso il negozio</label>
-      
-      <label><input type="checkbox" name="Sottovuoto"> Richiedi confezionamento sottovuoto</label>
-      <label><input type="checkbox" name="Confezione regalo"> Confezione regalo (+€5)</label>
-      <label>Regala un buono:
-        <input type="number" name="Buono regalo" placeholder="Importo in €" min="10">
-        <button type="button" onclick="alert('Procedura pagamento buono da implementare')">Paga buono</button>
-      </label>
-
+      <label><input type="checkbox" name="Ritiro in loco"> Ritiro in loco presso il negozio</label>
       <input type="hidden" name="Ordine" id="ordine-dettaglio">
       <button type="submit" onclick="prepareOrder()">Invia Ordine</button>
       <button type="button" onclick="downloadPDF()">Salva in PDF</button>
@@ -263,7 +255,23 @@
     <section id="home" class="section active">
       <h2>Benvenuti!</h2>
       <p>Visita il sito per scoprire i nostri prodotti. Offriamo una selezione di eccellenze enogastronomiche sarde, con attenzione alla qualità, alla tradizione e al gusto autentico.</p>
-    </section>
+    
+<h3>Salumi</h3>
+<ul>
+  <li>Guanciale – 20€/kg</li>
+  <li>Salsiccia – 18€/kg</li>
+  <li>Pancetta affumicata – 18€/kg</li>
+</ul>
+<h3>Formaggi</h3>
+<ul>
+  <li>Mozzarella di bufala – 19€/kg</li>
+  <li>Grana padano 12-14 mesi – 19€/kg</li>
+  <li>Pecorino fresco – 16€/kg</li>
+  <li>Pecorino semistagionato – 18€/kg</li>
+  <li>Pecorino stagionato – 22€/kg</li>
+</ul>
+
+</section>
 
     <section id="chi-siamo" class="section">
       <h2>Chi siamo</h2>
@@ -399,8 +407,7 @@
       alert("Ordine inviato! (funzione dimostrativa)");
     }
 
-    
-function downloadPDF() {
+    function downloadPDF() {
   let content = "Ordine Zara Formaggi
 
 ";
@@ -408,11 +415,13 @@ function downloadPDF() {
     content += `${item.name} - Quantità: ${item.quantity}, Prezzo totale: €${(item.price * item.quantity).toFixed(2)}
 `;
   });
-  const blob = new Blob([content], { type: "text/plain" });
+  const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
   link.download = "ordine_zara_formaggi.txt";
+  document.body.appendChild(link);
   link.click();
+  document.body.removeChild(link);
 }
 
 
@@ -516,8 +525,7 @@ function downloadPDF() {
       alert("Ordine inviato! (funzione dimostrativa)");
     }
 
-    
-function downloadPDF() {
+    function downloadPDF() {
   let content = "Ordine Zara Formaggi
 
 ";
@@ -525,11 +533,13 @@ function downloadPDF() {
     content += `${item.name} - Quantità: ${item.quantity}, Prezzo totale: €${(item.price * item.quantity).toFixed(2)}
 `;
   });
-  const blob = new Blob([content], { type: "text/plain" });
+  const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
   link.download = "ordine_zara_formaggi.txt";
+  document.body.appendChild(link);
   link.click();
+  document.body.removeChild(link);
 }
 
 
