@@ -538,6 +538,10 @@ renderProducts();
   }).render("#paypal-button-container");
 </script>
 
+<button onclick="svuotaCarrello()" style="margin-top: 10px; background: #d9534f; color: white; padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer;">
+  🧹 Svuota Carrello
+</button>
+     
   
 <-- script pdf -->
 <script>
@@ -612,8 +616,90 @@ renderProducts();
   }
 </script>
 
+<-- aggiornamento carrello -->
 
+     <script>
+  let carrello = JSON.parse(localStorage.getItem("carrello")) || [];
+
+  // Aggiungi prodotto
+  function aggiungiAlCarrello(button) {
+    const prodottoDiv = button.closest(".prodotto");
+    const nome = prodottoDiv.dataset.nome;
+    const prezzo = parseFloat(prodottoDiv.dataset.prezzo);
+
+    const esistente = carrello.find(item => item.nome === nome);
+    if (esistente) {
+      esistente.quantita += 1;
+    } else {
+      carrello.push({ nome, prezzo, quantita: 1 });
+    }
+
+    salvaCarrello();
+    aggiornaCarrello();
+  }
+
+  // Rimuovi prodotto
+  function rimuoviDalCarrello(nome) {
+    carrello = carrello.filter(item => item.nome !== nome);
+    salvaCarrello();
+    aggiornaCarrello();
+  }
+
+  // Cambia quantità
+  function cambiaQuantita(nome, quantita) {
+    const prodotto = carrello.find(item => item.nome === nome);
+    if (prodotto) {
+      prodotto.quantita = parseInt(quantita);
+      if (prodotto.quantita <= 0) {
+        rimuoviDalCarrello(nome);
+      } else {
+        salvaCarrello();
+        aggiornaCarrello();
+      }
+    }
+  }
+
+  // Salva nel Local Storage
+  function salvaCarrello() {
+    localStorage.setItem("carrello", JSON.stringify(carrello));
+  }
+
+  // Aggiorna visualizzazione carrello
+  function aggiornaCarrello() {
+    const lista = document.getElementById("carrello");
+    lista.innerHTML = "";
+    let totale = 0;
+
+    carrello.forEach(item => {
+      const subtotale = item.prezzo * item.quantita;
+      totale += subtotale;
+
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <strong>${item.nome}</strong> - €${item.prezzo.toFixed(2)} x 
+        <input type="number" value="${item.quantita}" min="1" style="width:40px" onchange="cambiaQuantita('${item.nome}', this.value)">
+        = €${subtotale.toFixed(2)}
+        <button onclick="rimuoviDalCarrello('${item.nome}')">🗑</button>
+      `;
+      lista.appendChild(li);
+    });
+
+    document.getElementById("totale").textContent = `€${totale.toFixed(2)}`;
+  }
+
+  // Al caricamento della pagina
+  document.addEventListener("DOMContentLoaded", () => {
+    aggiornaCarrello();
+  });
+          
+          function svuotaCarrello() {
+  carrello = [];
+  localStorage.removeItem("carrello");
+  aggiornaCarrello();
+}     
+</script>
      
+
   
 </body>
 </html>
