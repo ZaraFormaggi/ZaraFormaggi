@@ -2,6 +2,11 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+
+     <!-- script pdf-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ZARA FORMAGGI di Zara Maurizio</title>
@@ -229,6 +234,7 @@
       <input type="hidden" name="ordine" id="ordineHidden">
 
       <button type="submit" style="background-color: #6b3e26; color: white; padding: 0.75rem; border: none; border-radius: 5px;">📨 Invia Ordine</button>
+      <button type="button" onclick="downloadPDF()" style="margin-left:10px;background:#555;color:white;padding:10px 20px;border:none;border-radius:5px;">💾 Salva PDF</button>
     </form>
 
     <br>
@@ -382,7 +388,7 @@ renderProducts();
     }
   </script>
 
-< !-- aggiornamento carrello -- >
+<!-- aggiornamento carrello  -->
 
   <script>
   const products = [
@@ -529,8 +535,36 @@ renderProducts();
     }
   }).render("#paypal-button-container");
 </script>
+
+  
+<-- script pdf -->
+<script>
+  async function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    let ordine = document.getElementById('ordineHidden').value || 'Nessun prodotto nel carrello.';
+    let nome = document.querySelector('input[name="nome"]').value;
+    let email = document.querySelector('input[name="email"]').value;
+    let indirizzo = document.querySelector('textarea[name="indirizzo"]').value;
+    let spedizione = document.querySelector('input[name="spedizione"]:checked')?.value || '';
+    let totale = document.getElementById('total').textContent;
+
+    let text = `ZARA FORMAGGI - Riepilogo ordine\n\n`;
+    text += `👤 Nome: ${nome}\n📧 Email: ${email}\n🏠 Indirizzo: ${indirizzo || '-'}\n🚚 Tipo spedizione: ${spedizione}\n\n`;
+    text += `🧀 Prodotti:\n${ordine}\n\n💰 Totale: ${totale}`;
+
+    doc.setFontSize(12);
+    doc.text(text, 10, 20);
+    doc.save('ordine_zaraformaggi.pdf');
+  }
+</script>
+
+
+  
 </body>
 </html>
 
-https://formspree.io/f/xpwrplgn
+
+
   
