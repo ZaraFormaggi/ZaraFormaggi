@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZARA FORMAGGI di Zara Maurizio</title>
+  <style>
+    :root {
+      --verde-scuro: #2f4f2f;
+      --verde-chiaro: #8fbc8f;
+      --giallo-ocra: #c9a602;
+      --caldo: #f4e2d8;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--caldo);
+      color: #333;
+    }
+
+    header {
+      background-color: var(--verde-scuro);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .header-logo {
+      max-width: 100px;
+      display: block;
+      margin: 0 auto 1rem auto;
+    }
+
+    .header-title h1 {
+      margin: 0;
+    }
+
+    .header-subtitle {
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    nav {
+      background-color: var(--verde-chiaro);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: white;
+      padding: 1rem;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      background-color: var(--giallo-ocra);
+    }
+
+    .section {
+      padding: 2rem;
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .gallery-placeholder {
+      border: 2px dashed var(--verde-scuro);
+      padding: 2rem;
+      text-align: center;
+      background-color: #fff;
+    }
+
+    footer {
+      background-color: var(--verde-scuro);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .search-bar {
+      margin: 1rem auto;
+      text-align: center;
+    }
+
+    .search-bar input {
+      padding: 0.5rem;
+      width: 80%;
+      max-width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 600px) {
+      nav a {
+        padding: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Logo Zara Formaggi" class="header-logo">
+    <div class="header-title">
+      <h1>ZARA FORMAGGI</h1>
+      <div class="header-subtitle">di Zara Maurizio</div>
+    </div>
+    <p>Rivendita di Prodotti tipici Sardi e tanto altro</p>
+  </header>
+
+  <nav>
+    <a onclick="showSection('home')">Home</a>
+    <a onclick="showSection('chi-siamo')">Chi siamo</a>
+    <a onclick="showSection('dove')">Dove ci trovi</a>
+    <a onclick="showSection('servizi')">Servizi</a>
+    <a onclick="showSection('galleria')">Galleria</a>
+    <a onclick="showSection('contatti')">Contatti</a>
+  </nav>
+
+  <div class="search-bar">
+    <input type="text" placeholder="Cerca nel sito...">
+  </div>
+
+  <main>
+    <section id="home" class="section active">
+      <h2>Benvenuti!</h2>
+      <p>Visita il sito per scoprire i nostri prodotti. Offriamo una selezione di eccellenze enogastronomiche sarde, con attenzione alla qualità, alla tradizione e al gusto autentico.</p>
+    </section>
+
+    <section id="chi-siamo" class="section">
+      <h2>Chi siamo</h2>
+      <p>ZARA FORMAGGI nasce dalla passione per i sapori autentici della Sardegna. Fondata da Maurizio Zara, l’attività si dedica alla selezione e vendita di prodotti tipici come formaggi, salumi, dolci e molto altro. Tradizione e qualità sono il nostro marchio.</p>
+    </section>
+
+    <section id="dove" class="section">
+      <h2>Dove ci trovi</h2>
+      <p>Ci trovi nel cuore della città, in una zona facilmente raggiungibile. Vieni a trovarci per assaporare i veri sapori sardi. (Inserire qui indirizzo e mappa interattiva in futuro)</p>
+    </section>
+
+    <section id="servizi" class="section">
+      <h2>I nostri servizi</h2>
+      <ul>
+        <li>Vendita al dettaglio di prodotti tipici sardi</li>
+        <li>Confezioni regalo personalizzate</li>
+        <li>Spedizioni in tutta Italia</li>
+        <li>Degustazioni su prenotazione</li>
+      </ul>
+    </section>
+
+    <section id="galleria" class="section">
+      <h2>Galleria</h2>
+      <div class="gallery-placeholder">
+        <p>Qui sarà inserita la galleria di foto e video dei nostri prodotti e del punto vendita.</p>
+      </div>
+    </section>
+
+    <section id="contatti" class="section">
+      <h2>Contatti</h2>
+      <p>Per informazioni, ordini o richieste particolari, contattaci via email o telefono. (Spazio per modulo contatti e informazioni)</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 ZARA FORMAGGI di Zara Maurizio - Tutti i diritti riservati</p>
+  </footer>
+
+  <script>
+    function showSection(id) {
+      console.log("Attempting to show section:", id);
+      const sections = document.querySelectorAll('.section');
+      console.log("Total sections found:", sections.length);
+      sections.forEach(section => {
+        console.log("Hiding section:", section.id);
+        section.classList.remove('active');
+      });
+      const target = document.getElementById(id);
+      if (target) {
+        console.log("Displaying section:", id);
+        target.classList.add('active');
+      } else {
+        console.warn("Section not found:", id);
+      }
+    }
+  </script>
+</body>
+</html>
+
