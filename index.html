@@ -3,6 +3,8 @@
 <html lang="it">
 <head>
 
+
+     
      <!-- script pdf-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
@@ -234,7 +236,7 @@
       <input type="hidden" name="ordine" id="ordineHidden">
 
       <button type="submit" style="background-color: #6b3e26; color: white; padding: 0.75rem; border: none; border-radius: 5px;">📨 Invia Ordine</button>
-      <button type="button" onclick="downloadPDF()" style="margin-left:10px;background:#555;color:white;padding:10px 20px;border:none;border-radius:5px;">💾 Salva PDF</button>
+      <button type="button" onclick="downloadPDF()" style="margin-left:10px;background:#555;color:white;padding:10px 20px;border:none;border-radius:5px;">💾 Salva Ordine in PDF</button>
     </form>
 
     <br>
@@ -561,6 +563,57 @@ renderProducts();
 </script>
 
 
+<script>
+  const { jsPDF } = window.jspdf;
+
+  function salvaOrdinePDF() {
+    const doc = new jsPDF();
+
+    // 🔶 LOGO: Base64 (accorciato qui, usa la versione completa che ti ho dato)
+    const logoBase64 = "data:image/png;base64,..."; // Usa la tua stringa completa Base64 qui
+
+    // Inserisci il logo
+    doc.addImage(logoBase64, 'PNG', 15, 10, 40, 40);
+
+    // 🔶 INTESTAZIONE
+    doc.setFontSize(18);
+    doc.text("ZARA FORMAGGI", 60, 20);
+    doc.setFontSize(12);
+    doc.text("di Zara Maurizio", 60, 28);
+    doc.text("Riepilogo ordine", 15, 60);
+
+    // 🔶 DATI CLIENTE (prendili dai campi del form)
+    const nome = document.querySelector("#nome").value;
+    const email = document.querySelector("#email").value;
+    const indirizzo = document.querySelector("#indirizzo").value;
+
+    doc.text(`Cliente: ${nome}`, 15, 70);
+    doc.text(`Email: ${email}`, 15, 78);
+    doc.text(`Indirizzo: ${indirizzo}`, 15, 86);
+
+    // 🔶 PRODOTTI ORDINATI (esempio statico — puoi modificarlo)
+    const prodotti = [
+      "Pecorino Sardo DOP - €12.00",
+      "Ricotta fresca - €5.50"
+    ];
+    let y = 100;
+    prodotti.forEach((prod, i) => {
+      doc.text(`• ${prod}`, 20, y + i * 10);
+    });
+
+    doc.text("Totale: €17.50", 20, y + prodotti.length * 10 + 10);
+
+    // 🔶 RINGRAZIAMENTO
+    doc.setFontSize(14);
+    doc.text("Grazie per il tuo acquisto!", 15, y + prodotti.length * 10 + 30);
+
+    // 🔶 SALVA
+    doc.save("ordine_zaraformaggi.pdf");
+  }
+</script>
+
+
+     
   
 </body>
 </html>
