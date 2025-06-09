@@ -190,38 +190,41 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <script>
-    let mapInitialized = false;
-    let map;
+  let mapInitialized = false;
+  let map;
 
-    function showSection(id) {
-      const sections = document.querySelectorAll('.section');
-      sections.forEach(section => section.classList.remove('active'));
+  function showSection(id) {
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => section.classList.remove('active'));
 
-      const target = document.getElementById(id);
-      if (target) {
-        target.classList.add('active');
+    const target = document.getElementById(id);
+    if (target) {
+      target.classList.add('active');
 
-        if (id === 'dove') {
-          if (!mapInitialized) {
-            map = L.map('map').setView([39.3081, 8.5292], 17);
+      if (id === 'dove') {
+        if (!mapInitialized) {
+          // Posizione precisa: Mercato Civico Via Gramsci
+          const coords = [39.30952, 8.53224];
 
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-              attribution: '© OpenStreetMap contributors'
-            }).addTo(map);
+          map = L.map('map').setView(coords, 18);
 
-            L.marker([39.3081, 8.5292]).addTo(map)
-              .bindPopup('Via Gramsci, Mercato Civico - Iglesias, Sardegna')
-              .openPopup();
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+          }).addTo(map);
 
-            mapInitialized = true;
-          } else {
-            setTimeout(() => {
-              map.invalidateSize();
-            }, 200);
-          }
+          L.marker(coords).addTo(map)
+            .bindPopup('Via Gramsci, Mercato Civico - Iglesias, Sardegna')
+            .openPopup();
+
+          mapInitialized = true;
+        } else {
+          setTimeout(() => {
+            map.invalidateSize();
+          }, 200);
         }
       }
     }
-  </script>
+  }
+</script>
 </body>
 </html>
