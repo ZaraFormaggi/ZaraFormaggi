@@ -204,25 +204,14 @@
     <h3>Il tuo carrello</h3>
     <div id="cart-items"></div>
     <hr>
-    
-    
-    <form id="checkout-form" action="https://formspree.io/f/xpwrplgn" method="POST">
-      <input type="text" name="Nome" placeholder="Nome" required>
-      <input type="text" name="Cognome" placeholder="Cognome" required>
-      <input type="tel" name="Telefono" placeholder="Numero di telefono" required>
-      <input type="email" name="Email" placeholder="Email" required>
-      <input type="text" name="Indirizzo" placeholder="Indirizzo di consegna (se richiesto)">
-      <label><input type="checkbox" name="Ritiro in loco"> Ritiro in loco presso il negozio</label>
-      <input type="hidden" name="Ordine" id="ordine-dettaglio">
-      <button type="submit" onclick="prepareOrder()">Invia Ordine</button>
+    <form id="checkout-form">
+      <input type="text" placeholder="Nome" required>
+      <input type="text" placeholder="Cognome" required>
+      <input type="tel" placeholder="Numero di telefono" required>
+      <input type="email" placeholder="Email" required>
+      <button type="button" onclick="submitOrder()">Invia Ordine</button>
       <button type="button" onclick="downloadPDF()">Salva in PDF</button>
-      <div style="margin-top:1rem;">
-        <div id="paypal-button-container"></div>
-        <button type="button" onclick="alert('Simulazione Stripe')">Paga con Stripe</button>
-      </div>
     </form>
-
-
   </div>
 
   <header>
@@ -255,10 +244,7 @@
     <section id="home" class="section active">
       <h2>Benvenuti!</h2>
       <p>Visita il sito per scoprire i nostri prodotti. Offriamo una selezione di eccellenze enogastronomiche sarde, con attenzione alla qualità, alla tradizione e al gusto autentico.</p>
-    
-
-
-</section>
+    </section>
 
     <section id="chi-siamo" class="section">
       <h2>Chi siamo</h2>
@@ -268,18 +254,6 @@
     <section id="dove" class="section">
       <h2>Dove ci trovi</h2>
       <p>Ci trovi in <strong>Via Gramsci, Iglesias (CI), Sardegna</strong>, presso il Mercato Civico.</p>
-      
-      <h3>Orari di apertura</h3>
-      <ul>
-        <li>Lunedì: Chiuso</li>
-        <li>Martedì: 8:00 - 13:00</li>
-        <li>Mercoledì: 8:00 - 13:00</li>
-        <li>Giovedì: 8:00 - 13:00</li>
-        <li>Venerdì: 7:30 - 13:00</li>
-        <li>Sabato: 7:30 - 13:00</li>
-        <li>Domenica: Chiuso</li>
-      </ul>
-
       <div id="map"></div>
     </section>
 
@@ -293,27 +267,17 @@
       </ul>
     </section>
 
-    
+    <section id="galleria" class="section">
+      <h2>Galleria</h2>
+      <div class="gallery-placeholder">
+        <p>Qui sarà inserita la galleria di foto e video dei nostri prodotti e del punto vendita.</p>
+      </div>
+    </section>
 
     <section id="prodotti" class="section">
       <h2>I nostri prodotti</h2>
       <div class="card-container">
         <div class="card">
-<h3>Salumi</h3>
-<ul>
-  <li>Guanciale – 20€/kg</li>
-  <li>Salsiccia – 18€/kg</li>
-  <li>Pancetta affumicata – 18€/kg</li>
-</ul>
-<h3>Formaggi</h3>
-<ul>
-  <li>Mozzarella di bufala – 19€/kg</li>
-  <li>Grana padano 12-14 mesi – 19€/kg</li>
-  <li>Pecorino fresco – 16€/kg</li>
-  <li>Pecorino semistagionato – 18€/kg</li>
-  <li>Pecorino stagionato – 22€/kg</li>
-</ul>
-          
           <img src="https://images.openai.com/thumbnails/e2612354a9f11115f0fd444ca441070b.jpeg" alt="Vecchio Capraro" />
           <h3>Vecchio Capraro</h3>
           <p>Caprino stagionato da latte crudo, aromatico e dal gusto deciso. Prodotti dalla Talaroga, ideale per abbinamenti sofisticati.</p>
@@ -410,46 +374,15 @@
     }
 
     function downloadPDF() {
-  let content = "Ordine Zara Formaggi
-
-";
-  cart.forEach(item => {
-    content += `${item.name} - Quantità: ${item.quantity}, Prezzo totale: €${(item.price * item.quantity).toFixed(2)}
-`;
-  });
-  const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = "ordine_zara_formaggi.txt";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-}
-
-
-    function simulatePayment() {
-      alert("Pagamento effettuato con successo (simulato).");
-      submitOrder();
-    }
-
-    function submitOrder() {
-      const name = document.getElementById("first-name").value;
-      const surname = document.getElementById("last-name").value;
-      const phone = document.getElementById("phone").value;
-      const email = document.getElementById("email").value;
-      const address = document.getElementById("address").value;
-      const pickup = document.getElementById("pickup").checked;
-
-      let content = `Ordine da: ${name} ${surname}\nEmail: ${email}\nTelefono: ${phone}\n`;
-      content += pickup ? "Ritiro in negozio\n" : `Consegna a: ${address}\n`;
-      content += "\nProdotti:\n";
-
+      let content = "Ordine Zara Formaggi\n\n";
       cart.forEach(item => {
-        content += `- ${item.name} x${item.quantity} (€${(item.price * item.quantity).toFixed(2)})\n`;
+        content += `${item.name} - Quantità: ${item.quantity}, Prezzo totale: €${(item.price * item.quantity).toFixed(2)}\n`;
       });
-
-      alert("Email inviata (simulazione):\n\n" + content);
-      // Qui si integrerebbe invio email reale via backend
+      const blob = new Blob([content], { type: "application/pdf" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "ordine_zara_formaggi.pdf";
+      link.click();
     }
 
 </script>
@@ -528,79 +461,18 @@
     }
 
     function downloadPDF() {
-  let content = "Ordine Zara Formaggi
-
-";
-  cart.forEach(item => {
-    content += `${item.name} - Quantità: ${item.quantity}, Prezzo totale: €${(item.price * item.quantity).toFixed(2)}
-`;
-  });
-  const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = "ordine_zara_formaggi.txt";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-}
-
-
-    function simulatePayment() {
-      alert("Pagamento effettuato con successo (simulato).");
-      submitOrder();
-    }
-
-    function submitOrder() {
-      const name = document.getElementById("first-name").value;
-      const surname = document.getElementById("last-name").value;
-      const phone = document.getElementById("phone").value;
-      const email = document.getElementById("email").value;
-      const address = document.getElementById("address").value;
-      const pickup = document.getElementById("pickup").checked;
-
-      let content = `Ordine da: ${name} ${surname}\nEmail: ${email}\nTelefono: ${phone}\n`;
-      content += pickup ? "Ritiro in negozio\n" : `Consegna a: ${address}\n`;
-      content += "\nProdotti:\n";
-
+      let content = "Ordine Zara Formaggi\n\n";
       cart.forEach(item => {
-        content += `- ${item.name} x${item.quantity} (€${(item.price * item.quantity).toFixed(2)})\n`;
+        content += `${item.name} - Quantità: ${item.quantity}, Prezzo totale: €${(item.price * item.quantity).toFixed(2)}\n`;
       });
-
-      alert("Email inviata (simulazione):\n\n" + content);
-      // Qui si integrerebbe invio email reale via backend
+      const blob = new Blob([content], { type: "application/pdf" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "ordine_zara_formaggi.pdf";
+      link.click();
     }
 
 </script>
-
-    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR"></script>
-    <script>
-      function prepareOrder() {
-        let content = "";
-        cart.forEach(item => {
-          content += `${item.name} x${item.quantity} (€${(item.price * item.quantity).toFixed(2)})\n`;
-        });
-        document.getElementById("ordine-dettaglio").value = content;
-      }
-
-      paypal.Buttons({
-        createOrder: function(data, actions) {
-          const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
-          return actions.order.create({
-            purchase_units: [{
-              amount: { value: total }
-            }]
-          });
-        },
-        onApprove: function(data, actions) {
-          return actions.order.capture().then(function(details) {
-            alert('Pagamento completato da ' + details.payer.name.given_name);
-            prepareOrder();
-            document.getElementById("checkout-form").submit();
-          });
-        }
-      }).render('#paypal-button-container');
-    </script>
-
 </body>
 </html>
   
