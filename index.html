@@ -213,7 +213,7 @@
 
     <div id="product-list" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 2rem;"></div>
 
-    <form id="order-form" action="https://formspree.io/f/YOUR_ID" method="POST">
+    <form id="order-form" action="https://formspree.io/f/xpwrplgn" method="POST">
       <h3>🛒 Carrello</h3>
       <ul id="cart" style="list-style: none; padding: 0;"></ul>
       <p><strong>Totale: <span id="total">€0.00</span></strong></p>
@@ -382,6 +382,79 @@ renderProducts();
     }
   </script>
 
+< !-- aggiornamento carrello -- >
+
+  <script>
+  const products = [
+    { name: "Pecorino Sardo", price: 12.90 },
+    { name: "Ricotta Mustia", price: 9.50 },
+    { name: "Crema di formaggio", price: 7.00 }
+  ];
+
+  const cartItems = [];
+
+  function updateCart() {
+    const cartList = document.getElementById('cart');
+    const subtotalEl = document.getElementById('subtotal');
+    const totalEl = document.getElementById('total');
+    const floatingTotalEl = document.getElementById('floating-total');
+    const ordineHidden = document.getElementById('ordineHidden');
+    const shippingRadio = document.querySelector('input[name="spedizione"]:checked');
+    
+    cartList.innerHTML = '';
+    let subtotal = 0;
+
+    cartItems.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = `${item.name} - €${item.price.toFixed(2)}`;
+      cartList.appendChild(li);
+      subtotal += item.price;
+    });
+
+    const shippingCost = shippingRadio && shippingRadio.value === 'spedizione' && cartItems.length > 0 ? 7.00 : 0.00;
+    
+    subtotalEl.textContent = `€${subtotal.toFixed(2)}`;
+    document.getElementById('shipping').textContent = `€${shippingCost.toFixed(2)}`;
+    const total = subtotal + shippingCost;
+    totalEl.textContent = `€${total.toFixed(2)}`;
+    floatingTotalEl.textContent = `€${total.toFixed(2)}`;
+
+    ordineHidden.value = cartItems.map(i => `${i.name} - €${i.price.toFixed(2)}`).join('\n');
+  }
+
+  function addToCart(product) {
+    cartItems.push(product);
+    updateCart();
+  }
+
+  function renderProducts() {
+    const productList = document.getElementById('product-list');
+    productList.innerHTML = '';
+
+    products.forEach(prod => {
+      const div = document.createElement('div');
+      div.className = 'card';
+      div.innerHTML = `
+        <h3>${prod.name}</h3>
+        <p>Prezzo: €${prod.price.toFixed(2)}</p>
+        <button onclick='addToCart(${JSON.stringify(prod)})' style="padding:8px 12px;background:#8fbc8f;color:white;border:none;border-radius:5px;cursor:pointer;">Aggiungi al carrello</button>
+      `;
+      productList.appendChild(div);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    renderProducts();
+
+    document.querySelectorAll('input[name="spedizione"]').forEach(radio => {
+      radio.addEventListener('change', updateCart);
+    });
+  });
+</script>
+
+  
+
+  
   <!-- AGGIUNGI QUESTO PRIMA DI </body> -->
 <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR"></script>
 <script>
@@ -459,5 +532,5 @@ renderProducts();
 </body>
 </html>
 
-
+https://formspree.io/f/xpwrplgn
   
