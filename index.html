@@ -204,14 +204,25 @@
     <h3>Il tuo carrello</h3>
     <div id="cart-items"></div>
     <hr>
-    <form id="checkout-form">
-      <input type="text" placeholder="Nome" required>
-      <input type="text" placeholder="Cognome" required>
-      <input type="tel" placeholder="Numero di telefono" required>
-      <input type="email" placeholder="Email" required>
-      <button type="button" onclick="submitOrder()">Invia Ordine</button>
+    
+    
+    <form id="checkout-form" action="https://formspree.io/f/xpwrplgn" method="POST">
+      <input type="text" name="Nome" placeholder="Nome" required>
+      <input type="text" name="Cognome" placeholder="Cognome" required>
+      <input type="tel" name="Telefono" placeholder="Numero di telefono" required>
+      <input type="email" name="Email" placeholder="Email" required>
+      <input type="text" name="Indirizzo" placeholder="Indirizzo di consegna (se richiesto)">
+      <label><input type="checkbox" name="Ritiro in loco"> Ritiro in loco presso il negozio</label>
+      <input type="hidden" name="Ordine" id="ordine-dettaglio">
+      <button type="submit" onclick="prepareOrder()">Invia Ordine</button>
       <button type="button" onclick="downloadPDF()">Salva in PDF</button>
+      <div style="margin-top:1rem;">
+        <div id="paypal-button-container"></div>
+        <button type="button" onclick="alert('Simulazione Stripe')">Paga con Stripe</button>
+      </div>
     </form>
+
+
   </div>
 
   <header>
@@ -254,6 +265,18 @@
     <section id="dove" class="section">
       <h2>Dove ci trovi</h2>
       <p>Ci trovi in <strong>Via Gramsci, Iglesias (CI), Sardegna</strong>, presso il Mercato Civico.</p>
+      
+      <h3>Orari di apertura</h3>
+      <ul>
+        <li>Lunedì: Chiuso</li>
+        <li>Martedì: 8:00 - 13:00</li>
+        <li>Mercoledì: 8:00 - 13:00</li>
+        <li>Giovedì: 8:00 - 13:00</li>
+        <li>Venerdì: 7:30 - 13:00</li>
+        <li>Sabato: 7:30 - 13:00</li>
+        <li>Domenica: Chiuso</li>
+      </ul>
+
       <div id="map"></div>
     </section>
 
@@ -385,6 +408,32 @@
       link.click();
     }
 
+
+    function simulatePayment() {
+      alert("Pagamento effettuato con successo (simulato).");
+      submitOrder();
+    }
+
+    function submitOrder() {
+      const name = document.getElementById("first-name").value;
+      const surname = document.getElementById("last-name").value;
+      const phone = document.getElementById("phone").value;
+      const email = document.getElementById("email").value;
+      const address = document.getElementById("address").value;
+      const pickup = document.getElementById("pickup").checked;
+
+      let content = `Ordine da: ${name} ${surname}\nEmail: ${email}\nTelefono: ${phone}\n`;
+      content += pickup ? "Ritiro in negozio\n" : `Consegna a: ${address}\n`;
+      content += "\nProdotti:\n";
+
+      cart.forEach(item => {
+        content += `- ${item.name} x${item.quantity} (€${(item.price * item.quantity).toFixed(2)})\n`;
+      });
+
+      alert("Email inviata (simulazione):\n\n" + content);
+      // Qui si integrerebbe invio email reale via backend
+    }
+
 </script>
 
   <script>
@@ -472,7 +521,63 @@
       link.click();
     }
 
+
+    function simulatePayment() {
+      alert("Pagamento effettuato con successo (simulato).");
+      submitOrder();
+    }
+
+    function submitOrder() {
+      const name = document.getElementById("first-name").value;
+      const surname = document.getElementById("last-name").value;
+      const phone = document.getElementById("phone").value;
+      const email = document.getElementById("email").value;
+      const address = document.getElementById("address").value;
+      const pickup = document.getElementById("pickup").checked;
+
+      let content = `Ordine da: ${name} ${surname}\nEmail: ${email}\nTelefono: ${phone}\n`;
+      content += pickup ? "Ritiro in negozio\n" : `Consegna a: ${address}\n`;
+      content += "\nProdotti:\n";
+
+      cart.forEach(item => {
+        content += `- ${item.name} x${item.quantity} (€${(item.price * item.quantity).toFixed(2)})\n`;
+      });
+
+      alert("Email inviata (simulazione):\n\n" + content);
+      // Qui si integrerebbe invio email reale via backend
+    }
+
 </script>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR"></script>
+    <script>
+      function prepareOrder() {
+        let content = "";
+        cart.forEach(item => {
+          content += `${item.name} x${item.quantity} (€${(item.price * item.quantity).toFixed(2)})\n`;
+        });
+        document.getElementById("ordine-dettaglio").value = content;
+      }
+
+      paypal.Buttons({
+        createOrder: function(data, actions) {
+          const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
+          return actions.order.create({
+            purchase_units: [{
+              amount: { value: total }
+            }]
+          });
+        },
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+            alert('Pagamento completato da ' + details.payer.name.given_name);
+            prepareOrder();
+            document.getElementById("checkout-form").submit();
+          });
+        }
+      }).render('#paypal-button-container');
+    </script>
+
 </body>
 </html>
   
