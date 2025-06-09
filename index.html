@@ -24,6 +24,14 @@
       color: #333;
     }
 
+<!-- CARRELLO FISSO IN ALTO A DESTRA -->
+<div id="floating-cart" style="position:fixed;top:20px;right:20px;background:#fff;border:1px solid #ccc;padding:10px 15px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.2);z-index:999;">
+  <strong>🛒 Carrello:</strong> <span id="floating-total">€0.00</span>
+</div>
+
+
+
+    
     header {
       background-color: var(--verde-scuro);
       color: white;
@@ -201,114 +209,34 @@
 <!-- SHOPPING AVANZATO -->
 
    
-<section id="shop"  class="section" style="padding: 2rem; font-family: Arial, sans-serif; background-color: #fff8f0;">
-  <div style="max-width: 800px; margin: auto;">
-    <h2 style="text-align: center; color: #6b3e26;">🧀 Acquista i nostri prodotti</h2>
+<section id="shop"  class="section"  style="padding: 2rem; background-color: #fffdf7; font-family: Arial, sans-serif;">
+  <h2 style="text-align:center;color:#6b3e26;">🧀 Acquista i nostri Formaggi</h2>
+  <div id="product-list" style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;"></div>
 
-    <div id="product-list" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 2rem;"></div>
+  <form id="order-form" action="https://formspree.io/f/YOUR_ID" method="POST" style="margin-top:2rem;">
+    <h3>🛍️ Riepilogo Ordine</h3>
+    <ul id="cart" style="padding-left:0;"></ul>
+    <p><strong>Totale prodotti: <span id="subtotal">€0.00</span></strong></p>
 
-    <form id="order-form" action="https://formspree.io/f/YOUR_ID" method="POST">
-      <h3>🛒 Carrello</h3>
-      <ul id="cart" style="list-style: none; padding: 0;"></ul>
-      <p><strong>Totale: <span id="total">€0.00</span></strong></p>
+    <h4>🚚 Spedizione</h4>
+    <label><input type="radio" name="spedizione" value="spedizione" required checked> Spedizione a domicilio</label><br>
+    <label><input type="radio" name="spedizione" value="ritiro"> Ritiro in sede</label><br><br>
 
-      <h4>📦 Consegna</h4>
-      <label><input type="radio" name="consegna" value="spedizione" required> Spedizione</label><br>
-      <label><input type="radio" name="consegna" value="ritiro"> Ritiro in sede</label><br><br>
+    <p><strong>Spese spedizione: <span id="shipping">€0.00</span></strong></p>
+    <p><strong>TOTALE FINALE: <span id="total">€0.00</span></strong></p>
 
-      <input type="text" name="nome" placeholder="Nome e Cognome" required><br><br>
-      <input type="email" name="email" placeholder="Email" required><br><br>
-      <textarea name="indirizzo" placeholder="Indirizzo per spedizione (se richiesto)" rows="3"></textarea><br><br>
+    <input type="text" name="nome" placeholder="Nome completo" required><br><br>
+    <input type="email" name="email" placeholder="Email" required><br><br>
+    <textarea name="indirizzo" placeholder="Indirizzo per spedizione (se selezionata)" rows="3"></textarea><br><br>
 
-      <input type="hidden" name="ordine" id="ordineHidden">
+    <input type="hidden" name="ordine" id="ordineHidden">
 
-      <button type="submit" style="background-color: #6b3e26; color: white; padding: 0.75rem; border: none; border-radius: 5px;">📨 Invia Ordine</button>
-    </form>
+    <button type="submit" style="background:#6b3e26;color:white;padding:10px 20px;border:none;border-radius:5px;">📨 Invia Ordine</button>
+  </form>
 
-    <br>
-    <h4>Paga con PayPal:</h4>
-    <div id="paypal-button-container"></div>
-  </div>
-
-
-<!-- SCRIPT: prodotti, carrello, PayPal -->
-<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR"></script>
-<script>
-const products = [
-  { id: 1, name: "Prodotto 1", price: 10 },
-  { id: 2, name: "Prodotto 2", price: 9.0 },
-  { id: 3, name: "Prodotto 3 ", price: 12.0 }
-];
-let cart = [];
-
-function renderProducts() {
-  const list = document.getElementById("product-list");
-  list.innerHTML = "";
-  products.forEach(p => {
-    const box = document.createElement("div");
-    box.style = "border:1px solid #ccc; padding:1rem; width:200px; border-radius:10px; background:#fff;";
-    box.innerHTML = `
-      <h4>${p.name}</h4>
-      <p>€${p.price.toFixed(2)}</p>
-      <button onclick="addToCart(${p.id})" style="background:#8c5b3f; color:#fff; border:none; padding:0.5rem; border-radius:5px;">Aggiungi</button>
-    `;
-    list.appendChild(box);
-  });
-}
-
-function addToCart(id) {
-  const prod = products.find(p => p.id === id);
-  const found = cart.find(c => c.id === id);
-  if (found) found.qty++;
-  else cart.push({ ...prod, qty: 1 });
-  renderCart();
-}
-
-function renderCart() {
-  const list = document.getElementById("cart");
-  list.innerHTML = '';
-  let total = 0;
-  cart.forEach(item => {
-    total += item.price * item.qty;
-    const li = document.createElement("li");
-    li.textContent = `${item.name} x${item.qty} = €${(item.qty * item.price).toFixed(2)}`;
-    list.appendChild(li);
-  });
-  document.getElementById("total").textContent = `€${total.toFixed(2)}`;
-  document.getElementById("ordineHidden").value = cart.map(i => `${i.name} x${i.qty}`).join(', ') + ` | Totale: €${total.toFixed(2)}`;
-}
-
-paypal.Buttons({
-  createOrder: function(data, actions) {
-    const total = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
-    return actions.order.create({
-      purchase_units: [{
-        amount: {
-          value: total.toFixed(2)
-        }
-      }]
-    });
-  },
-  onApprove: function(data, actions) {
-    return actions.order.capture().then(function(details) {
-      alert('Pagamento completato da ' + details.payer.name.given_name);
-    });
-  }
-}).render('#paypal-button-container');
-
-renderProducts();
-</script>
-
-<style>
-@media (max-width: 600px) {
-  #product-list div {
-    width: 100% !important;
-  }
-  section#shop {
-    padding: 1rem;
-  }
-}
-</style>
+  <h4 style="margin-top:2rem;">💳 Paga con PayPal</h4>
+  <div id="paypal-button-container"></div>
+</section>
 
 </section>
 
