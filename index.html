@@ -402,7 +402,7 @@ renderProducts();
     }
   </script>
 
-<!-- aggiornamento carrello  -->
+
 
   <script>
   const products = [
@@ -634,53 +634,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-
-<!-- Stripe JS -->
-<script src="https://js.stripe.com/v3/"></script>
-
-<!-- Payment container -->
-<section style="margin-top:2rem;">
-  <h3>💳 Paga con Google Pay / Apple Pay</h3>
-  <div id="payment-request-button" style="max-width:400px;margin:auto;"></div>
-</section>
-
-<script>
-const stripe = Stripe('pk_test_51Nxxxxxx...'); // replace with your test/live Stripe publishable key
-
-const paymentRequest = stripe.paymentRequest({
-  country: 'IT',
-  currency: 'eur',
-  total: {
-    label: 'ZARA FORMAGGI',
-    amount: 2000,
-  },
-  requestPayerName: true,
-  requestPayerEmail: true,
-});
-
-const elements = stripe.elements();
-paymentRequest.canMakePayment().then(function(result) {
-  if (result) {
-    const prButton = elements.create('paymentRequestButton', {
-      paymentRequest: paymentRequest,
-    });
-    prButton.mount('#payment-request-button');
-  } else {
-    document.getElementById('payment-request-button').style.display = 'none';
-  }
-});
-</script>
-
-<!-- Simulazione notifica email con allegato PDF -->
-<script>
-function inviaOrdineViaEmail() {
-  alert("✅ Il tuo ordine è stato completato. Riceverai una copia via email con il PDF allegato (funzione da integrare con backend SMTP o servizio email esterno).");
-}
-</script>
-<button onclick="inviaOrdineViaEmail()" style="margin-top: 15px; background: #337ab7; color: white; padding: 10px; border: none; border-radius: 5px;">
-📧 Invia ordine via email
-</button>
-
 </body> -->
 <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR"></script>
 <script>
@@ -881,9 +834,7 @@ function inviaOrdineViaEmail() {
     }
   }
 
-  // Salva nel Local Storage
-  function salvaCarrello() {
-    localStorage.setItem("carrello", JSON.stringify(carrello));
+  
   }
 
   // Aggiorna visualizzazione carrello
@@ -1081,56 +1032,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-
-<!-- Stripe JS -->
-<script src="https://js.stripe.com/v3/"></script>
-
-<!-- Payment container -->
-<section style="margin-top:2rem;">
-  <h3>💳 Paga con Google Pay / Apple Pay</h3>
-  <div id="payment-request-button" style="max-width:400px;margin:auto;"></div>
-</section>
-
-<script>
-const stripe = Stripe('pk_test_51Nxxxxxx...'); // replace with your test/live Stripe publishable key
-
-const paymentRequest = stripe.paymentRequest({
-  country: 'IT',
-  currency: 'eur',
-  total: {
-    label: 'ZARA FORMAGGI',
-    amount: 2000,
-  },
-  requestPayerName: true,
-  requestPayerEmail: true,
-});
-
-const elements = stripe.elements();
-paymentRequest.canMakePayment().then(function(result) {
-  if (result) {
-    const prButton = elements.create('paymentRequestButton', {
-      paymentRequest: paymentRequest,
-    });
-    prButton.mount('#payment-request-button');
-  } else {
-    document.getElementById('payment-request-button').style.display = 'none';
-  }
-});
-</script>
-
-<!-- Simulazione notifica email con allegato PDF -->
-<script>
-function inviaOrdineViaEmail() {
-  alert("✅ Il tuo ordine è stato completato. Riceverai una copia via email con il PDF allegato (funzione da integrare con backend SMTP o servizio email esterno).");
-}
-</script>
-<button onclick="inviaOrdineViaEmail()" style="margin-top: 15px; background: #337ab7; color: white; padding: 10px; border: none; border-radius: 5px;">
-📧 Invia ordine via email
-</button>
-
 </body>
 </html>
 
+
+
+  
 
 
   
