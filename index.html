@@ -246,7 +246,6 @@
 <div id="paypal-button-container"></div>
 <button onclick="alert('Simulazione Stripe')" type="button">Paga con Stripe</button>
 </div>
-
 <p><strong>Destinazione:</strong><br/>
 <label><input checked="" id="destinazione-italia" name="destinazione" type="radio"/> Italia</label><br/>
 <label><input id="destinazione-europa" name="destinazione" type="radio"/> Europa</label>
@@ -1083,7 +1082,6 @@ function aggiornaTotale() {
   renderCart(); // Riusa renderCart per aggiornare i costi
 }
 </script>
-
 <script>
 function inviaOrdine() {
   let total = 0;
@@ -1103,13 +1101,11 @@ function inviaOrdine() {
   return false;
 }
 </script>
-
 <section id="riepilogo-ordine" style="display:none; margin-top: 40px;">
 <h2>🧾 Riepilogo Ordine</h2>
 <div id="riepilogo-dettagli" style="margin-bottom: 20px;"></div>
 <button onclick="finalizzaOrdine()">Conferma e Invia Ordine</button>
 </section>
-
 <script>
 function mostraRiepilogoOrdine() {
   const div = document.getElementById("riepilogo-dettagli");
@@ -1141,10 +1137,3 @@ function finalizzaOrdine() {
 </body>
 </html>
 
-  
-       
-  
-
-
-  
-            
