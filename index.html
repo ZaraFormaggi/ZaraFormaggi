@@ -1,6 +1,35 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+
+<style>
+.card-overlay {
+  position: relative;
+  width: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+  text-align: center;
+}
+.card-overlay img {
+  width: 100%;
+  display: block;
+}
+.card-overlay .info {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  width: 100%;
+  padding: 10px;
+  opacity: 0;
+  transition: 0.3s ease-in-out;
+  font-size: 0.9rem;
+}
+.card-overlay:hover .info {
+  opacity: 1;
+}
+</style>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ZARA FORMAGGI di Zara Maurizio</title>
@@ -255,119 +284,7 @@
     <section id="home" class="section active">
       <h2>Benvenuti!</h2>
       <p>Visita il sito per scoprire i nostri prodotti. Offriamo una selezione di eccellenze enogastronomiche sarde, con attenzione alla qualità, alla tradizione e al gusto autentico.</p>
-    <div class="prodotti-gallery" style="display:flex;flex-wrap:wrap;gap:20px;">
-
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-CTwz8LPsEgJn12ktvqk9Xp" alt="Crablù" title="Formaggio erborinato di capra, dal gusto intenso e aromatico." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Crablù</h4>
-      <p style="margin:0;color:#444;">€24,00/kg</p>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-ABLRUJKxYjtj1kf2kU7Ffp" alt="Sulcitano" title="Formaggio pecorino sardo 100% latte ovino, sapore equilibrato." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Sulcitano</h4>
-      <p style="margin:0;color:#444;">€18,00/kg</p>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-WnAwhyrixLJNE8fXWcxtQR" alt="Biancoarrosto" title="Pecorino da griglia con crosta sottile, ottimo per arrosti e piastra." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Biancoarrosto</h4>
-      <p style="margin:0;color:#444;">€17,00/kg</p>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-M6kxVPbo2VGqbKamp4S9W2" alt="Provola di Orotelli" title="Provola affumicata prodotta in Sardegna, gusto delicato e avvolgente." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Provola di Orotelli</h4>
-      <p style="margin:0;color:#444;">€16,00/kg</p>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-48PDY9p9APKPqELaxkZqFu" alt="Gran Sirai" title="Formaggio pecorino stagionato a pasta friabile, sapore deciso." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Gran Sirai</h4>
-      <p style="margin:0;color:#444;">€20,00/kg</p>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-HQBXRUi2L1QgZdcP6U56Ay" alt="Cuor di Latte" title="Caprino semistagionato, delicato e profumato." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Cuor di Latte</h4>
-      <p style="margin:0;color:#444;">€19,00/kg</p>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-1wCxwZoPwC9DyjWfGABUYk" alt="Sirai Gigante" title="Pecorino stagionato di grandi dimensioni, sapore robusto." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Sirai Gigante</h4>
-      <p style="margin:0;color:#444;">€22,00/kg</p>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-H1exrZC8Gr2PgXLJdaScJo" alt="Vecchio Capraro" title="Formaggio di capra a lunga stagionatura, gusto complesso e aromatico." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Vecchio Capraro</h4>
-      <p style="margin:0;color:#444;">€21,00/kg</p>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-U1iwj7gPruJG6HbJN72ju1" alt="Cuore del Sulcis" title="Pecorino da tavola, sapore leggero e profumato, ideale anche grattugiato." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Cuore del Sulcis</h4>
-      <p style="margin:0;color:#444;">€18,00/kg</p>
-    </div>
-    </div>
-<div class="prodotti-gallery" style="display:flex;flex-wrap:wrap;gap:20px;">
-
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-CTwz8LPsEgJn12ktvqk9Xp" alt="Crablù" title="Formaggio erborinato di capra, dal gusto intenso e aromatico." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Crablù</h4>
-      <p style="margin:0;color:#444;">€24,00/kg</p>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-ABLRUJKxYjtj1kf2kU7Ffp" alt="Sulcitano" title="Formaggio pecorino sardo 100% latte ovino, sapore equilibrato." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Sulcitano</h4>
-      <p style="margin:0;color:#444;">€18,00/kg</p>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-WnAwhyrixLJNE8fXWcxtQR" alt="Biancoarrosto" title="Pecorino da griglia con crosta sottile, ottimo per arrosti e piastra." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Biancoarrosto</h4>
-      <p style="margin:0;color:#444;">€17,00/kg</p>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-M6kxVPbo2VGqbKamp4S9W2" alt="Provola di Orotelli" title="Provola affumicata prodotta in Sardegna, gusto delicato e avvolgente." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Provola di Orotelli</h4>
-      <p style="margin:0;color:#444;">€16,00/kg</p>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-48PDY9p9APKPqELaxkZqFu" alt="Gran Sirai" title="Formaggio pecorino stagionato a pasta friabile, sapore deciso." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Gran Sirai</h4>
-      <p style="margin:0;color:#444;">€20,00/kg</p>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-HQBXRUi2L1QgZdcP6U56Ay" alt="Cuor di Latte" title="Caprino semistagionato, delicato e profumato." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Cuor di Latte</h4>
-      <p style="margin:0;color:#444;">€19,00/kg</p>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-1wCxwZoPwC9DyjWfGABUYk" alt="Sirai Gigante" title="Pecorino stagionato di grandi dimensioni, sapore robusto." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Sirai Gigante</h4>
-      <p style="margin:0;color:#444;">€22,00/kg</p>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-H1exrZC8Gr2PgXLJdaScJo" alt="Vecchio Capraro" title="Formaggio di capra a lunga stagionatura, gusto complesso e aromatico." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Vecchio Capraro</h4>
-      <p style="margin:0;color:#444;">€21,00/kg</p>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-U1iwj7gPruJG6HbJN72ju1" alt="Cuore del Sulcis" title="Pecorino da tavola, sapore leggero e profumato, ideale anche grattugiato." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Cuore del Sulcis</h4>
-      <p style="margin:0;color:#444;">€18,00/kg</p>
-    </div>
-    </div>
-</section>
+    </section>
 
     <section id="chi-siamo" class="section">
       <h2>Chi siamo</h2>
@@ -411,6 +328,120 @@
 
     <section id="prodotti" class="section">
       <h2>I nostri prodotti</h2>
+<div class="prodotti-gallery" style="display:flex;flex-wrap:wrap;gap:20px;">
+
+    <div class="card-overlay">
+      <img src="https://chat.openai.com/cdn/pub/file-CTwz8LPsEgJn12ktvqk9Xp" alt="Crablù">
+      <div class="info">Formaggio erborinato di capra, dal gusto intenso e aromatico.</div>
+      <h4 style="margin:6px 0 0;">Crablù</h4>
+      <p style="margin:0;color:#444;">€24,00/kg</p>
+    </div>
+    
+    <div class="card-overlay">
+      <img src="https://chat.openai.com/cdn/pub/file-ABLRUJKxYjtj1kf2kU7Ffp" alt="Sulcitano">
+      <div class="info">Formaggio pecorino sardo 100% latte ovino, sapore equilibrato.</div>
+      <h4 style="margin:6px 0 0;">Sulcitano</h4>
+      <p style="margin:0;color:#444;">€18,00/kg</p>
+    </div>
+    
+    <div class="card-overlay">
+      <img src="https://chat.openai.com/cdn/pub/file-WnAwhyrixLJNE8fXWcxtQR" alt="Biancoarrosto">
+      <div class="info">Pecorino da griglia con crosta sottile, ottimo per arrosti e piastra.</div>
+      <h4 style="margin:6px 0 0;">Biancoarrosto</h4>
+      <p style="margin:0;color:#444;">€17,00/kg</p>
+    </div>
+    
+    <div class="card-overlay">
+      <img src="https://chat.openai.com/cdn/pub/file-M6kxVPbo2VGqbKamp4S9W2" alt="Provola di Orotelli">
+      <div class="info">Provola affumicata prodotta in Sardegna, gusto delicato e avvolgente.</div>
+      <h4 style="margin:6px 0 0;">Provola di Orotelli</h4>
+      <p style="margin:0;color:#444;">€16,00/kg</p>
+    </div>
+    
+    <div class="card-overlay">
+      <img src="https://chat.openai.com/cdn/pub/file-48PDY9p9APKPqELaxkZqFu" alt="Gran Sirai">
+      <div class="info">Formaggio pecorino stagionato a pasta friabile, sapore deciso.</div>
+      <h4 style="margin:6px 0 0;">Gran Sirai</h4>
+      <p style="margin:0;color:#444;">€20,00/kg</p>
+    </div>
+    
+    <div class="card-overlay">
+      <img src="https://chat.openai.com/cdn/pub/file-HQBXRUi2L1QgZdcP6U56Ay" alt="Cuor di Latte">
+      <div class="info">Caprino semistagionato, delicato e profumato.</div>
+      <h4 style="margin:6px 0 0;">Cuor di Latte</h4>
+      <p style="margin:0;color:#444;">€19,00/kg</p>
+    </div>
+    
+    <div class="card-overlay">
+      <img src="https://chat.openai.com/cdn/pub/file-1wCxwZoPwC9DyjWfGABUYk" alt="Sirai Gigante">
+      <div class="info">Pecorino stagionato di grandi dimensioni, sapore robusto.</div>
+      <h4 style="margin:6px 0 0;">Sirai Gigante</h4>
+      <p style="margin:0;color:#444;">€22,00/kg</p>
+    </div>
+    
+    <div class="card-overlay">
+      <img src="https://chat.openai.com/cdn/pub/file-H1exrZC8Gr2PgXLJdaScJo" alt="Vecchio Capraro">
+      <div class="info">Formaggio di capra a lunga stagionatura, gusto complesso e aromatico.</div>
+      <h4 style="margin:6px 0 0;">Vecchio Capraro</h4>
+      <p style="margin:0;color:#444;">€21,00/kg</p>
+    </div>
+    
+    <div class="card-overlay">
+      <img src="https://chat.openai.com/cdn/pub/file-U1iwj7gPruJG6HbJN72ju1" alt="Cuore del Sulcis">
+      <div class="info">Pecorino da tavola, sapore leggero e profumato, ideale anche grattugiato.</div>
+      <h4 style="margin:6px 0 0;">Cuore del Sulcis</h4>
+      <p style="margin:0;color:#444;">€18,00/kg</p>
+    </div>
+    </div>
+    
+    <div class="prodotto" style="width:200px;text-align:center;">
+      <img src="https://chat.openai.com/cdn/pub/file-ABLRUJKxYjtj1kf2kU7Ffp" alt="Sulcitano" title="Formaggio pecorino sardo 100% latte ovino, sapore equilibrato." style="width:200px;height:auto;border-radius:8px;"/>
+      <h4 style="margin:0.5rem 0 0;">Sulcitano</h4>
+      <p style="margin:0;color:#444;">€18,00/kg</p>
+    </div>
+    
+    <div class="prodotto" style="width:200px;text-align:center;">
+      <img src="https://chat.openai.com/cdn/pub/file-WnAwhyrixLJNE8fXWcxtQR" alt="Biancoarrosto" title="Pecorino da griglia con crosta sottile, ottimo per arrosti e piastra." style="width:200px;height:auto;border-radius:8px;"/>
+      <h4 style="margin:0.5rem 0 0;">Biancoarrosto</h4>
+      <p style="margin:0;color:#444;">€17,00/kg</p>
+    </div>
+    
+    <div class="prodotto" style="width:200px;text-align:center;">
+      <img src="https://chat.openai.com/cdn/pub/file-M6kxVPbo2VGqbKamp4S9W2" alt="Provola di Orotelli" title="Provola affumicata prodotta in Sardegna, gusto delicato e avvolgente." style="width:200px;height:auto;border-radius:8px;"/>
+      <h4 style="margin:0.5rem 0 0;">Provola di Orotelli</h4>
+      <p style="margin:0;color:#444;">€16,00/kg</p>
+    </div>
+    
+    <div class="prodotto" style="width:200px;text-align:center;">
+      <img src="https://chat.openai.com/cdn/pub/file-48PDY9p9APKPqELaxkZqFu" alt="Gran Sirai" title="Formaggio pecorino stagionato a pasta friabile, sapore deciso." style="width:200px;height:auto;border-radius:8px;"/>
+      <h4 style="margin:0.5rem 0 0;">Gran Sirai</h4>
+      <p style="margin:0;color:#444;">€20,00/kg</p>
+    </div>
+    
+    <div class="prodotto" style="width:200px;text-align:center;">
+      <img src="https://chat.openai.com/cdn/pub/file-HQBXRUi2L1QgZdcP6U56Ay" alt="Cuor di Latte" title="Caprino semistagionato, delicato e profumato." style="width:200px;height:auto;border-radius:8px;"/>
+      <h4 style="margin:0.5rem 0 0;">Cuor di Latte</h4>
+      <p style="margin:0;color:#444;">€19,00/kg</p>
+    </div>
+    
+    <div class="prodotto" style="width:200px;text-align:center;">
+      <img src="https://chat.openai.com/cdn/pub/file-1wCxwZoPwC9DyjWfGABUYk" alt="Sirai Gigante" title="Pecorino stagionato di grandi dimensioni, sapore robusto." style="width:200px;height:auto;border-radius:8px;"/>
+      <h4 style="margin:0.5rem 0 0;">Sirai Gigante</h4>
+      <p style="margin:0;color:#444;">€22,00/kg</p>
+    </div>
+    
+    <div class="prodotto" style="width:200px;text-align:center;">
+      <img src="https://chat.openai.com/cdn/pub/file-H1exrZC8Gr2PgXLJdaScJo" alt="Vecchio Capraro" title="Formaggio di capra a lunga stagionatura, gusto complesso e aromatico." style="width:200px;height:auto;border-radius:8px;"/>
+      <h4 style="margin:0.5rem 0 0;">Vecchio Capraro</h4>
+      <p style="margin:0;color:#444;">€21,00/kg</p>
+    </div>
+    
+    <div class="prodotto" style="width:200px;text-align:center;">
+      <img src="https://chat.openai.com/cdn/pub/file-U1iwj7gPruJG6HbJN72ju1" alt="Cuore del Sulcis" title="Pecorino da tavola, sapore leggero e profumato, ideale anche grattugiato." style="width:200px;height:auto;border-radius:8px;"/>
+      <h4 style="margin:0.5rem 0 0;">Cuore del Sulcis</h4>
+      <p style="margin:0;color:#444;">€18,00/kg</p>
+    </div>
+    </div>
       <div class="card-container">
         <div class="card">
           <img src="https://images.openai.com/thumbnails/e2612354a9f11115f0fd444ca441070b.jpeg" alt="Vecchio Capraro" />
@@ -432,6 +463,120 @@
   
     <section id="shop" class="section">
       <h2>Shop</h2>
+<div class="prodotti-gallery" style="display:flex;flex-wrap:wrap;gap:20px;">
+
+    <div class="card-overlay">
+      <img src="https://chat.openai.com/cdn/pub/file-CTwz8LPsEgJn12ktvqk9Xp" alt="Crablù">
+      <div class="info">Formaggio erborinato di capra, dal gusto intenso e aromatico.</div>
+      <h4 style="margin:6px 0 0;">Crablù</h4>
+      <p style="margin:0;color:#444;">€24,00/kg</p>
+    </div>
+    
+    <div class="card-overlay">
+      <img src="https://chat.openai.com/cdn/pub/file-ABLRUJKxYjtj1kf2kU7Ffp" alt="Sulcitano">
+      <div class="info">Formaggio pecorino sardo 100% latte ovino, sapore equilibrato.</div>
+      <h4 style="margin:6px 0 0;">Sulcitano</h4>
+      <p style="margin:0;color:#444;">€18,00/kg</p>
+    </div>
+    
+    <div class="card-overlay">
+      <img src="https://chat.openai.com/cdn/pub/file-WnAwhyrixLJNE8fXWcxtQR" alt="Biancoarrosto">
+      <div class="info">Pecorino da griglia con crosta sottile, ottimo per arrosti e piastra.</div>
+      <h4 style="margin:6px 0 0;">Biancoarrosto</h4>
+      <p style="margin:0;color:#444;">€17,00/kg</p>
+    </div>
+    
+    <div class="card-overlay">
+      <img src="https://chat.openai.com/cdn/pub/file-M6kxVPbo2VGqbKamp4S9W2" alt="Provola di Orotelli">
+      <div class="info">Provola affumicata prodotta in Sardegna, gusto delicato e avvolgente.</div>
+      <h4 style="margin:6px 0 0;">Provola di Orotelli</h4>
+      <p style="margin:0;color:#444;">€16,00/kg</p>
+    </div>
+    
+    <div class="card-overlay">
+      <img src="https://chat.openai.com/cdn/pub/file-48PDY9p9APKPqELaxkZqFu" alt="Gran Sirai">
+      <div class="info">Formaggio pecorino stagionato a pasta friabile, sapore deciso.</div>
+      <h4 style="margin:6px 0 0;">Gran Sirai</h4>
+      <p style="margin:0;color:#444;">€20,00/kg</p>
+    </div>
+    
+    <div class="card-overlay">
+      <img src="https://chat.openai.com/cdn/pub/file-HQBXRUi2L1QgZdcP6U56Ay" alt="Cuor di Latte">
+      <div class="info">Caprino semistagionato, delicato e profumato.</div>
+      <h4 style="margin:6px 0 0;">Cuor di Latte</h4>
+      <p style="margin:0;color:#444;">€19,00/kg</p>
+    </div>
+    
+    <div class="card-overlay">
+      <img src="https://chat.openai.com/cdn/pub/file-1wCxwZoPwC9DyjWfGABUYk" alt="Sirai Gigante">
+      <div class="info">Pecorino stagionato di grandi dimensioni, sapore robusto.</div>
+      <h4 style="margin:6px 0 0;">Sirai Gigante</h4>
+      <p style="margin:0;color:#444;">€22,00/kg</p>
+    </div>
+    
+    <div class="card-overlay">
+      <img src="https://chat.openai.com/cdn/pub/file-H1exrZC8Gr2PgXLJdaScJo" alt="Vecchio Capraro">
+      <div class="info">Formaggio di capra a lunga stagionatura, gusto complesso e aromatico.</div>
+      <h4 style="margin:6px 0 0;">Vecchio Capraro</h4>
+      <p style="margin:0;color:#444;">€21,00/kg</p>
+    </div>
+    
+    <div class="card-overlay">
+      <img src="https://chat.openai.com/cdn/pub/file-U1iwj7gPruJG6HbJN72ju1" alt="Cuore del Sulcis">
+      <div class="info">Pecorino da tavola, sapore leggero e profumato, ideale anche grattugiato.</div>
+      <h4 style="margin:6px 0 0;">Cuore del Sulcis</h4>
+      <p style="margin:0;color:#444;">€18,00/kg</p>
+    </div>
+    </div>
+    
+    <div class="prodotto" style="width:200px;text-align:center;">
+      <img src="https://chat.openai.com/cdn/pub/file-ABLRUJKxYjtj1kf2kU7Ffp" alt="Sulcitano" title="Formaggio pecorino sardo 100% latte ovino, sapore equilibrato." style="width:200px;height:auto;border-radius:8px;"/>
+      <h4 style="margin:0.5rem 0 0;">Sulcitano</h4>
+      <p style="margin:0;color:#444;">€18,00/kg</p>
+    </div>
+    
+    <div class="prodotto" style="width:200px;text-align:center;">
+      <img src="https://chat.openai.com/cdn/pub/file-WnAwhyrixLJNE8fXWcxtQR" alt="Biancoarrosto" title="Pecorino da griglia con crosta sottile, ottimo per arrosti e piastra." style="width:200px;height:auto;border-radius:8px;"/>
+      <h4 style="margin:0.5rem 0 0;">Biancoarrosto</h4>
+      <p style="margin:0;color:#444;">€17,00/kg</p>
+    </div>
+    
+    <div class="prodotto" style="width:200px;text-align:center;">
+      <img src="https://chat.openai.com/cdn/pub/file-M6kxVPbo2VGqbKamp4S9W2" alt="Provola di Orotelli" title="Provola affumicata prodotta in Sardegna, gusto delicato e avvolgente." style="width:200px;height:auto;border-radius:8px;"/>
+      <h4 style="margin:0.5rem 0 0;">Provola di Orotelli</h4>
+      <p style="margin:0;color:#444;">€16,00/kg</p>
+    </div>
+    
+    <div class="prodotto" style="width:200px;text-align:center;">
+      <img src="https://chat.openai.com/cdn/pub/file-48PDY9p9APKPqELaxkZqFu" alt="Gran Sirai" title="Formaggio pecorino stagionato a pasta friabile, sapore deciso." style="width:200px;height:auto;border-radius:8px;"/>
+      <h4 style="margin:0.5rem 0 0;">Gran Sirai</h4>
+      <p style="margin:0;color:#444;">€20,00/kg</p>
+    </div>
+    
+    <div class="prodotto" style="width:200px;text-align:center;">
+      <img src="https://chat.openai.com/cdn/pub/file-HQBXRUi2L1QgZdcP6U56Ay" alt="Cuor di Latte" title="Caprino semistagionato, delicato e profumato." style="width:200px;height:auto;border-radius:8px;"/>
+      <h4 style="margin:0.5rem 0 0;">Cuor di Latte</h4>
+      <p style="margin:0;color:#444;">€19,00/kg</p>
+    </div>
+    
+    <div class="prodotto" style="width:200px;text-align:center;">
+      <img src="https://chat.openai.com/cdn/pub/file-1wCxwZoPwC9DyjWfGABUYk" alt="Sirai Gigante" title="Pecorino stagionato di grandi dimensioni, sapore robusto." style="width:200px;height:auto;border-radius:8px;"/>
+      <h4 style="margin:0.5rem 0 0;">Sirai Gigante</h4>
+      <p style="margin:0;color:#444;">€22,00/kg</p>
+    </div>
+    
+    <div class="prodotto" style="width:200px;text-align:center;">
+      <img src="https://chat.openai.com/cdn/pub/file-H1exrZC8Gr2PgXLJdaScJo" alt="Vecchio Capraro" title="Formaggio di capra a lunga stagionatura, gusto complesso e aromatico." style="width:200px;height:auto;border-radius:8px;"/>
+      <h4 style="margin:0.5rem 0 0;">Vecchio Capraro</h4>
+      <p style="margin:0;color:#444;">€21,00/kg</p>
+    </div>
+    
+    <div class="prodotto" style="width:200px;text-align:center;">
+      <img src="https://chat.openai.com/cdn/pub/file-U1iwj7gPruJG6HbJN72ju1" alt="Cuore del Sulcis" title="Pecorino da tavola, sapore leggero e profumato, ideale anche grattugiato." style="width:200px;height:auto;border-radius:8px;"/>
+      <h4 style="margin:0.5rem 0 0;">Cuore del Sulcis</h4>
+      <p style="margin:0;color:#444;">€18,00/kg</p>
+    </div>
+    </div>
       <div class="card-container">
         <div class="card">
           <img src="https://images.openai.com/thumbnails/e2612354a9f11115f0fd444ca441070b.jpeg" alt="Vecchio Capraro" />
