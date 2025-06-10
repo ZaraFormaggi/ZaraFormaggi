@@ -1,7 +1,7 @@
 <!DOCTYPE html>
+
 <html lang="it">
 <head>
-
 <style>
 .card-overlay {
   position: relative;
@@ -29,15 +29,12 @@
   opacity: 1;
 }
 </style>
-
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ZARA FORMAGGI di Zara Maurizio</title>
-
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ZARA FORMAGGI di Zara Maurizio</title>
+<!-- Leaflet CSS -->
+<link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/>
+<style>
     :root {
       --verde-scuro: #2f4f2f;
       --verde-chiaro: #8fbc8f;
@@ -226,458 +223,518 @@
 </style>
 </head>
 <body>
+<button id="cart-button" onclick="toggleCart()">🛒 Carrello</button>
+<div id="cart-section">
+<h3>Il tuo carrello</h3>
+<div id="cart-items"></div>
+<hr/>
+<form action="https://formspree.io/f/xpwrplgn" id="checkout-form" method="POST">
+<label><input id="ritiro-loco" onchange="toggleSottovuoto()" type="checkbox"/> Ritiro in loco</label><br/>
+<div id="sottovuoto-opzione" style="display:none; margin-top:6px;">
+<label><input id="sottovuoto" onchange="aggiornaTotale()" type="checkbox"/> Richiedi sottovuoto (+€0.50)</label>
+</div>
+<input name="Nome" placeholder="Nome" required="" type="text"/>
+<input name="Cognome" placeholder="Cognome" required="" type="text"/>
+<input name="Telefono" placeholder="Numero di telefono" required="" type="tel"/>
+<input name="Email" placeholder="Email" required="" type="email"/>
+<input name="Indirizzo" placeholder="Indirizzo di consegna (se richiesto)" type="text"/>
+<label><input name="Ritiro in loco" type="checkbox"/> Ritiro in loco presso il negozio</label>
+<input id="ordine-dettaglio" name="Ordine" type="hidden"/>
+<button onclick="prepareOrder()" type="submit">Invia Ordine</button>
+<button onclick="downloadPDF()" type="button">Salva in PDF</button>
+<div style="margin-top:1rem;">
+<div id="paypal-button-container"></div>
+<button onclick="alert('Simulazione Stripe')" type="button">Paga con Stripe</button>
+</div>
 
-  <button id="cart-button" onclick="toggleCart()">🛒 Carrello</button>
-
-  <div id="cart-section">
-    <h3>Il tuo carrello</h3>
-    <div id="cart-items"></div>
-    <hr>
-    
-    
-    <form id="checkout-form" action="https://formspree.io/f/xpwrplgn" method="POST">
-      <input type="text" name="Nome" placeholder="Nome" required>
-      <input type="text" name="Cognome" placeholder="Cognome" required>
-      <input type="tel" name="Telefono" placeholder="Numero di telefono" required>
-      <input type="email" name="Email" placeholder="Email" required>
-      <input type="text" name="Indirizzo" placeholder="Indirizzo di consegna (se richiesto)">
-      <label><input type="checkbox" name="Ritiro in loco"> Ritiro in loco presso il negozio</label>
-      <input type="hidden" name="Ordine" id="ordine-dettaglio">
-      <button type="submit" onclick="prepareOrder()">Invia Ordine</button>
-      <button type="button" onclick="downloadPDF()">Salva in PDF</button>
-      <div style="margin-top:1rem;">
-        <div id="paypal-button-container"></div>
-        <button type="button" onclick="alert('Simulazione Stripe')">Paga con Stripe</button>
-      </div>
-    </form>
-
-
-  </div>
-
-  <header>
-    <div class="header-logo">
-      <img src="logo.png" alt="Logo Zara Formaggi" />
-    </div>
-    <div class="header-title">
-      <h1>ZARA FORMAGGI</h1>
-      <div class="header-subtitle">di Zara Maurizio</div>
-    </div>
-    <p>Rivendita di Prodotti tipici Sardi e tanto altro</p>
-  </header>
-
-  <nav>
-    <a onclick="showSection('home')">Home</a>
-    <a onclick="showSection('chi-siamo')">Chi siamo</a>
-    <a onclick="showSection('dove')">Dove ci trovi</a>
-    <a onclick="showSection('servizi')">Servizi</a>
-    <a onclick="showSection('galleria')">Galleria</a>
-    <a onclick="showSection('prodotti')">I nostri prodotti</a>
-    <a onclick="showSection('shop')">Shop</a>
-    <a onclick="showSection('contatti')">Contatti</a>
-  </nav>
-
-  <div class="search-bar">
-    <input type="text" placeholder="Cerca nel sito..." />
-  </div>
-
-  <main>
-    <section id="home" class="section active">
-      <h2>Benvenuti!</h2>
-      <p>Visita il sito per scoprire i nostri prodotti. Offriamo una selezione di eccellenze enogastronomiche sarde, con attenzione alla qualità, alla tradizione e al gusto autentico.</p>
-    </section>
-
-    <section id="chi-siamo" class="section">
-      <h2>Chi siamo</h2>
-      <p>ZARA FORMAGGI nasce dalla passione per i sapori autentici della Sardegna. Fondata da Maurizio Zara, l’attività si dedica alla selezione e vendita di prodotti tipici come formaggi, salumi, dolci e molto altro. Tradizione e qualità sono il nostro marchio.</p>
-    </section>
-
-    <section id="dove" class="section">
-      <h2>Dove ci trovi</h2>
-      <p>Ci trovi in <strong>Via Gramsci, Iglesias (CI), Sardegna</strong>, presso il Mercato Civico.</p>
-      
-      <h3>Orari di apertura</h3>
-      <ul>
-        <li>Lunedì: Chiuso</li>
-        <li>Martedì: 8:00 - 13:00</li>
-        <li>Mercoledì: 8:00 - 13:00</li>
-        <li>Giovedì: 8:00 - 13:00</li>
-        <li>Venerdì: 7:30 - 13:00</li>
-        <li>Sabato: 7:30 - 13:00</li>
-        <li>Domenica: Chiuso</li>
-      </ul>
-
-      <div id="map"></div>
-    </section>
-
-    <section id="servizi" class="section">
-      <h2>I nostri servizi</h2>
-      <ul>
-        <li>Vendita al dettaglio di prodotti tipici sardi</li>
-        <li>Confezioni regalo personalizzate</li>
-        <li>Spedizioni in tutta Italia</li>
-        <li>Degustazioni su prenotazione</li>
-      </ul>
-    </section>
-
-    <section id="galleria" class="section">
-      <h2>Galleria</h2>
-      <div class="gallery-placeholder">
-        <p>Qui sarà inserita la galleria di foto e video dei nostri prodotti e del punto vendita.</p>
-      </div>
-    </section>
-
-    <section id="prodotti" class="section">
-      <h2>I nostri prodotti</h2>
+<p><strong>Destinazione:</strong><br/>
+<label><input checked="" id="destinazione-italia" name="destinazione" type="radio"/> Italia</label><br/>
+<label><input id="destinazione-europa" name="destinazione" type="radio"/> Europa</label>
+</p>
+<button onclick="return inviaOrdine()" type="submit">Procedi al pagamento</button>
+</form>
+<div style="margin-top:10px;">
+<label><input id="confezione-regalo" onchange="aggiornaTotale()" type="checkbox"/> Aggiungi confezione regalo (+€5)</label>
+</div>
+<div id="cart-total" style="margin-top:10px; font-weight:bold;"></div></div>
+<header>
+<div class="header-logo">
+<img alt="Logo Zara Formaggi" src="logo.png"/>
+</div>
+<div class="header-title">
+<h1>ZARA FORMAGGI</h1>
+<div class="header-subtitle">di Zara Maurizio</div>
+</div>
+<p>Rivendita di Prodotti tipici Sardi e tanto altro</p>
+</header>
+<nav>
+<a onclick="showSection('home')">Home</a>
+<a onclick="showSection('chi-siamo')">Chi siamo</a>
+<a onclick="showSection('dove')">Dove ci trovi</a>
+<a onclick="showSection('servizi')">Servizi</a>
+<a onclick="showSection('galleria')">Galleria</a>
+<a onclick="showSection('prodotti')">I nostri prodotti</a>
+<a onclick="showSection('shop')">Shop</a>
+<a onclick="showSection('contatti')">Contatti</a>
+</nav>
+<div class="search-bar">
+<input placeholder="Cerca nel sito..." type="text"/>
+</div>
+<main>
+<section class="section active" id="home">
+<h2>Benvenuti!</h2>
+<p>Visita il sito per scoprire i nostri prodotti. Offriamo una selezione di eccellenze enogastronomiche sarde, con attenzione alla qualità, alla tradizione e al gusto autentico.</p>
+</section>
+<section class="section" id="chi-siamo">
+<h2>Chi siamo</h2>
+<p>ZARA FORMAGGI nasce dalla passione per i sapori autentici della Sardegna. Fondata da Maurizio Zara, l’attività si dedica alla selezione e vendita di prodotti tipici come formaggi, salumi, dolci e molto altro. Tradizione e qualità sono il nostro marchio.</p>
+</section>
+<section class="section" id="dove">
+<h2>Dove ci trovi</h2>
+<p>Ci trovi in <strong>Via Gramsci, Iglesias (CI), Sardegna</strong>, presso il Mercato Civico.</p>
+<h3>Orari di apertura</h3>
+<ul>
+<li>Lunedì: Chiuso</li>
+<li>Martedì: 8:00 - 13:00</li>
+<li>Mercoledì: 8:00 - 13:00</li>
+<li>Giovedì: 8:00 - 13:00</li>
+<li>Venerdì: 7:30 - 13:00</li>
+<li>Sabato: 7:30 - 13:00</li>
+<li>Domenica: Chiuso</li>
+</ul>
+<div id="map"></div>
+</section>
+<section class="section" id="servizi">
+<h2>I nostri servizi</h2>
+<ul>
+<li>Vendita al dettaglio di prodotti tipici sardi</li>
+<li>Confezioni regalo personalizzate</li>
+<li>Spedizioni in tutta Italia</li>
+<li>Degustazioni su prenotazione</li>
+</ul>
+</section>
+<section class="section" id="galleria">
+<h2>Galleria</h2>
+<div class="gallery-placeholder">
+<p>Qui sarà inserita la galleria di foto e video dei nostri prodotti e del punto vendita.</p>
+</div>
+</section>
+<section class="section" id="prodotti">
+<nav class="menu-prodotti" style="position: sticky; top: 0; background: white; z-index: 1000; padding: 10px 0; border-bottom: 1px solid #ccc; text-align: center;">
+<a href="#formaggi" style="margin-right: 20px;">🧀 Formaggi</a>
+<a href="#salumi" style="margin-right: 20px;">🥓 Salumi</a>
+<a href="#altri-prodotti">🛒 Altri Prodotti</a>
+</nav>
+<h2>I nostri prodotti</h2>
 <div class="card-container" style="display: flex; flex-wrap: wrap; gap: 20px;">
-
-    <div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-        <img src="Crablu.png" alt="Crablù" style="width: 100%; height: auto;">
-        <div style="padding: 10px;">
-            <h4 style="margin: 0 0 5px;">Crablù</h4>
-            <p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Formaggio erborinato di capra, dal gusto intenso e aromatico.</p>
-            <p style="margin: 0; font-weight: bold; color: #444;">€24,00/kg</p>
-        </div>
-    </div>
-    
-    <div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-        <img src="Sulcitano.png" alt="Sulcitano" style="width: 100%; height: auto;">
-        <div style="padding: 10px;">
-            <h4 style="margin: 0 0 5px;">Sulcitano</h4>
-            <p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Formaggio pecorino sardo 100% latte ovino, sapore equilibrato.</p>
-            <p style="margin: 0; font-weight: bold; color: #444;">€18,00/kg</p>
-        </div>
-    </div>
-    
-    <div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-        <img src="Bianco arrosto.png" alt="Biancoarrosto" style="width: 100%; height: auto;">
-        <div style="padding: 10px;">
-            <h4 style="margin: 0 0 5px;">Biancoarrosto</h4>
-            <p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Pecorino da griglia con crosta sottile, ottimo per arrosti e piastra.</p>
-            <p style="margin: 0; font-weight: bold; color: #444;">€17,00/kg</p>
-        </div>
-    </div>
-    
-    <div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-        <img src="Provola di Orotelli.png" alt="Provola di Orotelli" style="width: 100%; height: auto;">
-        <div style="padding: 10px;">
-            <h4 style="margin: 0 0 5px;">Provola di Orotelli</h4>
-            <p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Provola affumicata prodotta in Sardegna, gusto delicato e avvolgente.</p>
-            <p style="margin: 0; font-weight: bold; color: #444;">€16,00/kg</p>
-        </div>
-    </div>
-    
-    <div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-        <img src="Gran Sirai.png" alt="Gran Sirai" style="width: 100%; height: auto;">
-        <div style="padding: 10px;">
-            <h4 style="margin: 0 0 5px;">Gran Sirai</h4>
-            <p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Formaggio pecorino stagionato a pasta friabile, sapore deciso.</p>
-            <p style="margin: 0; font-weight: bold; color: #444;">€20,00/kg</p>
-        </div>
-    </div>
-    
-    <div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-        <img src="Cuor di latte.png" alt="Cuor di Latte" style="width: 100%; height: auto;">
-        <div style="padding: 10px;">
-            <h4 style="margin: 0 0 5px;">Cuor di Latte</h4>
-            <p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Caprino semistagionato, delicato e profumato.</p>
-            <p style="margin: 0; font-weight: bold; color: #444;">€19,00/kg</p>
-        </div>
-    </div>
-    
-    <div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-        <img src="Sirai gigante.png" alt="Sirai Gigante" style="width: 100%; height: auto;">
-        <div style="padding: 10px;">
-            <h4 style="margin: 0 0 5px;">Sirai Gigante</h4>
-            <p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Pecorino stagionato di grandi dimensioni, sapore robusto.</p>
-            <p style="margin: 0; font-weight: bold; color: #444;">€22,00/kg</p>
-        </div>
-    </div>
-    
-    <div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-        <img src="Vecchio Capraro.png" alt="Vecchio Capraro" style="width: 100%; height: auto;">
-        <div style="padding: 10px;">
-            <h4 style="margin: 0 0 5px;">Vecchio Capraro</h4>
-            <p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Formaggio di capra a lunga stagionatura, gusto complesso e aromatico.</p>
-            <p style="margin: 0; font-weight: bold; color: #444;">€21,00/kg</p>
-        </div>
-    </div>
-    
-    <div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-        <img src="Cuore.png" alt="Cuore del Sulcis" style="width: 100%; height: auto;">
-        <div style="padding: 10px;">
-            <h4 style="margin: 0 0 5px;">Cuore del Sulcis</h4>
-            <p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Pecorino da tavola, sapore leggero e profumato, ideale anche grattugiato.</p>
-            <p style="margin: 0; font-weight: bold; color: #444;">€18,00/kg</p>
-        </div>
-    </div>
-    </div>
-      <h4 style="margin:6px 0 0;">Crablù</h4>
-      <p style="margin:0;color:#444;">€24,00/kg</p>
-    </div>
- 
-    </section>
-
-
-
-
-
-
-
-    
-    <section id="contatti" class="section">
-      <h2>Contatti</h2>
-      <p>Per informazioni, ordini o richieste particolari, contattaci via email o telefono. (Spazio per modulo contatti e informazioni)</p>
-    </section>
-
-
-
-
-    
-    <section id="shop" class="section">
-      <h2>Shop</h2>
+</div>
+<h4 style="margin:6px 0 0;">Crablù</h4>
+<p style="margin:0;color:#444;">€24,00/kg</p>
+<div class="categoria-prodotti" id="formaggi"><h3>Formaggi</h3></div><div class="categoria-prodotti" id="salumi"><h3>Salumi</h3></div><div class="categoria-prodotti" id="altri-prodotti"><h3>Altri prodotti</h3></div></section>
+<section class="section" id="contatti">
+<h2>Contatti</h2>
+<p>Per informazioni, ordini o richieste particolari, contattaci via email o telefono. (Spazio per modulo contatti e informazioni)</p>
+</section>
+<section class="section" id="shop">
+<div style="margin: 30px 0; padding: 15px; border: 1px solid #ccc; border-radius: 10px;">
+<h3>🎁 Richiedi un Buono Regalo</h3>
+<label for="valore-voucher">Inserisci il valore (10€ - 200€):</label><br/>
+<input id="valore-voucher" max="200" min="10" style="width: 100px; margin: 8px 0;" type="number" value="10"/>
+<button onclick="aggiungiVoucher()" type="button">Aggiungi al carrello</button>
+</div>
+<h2>Shop</h2>
 <div class="card-container" style="display: flex; flex-wrap: wrap; gap: 20px;">
-
-
-
-
-  
-    <div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-   <img src="Crablu.png" alt="Crablù" style="width: 100%; height: auto;">
-        <div style="padding: 10px;">
-            <h4 style="margin: 0 0 5px;">Crablù</h4>
-            <p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Formaggio erborinato di capra, dal gusto intenso e aromatico.</p>
-            <p style="margin: 0; font-weight: bold; color: #444;">€24,00/kg</p>
-           <input type="number" id="qty1" value="1" min="1">
-          <button onclick="addToCart('Crablù', 24 , parseInt(document.getElementById('qty1').value))">Aggiungi al carrello</button>
-        </div>
-    </div>
-    
-    <div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-        <img src="Sulcitano.png" alt="Sulcitano" style="width: 100%; height: auto;">
-        <div style="padding: 10px;">
-            <h4 style="margin: 0 0 5px;">Sulcitano</h4>
-            <p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Formaggio pecorino sardo 100% latte ovino, sapore equilibrato.</p>
-            <p style="margin: 0; font-weight: bold; color: #444;">€18,00/kg</p>
-          <input type="number" id="qty1" value="1" min="1">
-          <button onclick="addToCart('Sulcitano', 18 , parseInt(document.getElementById('qty1').value))">Aggiungi al carrello</button>
-        </div>
-    </div>
-    
-    <div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-        <img src="Bianco arrosto.png" alt="Biancoarrosto" style="width: 100%; height: auto;">
-        <div style="padding: 10px;">
-            <h4 style="margin: 0 0 5px;">Biancoarrosto</h4>
-            <p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Pecorino da griglia con crosta sottile, ottimo per arrosti e piastra.</p>
-            <p style="margin: 0; font-weight: bold; color: #444;">€17,00/kg</p>
-          <input type="number" id="qty1" value="1" min="1">
-          <button onclick="addToCart('Biancoarrosto', 17 , parseInt(document.getElementById('qty1').value))">Aggiungi al carrello</button>
-        </div>
-    </div>
-
-  
-    <div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-        <img src="Provole bianche orotelli.png" alt="Provola di Orotelli" style="width: 100%; height: auto;">
-        <div style="padding: 10px;">
-            <h4 style="margin: 0 0 5px;">Provola di Orotelli</h4>
-            <p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Provola affumicata prodotta in Sardegna, gusto delicato e avvolgente.</p>
-            <p style="margin: 0; font-weight: bold; color: #444;">€16,00/kg</p>
-           <input type="number" id="qty1" value="1" min="1">
-          <button onclick="addToCart('Provola di Orotelli', 16 , parseInt(document.getElementById('qty1').value))">Aggiungi al carrello</button>
-        </div>
-    </div>
-
-
-  
-    <div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-        <img src="Gran Sirai.png" alt="Gran Sirai" style="width: 100%; height: auto;">
-        <div style="padding: 10px;">
-            <h4 style="margin: 0 0 5px;">Gran Sirai</h4>
-            <p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Formaggio pecorino stagionato a pasta friabile, sapore deciso.</p>
-            <p style="margin: 0; font-weight: bold; color: #444;">€26,00/kg</p>
-          <input type="number" id="qty1" value="1" min="1">
-          <button onclick="addToCart('Gran Sirai', 26 , parseInt(document.getElementById('qty1').value))">Aggiungi al carrello</button>
-        </div>
-    </div>
-    
-    <div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-        <img src="Cuor di latte.png" alt="Cuor di Latte" style="width: 100%; height: auto;">
-        <div style="padding: 10px;">
-            <h4 style="margin: 0 0 5px;">Cuor di Latte</h4>
-            <p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Caprino semistagionato, delicato e profumato.</p>
-            <p style="margin: 0; font-weight: bold; color: #444;">€19,00/kg</p>
-          <input type="number" id="qty1" value="1" min="1">
-          <button onclick="addToCart('Cuor di Latte', 19 , parseInt(document.getElementById('qty1').value))">Aggiungi al carrello</button>
-          
-        </div>
-    </div>
-
-
-
-  
-    <div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-        <img src="Sirai gigante.png" alt="Sirai Gigante" style="width: 100%; height: auto;">
-        <div style="padding: 10px;">
-            <h4 style="margin: 0 0 5px;">Sirai Gigante</h4>
-            <p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Pecorino stagionato di grandi dimensioni, sapore robusto.</p>
-            <p style="margin: 0; font-weight: bold; color: #444;">€22,00/kg</p>
-           <input type="number" id="qty1" value="1" min="1">
-          <button onclick="addToCart('Cuor di Latte', 19 , parseInt(document.getElementById('qty1').value))">Aggiungi al carrello</button>
-        </div>
-    </div>
-    
-    <div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-        <img src="https://chat.openai.com/cdn/pub/file-H1exrZC8Gr2PgXLJdaScJo" alt="Vecchio Capraro" style="width: 100%; height: auto;">
-        <div style="padding: 10px;">
-            <h4 style="margin: 0 0 5px;">Vecchio Capraro</h4>
-            <p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Formaggio di capra a lunga stagionatura, gusto complesso e aromatico.</p>
-            <p style="margin: 0; font-weight: bold; color: #444;">€21,00/kg</p>
-        </div>
-    </div>
-    
-    <div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-        <img src="https://chat.openai.com/cdn/pub/file-U1iwj7gPruJG6HbJN72ju1" alt="Cuore del Sulcis" style="width: 100%; height: auto;">
-        <div style="padding: 10px;">
-            <h4 style="margin: 0 0 5px;">Cuore del Sulcis</h4>
-            <p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Pecorino da tavola, sapore leggero e profumato, ideale anche grattugiato.</p>
-            <p style="margin: 0; font-weight: bold; color: #444;">€18,00/kg</p>
-        </div>
-    </div>
-    </div>
-      <h4 style="margin:6px 0 0;">Crablù</h4>
-      <p style="margin:0;color:#444;">€24,00/kg</p>
-    </div>
-    
-    <div class="card-overlay">
-      <img src="https://chat.openai.com/cdn/pub/file-ABLRUJKxYjtj1kf2kU7Ffp" alt="Sulcitano">
-      <div class="info">Formaggio pecorino sardo 100% latte ovino, sapore equilibrato.</div>
-      <h4 style="margin:6px 0 0;">Sulcitano</h4>
-      <p style="margin:0;color:#444;">€18,00/kg</p>
-    </div>
-    
-    <div class="card-overlay">
-      <img src="https://chat.openai.com/cdn/pub/file-WnAwhyrixLJNE8fXWcxtQR" alt="Biancoarrosto">
-      <div class="info">Pecorino da griglia con crosta sottile, ottimo per arrosti e piastra.</div>
-      <h4 style="margin:6px 0 0;">Biancoarrosto</h4>
-      <p style="margin:0;color:#444;">€17,00/kg</p>
-    </div>
-    
-    <div class="card-overlay">
-      <img src="https://chat.openai.com/cdn/pub/file-M6kxVPbo2VGqbKamp4S9W2" alt="Provola di Orotelli">
-      <div class="info">Provola affumicata prodotta in Sardegna, gusto delicato e avvolgente.</div>
-      <h4 style="margin:6px 0 0;">Provola di Orotelli</h4>
-      <p style="margin:0;color:#444;">€16,00/kg</p>
-    </div>
-    
-    <div class="card-overlay">
-      <img src="https://chat.openai.com/cdn/pub/file-48PDY9p9APKPqELaxkZqFu" alt="Gran Sirai">
-      <div class="info">Formaggio pecorino stagionato a pasta friabile, sapore deciso.</div>
-      <h4 style="margin:6px 0 0;">Gran Sirai</h4>
-      <p style="margin:0;color:#444;">€20,00/kg</p>
-    </div>
-    
-    <div class="card-overlay">
-      <img src="https://chat.openai.com/cdn/pub/file-HQBXRUi2L1QgZdcP6U56Ay" alt="Cuor di Latte">
-      <div class="info">Caprino semistagionato, delicato e profumato.</div>
-      <h4 style="margin:6px 0 0;">Cuor di Latte</h4>
-      <p style="margin:0;color:#444;">€19,00/kg</p>
-    </div>
-    
-    <div class="card-overlay">
-      <img src="https://chat.openai.com/cdn/pub/file-1wCxwZoPwC9DyjWfGABUYk" alt="Sirai Gigante">
-      <div class="info">Pecorino stagionato di grandi dimensioni, sapore robusto.</div>
-      <h4 style="margin:6px 0 0;">Sirai Gigante</h4>
-      <p style="margin:0;color:#444;">€22,00/kg</p>
-    </div>
-    
-    <div class="card-overlay">
-      <img src="https://chat.openai.com/cdn/pub/file-H1exrZC8Gr2PgXLJdaScJo" alt="Vecchio Capraro">
-      <div class="info">Formaggio di capra a lunga stagionatura, gusto complesso e aromatico.</div>
-      <h4 style="margin:6px 0 0;">Vecchio Capraro</h4>
-      <p style="margin:0;color:#444;">€21,00/kg</p>
-    </div>
-    
-    <div class="card-overlay">
-      <img src="https://chat.openai.com/cdn/pub/file-U1iwj7gPruJG6HbJN72ju1" alt="Cuore del Sulcis">
-      <div class="info">Pecorino da tavola, sapore leggero e profumato, ideale anche grattugiato.</div>
-      <h4 style="margin:6px 0 0;">Cuore del Sulcis</h4>
-      <p style="margin:0;color:#444;">€18,00/kg</p>
-    </div>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-ABLRUJKxYjtj1kf2kU7Ffp" alt="Sulcitano" title="Formaggio pecorino sardo 100% latte ovino, sapore equilibrato." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Sulcitano</h4>
-      <p style="margin:0;color:#444;">€18,00/kg</p>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-WnAwhyrixLJNE8fXWcxtQR" alt="Biancoarrosto" title="Pecorino da griglia con crosta sottile, ottimo per arrosti e piastra." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Biancoarrosto</h4>
-      <p style="margin:0;color:#444;">€17,00/kg</p>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-M6kxVPbo2VGqbKamp4S9W2" alt="Provola di Orotelli" title="Provola affumicata prodotta in Sardegna, gusto delicato e avvolgente." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Provola di Orotelli</h4>
-      <p style="margin:0;color:#444;">€16,00/kg</p>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-48PDY9p9APKPqELaxkZqFu" alt="Gran Sirai" title="Formaggio pecorino stagionato a pasta friabile, sapore deciso." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Gran Sirai</h4>
-      <p style="margin:0;color:#444;">€20,00/kg</p>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-HQBXRUi2L1QgZdcP6U56Ay" alt="Cuor di Latte" title="Caprino semistagionato, delicato e profumato." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Cuor di Latte</h4>
-      <p style="margin:0;color:#444;">€19,00/kg</p>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-1wCxwZoPwC9DyjWfGABUYk" alt="Sirai Gigante" title="Pecorino stagionato di grandi dimensioni, sapore robusto." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Sirai Gigante</h4>
-      <p style="margin:0;color:#444;">€22,00/kg</p>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-H1exrZC8Gr2PgXLJdaScJo" alt="Vecchio Capraro" title="Formaggio di capra a lunga stagionatura, gusto complesso e aromatico." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Vecchio Capraro</h4>
-      <p style="margin:0;color:#444;">€21,00/kg</p>
-    </div>
-    
-    <div class="prodotto" style="width:200px;text-align:center;">
-      <img src="https://chat.openai.com/cdn/pub/file-U1iwj7gPruJG6HbJN72ju1" alt="Cuore del Sulcis" title="Pecorino da tavola, sapore leggero e profumato, ideale anche grattugiato." style="width:200px;height:auto;border-radius:8px;"/>
-      <h4 style="margin:0.5rem 0 0;">Cuore del Sulcis</h4>
-      <p style="margin:0;color:#444;">€18,00/kg</p>
-    </div>
-    </div>
-      <div class="card-container">
-        <div class="card">
-          <img src="https://images.openai.com/thumbnails/e2612354a9f11115f0fd444ca441070b.jpeg" alt="Vecchio Capraro" />
-          <h3>Vecchio Capraro</h3>
-          <p>€12.00</p>
-          <input type="number" id="qty1" value="1" min="1">
-          <button onclick="addToCart('Vecchio Capraro', 12.00, parseInt(document.getElementById('qty1').value))">Aggiungi al carrello</button>
-        </div>
-        <div class="card">
-          <img src="https://images.openai.com/thumbnails/561ca8fe4a0a0e02deb1b6bfb4915d74.jpeg" alt="Cuor di Latte" />
-          <h3>Cuor di Latte</h3>
-          <p>€8.00</p>
-          <input type="number" id="qty2" value="1" min="1">
-          <button onclick="addToCart('Cuor di Latte', 8.00, parseInt(document.getElementById('qty2').value))">Aggiungi al carrello</button>
-        </div>
-      </div>
-    </section>
-
+<div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
+<img alt="Crablù" src="Crablu.png" style="width: 100%; height: auto;"/>
+<div style="padding: 10px;">
+<h4 style="margin: 0 0 5px;">Crablù</h4>
+<p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Formaggio erborinato di capra, dal gusto intenso e aromatico.</p>
+<p style="margin: 0; font-weight: bold; color: #444;">€24,00/kg</p>
+<label for="quantita-crablù">Seleziona quantità:</label><br/>
+<select id="quantita-crablù" onchange="aggiornaPesoGenerico('quantita-crablù', 'peso-crablù')" style="width: 100%; margin-top: 4px;">
+<option value="0.125">1/8 di forma</option>
+<option value="0.25">1/4 di forma</option>
+<option value="0.5">1/2 forma</option>
+<option value="1">1 forma intera</option>
+</select>
+<p id="peso-crablù" style="font-size: 0.85em; color: #666; margin-top: 6px;">
+      1/8 di forma = circa 500g
+    </p>
+<label for="quantita-crablu">Seleziona quantità:</label><br/>
+<select id="quantita-crablu" onchange="aggiornaPesoGenerico('quantita-crablu', 'peso-crablu')" style="width: 100%; margin-top: 4px;">
+<option value="0.125">1/8 di forma</option>
+<option value="0.25">1/4 di forma</option>
+<option value="0.5">1/2 forma</option>
+<option value="1">1 forma intera</option>
+</select>
+<p id="peso-crablu" style="font-size: 0.85em; color: #666; margin-top: 6px;">
+      1/8 di forma = circa 500g
+    </p>
+<button onclick="addToCart('Crablù', 1/8 di forma = circa 500g, parseFloat(document.getElementById('quantita-crablu').value))" style="margin-top: 10px;">
+      Aggiungi al carrello
+    </button>
+</div>
+</div>
+<div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
+<img alt="Sulcitano" src="Sulcitano.png" style="width: 100%; height: auto;"/>
+<div style="padding: 10px;">
+<h4 style="margin: 0 0 5px;">Sulcitano</h4>
+<p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Formaggio pecorino sardo 100% latte ovino, sapore equilibrato.</p>
+<p style="margin: 0; font-weight: bold; color: #444;">€18,00/kg</p>
+<label for="quantita-sulcitano">Seleziona quantità:</label><br/>
+<select id="quantita-sulcitano" onchange="aggiornaPesoGenerico('quantita-sulcitano', 'peso-sulcitano')" style="width: 100%; margin-top: 4px;">
+<option value="0.125">1/8 di forma</option>
+<option value="0.25">1/4 di forma</option>
+<option value="0.5">1/2 forma</option>
+<option value="1">1 forma intera</option>
+</select>
+<p id="peso-sulcitano" style="font-size: 0.85em; color: #666; margin-top: 6px;">
+      1/8 di forma = circa 500g
+    </p>
+<label for="quantita-sulcitano">Seleziona quantità:</label><br/>
+<select id="quantita-sulcitano" onchange="aggiornaPesoGenerico('quantita-sulcitano', 'peso-sulcitano')" style="width: 100%; margin-top: 4px;">
+<option value="0.125">1/8 di forma</option>
+<option value="0.25">1/4 di forma</option>
+<option value="0.5">1/2 forma</option>
+<option value="1">1 forma intera</option>
+</select>
+<p id="peso-sulcitano" style="font-size: 0.85em; color: #666; margin-top: 6px;">
+      1/8 di forma = circa 500g
+    </p>
+<button onclick="addToCart('Sulcitano', 1/8 di forma = circa 500g, parseFloat(document.getElementById('quantita-sulcitano').value))" style="margin-top: 10px;">
+      Aggiungi al carrello
+    </button>
+</div>
+</div>
+<div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
+<img alt="Biancoarrosto" src="Bianco arrosto.png" style="width: 100%; height: auto;"/>
+<div style="padding: 10px;">
+<h4 style="margin: 0 0 5px;">Biancoarrosto</h4>
+<p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Pecorino da griglia con crosta sottile, ottimo per arrosti e piastra.</p>
+<p style="margin: 0; font-weight: bold; color: #444;">€17,00/kg</p>
+<label for="quantita-biancoarrosto">Seleziona quantità:</label><br/>
+<select id="quantita-biancoarrosto" onchange="aggiornaPesoGenerico('quantita-biancoarrosto', 'peso-biancoarrosto')" style="width: 100%; margin-top: 4px;">
+<option value="0.125">1/8 di forma</option>
+<option value="0.25">1/4 di forma</option>
+<option value="0.5">1/2 forma</option>
+<option value="1">1 forma intera</option>
+</select>
+<p id="peso-biancoarrosto" style="font-size: 0.85em; color: #666; margin-top: 6px;">
+      1/8 di forma = circa 500g
+    </p>
+<label for="quantita-biancoarrosto">Seleziona quantità:</label><br/>
+<select id="quantita-biancoarrosto" onchange="aggiornaPesoGenerico('quantita-biancoarrosto', 'peso-biancoarrosto')" style="width: 100%; margin-top: 4px;">
+<option value="0.125">1/8 di forma</option>
+<option value="0.25">1/4 di forma</option>
+<option value="0.5">1/2 forma</option>
+<option value="1">1 forma intera</option>
+</select>
+<p id="peso-biancoarrosto" style="font-size: 0.85em; color: #666; margin-top: 6px;">
+      1/8 di forma = circa 500g
+    </p>
+<button onclick="addToCart('Biancoarrosto', 1/8 di forma = circa 500g, parseFloat(document.getElementById('quantita-biancoarrosto').value))" style="margin-top: 10px;">
+      Aggiungi al carrello
+    </button>
+</div>
+</div>
+<div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
+<img alt="Provola di Orotelli" src="Provole bianche orotelli.png" style="width: 100%; height: auto;"/>
+<div style="padding: 10px;">
+<h4 style="margin: 0 0 5px;">Provola di Orotelli</h4>
+<p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Provola affumicata prodotta in Sardegna, gusto delicato e avvolgente.</p>
+<p style="margin: 0; font-weight: bold; color: #444;">€16,00/kg</p>
+<label for="quantita-provola-di-orotelli">Seleziona quantità:</label><br/>
+<select id="quantita-provola-di-orotelli" onchange="aggiornaPesoGenerico('quantita-provola-di-orotelli', 'peso-provola-di-orotelli')" style="width: 100%; margin-top: 4px;">
+<option value="0.125">1/8 di forma</option>
+<option value="0.25">1/4 di forma</option>
+<option value="0.5">1/2 forma</option>
+<option value="1">1 forma intera</option>
+</select>
+<p id="peso-provola-di-orotelli" style="font-size: 0.85em; color: #666; margin-top: 6px;">
+      1/8 di forma = circa 500g
+    </p>
+<label for="quantita-provola-di-orotelli">Seleziona quantità:</label><br/>
+<select id="quantita-provola-di-orotelli" onchange="aggiornaPesoGenerico('quantita-provola-di-orotelli', 'peso-provola-di-orotelli')" style="width: 100%; margin-top: 4px;">
+<option value="0.125">1/8 di forma</option>
+<option value="0.25">1/4 di forma</option>
+<option value="0.5">1/2 forma</option>
+<option value="1">1 forma intera</option>
+</select>
+<p id="peso-provola-di-orotelli" style="font-size: 0.85em; color: #666; margin-top: 6px;">
+      1/8 di forma = circa 500g
+    </p>
+<button onclick="addToCart('Provola di Orotelli', 1/8 di forma = circa 500g, parseFloat(document.getElementById('quantita-provola-di-orotelli').value))" style="margin-top: 10px;">
+      Aggiungi al carrello
+    </button>
+</div>
+</div>
+<div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
+<img alt="Gran Sirai" src="Gran Sirai.png" style="width: 100%; height: auto;"/>
+<div style="padding: 10px;">
+<h4 style="margin: 0 0 5px;">Gran Sirai</h4>
+<p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Formaggio pecorino stagionato a pasta friabile, sapore deciso.</p>
+<p style="margin: 0; font-weight: bold; color: #444;">€26,00/kg</p>
+<label for="quantita-gran-sirai">Seleziona quantità:</label><br/>
+<select id="quantita-gran-sirai" onchange="aggiornaPesoGenerico('quantita-gran-sirai', 'peso-gran-sirai')" style="width: 100%; margin-top: 4px;">
+<option value="0.125">1/8 di forma</option>
+<option value="0.25">1/4 di forma</option>
+<option value="0.5">1/2 forma</option>
+<option value="1">1 forma intera</option>
+</select>
+<p id="peso-gran-sirai" style="font-size: 0.85em; color: #666; margin-top: 6px;">
+      1/8 di forma = circa 500g
+    </p>
+<label for="quantita-gran-sirai">Seleziona quantità:</label><br/>
+<select id="quantita-gran-sirai" onchange="aggiornaPesoGenerico('quantita-gran-sirai', 'peso-gran-sirai')" style="width: 100%; margin-top: 4px;">
+<option value="0.125">1/8 di forma</option>
+<option value="0.25">1/4 di forma</option>
+<option value="0.5">1/2 forma</option>
+<option value="1">1 forma intera</option>
+</select>
+<p id="peso-gran-sirai" style="font-size: 0.85em; color: #666; margin-top: 6px;">
+      1/8 di forma = circa 500g
+    </p>
+<button onclick="addToCart('Gran Sirai', 1/8 di forma = circa 500g, parseFloat(document.getElementById('quantita-gran-sirai').value))" style="margin-top: 10px;">
+      Aggiungi al carrello
+    </button>
+</div>
+</div>
+<div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
+<img alt="Cuor di Latte" src="Cuor di latte.png" style="width: 100%; height: auto;"/>
+<div style="padding: 10px;">
+<h4 style="margin: 0 0 5px;">Cuor di Latte</h4>
+<p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Caprino semistagionato, delicato e profumato.</p>
+<p style="margin: 0; font-weight: bold; color: #444;">€19,00/kg</p>
+<label for="quantita-cuor-di-latte">Seleziona quantità:</label><br/>
+<select id="quantita-cuor-di-latte" onchange="aggiornaPesoGenerico('quantita-cuor-di-latte', 'peso-cuor-di-latte')" style="width: 100%; margin-top: 4px;">
+<option value="0.125">1/8 di forma</option>
+<option value="0.25">1/4 di forma</option>
+<option value="0.5">1/2 forma</option>
+<option value="1">1 forma intera</option>
+</select>
+<p id="peso-cuor-di-latte" style="font-size: 0.85em; color: #666; margin-top: 6px;">
+      1/8 di forma = circa 500g
+    </p>
+<label for="quantita-cuor-di-latte">Seleziona quantità:</label><br/>
+<select id="quantita-cuor-di-latte" onchange="aggiornaPesoGenerico('quantita-cuor-di-latte', 'peso-cuor-di-latte')" style="width: 100%; margin-top: 4px;">
+<option value="0.125">1/8 di forma</option>
+<option value="0.25">1/4 di forma</option>
+<option value="0.5">1/2 forma</option>
+<option value="1">1 forma intera</option>
+</select>
+<p id="peso-cuor-di-latte" style="font-size: 0.85em; color: #666; margin-top: 6px;">
+      1/8 di forma = circa 500g
+    </p>
+<button onclick="addToCart('Cuor di Latte', 1/8 di forma = circa 500g, parseFloat(document.getElementById('quantita-cuor-di-latte').value))" style="margin-top: 10px;">
+      Aggiungi al carrello
+    </button>
+</div>
+</div>
+<div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
+<img alt="Sirai Gigante" src="Sirai gigante.png" style="width: 100%; height: auto;"/>
+<div style="padding: 10px;">
+<h4 style="margin: 0 0 5px;">Sirai Gigante</h4>
+<p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Pecorino stagionato di grandi dimensioni, sapore robusto.</p>
+<p style="margin: 0; font-weight: bold; color: #444;">€22,00/kg</p>
+<label for="quantita-sirai-gigante">Seleziona quantità:</label><br/>
+<select id="quantita-sirai-gigante" onchange="aggiornaPesoGenerico('quantita-sirai-gigante', 'peso-sirai-gigante')" style="width: 100%; margin-top: 4px;">
+<option value="0.125">1/8 di forma</option>
+<option value="0.25">1/4 di forma</option>
+<option value="0.5">1/2 forma</option>
+<option value="1">1 forma intera</option>
+</select>
+<p id="peso-sirai-gigante" style="font-size: 0.85em; color: #666; margin-top: 6px;">
+      1/8 di forma = circa 500g
+    </p>
+<label for="quantita-sirai-gigante">Seleziona quantità:</label><br/>
+<select id="quantita-sirai-gigante" onchange="aggiornaPesoGenerico('quantita-sirai-gigante', 'peso-sirai-gigante')" style="width: 100%; margin-top: 4px;">
+<option value="0.125">1/8 di forma</option>
+<option value="0.25">1/4 di forma</option>
+<option value="0.5">1/2 forma</option>
+<option value="1">1 forma intera</option>
+</select>
+<p id="peso-sirai-gigante" style="font-size: 0.85em; color: #666; margin-top: 6px;">
+      1/8 di forma = circa 500g
+    </p>
+<button onclick="addToCart('Sirai Gigante', 1/8 di forma = circa 500g, parseFloat(document.getElementById('quantita-sirai-gigante').value))" style="margin-top: 10px;">
+      Aggiungi al carrello
+    </button>
+</div>
+</div>
+<div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
+<img alt="Vecchio Capraro" src="https://chat.openai.com/cdn/pub/file-H1exrZC8Gr2PgXLJdaScJo" style="width: 100%; height: auto;"/>
+<div style="padding: 10px;">
+<h4 style="margin: 0 0 5px;">Vecchio Capraro</h4>
+<p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Formaggio di capra a lunga stagionatura, gusto complesso e aromatico.</p>
+<p style="margin: 0; font-weight: bold; color: #444;">€21,00/kg</p>
+<label for="quantita-vecchio-capraro">Seleziona quantità:</label><br/>
+<select id="quantita-vecchio-capraro" onchange="aggiornaPesoGenerico('quantita-vecchio-capraro', 'peso-vecchio-capraro')" style="width: 100%; margin-top: 4px;">
+<option value="0.125">1/8 di forma</option>
+<option value="0.25">1/4 di forma</option>
+<option value="0.5">1/2 forma</option>
+<option value="1">1 forma intera</option>
+</select>
+<p id="peso-vecchio-capraro" style="font-size: 0.85em; color: #666; margin-top: 6px;">
+      1/8 di forma = circa 500g
+    </p>
+<label for="quantita-vecchio-capraro">Seleziona quantità:</label><br/>
+<select id="quantita-vecchio-capraro" onchange="aggiornaPesoGenerico('quantita-vecchio-capraro', 'peso-vecchio-capraro')" style="width: 100%; margin-top: 4px;">
+<option value="0.125">1/8 di forma</option>
+<option value="0.25">1/4 di forma</option>
+<option value="0.5">1/2 forma</option>
+<option value="1">1 forma intera</option>
+</select>
+<p id="peso-vecchio-capraro" style="font-size: 0.85em; color: #666; margin-top: 6px;">
+      1/8 di forma = circa 500g
+    </p>
+<button onclick="addToCart('Vecchio Capraro', 1/8 di forma = circa 500g, parseFloat(document.getElementById('quantita-vecchio-capraro').value))" style="margin-top: 10px;">
+      Aggiungi al carrello
+    </button>
+</div>
+</div>
+<div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
+<img alt="Cuore del Sulcis" src="https://chat.openai.com/cdn/pub/file-U1iwj7gPruJG6HbJN72ju1" style="width: 100%; height: auto;"/>
+<div style="padding: 10px;">
+<h4 style="margin: 0 0 5px;">Cuore del Sulcis</h4>
+<p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Pecorino da tavola, sapore leggero e profumato, ideale anche grattugiato.</p>
+<p style="margin: 0; font-weight: bold; color: #444;">€18,00/kg</p>
+<label for="quantita-cuore-del-sulcis">Seleziona quantità:</label><br/>
+<select id="quantita-cuore-del-sulcis" onchange="aggiornaPesoGenerico('quantita-cuore-del-sulcis', 'peso-cuore-del-sulcis')" style="width: 100%; margin-top: 4px;">
+<option value="0.125">1/8 di forma</option>
+<option value="0.25">1/4 di forma</option>
+<option value="0.5">1/2 forma</option>
+<option value="1">1 forma intera</option>
+</select>
+<p id="peso-cuore-del-sulcis" style="font-size: 0.85em; color: #666; margin-top: 6px;">
+      1/8 di forma = circa 500g
+    </p>
+<label for="quantita-cuore-del-sulcis">Seleziona quantità:</label><br/>
+<select id="quantita-cuore-del-sulcis" onchange="aggiornaPesoGenerico('quantita-cuore-del-sulcis', 'peso-cuore-del-sulcis')" style="width: 100%; margin-top: 4px;">
+<option value="0.125">1/8 di forma</option>
+<option value="0.25">1/4 di forma</option>
+<option value="0.5">1/2 forma</option>
+<option value="1">1 forma intera</option>
+</select>
+<p id="peso-cuore-del-sulcis" style="font-size: 0.85em; color: #666; margin-top: 6px;">
+      1/8 di forma = circa 500g
+    </p>
+<button onclick="addToCart('Cuore del Sulcis', 1/8 di forma = circa 500g, parseFloat(document.getElementById('quantita-cuore-del-sulcis').value))" style="margin-top: 10px;">
+      Aggiungi al carrello
+    </button>
+</div>
+</div>
+</div>
+<h4 style="margin:6px 0 0;">Crablù</h4>
+<p style="margin:0;color:#444;">€24,00/kg</p>
+<div class="card-overlay">
+<img alt="Sulcitano" src="https://chat.openai.com/cdn/pub/file-ABLRUJKxYjtj1kf2kU7Ffp"/>
+<div class="info">Formaggio pecorino sardo 100% latte ovino, sapore equilibrato.</div>
+<h4 style="margin:6px 0 0;">Sulcitano</h4>
+<p style="margin:0;color:#444;">€18,00/kg</p>
+</div>
+<div class="card-overlay">
+<img alt="Biancoarrosto" src="https://chat.openai.com/cdn/pub/file-WnAwhyrixLJNE8fXWcxtQR"/>
+<div class="info">Pecorino da griglia con crosta sottile, ottimo per arrosti e piastra.</div>
+<h4 style="margin:6px 0 0;">Biancoarrosto</h4>
+<p style="margin:0;color:#444;">€17,00/kg</p>
+</div>
+<div class="card-overlay">
+<img alt="Provola di Orotelli" src="https://chat.openai.com/cdn/pub/file-M6kxVPbo2VGqbKamp4S9W2"/>
+<div class="info">Provola affumicata prodotta in Sardegna, gusto delicato e avvolgente.</div>
+<h4 style="margin:6px 0 0;">Provola di Orotelli</h4>
+<p style="margin:0;color:#444;">€16,00/kg</p>
+</div>
+<div class="card-overlay">
+<img alt="Gran Sirai" src="https://chat.openai.com/cdn/pub/file-48PDY9p9APKPqELaxkZqFu"/>
+<div class="info">Formaggio pecorino stagionato a pasta friabile, sapore deciso.</div>
+<h4 style="margin:6px 0 0;">Gran Sirai</h4>
+<p style="margin:0;color:#444;">€20,00/kg</p>
+</div>
+<div class="card-overlay">
+<img alt="Cuor di Latte" src="https://chat.openai.com/cdn/pub/file-HQBXRUi2L1QgZdcP6U56Ay"/>
+<div class="info">Caprino semistagionato, delicato e profumato.</div>
+<h4 style="margin:6px 0 0;">Cuor di Latte</h4>
+<p style="margin:0;color:#444;">€19,00/kg</p>
+</div>
+<div class="card-overlay">
+<img alt="Sirai Gigante" src="https://chat.openai.com/cdn/pub/file-1wCxwZoPwC9DyjWfGABUYk"/>
+<div class="info">Pecorino stagionato di grandi dimensioni, sapore robusto.</div>
+<h4 style="margin:6px 0 0;">Sirai Gigante</h4>
+<p style="margin:0;color:#444;">€22,00/kg</p>
+</div>
+<div class="card-overlay">
+<img alt="Vecchio Capraro" src="https://chat.openai.com/cdn/pub/file-H1exrZC8Gr2PgXLJdaScJo"/>
+<div class="info">Formaggio di capra a lunga stagionatura, gusto complesso e aromatico.</div>
+<h4 style="margin:6px 0 0;">Vecchio Capraro</h4>
+<p style="margin:0;color:#444;">€21,00/kg</p>
+</div>
+<div class="card-overlay">
+<img alt="Cuore del Sulcis" src="https://chat.openai.com/cdn/pub/file-U1iwj7gPruJG6HbJN72ju1"/>
+<div class="info">Pecorino da tavola, sapore leggero e profumato, ideale anche grattugiato.</div>
+<h4 style="margin:6px 0 0;">Cuore del Sulcis</h4>
+<p style="margin:0;color:#444;">€18,00/kg</p>
+</div>
+<div class="prodotto" style="width:200px;text-align:center;">
+<img alt="Sulcitano" src="https://chat.openai.com/cdn/pub/file-ABLRUJKxYjtj1kf2kU7Ffp" style="width:200px;height:auto;border-radius:8px;" title="Formaggio pecorino sardo 100% latte ovino, sapore equilibrato."/>
+<h4 style="margin:0.5rem 0 0;">Sulcitano</h4>
+<p style="margin:0;color:#444;">€18,00/kg</p>
+</div>
+<div class="prodotto" style="width:200px;text-align:center;">
+<img alt="Biancoarrosto" src="https://chat.openai.com/cdn/pub/file-WnAwhyrixLJNE8fXWcxtQR" style="width:200px;height:auto;border-radius:8px;" title="Pecorino da griglia con crosta sottile, ottimo per arrosti e piastra."/>
+<h4 style="margin:0.5rem 0 0;">Biancoarrosto</h4>
+<p style="margin:0;color:#444;">€17,00/kg</p>
+</div>
+<div class="prodotto" style="width:200px;text-align:center;">
+<img alt="Provola di Orotelli" src="https://chat.openai.com/cdn/pub/file-M6kxVPbo2VGqbKamp4S9W2" style="width:200px;height:auto;border-radius:8px;" title="Provola affumicata prodotta in Sardegna, gusto delicato e avvolgente."/>
+<h4 style="margin:0.5rem 0 0;">Provola di Orotelli</h4>
+<p style="margin:0;color:#444;">€16,00/kg</p>
+</div>
+<div class="prodotto" style="width:200px;text-align:center;">
+<img alt="Gran Sirai" src="https://chat.openai.com/cdn/pub/file-48PDY9p9APKPqELaxkZqFu" style="width:200px;height:auto;border-radius:8px;" title="Formaggio pecorino stagionato a pasta friabile, sapore deciso."/>
+<h4 style="margin:0.5rem 0 0;">Gran Sirai</h4>
+<p style="margin:0;color:#444;">€20,00/kg</p>
+</div>
+<div class="prodotto" style="width:200px;text-align:center;">
+<img alt="Cuor di Latte" src="https://chat.openai.com/cdn/pub/file-HQBXRUi2L1QgZdcP6U56Ay" style="width:200px;height:auto;border-radius:8px;" title="Caprino semistagionato, delicato e profumato."/>
+<h4 style="margin:0.5rem 0 0;">Cuor di Latte</h4>
+<p style="margin:0;color:#444;">€19,00/kg</p>
+</div>
+<div class="prodotto" style="width:200px;text-align:center;">
+<img alt="Sirai Gigante" src="https://chat.openai.com/cdn/pub/file-1wCxwZoPwC9DyjWfGABUYk" style="width:200px;height:auto;border-radius:8px;" title="Pecorino stagionato di grandi dimensioni, sapore robusto."/>
+<h4 style="margin:0.5rem 0 0;">Sirai Gigante</h4>
+<p style="margin:0;color:#444;">€22,00/kg</p>
+</div>
+<div class="prodotto" style="width:200px;text-align:center;">
+<img alt="Vecchio Capraro" src="https://chat.openai.com/cdn/pub/file-H1exrZC8Gr2PgXLJdaScJo" style="width:200px;height:auto;border-radius:8px;" title="Formaggio di capra a lunga stagionatura, gusto complesso e aromatico."/>
+<h4 style="margin:0.5rem 0 0;">Vecchio Capraro</h4>
+<p style="margin:0;color:#444;">€21,00/kg</p>
+</div>
+<div class="prodotto" style="width:200px;text-align:center;">
+<img alt="Cuore del Sulcis" src="https://chat.openai.com/cdn/pub/file-U1iwj7gPruJG6HbJN72ju1" style="width:200px;height:auto;border-radius:8px;" title="Pecorino da tavola, sapore leggero e profumato, ideale anche grattugiato."/>
+<h4 style="margin:0.5rem 0 0;">Cuore del Sulcis</h4>
+<p style="margin:0;color:#444;">€18,00/kg</p>
+</div>
+<div class="card-container">
+<div class="card">
+<img alt="Vecchio Capraro" src="https://images.openai.com/thumbnails/e2612354a9f11115f0fd444ca441070b.jpeg"/>
+<h3>Vecchio Capraro</h3>
+<p>€12.00</p>
+<button onclick="addToCart('Vecchio Capraro', 12.00, parseInt(document.getElementById('qty1').value))">Aggiungi al carrello</button>
+</div>
+<div class="card">
+<img alt="Cuor di Latte" src="https://images.openai.com/thumbnails/561ca8fe4a0a0e02deb1b6bfb4915d74.jpeg"/>
+<h3>Cuor di Latte</h3>
+<p>€8.00</p>
+<button onclick="addToCart('Cuor di Latte', 8.00, parseInt(document.getElementById('qty2').value))">Aggiungi al carrello</button>
+</div>
+</div>
+</section>
 </main>
-
-  <footer>
-    <p>&copy; 2025 ZARA FORMAGGI di Zara Maurizio - Tutti i diritti riservati</p>
-  </footer>
-
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+<footer>
+<p>© 2025 ZARA FORMAGGI di Zara Maurizio - Tutti i diritti riservati</p>
+</footer>
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
     const cart = [];
 
     function toggleCart() {
@@ -767,8 +824,7 @@
     }
 
 </script>
-
-  <script>
+<script>
     let mapInitialized = false;
     let map;
 
@@ -880,9 +936,8 @@
     }
 
 </script>
-
-    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR"></script>
-    <script>
+<script src="https://www.paypal.com/sdk/js?client-id=sb¤cy=EUR"></script>
+<script>
       function prepareOrder() {
         let content = "";
         cart.forEach(item => {
@@ -909,8 +964,6 @@
         }
       }).render('#paypal-button-container');
     </script>
-
-
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   const cards = document.querySelectorAll('.card-overlay');
@@ -932,9 +985,162 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 </script>
+<script>
+function aggiornaPesoGenerico(selectId, labelId) {
+  const pesoTesto = {
+    "0.125": "1/8 di forma = circa 500g",
+    "0.25":  "1/4 di forma = circa 1kg",
+    "0.5":   "1/2 forma = circa 2kg",
+    "1":     "1 forma intera = circa 4kg"
+  };
+  const valore = document.getElementById(selectId).value;
+  document.getElementById(labelId).innerText = pesoTesto[valore];
+}
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const sections = ["formaggi", "salumi", "altri-prodotti"];
+  const navLinks = document.querySelectorAll(".menu-prodotti a");
 
+  function highlightSection() {
+    let scrollY = window.pageYOffset;
+    sections.forEach(id => {
+      const section = document.getElementById(id);
+      if (section && scrollY >= section.offsetTop - 60) {
+        navLinks.forEach(link => link.classList.remove("active"));
+        const activeLink = document.querySelector(`.menu-prodotti a[href="#${id}"]`);
+        if (activeLink) activeLink.classList.add("active");
+      }
+    });
+  }
+
+  window.addEventListener("scroll", highlightSection);
+});
+</script>
+<style>
+.menu-prodotti a.active {
+  font-weight: bold;
+  text-decoration: underline;
+  color: #c00;
+}
+</style>
+<script>
+function renderCart() {
+  const cartSection = document.getElementById("cart-items");
+  cartSection.innerHTML = "";
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    const itemDiv = document.createElement("div");
+    itemDiv.innerHTML = `
+      <strong>${item.name}</strong> - Quantità: ${item.quantity} - Prezzo: €${(item.price * item.quantity).toFixed(2)}
+      <button onclick="changeQuantity(${index}, 1)">+</button>
+      <button onclick="changeQuantity(${index}, -1)">-</button>
+      <button onclick="removeFromCart(${index})">x</button>
+    `;
+    cartSection.appendChild(itemDiv);
+    total += item.price * item.quantity;
+  });
+
+  // Extra costi
+  if (document.getElementById("confezione-regalo")?.checked) {
+    total += 5;
+  }
+  if (document.getElementById("sottovuoto")?.checked) {
+    total += 0.5;
+  }
+
+  document.getElementById("cart-total").innerText = "Totale: €" + total.toFixed(2);
+}
+
+function addToCart(name, price, quantity) {
+  const existing = cart.findIndex(i => i.name === name);
+  if (existing >= 0) {
+    cart[existing].quantity += quantity;
+  } else {
+    cart.push({ name, price, quantity });
+  }
+  renderCart();
+}
+
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  renderCart();
+}
+
+function changeQuantity(index, delta) {
+  cart[index].quantity += delta;
+  if (cart[index].quantity <= 0) {
+    removeFromCart(index);
+  } else {
+    renderCart();
+  }
+}
+
+let cart = [];
+
+function aggiornaTotale() {
+  renderCart(); // Riusa renderCart per aggiornare i costi
+}
+</script>
+
+<script>
+function inviaOrdine() {
+  let total = 0;
+  cart.forEach(item => total += item.price * item.quantity);
+  if (document.getElementById("confezione-regalo")?.checked) total += 5;
+  if (document.getElementById("sottovuoto")?.checked) total += 0.5;
+
+  const europa = document.getElementById("destinazione-europa")?.checked;
+  const minimo = europa ? 140 : 90;
+
+  if (total < minimo) {
+    alert("L'ordine minimo è di €" + minimo.toFixed(2) + (europa ? " per l'Europa." : " per l'Italia."));
+    return false;
+  }
+
+  mostraRiepilogoOrdine();
+  return false;
+}
+</script>
+
+<section id="riepilogo-ordine" style="display:none; margin-top: 40px;">
+<h2>🧾 Riepilogo Ordine</h2>
+<div id="riepilogo-dettagli" style="margin-bottom: 20px;"></div>
+<button onclick="finalizzaOrdine()">Conferma e Invia Ordine</button>
+</section>
+
+<script>
+function mostraRiepilogoOrdine() {
+  const div = document.getElementById("riepilogo-dettagli");
+  let html = "<ul>";
+  let total = 0;
+  cart.forEach(item => {
+    const subtot = item.price * item.quantity;
+    total += subtot;
+    html += `<li>${item.name} x${item.quantity} = €${subtot.toFixed(2)}</li>`;
+  });
+  if (document.getElementById("confezione-regalo")?.checked) {
+    html += "<li>Confezione regalo = €5.00</li>";
+    total += 5;
+  }
+  if (document.getElementById("sottovuoto")?.checked) {
+    html += "<li>Sottovuoto = €0.50</li>";
+    total += 0.5;
+  }
+  html += `</ul><strong>Totale: €${total.toFixed(2)}</strong>`;
+  div.innerHTML = html;
+  document.getElementById("riepilogo-ordine").style.display = "block";
+}
+
+function finalizzaOrdine() {
+  alert("Ordine confermato! Grazie per l'acquisto.");
+  location.reload();  // simula invio e reset
+}
+</script>
 </body>
 </html>
+
   
        
   
