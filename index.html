@@ -246,6 +246,7 @@
 <div id="paypal-button-container"></div>
 <button onclick="alert('Simulazione Stripe')" type="button">Paga con Stripe</button>
 </div>
+
 <p><strong>Destinazione:</strong><br/>
 <label><input checked="" id="destinazione-italia" name="destinazione" type="radio"/> Italia</label><br/>
 <label><input id="destinazione-europa" name="destinazione" type="radio"/> Europa</label>
@@ -255,12 +256,7 @@
 <div style="margin-top:10px;">
 <label><input id="confezione-regalo" onchange="aggiornaTotale()" type="checkbox"/> Aggiungi confezione regalo (+€5)</label>
 </div>
-<div id="cart-total" style="margin-top:10px; font-weight:bold;"></div>
-<div style="margin-top:20px;">
-<h4>💳 Paga con Google Pay / Apple Pay</h4>
-<div id="payment-request-button"></div>
-</div>
-</div>
+<div id="cart-total" style="margin-top:10px; font-weight:bold;"></div></div>
 <header>
 <div class="header-logo">
 <img alt="Logo Zara Formaggi" src="logo.png"/>
@@ -323,7 +319,18 @@
 <p>Qui sarà inserita la galleria di foto e video dei nostri prodotti e del punto vendita.</p>
 </div>
 </section>
-
+<section class="section" id="prodotti">
+<nav class="menu-prodotti" style="position: sticky; top: 0; background: white; z-index: 1000; padding: 10px 0; border-bottom: 1px solid #ccc; text-align: center;">
+<a href="#formaggi" style="margin-right: 20px;">🧀 Formaggi</a>
+<a href="#salumi" style="margin-right: 20px;">🥓 Salumi</a>
+<a href="#altri-prodotti">🛒 Altri Prodotti</a>
+</nav>
+<h2>I nostri prodotti</h2>
+<div class="card-container" style="display: flex; flex-wrap: wrap; gap: 20px;">
+</div>
+<h4 style="margin:6px 0 0;">Crablù</h4>
+<p style="margin:0;color:#444;">€24,00/kg</p>
+<div class="categoria-prodotti" id="formaggi"><h3>Formaggi</h3></div><div class="categoria-prodotti" id="salumi"><h3>Salumi</h3></div><div class="categoria-prodotti" id="altri-prodotti"><h3>Altri prodotti</h3></div></section>
 <section class="section" id="contatti">
 <h2>Contatti</h2>
 <p>Per informazioni, ordini o richieste particolari, contattaci via email o telefono. (Spazio per modulo contatti e informazioni)</p>
@@ -1076,6 +1083,7 @@ function aggiornaTotale() {
   renderCart(); // Riusa renderCart per aggiornare i costi
 }
 </script>
+
 <script>
 function inviaOrdine() {
   let total = 0;
@@ -1095,11 +1103,13 @@ function inviaOrdine() {
   return false;
 }
 </script>
+
 <section id="riepilogo-ordine" style="display:none; margin-top: 40px;">
 <h2>🧾 Riepilogo Ordine</h2>
 <div id="riepilogo-dettagli" style="margin-bottom: 20px;"></div>
 <button onclick="finalizzaOrdine()">Conferma e Invia Ordine</button>
 </section>
+
 <script>
 function mostraRiepilogoOrdine() {
   const div = document.getElementById("riepilogo-dettagli");
@@ -1126,114 +1136,6 @@ function mostraRiepilogoOrdine() {
 function finalizzaOrdine() {
   alert("Ordine confermato! Grazie per l'acquisto.");
   location.reload();  // simula invio e reset
-}
-</script>
-<script>
-function renderCart() {
-  const cartSection = document.getElementById("cart-items");
-  cartSection.innerHTML = "";
-  let total = 0;
-
-  cart.forEach((item, index) => {
-    const itemDiv = document.createElement("div");
-    itemDiv.innerHTML = `
-      <strong>${item.name}</strong> - Quantità: ${item.quantity} - Prezzo: €${(item.price * item.quantity).toFixed(2)}
-      <button onclick="changeQuantity(${index}, 1)">+</button>
-      <button onclick="changeQuantity(${index}, -1)">-</button>
-      <button onclick="removeFromCart(${index})">x</button>
-    `;
-    cartSection.appendChild(itemDiv);
-    total += item.price * item.quantity;
-  });
-
-  if (document.getElementById("confezione-regalo")?.checked) total += 5;
-  if (document.getElementById("sottovuoto")?.checked) total += 0.5;
-
-  document.getElementById("cart-total").innerText = "Totale: €" + total.toFixed(2);
-}
-
-function addToCart(name, price, quantity) {
-  const existing = cart.findIndex(i => i.name === name);
-  if (existing >= 0) {
-    cart[existing].quantity += quantity;
-  } else {
-    cart.push({ name, price, quantity });
-  }
-  renderCart();
-}
-
-function removeFromCart(index) {
-  cart.splice(index, 1);
-  renderCart();
-}
-
-function changeQuantity(index, delta) {
-  cart[index].quantity += delta;
-  if (cart[index].quantity <= 0) removeFromCart(index);
-  else renderCart();
-}
-
-let cart = [];
-
-function aggiornaTotale() {
-  renderCart();
-}
-</script>
-<script src="https://js.stripe.com/v3/"></script>
-
-
-<script src="https://js.stripe.com/v3/"></script>
-<script>
-let stripe, prButton, paymentRequest, elements;
-
-document.addEventListener("DOMContentLoaded", async function () {
-  stripe = Stripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
-  elements = stripe.elements();
-
-  updatePaymentRequest(1500); // default 15€
-
-  const result = await paymentRequest.canMakePayment();
-  if (result) {
-    prButton.mount("#payment-request-button");
-  } else {
-    document.getElementById("payment-request-button").innerHTML = "Google/Apple Pay non disponibile sul dispositivo.";
-  }
-});
-
-function updatePaymentRequest(amount) {
-  paymentRequest = stripe.paymentRequest({
-    country: "IT",
-    currency: "eur",
-    total: {
-      label: "Totale ordine",
-      amount: amount,
-    },
-    requestPayerName: true,
-    requestPayerEmail: true,
-  });
-
-  prButton = elements.create("paymentRequestButton", {
-    paymentRequest: paymentRequest,
-  });
-
-  paymentRequest.on("paymentmethod", function(ev) {
-    ev.complete("success");
-    alert("Pagamento simulato ricevuto: €" + (amount / 100).toFixed(2));
-  });
-}
-
-function aggiornaTotale() {
-  renderCart();
-
-  let total = 0;
-  cart.forEach(item => total += item.price * item.quantity);
-  if (document.getElementById("confezione-regalo")?.checked) total += 5;
-  if (document.getElementById("sottovuoto")?.checked) total += 0.5;
-
-  document.getElementById("cart-total").innerText = "Totale: €" + total.toFixed(2);
-  if (stripe && updatePaymentRequest) {
-    updatePaymentRequest(Math.round(total * 100));
-  }
 }
 </script>
 </body>
