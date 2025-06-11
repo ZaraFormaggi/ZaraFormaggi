@@ -347,11 +347,12 @@ nav a.active-link {
 </style>
 <style>
 .shop-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  margin-top: 2rem;
+  display: block;
+  margin: 2rem auto;
+  max-width: 600px;
+}
+.product-card {
+  margin-bottom: 2rem;
 }
 .product-card {
   width: 300px;
@@ -368,8 +369,6 @@ nav a.active-link {
   margin-top: 12px;
 }
 </style>
-
-
 <style>
 .tooltip {
   position: relative;
@@ -395,6 +394,29 @@ nav a.active-link {
 .tooltip:hover .tooltip-text {
   visibility: visible;
   opacity: 1;
+}
+</style>
+
+<style>
+.formato-attivo {
+  background-color: #004aad !important;
+  color: #fff !important;
+  border: 2px solid #004aad;
+}
+</style>
+
+
+<style>
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.6s ease-out forwards;
+}
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>
 
@@ -549,52 +571,52 @@ nav a.active-link {
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
 <div class="product-card product">
 <img src="nuraghe.png" style="width:100%;border-radius:8px;"/><h4>Nuraghe</h4>
-<input class="peso-forma" data-product="Nuraghe" type="hidden" value="5"/><p>Pecorino stagionato dal gusto intenso, prodotto con latte ovino.</p>
+<input class="peso-forma" data-product="Nuraghe" type="hidden" value="4.0"/><p>Pecorino stagionato dal gusto intenso, prodotto con latte ovino.</p>
 <div class="scelte-formati"></div>
 </div>
 <div class="product-card product">
 <img src="sirai_gigante.png" style="width:100%;border-radius:8px;"/><h4>Sirai Gigante</h4>
-<input class="peso-forma" data-product="Sirai Gigante" type="hidden" value="5"/><p>Formaggio a lunga stagionatura, pasta dura, sapore ricco.</p>
+<input class="peso-forma" data-product="Sirai Gigante" type="hidden" value="4.5"/><p>Formaggio a lunga stagionatura, pasta dura, sapore ricco.</p>
 <div class="scelte-formati"></div>
 </div>
 <div class="product-card product">
 <img src="cuore.png" style="width:100%;border-radius:8px;"/><h4>Cuore del Sulcis</h4>
-<input class="peso-forma" data-product="Cuore del Sulcis" type="hidden" value="5"/><p>Pecorino semistagionato, dal cuore morbido e sapore equilibrato.</p>
+<input class="peso-forma" data-product="Cuore del Sulcis" type="hidden" value="3.5"/><p>Pecorino semistagionato, dal cuore morbido e sapore equilibrato.</p>
 <div class="scelte-formati"></div>
 </div>
 <div class="product-card product">
 <img src="cuor_di_latte.png" style="width:100%;border-radius:8px;"/><h4>Cuor di Latte</h4>
-<input class="peso-forma" data-product="Cuor di Latte" type="hidden" value="5"/><p>Formaggio fresco e dolce, perfetto per spalmare o accompagnare miele.</p>
+<input class="peso-forma" data-product="Cuor di Latte" type="hidden" value="3.0"/><p>Formaggio fresco e dolce, perfetto per spalmare o accompagnare miele.</p>
 <div class="scelte-formati"></div>
 </div>
 <div class="product-card product">
 <img src="vecchio_capraro.png" style="width:100%;border-radius:8px;"/><h4>Vecchio Capraro</h4>
-<input class="peso-forma" data-product="Vecchio Capraro" type="hidden" value="5"/><p>Caprino stagionato, forte e aromatico, 100% latte di capra.</p>
+<input class="peso-forma" data-product="Vecchio Capraro" type="hidden" value="4.2"/><p>Caprino stagionato, forte e aromatico, 100% latte di capra.</p>
 <div class="scelte-formati"></div>
 </div>
 <div class="product-card product">
 <img src="crablu.png" style="width:100%;border-radius:8px;"/><h4>Crablu</h4>
-<input class="peso-forma" data-product="Crablu" type="hidden" value="5"/><p>Formaggio erborinato con venature blu, sapore deciso e complesso.</p>
+<input class="peso-forma" data-product="Crablu" type="hidden" value="2.8"/><p>Formaggio erborinato con venature blu, sapore deciso e complesso.</p>
 <div class="scelte-formati"></div>
 </div>
 <div class="product-card product">
 <img src="sulcitano.png" style="width:100%;border-radius:8px;"/><h4>Sulcitano</h4>
-<input class="peso-forma" data-product="Sulcitano" type="hidden" value="5"/><p>Pecorino fresco tipico del Sulcis, ideale da tavola.</p>
+<input class="peso-forma" data-product="Sulcitano" type="hidden" value="3.8"/><p>Pecorino fresco tipico del Sulcis, ideale da tavola.</p>
 <div class="scelte-formati"></div>
 </div>
 <div class="product-card product">
 <img src="provola_orotelli.png" style="width:100%;border-radius:8px;"/><h4>Provola di Orotelli</h4>
-<input class="peso-forma" data-product="Provola di Orotelli" type="hidden" value="5"/><p>Formaggio affumicato, dalla crosta dorata e pasta filante.</p>
+<input class="peso-forma" data-product="Provola di Orotelli" type="hidden" value="3.6"/><p>Formaggio affumicato, dalla crosta dorata e pasta filante.</p>
 <div class="scelte-formati"></div>
 </div>
 <div class="product-card product">
 <img src="gran_sirai.png" style="width:100%;border-radius:8px;"/><h4>Gran Sirai</h4>
-<input class="peso-forma" data-product="Gran Sirai" type="hidden" value="11"/><p>Formaggio a pasta dura e lunga stagionatura, per grattugia o tavola.</p>
+<input class="peso-forma" data-product="Gran Sirai" type="hidden" value="5.0"/><p>Formaggio a pasta dura e lunga stagionatura, per grattugia o tavola.</p>
 <div class="scelte-formati"></div>
 </div>
 <div class="product-card product">
 <img src="biancoarrosto.png" style="width:100%;border-radius:8px;"/><h4>Biancoarrosto del Sulcis</h4>
-<input class="peso-forma" data-product="Biancoarrosto del Sulcis" type="hidden" value="5"/><p>Formaggio bianco da griglia, dal sapore pieno e leggero.</p>
+<input class="peso-forma" data-product="Biancoarrosto del Sulcis" type="hidden" value="4.6"/><p>Formaggio bianco da griglia, dal sapore pieno e leggero.</p>
 <div class="scelte-formati"></div>
 </div>
 </div>
@@ -770,7 +792,7 @@ function finalizzaOrdine() {
 <div id="cart-container"></div>
 <div id="peso-totale" style="margin-top: 10px; font-weight: bold;"></div>
 <div style="margin-top: 20px;">
-
+<strong id="cart-total">Totale: €0.00</strong>
 <button onclick="proseguiOrdine()" style="margin-left: 20px;">Procedi all'acquisto</button>
 </div>
 <h3 style="text-align:right;">Totale: <span id="carrello-totale">€0.00</span></h3></section>
@@ -1131,7 +1153,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const contenitore = prod.querySelector(".scelte-formati");
     if (!nome || !contenitore) return;
 
-    const frazioni = Object.keys(disponibilitaProdotti[nome] || {});
+    const frazioni = Object.keys(disponibilitaProdotti[nome] || {}).sort((a, b) => {
+  const ordine = ['1', '1/2', '1/4', '1/8', '1/16', '1/32'];
+  return ordine.indexOf(a) - ordine.indexOf(b);
+});
     const prezzi = {};
     prod.querySelectorAll("option")?.forEach(opt => {
       prezzi[opt.value] = parseFloat(opt.dataset.price);
@@ -1149,6 +1174,8 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.disabled = disponibilita <= 0;
       btn.style = "margin:4px;padding:6px 10px;font-size:14px;border-radius:6px;cursor:pointer;";
       btn.onclick = () => {
+        contenitore.querySelectorAll("button").forEach(b => b.classList.remove("formato-attivo"));
+        btn.classList.add("formato-attivo");
         addToCart(nome, frazione, prezzo, parseFloat(peso));
         disponibilitaProdotti[nome][frazione]--;
         btn.disabled = disponibilitaProdotti[nome][frazione] <= 0;
@@ -1168,7 +1195,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const contenitore = prod.querySelector(".scelte-formati");
     if (!nome || !contenitore) return;
 
-    const frazioni = Object.keys(disponibilitaProdotti[nome] || {});
+    const frazioni = Object.keys(disponibilitaProdotti[nome] || {}).sort((a, b) => {
+  const ordine = ['1', '1/2', '1/4', '1/8', '1/16', '1/32'];
+  return ordine.indexOf(a) - ordine.indexOf(b);
+});
     contenitore.innerHTML = "";
 
     frazioni.forEach(frazione => {
@@ -1203,6 +1233,8 @@ document.addEventListener("DOMContentLoaded", () => {
       contenitore.appendChild(wrapper);
 
       btn.onclick = () => {
+        contenitore.querySelectorAll("button").forEach(b => b.classList.remove("formato-attivo"));
+        btn.classList.add("formato-attivo");
         addToCart(nome, frazione, prezzo, parseFloat(peso));
         disponibilitaProdotti[nome][frazione]--;
         btn.disabled = disponibilitaProdotti[nome][frazione] <= 0;
@@ -1220,41 +1252,36 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 <!-- Selettore modalità consegna -->
 <div style="text-align:center; margin-top:2rem;">
-  <button onclick="toggleRitiro()" id="btn-toggle-ritiro" style="padding: 10px 20px; font-weight: bold; border-radius: 8px; background-color: #007f5f; color: white; border: none; cursor: pointer;">
+<button id="btn-toggle-ritiro" onclick="toggleRitiro()" style="padding: 10px 20px; font-weight: bold; border-radius: 8px; background-color: #007f5f; color: white; border: none; cursor: pointer;">
     🚚 Clicca per ritiro in negozio
   </button>
 </div>
-
 <!-- Form ordine completo -->
-<form id="form-completo" style="margin-top:2rem;">
-  <h2>Dati per la spedizione</h2>
-  <label>Nome: <input name="nome" required></label><br>
-  <label>Cognome: <input name="cognome" required></label><br>
-  <label>Telefono: <input name="telefono" required></label><br>
-  <label>Email: <input name="email" required></label><br>
-  <label>Indirizzo: <input name="indirizzo" required></label><br>
-  <label>CAP: <input name="cap" required></label><br>
-  <label>Città: <input name="citta" required></label><br>
-  <label>Paese: <input name="paese" required></label><br>
+<form id="form-completo" style="display:none;" style="margin-top:2rem;">
+<h2>Dati per la spedizione</h2>
+<label>Nome: <input name="nome" required=""/></label><br/>
+<label>Cognome: <input name="cognome" required=""/></label><br/>
+<label>Telefono: <input name="telefono" required=""/></label><br/>
+<label>Email: <input name="email" required=""/></label><br/>
+<label>Indirizzo: <input name="indirizzo" required=""/></label><br/>
+<label>CAP: <input name="cap" required=""/></label><br/>
+<label>Città: <input name="citta" required=""/></label><br/>
+<label>Paese: <input name="paese" required=""/></label><br/>
 </form>
-
 <!-- Form ritiro in negozio -->
-<form id="form-ritiro" style="display:none; margin-top:2rem;">
-  <h2>Dati per il ritiro in negozio</h2>
-  <label>Nome: <input name="nome" required></label><br>
-  <label>Cognome: <input name="cognome" required></label><br>
-  <label>Telefono: <input name="telefono" required></label><br>
-  <label>Email: <input name="email" required></label><br>
+<form id="form-ritiro" style="display:none;" style="display:none; margin-top:2rem;">
+<h2>Dati per il ritiro in negozio</h2>
+<label>Nome: <input name="nome" required=""/></label><br/>
+<label>Cognome: <input name="cognome" required=""/></label><br/>
+<label>Telefono: <input name="telefono" required=""/></label><br/>
+<label>Email: <input name="email" required=""/></label><br/>
 </form>
-
 <!-- Pulsante WhatsApp -->
 <div style="margin-top: 1rem; text-align:center;">
-  <a href="#" onclick="inviaOrdineWhatsapp()" id="wa-btn" style="background-color: #25d366; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">
+<a href="#" id="wa-btn" onclick="inviaOrdineWhatsapp()" style="background-color: #25d366; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">
     📦 Invia Ordine via WhatsApp
   </a>
 </div>
-
-
 <script>
 function toggleRitiro() {
   const btn = document.getElementById("btn-toggle-ritiro");
@@ -1290,17 +1317,13 @@ function inviaOrdineWhatsapp() {
   window.open(link, '_blank');
 }
 </script>
-
-
 <!-- Invio ordine via Formspree -->
 <div style="text-align:center; margin-top: 1rem;">
-  <button type="button" onclick="inviaOrdineFormspree()" style="background-color: #004080; color: white; padding: 10px 20px; border-radius: 6px; font-weight: bold; border: none;">
+<button onclick="inviaOrdineFormspree()" style="background-color: #004080; color: white; padding: 10px 20px; border-radius: 6px; font-weight: bold; border: none;" type="button">
     📧 Invia Ordine via Email
   </button>
 </div>
-<form id="form-invio" action="https://formspree.io/f/xpwrplgn" method="POST" style="display:none;"></form>
-
-
+<form action="https://formspree.io/f/xpwrplgn" id="form-invio" method="POST" style="display:none;"></form>
 <script>
 function inviaOrdineFormspree() {
   const form = document.getElementById("form-ritiro").style.display === "block"
@@ -1339,8 +1362,6 @@ function inviaOrdineFormspree() {
   targetForm.submit();
 }
 </script>
-
-
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".product-card").forEach(prod => {
@@ -1349,7 +1370,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const contenitore = prod.querySelector(".scelte-formati");
     if (!nome || !contenitore) return;
 
-    const frazioni = Object.keys(disponibilitaProdotti[nome] || {});
+    const frazioni = Object.keys(disponibilitaProdotti[nome] || {}).sort((a, b) => {
+  const ordine = ['1', '1/2', '1/4', '1/8', '1/16', '1/32'];
+  return ordine.indexOf(a) - ordine.indexOf(b);
+});
     contenitore.querySelectorAll("button").forEach(btn => {
       const testo = btn.textContent;
       const match = testo.match(/^([\d/]+).*€([\d\.]+).*([\d\.]+) kg/);
@@ -1367,6 +1391,24 @@ document.addEventListener("DOMContentLoaded", () => {
       wrapper.appendChild(tooltip);
     });
   });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const hash = window.location.hash;
+  const spedizione = document.getElementById("form-completo");
+  const ritiro = document.getElementById("form-ritiro");
+  const invio = document.getElementById("blocco-invio");
+
+  if (hash === "#carrello") {
+    [spedizione, ritiro, invio].forEach(el => {
+      if (el) {
+        el.style.display = "block";
+        el.classList.add("fade-in");
+      }
+    });
+  }
 });
 </script>
 
