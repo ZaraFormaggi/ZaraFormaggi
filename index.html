@@ -283,6 +283,9 @@ nav a.active-link {
 </head>
 <body>
 
+
+
+  
 <!-- Bottone carrello fisso -->
 <div id="floating-cart"
      onclick="toggleCartSidebar()"
@@ -291,6 +294,9 @@ nav a.active-link {
   🛒 Carrello: <span id="floating-total">€0.00</span>
 </div>
 
+
+
+  
 <header style="background-color: #2f4f2f; color: white; padding: 1rem 0; text-align: center;">
 <div class="header-logo">
 <img alt="ZARA FORMAGGI Logo" src="logo.png" style="width: 100px; height: auto; margin-bottom: 0.5rem;"/>
@@ -438,7 +444,7 @@ nav a.active-link {
 </div>
 </section>
 <section class="section" id="shop" style="display: none;">
-<h2>🧀 Shop</h2>
+<h2>🧀🥓 Shop</h2>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
 <div class="product">
 <img src="nuraghe.png" style="width:100%;border-radius:8px;"/><h4>Nuraghe</h4>
@@ -926,7 +932,7 @@ function inviaOrdineWhatsApp() {
 }
 
 function generaMessaggioOrdine() {
-  let messaggio = "🧀 *Nuovo ordine Zara Formaggi*\n\n";
+  let messaggio = "🧀🥓 *Nuovo ordine Zara Formaggi*\n\n";
   cart.forEach((item, i) => {
     if (sidebarContainer) {
       const pesoMap = { "1/8": "≈ 500g", "1/4": "≈ 1kg", "1/2": "≈ 2kg", "1": "≈ 4kg" };
@@ -1033,6 +1039,8 @@ function toggleRitiroNegozio() {
 
 
 <!-- Sidebar carrello COMPLETA -->
+
+  
 <div id="cart-sidebar"
      style="position:fixed;top:0;right:-400px;width:350px;height:100%;background:#fff;border-left:2px solid #ccc;box-shadow:-2px 0 5px rgba(0,0,0,0.1);z-index:9999;padding:1rem;transition:right 0.3s;overflow-y:auto;">
   <h3>🛒 Il tuo carrello</h3>
@@ -1040,7 +1048,7 @@ function toggleRitiroNegozio() {
   <div id="peso-sidebar" style="margin-top:10px;font-weight:bold;"></div>
   <div id="cart-sidebar-total" style="font-weight: bold; margin-top: 10px;">Totale: €0.00</div>
   <button onclick="svuotaCarrello()" style="background:#c00;color:white;padding:8px 12px;border:none;border-radius:5px;">🧹 Svuota</button>
-  <button onclick="proseguiOrdine()" style="margin-top:10px;background:#2f4f2f;color:white;padding:8px 12px;border:none;border-radius:5px;">📦 Procedi all'acquisto</button>
+ 
   <button onclick="toggleCartSidebar()" style="margin-top:10px;">Chiudi</button>
 </div>
 
