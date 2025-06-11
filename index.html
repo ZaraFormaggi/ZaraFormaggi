@@ -279,6 +279,9 @@ nav a.active-link {
 <a href="#galleria">🖼️ Galleria</a>
 <a href="#shop">🧀 Shop</a>
 <a href="#contatti">📞 Contatti</a>
+<a href="#carrello" id="menu-carrello">
+  🛒 Carrello (<span id="menu-cart-count">0</span>) – €<span id="menu-cart-total">0.00</span>
+</a>
 </nav>
 <button id="cart-button" onclick="toggleCart()">🛒 Carrello</button>
 <div id="cart-section">
@@ -665,7 +668,20 @@ function updateCart() {
   });
 
   cartTotal.innerText = "Totale: €" + total.toFixed(2);
-  document.getElementById("cart-button").innerText = `🛒 Carrello (${cart.length}) – Totale: €${total.toFixed(2)}`;
+
+  // ✅ Aggiorna anche la voce nel menu
+  const countEl = document.getElementById("menu-cart-count");
+  const totalEl = document.getElementById("menu-cart-total");
+  if (countEl && totalEl) {
+    countEl.innerText = cart.length;
+    totalEl.innerText = total.toFixed(2);
+  }
+
+  // ✅ Aggiorna anche il bottone fisso in alto
+  const fixedBtn = document.getElementById("cart-button");
+  if (fixedBtn) {
+    fixedBtn.innerText = `🛒 Carrello (${cart.length}) – Totale: €${total.toFixed(2)}`;
+  }
 }
 
 function removeItem(index) {
