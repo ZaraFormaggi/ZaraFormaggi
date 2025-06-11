@@ -647,8 +647,7 @@ function inviaOrdine() {
 <script>
 function mostraRiepilogoOrdine() {
   const div = document.getElementById("riepilogo-dettagli");
-  
-  let imageMap = {
+    const imageMap = {
     "nuraghe": "img/nuraghe.png",
     "sirai gigante": "img/sirai_gigante.png",
     "cuore del sulcis": "img/cuore_sulcis.png",
@@ -660,15 +659,14 @@ function mostraRiepilogoOrdine() {
     "gran sirai": "img/gran_sirai.png",
     "biancoarrosto del sulcis": "img/biancoarrosto.png"
   };
-
   let html = "<ul>";
   let total = 0;
   cart.forEach(item => {
     const subtot = item.price * item.quantity;
     total += subtot;
-      const img = imageMap[item.name.toLowerCase()] || "";
-  const imgTag = img ? `<img src="${img}" style="width:30px; height:auto; vertical-align:middle; margin-right:8px;">` : "";
-  html += `<li>${imgTag}${item.name} x${item.quantity} = €${subtot.toFixed(2)}</li>`;
+    const nome = item.name.toLowerCase().replace(/\s/g, "_").replace(/[^a-z0-9_]/g, "");
+    const imgSrc = `img/${nome}.png`;
+    html += `<li><img src="${imgSrc}" alt="${item.name}" style="height:40px; vertical-align:middle; margin-right:10px; border-radius:4px;"> ${item.name} x${item.quantity} = €${subtot.toFixed(2)}</li>`;
   });
   if (document.getElementById("confezione-regalo")?.checked) {
     html += "<li>Confezione regalo = €5.00</li>";
@@ -905,9 +903,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-</script>
-
-<script>
+  <script>
 function toggleRitiroNegozio() {
   const ritiroCheckbox = document.querySelector('input[name="Ritiro in loco"]');
   const btn = document.getElementById("btn-ritiro");
@@ -917,6 +913,10 @@ function toggleRitiroNegozio() {
   btn.style.backgroundColor = attivo ? "#4caf50" : "#2f4f2f";
 }
 </script>
+  
+</script>
+
+
 
 </body>
 </html>
