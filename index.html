@@ -309,7 +309,7 @@ nav a.active-link {
 <a href="#dove">📍 Dove ci trovi</a>
 <a href="#servizi">🛠️ Servizi</a>
 <a href="#galleria">🖼️ Galleria</a>
-<a href="#shop">🧀 Shop</a>
+<a href="#shop">🧀 🥓 Shop</a>
 <a href="#contatti">📞 Contatti</a>
 <a href="#carrello" id="menu-carrello">
   🛒 Carrello (<span id="menu-cart-count">0</span>) – €<span id="menu-cart-total">0.00</span>
@@ -434,119 +434,57 @@ nav a.active-link {
 </div>
 </section>
 <section class="section" id="shop" style="display: none;">
-<h2>🧀 Shop</h2>
+<h4>🧀 🥓  Shop</h4>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
 <div class="product">
 <img src="nuraghe.png" style="width:100%;border-radius:8px;"/><h4>Nuraghe</h4>
 <input class="peso-forma" data-product="Nuraghe" type="hidden" value="5"/><p>Pecorino stagionato dal gusto intenso, prodotto con latte ovino.</p>
-<select id="nuraghe-qty">
-<option data-price="5.0" value="1/8">1/8 - €5.00</option>
-<option data-price="9.5" value="1/4">1/4 - €9.50</option>
-<option data-price="18.5" value="1/2">1/2 - €18.50</option>
-<option data-price="35.0" value="1">1 - €35.00</option>
-</select>
-<button onclick="aggiungiShop('Nuraghe', 'nuraghe-qty')">Aggiungi al carrello</button>
+<div class="scelte-formati"></div>
 </div>
 <div class="product">
 <img src="sirai_gigante.png" style="width:100%;border-radius:8px;"/><h4>Sirai Gigante</h4>
 <input class="peso-forma" data-product="Sirai Gigante" type="hidden" value="5"/><p>Formaggio a lunga stagionatura, pasta dura, sapore ricco.</p>
-<select id="sirai-gigante-qty">
-<option data-price="6.0" value="1/8">1/8 - €6.00</option>
-<option data-price="11.5" value="1/4">1/4 - €11.50</option>
-<option data-price="22.5" value="1/2">1/2 - €22.50</option>
-<option data-price="43.0" value="1">1 - €43.00</option>
-</select>
-<button onclick="aggiungiShop('Sirai Gigante', 'sirai-gigante-qty')">Aggiungi al carrello</button>
+<div class="scelte-formati"></div>
 </div>
 <div class="product">
 <img src="cuore.png" style="width:100%;border-radius:8px;"/><h4>Cuore del Sulcis</h4>
 <input class="peso-forma" data-product="Cuore del Sulcis" type="hidden" value="5"/><p>Pecorino semistagionato, dal cuore morbido e sapore equilibrato.</p>
-<select id="cuore-del-sulcis-qty">
-<option data-price="4.5" value="1/8">1/8 - €4.50</option>
-<option data-price="8.0" value="1/4">1/4 - €8.00</option>
-<option data-price="15.0" value="1/2">1/2 - €15.00</option>
-<option data-price="30.0" value="1">1 - €30.00</option>
-</select>
-<button onclick="aggiungiShop('Cuore del Sulcis', 'cuore-del-sulcis-qty')">Aggiungi al carrello</button>
+<div class="scelte-formati"></div>
 </div>
 <div class="product">
 <img src="cuor_di_latte.png" style="width:100%;border-radius:8px;"/><h4>Cuor di Latte</h4>
 <input class="peso-forma" data-product="Cuor di Latte" type="hidden" value="5"/><p>Formaggio fresco e dolce, perfetto per spalmare o accompagnare miele.</p>
-<select id="cuor-di-latte-qty">
-<option data-price="5.2" value="1/8">1/8 - €5.20</option>
-<option data-price="9.8" value="1/4">1/4 - €9.80</option>
-<option data-price="18.9" value="1/2">1/2 - €18.90</option>
-<option data-price="36.0" value="1">1 - €36.00</option>
-</select>
-<button onclick="aggiungiShop('Cuor di Latte', 'cuor-di-latte-qty')">Aggiungi al carrello</button>
+<div class="scelte-formati"></div>
 </div>
 <div class="product">
 <img src="vecchio_capraro.png" style="width:100%;border-radius:8px;"/><h4>Vecchio Capraro</h4>
 <input class="peso-forma" data-product="Vecchio Capraro" type="hidden" value="5"/><p>Caprino stagionato, forte e aromatico, 100% latte di capra.</p>
-<select id="vecchio-capraro-qty">
-<option data-price="5.3" value="1/8">1/8 - €5.30</option>
-<option data-price="10.5" value="1/4">1/4 - €10.50</option>
-<option data-price="20.0" value="1/2">1/2 - €20.00</option>
-<option data-price="39.0" value="1">1 - €39.00</option>
-</select>
-<button onclick="aggiungiShop('Vecchio Capraro', 'vecchio-capraro-qty')">Aggiungi al carrello</button>
+<div class="scelte-formati"></div>
 </div>
 <div class="product">
 <img src="crablu.png" style="width:100%;border-radius:8px;"/><h4>Crablu</h4>
 <input class="peso-forma" data-product="Crablu" type="hidden" value="5"/><p>Formaggio erborinato con venature blu, sapore deciso e complesso.</p>
-<select id="crablu-qty">
-<option data-price="6.4" value="1/8">1/8 - €6.40</option>
-<option data-price="11.8" value="1/4">1/4 - €11.80</option>
-<option data-price="22.9" value="1/2">1/2 - €22.90</option>
-<option data-price="44.0" value="1">1 - €44.00</option>
-</select>
-<button onclick="aggiungiShop('Crablu', 'crablu-qty')">Aggiungi al carrello</button>
+<div class="scelte-formati"></div>
 </div>
 <div class="product">
 <img src="sulcitano.png" style="width:100%;border-radius:8px;"/><h4>Sulcitano</h4>
 <input class="peso-forma" data-product="Sulcitano" type="hidden" value="5"/><p>Pecorino fresco tipico del Sulcis, ideale da tavola.</p>
-<select id="sulcitano-qty">
-<option data-price="4.8" value="1/8">1/8 - €4.80</option>
-<option data-price="9.2" value="1/4">1/4 - €9.20</option>
-<option data-price="17.5" value="1/2">1/2 - €17.50</option>
-<option data-price="34.0" value="1">1 - €34.00</option>
-</select>
-<button onclick="aggiungiShop('Sulcitano', 'sulcitano-qty')">Aggiungi al carrello</button>
+<div class="scelte-formati"></div>
 </div>
 <div class="product">
 <img src="provola_orotelli.png" style="width:100%;border-radius:8px;"/><h4>Provola di Orotelli</h4>
 <input class="peso-forma" data-product="Provola di Orotelli" type="hidden" value="5"/><p>Formaggio affumicato, dalla crosta dorata e pasta filante.</p>
-<select id="provola-di-orotelli-qty">
-<option data-price="5.6" value="1/8">1/8 - €5.60</option>
-<option data-price="10.6" value="1/4">1/4 - €10.60</option>
-<option data-price="20.5" value="1/2">1/2 - €20.50</option>
-<option data-price="40.0" value="1">1 - €40.00</option>
-</select>
-<button onclick="aggiungiShop('Provola di Orotelli', 'provola-di-orotelli-qty')">Aggiungi al carrello</button>
+<div class="scelte-formati"></div>
 </div>
 <div class="product">
 <img src="gran_sirai.png" style="width:100%;border-radius:8px;"/><h4>Gran Sirai</h4>
 <input class="peso-forma" data-product="Gran Sirai" type="hidden" value="11"/><p>Formaggio a pasta dura e lunga stagionatura, per grattugia o tavola.</p>
-<select id="gran-sirai-qty">
-<option data-price="7.5" value="1/32">1/32 - €7,5.00</option>
-<option data-price="15.0" value="1/16">1/16 - €15.00</option>
-<option data-price="6.0" value="1/8">1/8 - €6.00</option>
-<option data-price="11.5" value="1/4">1/4 - €11.50</option>
-<option data-price="22.0" value="1/2">1/2 - €22.00</option>
-<option data-price="42.0" value="1">1 - €42.00</option>
-</select>
-<button onclick="aggiungiShop('Gran Sirai', 'gran-sirai-qty')">Aggiungi al carrello</button>
+<div class="scelte-formati"></div>
 </div>
 <div class="product">
 <img src="biancoarrosto.png" style="width:100%;border-radius:8px;"/><h4>Biancoarrosto del Sulcis</h4>
 <input class="peso-forma" data-product="Biancoarrosto del Sulcis" type="hidden" value="5"/><p>Formaggio bianco da griglia, dal sapore pieno e leggero.</p>
-<select id="biancoarrosto-del-sulcis-qty">
-<option data-price="5.1" value="1/8">1/8 - €5.10</option>
-<option data-price="9.9" value="1/4">1/4 - €9.90</option>
-<option data-price="19.0" value="1/2">1/2 - €19.00</option>
-<option data-price="37.0" value="1">1 - €37.00</option>
-</select>
-<button onclick="aggiungiShop('Biancoarrosto del Sulcis', 'biancoarrosto-del-sulcis-qty')">Aggiungi al carrello</button>
+<div class="scelte-formati"></div>
 </div>
 </div>
 </section>
@@ -910,7 +848,7 @@ function inviaOrdineWhatsApp() {
   let telefono = document.getElementById("telefono2")?.value || "";
   let note = document.getElementById("note2")?.value || "";
 
-  let msg = `🧀 Ordine Zara Formaggi:%0A`;
+  let msg = `🧀 🥓Ordine Zara Formaggi:%0A`;
   msg += `👤 ${nome}%0A📍 ${indirizzo}, ${cap} ${città}%0A📞 ${telefono}%0A📝 Note: ${note}%0A%0A`;
 
   cart.forEach(item => {
@@ -1045,63 +983,68 @@ function toggleRitiroNegozio() {
 </script>
 
 <script>
-let cart = [];
-
 const disponibilitaProdotti = {
-  "Nuraghe": { "1/8": 10, "1/4": 10, "1/2": 10, "1": 10 },
-  "Sirai Gigante": { "1/8": 10, "1/4": 10, "1/2": 10, "1": 10 },
-  "Cuore del Sulcis": { "1/8": 10, "1/4": 10, "1/2": 10, "1": 10 },
-  "Cuor di Latte": { "1/8": 10, "1/4": 10, "1/2": 10, "1": 10 },
-  "Vecchio Capraro": { "1/8": 10, "1/4": 10, "1/2": 10, "1": 10 },
-  "Crablu": { "1/8": 10, "1/4": 10, "1/2": 10, "1": 10 },
-  "Sulcitano": { "1/8": 10, "1/4": 10, "1/2": 10, "1": 10 },
-  "Provola di Orotelli": { "1/8": 10, "1/4": 10, "1/2": 10, "1": 10 },
-  "Gran Sirai": { "1/32": 10, "1/16": 10, "1/8": 10, "1/4": 10, "1/2": 10, "1": 10 },
-  "Biancoarrosto del Sulcis": { "1/8": 10, "1/4": 10, "1/2": 10, "1": 10 }
+  "Nuraghe": {"1/8":10,"1/4":10,"1/2":10,"1":10},
+  "Sirai Gigante": {"1/8":10,"1/4":10,"1/2":10,"1":10},
+  "Cuore del Sulcis": {"1/8":10,"1/4":10,"1/2":10,"1":10},
+  "Cuor di Latte": {"1/8":10,"1/4":10,"1/2":10,"1":10},
+  "Vecchio Capraro": {"1/8":10,"1/4":10,"1/2":10,"1":10},
+  "Crablu": {"1/8":10,"1/4":10,"1/2":10,"1":10},
+  "Sulcitano": {"1/8":10,"1/4":10,"1/2":10,"1":10},
+  "Provola di Orotelli": {"1/8":10,"1/4":10,"1/2":10,"1":10},
+  "Gran Sirai": {"1/32":10,"1/16":10,"1/8":10,"1/4":10,"1/2":10,"1":10},
+  "Biancoarrosto del Sulcis": {"1/8":10,"1/4":10,"1/2":10,"1":10}
 };
 
-function aggiornaTestiSelect() {
-  document.querySelectorAll(".product").forEach(prod => {
-    const pesoInput = prod.querySelector(".peso-forma");
-    const prodotto = pesoInput?.dataset.product;
-    const pesoForma = parseFloat(pesoInput?.value || 4);
-    const select = prod.querySelector("select");
-    if (!select) return;
+const prezziProdotti = {
+  "Nuraghe": { "1/8": 8.00, "1/4": 15.00, "1/2": 28.00, "1": 55.00 },
+  "Sirai Gigante": { "1/8": 9.00, "1/4": 17.00, "1/2": 32.00, "1": 62.00 },
+  "Cuore del Sulcis": { "1/8": 9.50, "1/4": 18.50, "1/2": 35.00, "1": 70.00 },
+  "Cuor di Latte": { "1/8": 7.50, "1/4": 14.50, "1/2": 27.00, "1": 52.00 },
+  "Vecchio Capraro": { "1/8": 10.00, "1/4": 19.00, "1/2": 37.00, "1": 72.00 },
+  "Crablu": { "1/8": 9.20, "1/4": 17.80, "1/2": 34.00, "1": 66.00 },
+  "Sulcitano": { "1/8": 8.80, "1/4": 16.70, "1/2": 31.50, "1": 60.00 },
+  "Provola di Orotelli": { "1/8": 8.90, "1/4": 17.10, "1/2": 32.00, "1": 61.00 },
+  "Gran Sirai": { "1/32": 2.50, "1/16": 5.00, "1/8": 9.80, "1/4": 18.80, "1/2": 36.00, "1": 72.00 },
+  "Biancoarrosto del Sulcis": { "1/8": 8.30, "1/4": 15.90, "1/2": 30.00, "1": 58.00 }
+};
 
-    select.querySelectorAll("option").forEach(opt => {
-      const frazione = opt.value.trim();
-      const frazioni = { "1/32": 1/32, "1/16": 1/16, "1/8": 1/8, "1/4": 1/4, "1/2": 1/2, "1": 1 };
-      const pesoCalcolato = (pesoForma * (frazioni[frazione] || 0)).toFixed(2);
-      const prezzo = opt.dataset.price;
-      const disponibilita = disponibilitaProdotti[prodotto]?.[frazione] ?? 0;
-      opt.dataset.pesounitario = pesoCalcolato;
-      opt.textContent = `${frazione} - €${prezzo} (${pesoCalcolato} kg) – Disponibilità: ${disponibilita}`;
-      opt.disabled = disponibilita <= 0;
-    });
-  });
-}
 
 document.addEventListener("DOMContentLoaded", () => {
-  aggiornaTestiSelect();
+  document.querySelectorAll(".product").forEach(prod => {
+    const nome = prod.querySelector(".peso-forma")?.dataset.product;
+    const pesoForma = parseFloat(prod.querySelector(".peso-forma")?.value || 5);
+    const contenitore = prod.querySelector(".scelte-formati");
+    if (!nome || !contenitore) return;
+
+    const frazioni = Object.keys(disponibilitaProdotti[nome] || {});
+    const prezzi = {};
+    prod.querySelectorAll("option")?.forEach(opt => {
+      prezzi[opt.value] = parseFloat(opt.dataset.price);
+    });
+
+    contenitore.innerHTML = "";
+    frazioni.forEach(frazione => {
+      const disponibilita = disponibilitaProdotti[nome][frazione];
+      const frazMap = { "1/32":1/32, "1/16":1/16, "1/8":1/8, "1/4":1/4, "1/2":1/2, "1":1 };
+      const peso = (pesoForma * (frazMap[frazione] || 0)).toFixed(2);
+      const prezzo = (prezziProdotti[nome]?.[frazione] ?? "-");
+
+      const btn = document.createElement("button");
+      btn.textContent = `${frazione} – €${prezzo} – ${peso} kg – Qta disponibile: ${disponibilita}`;
+      btn.disabled = disponibilita <= 0;
+      btn.style = "margin:4px;padding:6px 10px;font-size:14px;border-radius:6px;cursor:pointer;";
+      btn.onclick = () => {
+        addToCart(nome, frazione, prezzo, parseFloat(peso));
+        disponibilitaProdotti[nome][frazione]--;
+        btn.disabled = disponibilitaProdotti[nome][frazione] <= 0;
+        btn.textContent = `${frazione} – €${prezzo} – ${peso} kg – Qta disponibile: ${disponibilitaProdotti[nome][frazione]}`;
+      };
+
+      contenitore.appendChild(btn);
+    });
+  });
 });
-
-function aggiungiShop(nome, selectId) {
-  const sel = document.getElementById(selectId);
-  if (!sel) return;
-  const formato = sel.value;
-  const prezzo = parseFloat(sel.options[sel.selectedIndex].dataset.price);
-  const pesoUnitario = parseFloat(sel.options[sel.selectedIndex].dataset.pesounitario);
-
-  const disponibile = disponibilitaProdotti[nome]?.[formato] ?? 0;
-  if (disponibile <= 0) {
-    alert("❌ Quantità esaurita per questo formato.");
-    return;
-  }
-
-  disponibilitaProdotti[nome][formato] -= 1;
-  aggiornaTestiSelect();
-  addToCart(nome, formato, prezzo, pesoUnitario);
-}
 </script>
 
 </body>
