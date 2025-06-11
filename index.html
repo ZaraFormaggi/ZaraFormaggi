@@ -54,7 +54,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>ZARA FORMAGGI di Zara Maurizio</title>
 <!-- Leaflet CSS -->
-<link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/>
+
 <style>
     :root {
       --verde-scuro: #2f4f2f;
@@ -355,10 +355,6 @@ nav a.active-link {
 <li>Regala un  Voucher "ZaraFormaggi " </li>
 </ul>
 </section><section class="section" id="chi-siamo" style="display: none;">
-
-
-
-  
 <h2>Chi siamo</h2>
 <p>ZARA FORMAGGI nasce dalla passione per i sapori autentici della Sardegna. Fondata da Maurizio Zara, l’attività si dedica alla selezione e vendita di prodotti tipici come formaggi, salumi, dolci e molto altro. Tradizione e qualità sono il nostro marchio.</p>
 </section><section class="section active" id="home" style="display: block;">
@@ -366,8 +362,6 @@ nav a.active-link {
 <p>Visita il sito per scoprire i nostri prodotti. Offriamo una selezione di eccellenze enogastronomiche sarde, con attenzione alla qualità, alla tradizione e al gusto autentico.</p>
 </section>
 <section class="section" id="dove" style="display: none;">
-
-  
 <h2>Dove ci trovi</h2>
 <p>Ci trovi in <strong>Via Gramsci, Iglesias (CI), Sardegna</strong>, presso il Mercato Civico Box N° 27.</p>
 <h3>Orari di apertura</h3>
@@ -381,62 +375,66 @@ nav a.active-link {
 <li>Domenica: Chiuso</li>
 </ul>
 <div id="map"></div>
+
+<div style="text-align: center; margin-top: 10px;">
+  <a href="https://www.google.com/maps?q=39.3117602,8.5351056" target="_blank"
+     style="display: inline-block; padding: 10px 20px; background: #3367d6; color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">
+    📍 Apri in Google Maps
+  </a>
+</div>
+
 </section>
 <section class="section" id="galleria" style="display: none;">
 <h2>Galleria</h2>
 
 <div class="card-container">
   <div class="card">
-    <img src="img/biancoarrosto.png" alt="biancoarrosto.png" />
+    <img src="biancoarrosto.png" alt="biancoarrosto.png" />
     <p>Biancoarrosto</p>
   </div>
   <div class="card">
-    <img src="img/crablu.png" alt="crablu.png" />
+    <img src="crablu.png" alt="crablu.png" />
     <p>Crablu</p>
   </div>
   <div class="card">
-    <img src="img/cuor_di_latte.png" alt="cuor_di_latte.png" />
+    <img src="cuor_di_latte.png" alt="cuor_di_latte.png" />
     <p>Cuor Di Latte</p>
   </div>
   <div class="card">
-    <img src="img/cuore_sulcis.png" alt="cuore_sulcis.png" />
+    <img src="cuore_sulcis.png" alt="cuore_sulcis.png" />
     <p>Cuore Sulcis</p>
   </div>
   <div class="card">
-    <img src="img/gran_sirai.png" alt="gran_sirai.png" />
+    <img src="gran_sirai.png" alt="gran_sirai.png" />
     <p>Gran Sirai</p>
   </div>
   <div class="card">
-    <img src="img/nuraghe.png" alt="nuraghe.png" />
+    <img src="nuraghe.png" alt="nuraghe.png" />
     <p>Nuraghe</p>
   </div>
   <div class="card">
-    <img src="img/provola_orotelli.png" alt="provola_orotelli.png" />
+    <img src="provola_orotelli.png" alt="provola_orotelli.png" />
     <p>Provola Orotelli</p>
   </div>
   <div class="card">
-    <img src="img/sirai_gigante.png" alt="sirai_gigante.png" />
+    <img src="sirai_gigante.png" alt="sirai_gigante.png" />
     <p>Sirai Gigante</p>
   </div>
   <div class="card">
-    <img src="img/sulcitano.png" alt="sulcitano.png" />
+    <img src="sulcitano.png" alt="sulcitano.png" />
     <p>Sulcitano</p>
   </div>
   <div class="card">
-    <img src="img/vecchio_capraro.png" alt="vecchio_capraro.png" />
+    <img src="vecchio_capraro.png" alt="vecchio_capraro.png" />
     <p>Vecchio Capraro</p>
   </div>
 </div>
 </section>
 <section class="section" id="shop" style="display: none;">
-
-
-
-  
-<h2>🧀 🥓Shop</h2>
+<h2>🧀 Shop</h2>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
 <div class="product">
-<img src="Nuraghe.png" style="width:100%;border-radius:8px;"/><h4>Nuraghe</h4>
+<img src="nuraghe.png" style="width:100%;border-radius:8px;"/><h4>Nuraghe</h4>
 <input type="hidden" class="peso-forma" value="5" data-product="Nuraghe"><p>Pecorino stagionato dal gusto intenso, prodotto con latte ovino.</p>
 <select id="nuraghe-qty">
 <option data-price="5.0" value="1/8">1/8 - €5.00</option>
@@ -447,7 +445,7 @@ nav a.active-link {
 <button onclick="aggiungiShop('Nuraghe', 'nuraghe-qty')">Aggiungi al carrello</button>
 </div>
 <div class="product">
-<img src="Sirai gigante.png" style="width:100%;border-radius:8px;"/><h4>Sirai Gigante</h4>
+<img src="sirai_gigante.png" style="width:100%;border-radius:8px;"/><h4>Sirai Gigante</h4>
 <input type="hidden" class="peso-forma" value="5" data-product="Sirai Gigante"><p>Formaggio a lunga stagionatura, pasta dura, sapore ricco.</p>
 <select id="sirai-gigante-qty">
 <option data-price="6.0" value="1/8">1/8 - €6.00</option>
@@ -458,8 +456,8 @@ nav a.active-link {
 <button onclick="aggiungiShop('Sirai Gigante', 'sirai-gigante-qty')">Aggiungi al carrello</button>
 </div>
 <div class="product">
-<img src="Cuore.png" style="width:100%;border-radius:8px;"/><h4>Cuore del Sulcis</h4>
-<input type="hidden" class="peso-forma" value="4" data-product="Cuore del Sulcis"><p>Pecorino semistagionato, dal cuore morbido e sapore equilibrato.</p>
+<img src="cuore_sulcis.png" style="width:100%;border-radius:8px;"/><h4>Cuore del Sulcis</h4>
+<input type="hidden" class="peso-forma" value="5" data-product="Cuore del Sulcis"><p>Pecorino semistagionato, dal cuore morbido e sapore equilibrato.</p>
 <select id="cuore-del-sulcis-qty">
 <option data-price="4.5" value="1/8">1/8 - €4.50</option>
 <option data-price="8.0" value="1/4">1/4 - €8.00</option>
@@ -469,8 +467,8 @@ nav a.active-link {
 <button onclick="aggiungiShop('Cuore del Sulcis', 'cuore-del-sulcis-qty')">Aggiungi al carrello</button>
 </div>
 <div class="product">
-<img src="Cuor di latte.png" style="width:100%;border-radius:8px;"/><h4>Cuor di Latte</h4>
-<input type="hidden" class="peso-forma" value="3" data-product="Cuor di Latte"><p>Formaggio fresco e dolce, perfetto per spalmare o accompagnare miele.</p>
+<img src="cuor_di_latte.png" style="width:100%;border-radius:8px;"/><h4>Cuor di Latte</h4>
+<input type="hidden" class="peso-forma" value="5" data-product="Cuor di Latte"><p>Formaggio fresco e dolce, perfetto per spalmare o accompagnare miele.</p>
 <select id="cuor-di-latte-qty">
 <option data-price="5.2" value="1/8">1/8 - €5.20</option>
 <option data-price="9.8" value="1/4">1/4 - €9.80</option>
@@ -480,7 +478,7 @@ nav a.active-link {
 <button onclick="aggiungiShop('Cuor di Latte', 'cuor-di-latte-qty')">Aggiungi al carrello</button>
 </div>
 <div class="product">
-<img src="Vecchio Capraro.png" style="width:100%;border-radius:8px;"/><h4>Vecchio Capraro</h4>
+<img src="vecchio_capraro.png" style="width:100%;border-radius:8px;"/><h4>Vecchio Capraro</h4>
 <input type="hidden" class="peso-forma" value="5" data-product="Vecchio Capraro"><p>Caprino stagionato, forte e aromatico, 100% latte di capra.</p>
 <select id="vecchio-capraro-qty">
 <option data-price="5.3" value="1/8">1/8 - €5.30</option>
@@ -491,7 +489,7 @@ nav a.active-link {
 <button onclick="aggiungiShop('Vecchio Capraro', 'vecchio-capraro-qty')">Aggiungi al carrello</button>
 </div>
 <div class="product">
-<img src="Crablu.png" style="width:100%;border-radius:8px;"/><h4>Crablu</h4>
+<img src="crablu.png" style="width:100%;border-radius:8px;"/><h4>Crablu</h4>
 <input type="hidden" class="peso-forma" value="5" data-product="Crablu"><p>Formaggio erborinato con venature blu, sapore deciso e complesso.</p>
 <select id="crablu-qty">
 <option data-price="6.4" value="1/8">1/8 - €6.40</option>
@@ -502,8 +500,8 @@ nav a.active-link {
 <button onclick="aggiungiShop('Crablu', 'crablu-qty')">Aggiungi al carrello</button>
 </div>
 <div class="product">
-<img src="Sulcitano.png" style="width:100%;border-radius:8px;"/><h4>Sulcitano</h4>
-<input type="hidden" class="peso-forma" value="4.5" data-product="Sulcitano"><p>Pecorino fresco tipico del Sulcis, ideale da tavola.</p>
+<img src="sulcitano.png" style="width:100%;border-radius:8px;"/><h4>Sulcitano</h4>
+<input type="hidden" class="peso-forma" value="5" data-product="Sulcitano"><p>Pecorino fresco tipico del Sulcis, ideale da tavola.</p>
 <select id="sulcitano-qty">
 <option data-price="4.8" value="1/8">1/8 - €4.80</option>
 <option data-price="9.2" value="1/4">1/4 - €9.20</option>
@@ -513,7 +511,7 @@ nav a.active-link {
 <button onclick="aggiungiShop('Sulcitano', 'sulcitano-qty')">Aggiungi al carrello</button>
 </div>
 <div class="product">
-<img src="Provolebiancheorotelli.png" style="width:100%;border-radius:8px;"/><h4>Provola di Orotelli</h4>
+<img src="provola_orotelli.png" style="width:100%;border-radius:8px;"/><h4>Provola di Orotelli</h4>
 <input type="hidden" class="peso-forma" value="5" data-product="Provola di Orotelli"><p>Formaggio affumicato, dalla crosta dorata e pasta filante.</p>
 <select id="provola-di-orotelli-qty">
 <option data-price="5.6" value="1/8">1/8 - €5.60</option>
@@ -524,21 +522,21 @@ nav a.active-link {
 <button onclick="aggiungiShop('Provola di Orotelli', 'provola-di-orotelli-qty')">Aggiungi al carrello</button>
 </div>
 <div class="product">
-<img src="Gran Sirai.png" style="width:100%;border-radius:8px;"/><h4>Gran Sirai</h4>
-<input type="hidden" class="peso-forma" value="12" data-product="Gran Sirai"><p>Formaggio a pasta dura e lunga stagionatura, per grattugia o tavola.</p>
+<img src="gran_sirai.png" style="width:100%;border-radius:8px;"/><h4>Gran Sirai</h4>
+<input type="hidden" class="peso-forma" value="10" data-product="Gran Sirai"><p>Formaggio a pasta dura e lunga stagionatura, per grattugia o tavola.</p>
 <select id="gran-sirai-qty">
 <option data-price="7.5" value="1/32">1/32 - €7,5.00</option> 
 <option data-price="15.0" value="1/16">1/16 - €15.00</option>  
 <option data-price="30.0" value="1/8">1/8 - €30.00</option>
-<option data-price="60.5" value="1/4">1/4 - €60.50</option>
+<option data-price="60..0" value="1/4">1/4 - €60.00</option>
 <option data-price="120.0" value="1/2">1/2 - €120.00</option>
 <option data-price="240.0" value="1">1 - €240.00</option>
 </select>
 <button onclick="aggiungiShop('Gran Sirai', 'gran-sirai-qty')">Aggiungi al carrello</button>
 </div>
 <div class="product">
-<img src="Bianco arrosto .png" style="width:100%;border-radius:8px;"/><h4>Biancoarrosto del Sulcis</h4>
-<input type="hidden" class="peso-forma" value="2" data-product="Biancoarrosto del Sulcis"><p>Formaggio bianco da griglia, dal sapore pieno e leggero.</p>
+<img src="biancoarrosto.png" style="width:100%;border-radius:8px;"/><h4>Biancoarrosto del Sulcis</h4>
+<input type="hidden" class="peso-forma" value="5" data-product="Biancoarrosto del Sulcis"><p>Formaggio bianco da griglia, dal sapore pieno e leggero.</p>
 <select id="biancoarrosto-del-sulcis-qty">
 <option data-price="5.1" value="1/8">1/8 - €5.10</option>
 <option data-price="9.9" value="1/4">1/4 - €9.90</option>
@@ -553,45 +551,6 @@ nav a.active-link {
 <footer>
 <p>© 2025 ZARA FORMAGGI di Zara Maurizio - Tutti i diritti riservati</p>
 </footer>
-<!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-  <script>
-    let mapInitialized = false;
-    let map;
-
-    function showSection(id) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.getElementById(id)?.classList.add('active');
-
-      if (id === 'dove') {
-        if (!mapInitialized) {
-          const coords = [39.3117602, 8.5351056];
-          map = L.map('map').setView(coords, 18);
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-          }).addTo(map);
-          L.marker(coords).addTo(map).bindPopup('Via Gramsci, Mercato Civico - Iglesias, Sardegna').openPopup();
-          mapInitialized = true;
-        } else {
-          setTimeout(() => map.invalidateSize(), 200);
-        }
-      }
-    }
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-  
 <!-- Leaflet JS -->
 <script src="https://www.paypal.com/sdk/js?client-id=sb¤cy=EUR"></script>
 <script>
@@ -978,11 +937,35 @@ function toggleRitiroNegozio() {
 </script>
 
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  let mapInitialized = false;
+  let map;
 
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id)?.classList.add('active');
 
+    if (id === 'dove') {
+      if (!mapInitialized) {
+        const coords = [39.3117602, 8.5351056];
+        map = L.map('map').setView(coords, 18);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+        L.marker(coords).addTo(map).bindPopup(
+          'Zara Formaggi Box n°27<br>Via Gramsci, Mercato Civico - Iglesias, Sardegna'
+        ).openPopup();
+        mapInitialized = true;
+      } else {
+        setTimeout(() => map.invalidateSize(), 200);
+      }
+    }
+  }
 
-
-  
+  window.addEventListener("DOMContentLoaded", () => showSection("dove"));
+</script>
 </body>
 </html>
 
@@ -996,7 +979,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     select.querySelectorAll("option").forEach(opt => {
       const frazione = opt.value.trim();
-      const frazioni = { "1/8": 1/8, "1/4": 1/4, "1/2": 1/2, "1": 1 };
+      const frazioni = { "1/32": 1/32,"1/16": 1/16,"1/8": 1/8, "1/4": 1/4, "1/2": 1/2, "1": 1 };     
       const pesoCalcolato = (pesoForma * (frazioni[frazione] || 0)).toFixed(2);
       const prezzo = opt.dataset.price;
       opt.dataset.pesounitario = pesoCalcolato;
