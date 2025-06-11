@@ -445,10 +445,16 @@ nav a.active-link {
 <a href="#shop">🧀 🥓 Shop</a>
 <a href="#contatti">📞 Contatti</a>
 <a href="#carrello" id="menu-carrello">
+
+  
   🛒 Carrello (<span id="menu-cart-count">0</span>) – €<span id="menu-cart-total">0.00</span>
 </a>
 </nav>
+
+
+  
 <div id="cart-section">
+
 <h3>Il tuo carrello</h3>
 <div id="cart-items"></div><button onclick="document.getElementById('ordine-form').scrollIntoView();" style="margin-top: 20px;">📦 Procedi all'ordine</button>
 <hr/>
@@ -482,10 +488,15 @@ nav a.active-link {
 <div id="cart-total" style="margin-top:10px; font-weight:bold;"></div></div>
 <nav>
 </nav>
-<main><section class="section" id="contatti" style="display: none;">
+<main>
+  
+  <section class="section" id="contatti" style="display: none;">
 <h2>Contatti</h2>
 <p>Per informazioni, ordini o richieste particolari, contattaci via email  <strong> info@zaraformaggi.com  </strong> </p>
-</section><section class="section" id="servizi" style="display: none;">
+</section>
+  
+  
+<section class="section" id="servizi" style="display: none;">
 <h2>I nostri servizi</h2>
 <ul>
 <li>Vendita al dettaglio di prodotti tipici sardi</li>
@@ -494,10 +505,16 @@ nav a.active-link {
 <li>Possibilità di mettere sottovuoto i prodotti </li>
 <li>Regala un  Voucher "ZaraFormaggi " </li>
 </ul>
-</section><section class="section" id="chi-siamo" style="display: none;">
+</section>
+  
+  
+  <section class="section" id="chi-siamo" style="display: none;">
 <h2>Chi siamo</h2>
 <p>ZARA FORMAGGI nasce dalla passione per i sapori autentici della Sardegna. Fondata da Maurizio Zara, l’attività si dedica alla selezione e vendita di prodotti tipici come formaggi, salumi, dolci e molto altro. Tradizione e qualità sono il nostro marchio.</p>
-</section><section class="section active" id="home" style="display: block;">
+</section>
+  
+  
+ <section class="section active" id="home" style="display: block;">
 <h2>Benvenuti!</h2>
 <p>Visita il sito per scoprire i nostri prodotti. Offriamo una selezione di eccellenze enogastronomiche sarde, con attenzione alla qualità, alla tradizione e al gusto autentico.</p>
 </section>
@@ -787,15 +804,56 @@ function finalizzaOrdine() {
   location.reload();  // simula invio e reset
 }
 </script>
+
+
+  
 <section class="section" id="carrello" style="display: none;">
 <h2>🛒 Il tuo carrello</h2>
 <div id="cart-container"></div>
 <div id="peso-totale" style="margin-top: 10px; font-weight: bold;"></div>
 <div style="margin-top: 20px;">
-<strong id="cart-total">Totale: €0.00</strong>
-<button onclick="proseguiOrdine()" style="margin-left: 20px;">Procedi all'acquisto</button>
+
+// copiato da 
 </div>
 <h3 style="text-align:right;">Totale: <span id="carrello-totale">€0.00</span></h3></section>
+<!-- Selettore modalità consegna -->
+<div style="text-align:center; margin-top:2rem;">
+<button id="btn-toggle-ritiro" onclick="toggleRitiro()" style="padding: 10px 20px; font-weight: bold; border-radius: 8px; background-color: #007f5f; color: white; border: none; cursor: pointer;">
+    🚚 Clicca per ritiro in negozio
+  </button>
+</div>
+<!-- Form ordine completo -->
+<form id="form-completo" style="display:none;" style="margin-top:2rem;">
+<h2>Dati per la spedizione</h2>
+<label>Nome: <input name="nome" required=""/></label><br/>
+<label>Cognome: <input name="cognome" required=""/></label><br/>
+<label>Telefono: <input name="telefono" required=""/></label><br/>
+<label>Email: <input name="email" required=""/></label><br/>
+<label>Indirizzo: <input name="indirizzo" required=""/></label><br/>
+<label>CAP: <input name="cap" required=""/></label><br/>
+<label>Città: <input name="citta" required=""/></label><br/>
+<label>Paese: <input name="paese" required=""/></label><br/>
+</form>
+<!-- Form ritiro in negozio -->
+<form id="form-ritiro" style="display:none;" style="display:none; margin-top:2rem;">
+<h2>Dati per il ritiro in negozio</h2>
+<label>Nome: <input name="nome" required=""/></label><br/>
+<label>Cognome: <input name="cognome" required=""/></label><br/>
+<label>Telefono: <input name="telefono" required=""/></label><br/>
+<label>Email: <input name="email" required=""/></label><br/>
+</form>
+<!-- Pulsante WhatsApp -->
+<div style="margin-top: 1rem; text-align:center;">
+<a href="#" id="wa-btn" onclick="inviaOrdineWhatsapp()" style="background-color: #25d366; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">
+    📦 Invia Ordine via WhatsApp
+  </a>
+</div>
+
+
+
+
+
+  
 <section class="section" id="form-ordine" style="display: none;">
 <h2>Dati per la spedizione</h2>
 <form action="https://formspree.io/f/xpwrplgn" method="POST">
@@ -1250,38 +1308,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
-<!-- Selettore modalità consegna -->
-<div style="text-align:center; margin-top:2rem;">
-<button id="btn-toggle-ritiro" onclick="toggleRitiro()" style="padding: 10px 20px; font-weight: bold; border-radius: 8px; background-color: #007f5f; color: white; border: none; cursor: pointer;">
-    🚚 Clicca per ritiro in negozio
-  </button>
-</div>
-<!-- Form ordine completo -->
-<form id="form-completo" style="display:none;" style="margin-top:2rem;">
-<h2>Dati per la spedizione</h2>
-<label>Nome: <input name="nome" required=""/></label><br/>
-<label>Cognome: <input name="cognome" required=""/></label><br/>
-<label>Telefono: <input name="telefono" required=""/></label><br/>
-<label>Email: <input name="email" required=""/></label><br/>
-<label>Indirizzo: <input name="indirizzo" required=""/></label><br/>
-<label>CAP: <input name="cap" required=""/></label><br/>
-<label>Città: <input name="citta" required=""/></label><br/>
-<label>Paese: <input name="paese" required=""/></label><br/>
-</form>
-<!-- Form ritiro in negozio -->
-<form id="form-ritiro" style="display:none;" style="display:none; margin-top:2rem;">
-<h2>Dati per il ritiro in negozio</h2>
-<label>Nome: <input name="nome" required=""/></label><br/>
-<label>Cognome: <input name="cognome" required=""/></label><br/>
-<label>Telefono: <input name="telefono" required=""/></label><br/>
-<label>Email: <input name="email" required=""/></label><br/>
-</form>
-<!-- Pulsante WhatsApp -->
-<div style="margin-top: 1rem; text-align:center;">
-<a href="#" id="wa-btn" onclick="inviaOrdineWhatsapp()" style="background-color: #25d366; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">
-    📦 Invia Ordine via WhatsApp
-  </a>
-</div>
+
+// spsotato su carrello 
+
+  
 <script>
 function toggleRitiro() {
   const btn = document.getElementById("btn-toggle-ritiro");
