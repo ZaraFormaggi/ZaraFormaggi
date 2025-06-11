@@ -221,12 +221,71 @@
     }
 
 </style>
+<style>
+.section { display: none; }
+.section.active { display: block; }
+</style>
+<style>
+nav {
+  background: #333;
+  padding: 12px;
+  text-align: center;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: 500;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+nav a:hover {
+  color: #FFD700;
+}
+nav a.active-link {
+  border-bottom: 2px solid #FFD700;
+  padding-bottom: 4px;
+}
+.section {
+  display: none;
+  padding: 20px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+.section.active {
+  display: block;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
 </head>
 <body>
+<header style="background-color: #2f4f2f; color: white; padding: 1rem 0; text-align: center;">
+<div class="header-logo">
+<img alt="ZARA FORMAGGI Logo" src="logo.png" style="width: 100px; height: auto; margin-bottom: 0.5rem;"/>
+</div>
+<div class="header-title">
+<h1 style="margin: 0;">ZARA FORMAGGI</h1>
+<p class="header-subtitle">di Zara Maurizio</p>
+<p class="header-subtitle">Rivendita di prodotti tipici sardi e molto altro</p>
+</div>
+</header>
+<nav style="background-color: #3f704d; display: flex; flex-wrap: wrap; justify-content: center;">
+<a href="#home">🏠 Home</a>
+<a href="#chi-siamo">👤 Chi siamo</a>
+<a href="#dove">📍 Dove ci trovi</a>
+<a href="#servizi">🛠️ Servizi</a>
+<a href="#galleria">🖼️ Galleria</a>
+<a href="#shop">🧀 Shop</a>
+<a href="#contatti">📞 Contatti</a>
+</nav>
+
+
 <button id="cart-button" onclick="toggleCart()">🛒 Carrello</button>
 <div id="cart-section">
 <h3>Il tuo carrello</h3>
-<div id="cart-items"></div>
+<div id="cart-items"></div><button onclick="document.getElementById('ordine-form').scrollIntoView();" style="margin-top: 20px;">📦 Procedi all'ordine</button>
 <hr/>
 <form action="https://formspree.io/f/xpwrplgn" id="checkout-form" method="POST">
 <label><input id="ritiro-loco" onchange="toggleSottovuoto()" type="checkbox"/> Ritiro in loco</label><br/>
@@ -246,7 +305,6 @@
 <div id="paypal-button-container"></div>
 <button onclick="alert('Simulazione Stripe')" type="button">Paga con Stripe</button>
 </div>
-
 <p><strong>Destinazione:</strong><br/>
 <label><input checked="" id="destinazione-italia" name="destinazione" type="radio"/> Italia</label><br/>
 <label><input id="destinazione-europa" name="destinazione" type="radio"/> Europa</label>
@@ -257,36 +315,29 @@
 <label><input id="confezione-regalo" onchange="aggiornaTotale()" type="checkbox"/> Aggiungi confezione regalo (+€5)</label>
 </div>
 <div id="cart-total" style="margin-top:10px; font-weight:bold;"></div></div>
-<header>
-<div class="header-logo">
-<img alt="Logo Zara Formaggi" src="logo.png"/>
-</div>
-<div class="header-title">
-<h1>ZARA FORMAGGI</h1>
-<div class="header-subtitle">di Zara Maurizio</div>
-</div>
-<p>Rivendita di Prodotti tipici Sardi e tanto altro</p>
-</header>
 <nav>
-<a onclick="showSection('home')">Home</a>
-<a onclick="showSection('chi-siamo')">Chi siamo</a>
-<a onclick="showSection('dove')">Dove ci trovi</a>
-<a onclick="showSection('servizi')">Servizi</a>
-<a onclick="showSection('galleria')">Galleria</a>
-<a onclick="showSection('shop')">Shop</a>
-<a onclick="showSection('contatti')">Contatti</a>
 </nav>
 <div class="search-bar">
 <input placeholder="Cerca nel sito..." type="text"/>
 </div>
-<main>
-<section class="section active" id="home">
-<h2>Benvenuti!</h2>
-<p>Visita il sito per scoprire i nostri prodotti. Offriamo una selezione di eccellenze enogastronomiche sarde, con attenzione alla qualità, alla tradizione e al gusto autentico.</p>
-</section>
-<section class="section" id="chi-siamo">
+<main><section class="section" id="contatti">
+<h2>Contatti</h2>
+<p>Per informazioni, ordini o richieste particolari, contattaci via email  <strong> info@zaraformaggi.com  </strong> </p>
+</section><section class="section" id="servizi">
+<h2>I nostri servizi</h2>
+<ul>
+<li>Vendita al dettaglio di prodotti tipici sardi</li>
+<li>Confezioni regalo personalizzate</li>
+<li>Spedizioni in tutta Italia e Europa</li>
+<li>Possibilità di mettere sottovuoto i prodotti </li>
+<li>Regala un  Voucher "ZaraFormaggi " </li>
+</ul>
+</section><section class="section" id="chi-siamo">
 <h2>Chi siamo</h2>
 <p>ZARA FORMAGGI nasce dalla passione per i sapori autentici della Sardegna. Fondata da Maurizio Zara, l’attività si dedica alla selezione e vendita di prodotti tipici come formaggi, salumi, dolci e molto altro. Tradizione e qualità sono il nostro marchio.</p>
+</section><section class="section active" id="home">
+<h2>Benvenuti!</h2>
+<p>Visita il sito per scoprire i nostri prodotti. Offriamo una selezione di eccellenze enogastronomiche sarde, con attenzione alla qualità, alla tradizione e al gusto autentico.</p>
 </section>
 <section class="section" id="dove">
 <h2>Dove ci trovi</h2>
@@ -303,480 +354,122 @@
 </ul>
 <div id="map"></div>
 </section>
-<section class="section" id="servizi">
-<h2>I nostri servizi</h2>
-<ul>
-<li>Vendita al dettaglio di prodotti tipici sardi</li>
-<li>Confezioni regalo personalizzate</li>
-<li>Spedizioni in tutta Italia e Europa</li>
-<li>Possibilità di mettere sottovuoto i prodotti </li>
-<li>Regala un  Voucher "ZaraFormaggi " </li>
-</ul>
-</section>
 <section class="section" id="galleria">
 <h2>Galleria</h2>
 <div class="gallery-placeholder">
 <p>Qui sarà inserita la galleria di foto e video dei nostri prodotti e del punto vendita.</p>
 </div>
 </section>
-
 <section class="section" id="shop">
-<div style="margin: 30px 0; padding: 15px; border: 1px solid #ccc; border-radius: 10px;">
-<h3>🎁 Regala un Voucher</h3>
-<label for="valore-voucher">Inserisci il valore (10€ - 200€):</label><br/>
-<input id="valore-voucher" max="200" min="10" style="width: 100px; margin: 8px 0;" type="number" value="10"/>
-<button onclick="aggiungiVoucher()" type="button">Aggiungi al carrello</button>
-</div>
-
-  
-<h2>Shop</h2>
-<div class="card-container" style="display: flex; flex-wrap: wrap; gap: 20px;">
-<div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-<img alt="Crablù" src="Crablu.png" style="width: 100%; height: auto;"/>
-<div style="padding: 10px;">
-<h4 style="margin: 0 0 5px;">Crablù</h4>
-<p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Formaggio erborinato di capra, dal gusto intenso e aromatico.</p>
-<p style="margin: 0; font-weight: bold; color: #444;">€24,00/kg</p>
-<label for="quantita-crablù">Seleziona quantità:</label><br/>
-<select id="quantita-crablù" onchange="aggiornaPesoGenerico('quantita-crablù', 'peso-crablù')" style="width: 100%; margin-top: 4px;">
-<option value="0.125">1/8 di forma</option>
-<option value="0.25">1/4 di forma</option>
-<option value="0.5">1/2 forma</option>
-<option value="1">1 forma intera</option>
+<h2>🧀 Shop</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+<div class="product">
+<img src="img/nuraghe.png" style="width:100%;border-radius:8px;"/><h4>Nuraghe</h4><p>Pecorino stagionato dal gusto intenso, prodotto con latte ovino.</p>
+<select id="nuraghe-qty">
+<option data-price="5.0" value="1/8">1/8 - €5.00</option>
+<option data-price="9.5" value="1/4">1/4 - €9.50</option>
+<option data-price="18.5" value="1/2">1/2 - €18.50</option>
+<option data-price="35.0" value="1">1 - €35.00</option>
 </select>
-<p id="peso-crablù" style="font-size: 0.85em; color: #666; margin-top: 6px;">
-      1/8 di forma = circa 500g
-    </p>
-
-<button onclick="addToCart('Crablù', 1/8 di forma = circa 500g, parseFloat(document.getElementById('quantita-crablu').value))" style="margin-top: 10px;">
-      Aggiungi al carrello
-    </button>
+<button onclick="aggiungiShop('Nuraghe', 'nuraghe-qty')">Aggiungi al carrello</button>
 </div>
-</div>
-
-
-  
-<div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-<img alt="Sulcitano" src="Sulcitano.png" style="width: 100%; height: auto;"/>
-<div style="padding: 10px;">
-<h4 style="margin: 0 0 5px;">Sulcitano</h4>
-<p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Formaggio pecorino sardo 100% latte ovino, sapore equilibrato.</p>
-<p style="margin: 0; font-weight: bold; color: #444;">€18,00/kg</p>
-<label for="quantita-sulcitano">Seleziona quantità:</label><br/>
-<select id="quantita-sulcitano" onchange="aggiornaPesoGenerico('quantita-sulcitano', 'peso-sulcitano')" style="width: 100%; margin-top: 4px;">
-<option value="0.125">1/8 di forma</option>
-<option value="0.25">1/4 di forma</option>
-<option value="0.5">1/2 forma</option>
-<option value="1">1 forma intera</option>
+<div class="product">
+<img src="img/sirai_gigante.png" style="width:100%;border-radius:8px;"/><h4>Sirai Gigante</h4><p>Formaggio a lunga stagionatura, pasta dura, sapore ricco.</p>
+<select id="sirai-gigante-qty">
+<option data-price="6.0" value="1/8">1/8 - €6.00</option>
+<option data-price="11.5" value="1/4">1/4 - €11.50</option>
+<option data-price="22.5" value="1/2">1/2 - €22.50</option>
+<option data-price="43.0" value="1">1 - €43.00</option>
 </select>
-<p id="peso-sulcitano" style="font-size: 0.85em; color: #666; margin-top: 6px;">
-      1/8 di forma = circa 500g
-    </p>
-
-<button onclick="addToCart('Sulcitano', 1/8 di forma = circa 500g, parseFloat(document.getElementById('quantita-sulcitano').value))" style="margin-top: 10px;">
-      Aggiungi al carrello
-    </button>
+<button onclick="aggiungiShop('Sirai Gigante', 'sirai-gigante-qty')">Aggiungi al carrello</button>
 </div>
-</div>
-
-
-  
-<div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-<img alt="Biancoarrosto" src="Bianco arrosto .png" style="width: 100%; height: auto;"/>
-<div style="padding: 10px;">
-<h4 style="margin: 0 0 5px;">Biancoarrosto</h4>
-<p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Pecorino da griglia con crosta sottile, ottimo per arrosti e piastra.</p>
-<p style="margin: 0; font-weight: bold; color: #444;">€17,00/kg</p>
-<label for="quantita-biancoarrosto">Seleziona quantità:</label><br/>
-<select id="quantita-biancoarrosto" onchange="aggiornaPesoGenerico('quantita-biancoarrosto', 'peso-biancoarrosto')" style="width: 100%; margin-top: 4px;">
-<option value="0.125">1/8 di forma</option>
-<option value="0.25">1/4 di forma</option>
-<option value="0.5">1/2 forma</option>
-<option value="1">1 forma intera</option>
+<div class="product">
+<img src="img/cuore_sulcis.png" style="width:100%;border-radius:8px;"/><h4>Cuore del Sulcis</h4><p>Pecorino semistagionato, dal cuore morbido e sapore equilibrato.</p>
+<select id="cuore-del-sulcis-qty">
+<option data-price="4.5" value="1/8">1/8 - €4.50</option>
+<option data-price="8.0" value="1/4">1/4 - €8.00</option>
+<option data-price="15.0" value="1/2">1/2 - €15.00</option>
+<option data-price="30.0" value="1">1 - €30.00</option>
 </select>
-<p id="peso-biancoarrosto" style="font-size: 0.85em; color: #666; margin-top: 6px;">
-      1/8 di forma = circa 500g
-    </p>
-
-<button onclick="addToCart('Biancoarrosto', 1/8 di forma = circa 500g, parseFloat(document.getElementById('quantita-biancoarrosto').value))" style="margin-top: 10px;">
-      Aggiungi al carrello
-    </button>
+<button onclick="aggiungiShop('Cuore del Sulcis', 'cuore-del-sulcis-qty')">Aggiungi al carrello</button>
 </div>
-</div>
-
-
-
-  
-<div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-<img alt="Provola di Orotelli" src="Provolebiancheorotelli.png" style="width: 100%; height: auto;"/>
-<div style="padding: 10px;">
-<h4 style="margin: 0 0 5px;">Provola di Orotelli</h4>
-<p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Provola  prodotta in Sardegna, gusto delicato e avvolgente.</p>
-<p style="margin: 0; font-weight: bold; color: #444;">€16,00/kg</p>
-<label for="quantita-provola-di-orotelli">Seleziona quantità:</label><br/>
-<select id="quantita-provola-di-orotelli" onchange="aggiornaPesoGenerico('quantita-provola-di-orotelli', 'peso-provola-di-orotelli')" style="width: 100%; margin-top: 4px;">
-<option value="0.125">1/8 di forma</option>
-<option value="0.25">1/4 di forma</option>
-<option value="0.5">1/2 forma</option>
-<option value="1">1 forma intera</option>
+<div class="product">
+<img src="img/cuor_di_latte.png" style="width:100%;border-radius:8px;"/><h4>Cuor di Latte</h4><p>Formaggio fresco e dolce, perfetto per spalmare o accompagnare miele.</p>
+<select id="cuor-di-latte-qty">
+<option data-price="5.2" value="1/8">1/8 - €5.20</option>
+<option data-price="9.8" value="1/4">1/4 - €9.80</option>
+<option data-price="18.9" value="1/2">1/2 - €18.90</option>
+<option data-price="36.0" value="1">1 - €36.00</option>
 </select>
-<p id="peso-provola-di-orotelli" style="font-size: 0.85em; color: #666; margin-top: 6px;">
-      1/8 di forma = circa 500g
-    </p>
-
-<button onclick="addToCart('Provola di Orotelli', 1/8 di forma = circa 500g, parseFloat(document.getElementById('quantita-provola-di-orotelli').value))" style="margin-top: 10px;">
-      Aggiungi al carrello
-    </button>
+<button onclick="aggiungiShop('Cuor di Latte', 'cuor-di-latte-qty')">Aggiungi al carrello</button>
 </div>
-</div>
-
-
-  
-<div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-<img alt="Gran Sirai" src="Gran Sirai.png" style="width: 100%; height: auto;"/>
-<div style="padding: 10px;">
-<h4 style="margin: 0 0 5px;">Gran Sirai</h4>
-<p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Formaggio pecorino stagionato a pasta friabile, sapore deciso.</p>
-<p style="margin: 0; font-weight: bold; color: #444;">€26,00/kg</p>
-<label for="quantita-gran-sirai">Seleziona quantità:</label><br/>
-<select id="quantita-gran-sirai" onchange="aggiornaPesoGenerico('quantita-gran-sirai', 'peso-gran-sirai')" style="width: 100%; margin-top: 4px;">
-<option value="0.125">1/8 di forma</option>
-<option value="0.25">1/4 di forma</option>
-<option value="0.5">1/2 forma</option>
-<option value="1">1 forma intera</option>
+<div class="product">
+<img src="img/vecchio_capraro.png" style="width:100%;border-radius:8px;"/><h4>Vecchio Capraro</h4><p>Caprino stagionato, forte e aromatico, 100% latte di capra.</p>
+<select id="vecchio-capraro-qty">
+<option data-price="5.3" value="1/8">1/8 - €5.30</option>
+<option data-price="10.5" value="1/4">1/4 - €10.50</option>
+<option data-price="20.0" value="1/2">1/2 - €20.00</option>
+<option data-price="39.0" value="1">1 - €39.00</option>
 </select>
-<p id="peso-gran-sirai" style="font-size: 0.85em; color: #666; margin-top: 6px;">
-      1/8 di forma = circa 500g
-    </p>
-
-<button onclick="addToCart('Gran Sirai', 1/8 di forma = circa 500g, parseFloat(document.getElementById('quantita-gran-sirai').value))" style="margin-top: 10px;">
-      Aggiungi al carrello
-    </button>
+<button onclick="aggiungiShop('Vecchio Capraro', 'vecchio-capraro-qty')">Aggiungi al carrello</button>
 </div>
-</div>
-
-
-
-  
-<div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-<img alt="Cuor di Latte" src="Cuor di latte.png" style="width: 100%; height: auto;"/>
-<div style="padding: 10px;">
-<h4 style="margin: 0 0 5px;">Cuor di Latte</h4>
-<p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Caprino semistagionato, delicato e profumato.</p>
-<p style="margin: 0; font-weight: bold; color: #444;">€19,00/kg</p>
-<label for="quantita-cuor-di-latte">Seleziona quantità:</label><br/>
-<select id="quantita-cuor-di-latte" onchange="aggiornaPesoGenerico('quantita-cuor-di-latte', 'peso-cuor-di-latte')" style="width: 100%; margin-top: 4px;">
-<option value="0.125">1/8 di forma</option>
-<option value="0.25">1/4 di forma</option>
-<option value="0.5">1/2 forma</option>
-<option value="1">1 forma intera</option>
+<div class="product">
+<img src="img/crablu.png" style="width:100%;border-radius:8px;"/><h4>Crablu</h4><p>Formaggio erborinato con venature blu, sapore deciso e complesso.</p>
+<select id="crablu-qty">
+<option data-price="6.4" value="1/8">1/8 - €6.40</option>
+<option data-price="11.8" value="1/4">1/4 - €11.80</option>
+<option data-price="22.9" value="1/2">1/2 - €22.90</option>
+<option data-price="44.0" value="1">1 - €44.00</option>
 </select>
-<p id="peso-cuor-di-latte" style="font-size: 0.85em; color: #666; margin-top: 6px;">
-      1/8 di forma = circa 500g
-    </p>
-
-<button onclick="addToCart('Cuor di Latte', 1/8 di forma = circa 500g, parseFloat(document.getElementById('quantita-cuor-di-latte').value))" style="margin-top: 10px;">
-      Aggiungi al carrello
-    </button>
+<button onclick="aggiungiShop('Crablu', 'crablu-qty')">Aggiungi al carrello</button>
 </div>
-</div>
-
-
-  
-<div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-<img alt="Sirai Gigante" src="Sirai gigante.png" style="width: 100%; height: auto;"/>
-<div style="padding: 10px;">
-<h4 style="margin: 0 0 5px;">Sirai Gigante</h4>
-<p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Pecorino stagionato di grandi dimensioni, sapore robusto.</p>
-<p style="margin: 0; font-weight: bold; color: #444;">€22,00/kg</p>
-<label for="quantita-sirai-gigante">Seleziona quantità:</label><br/>
-<select id="quantita-sirai-gigante" onchange="aggiornaPesoGenerico('quantita-sirai-gigante', 'peso-sirai-gigante')" style="width: 100%; margin-top: 4px;">
-<option value="0.125">1/8 di forma</option>
-<option value="0.25">1/4 di forma</option>
-<option value="0.5">1/2 forma</option>
-<option value="1">1 forma intera</option>
+<div class="product">
+<img src="img/sulcitano.png" style="width:100%;border-radius:8px;"/><h4>Sulcitano</h4><p>Pecorino fresco tipico del Sulcis, ideale da tavola.</p>
+<select id="sulcitano-qty">
+<option data-price="4.8" value="1/8">1/8 - €4.80</option>
+<option data-price="9.2" value="1/4">1/4 - €9.20</option>
+<option data-price="17.5" value="1/2">1/2 - €17.50</option>
+<option data-price="34.0" value="1">1 - €34.00</option>
 </select>
-<p id="peso-sirai-gigante" style="font-size: 0.85em; color: #666; margin-top: 6px;">
-      1/8 di forma = circa 500g
-    </p>
-
-<button onclick="addToCart('Sirai Gigante', 1/8 di forma = circa 500g, parseFloat(document.getElementById('quantita-sirai-gigante').value))" style="margin-top: 10px;">
-      Aggiungi al carrello
-    </button>
+<button onclick="aggiungiShop('Sulcitano', 'sulcitano-qty')">Aggiungi al carrello</button>
 </div>
-</div>
-
-
-  
-<div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-<img alt="Vecchio Capraro" src="Vecchio Capraro.png" style="width: 100%; height: auto;"/>
-<div style="padding: 10px;">
-<h4 style="margin: 0 0 5px;">Vecchio Capraro</h4>
-<p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Formaggio di capra a lunga stagionatura, gusto complesso e aromatico.</p>
-<p style="margin: 0; font-weight: bold; color: #444;">€21,00/kg</p>
-<label for="quantita-vecchio-capraro">Seleziona quantità:</label><br/>
-<select id="quantita-vecchio-capraro" onchange="aggiornaPesoGenerico('quantita-vecchio-capraro', 'peso-vecchio-capraro')" style="width: 100%; margin-top: 4px;">
-<option value="0.125">1/8 di forma</option>
-<option value="0.25">1/4 di forma</option>
-<option value="0.5">1/2 forma</option>
-<option value="1">1 forma intera</option>
+<div class="product">
+<img src="img/provola_orotelli.png" style="width:100%;border-radius:8px;"/><h4>Provola di Orotelli</h4><p>Formaggio affumicato, dalla crosta dorata e pasta filante.</p>
+<select id="provola-di-orotelli-qty">
+<option data-price="5.6" value="1/8">1/8 - €5.60</option>
+<option data-price="10.6" value="1/4">1/4 - €10.60</option>
+<option data-price="20.5" value="1/2">1/2 - €20.50</option>
+<option data-price="40.0" value="1">1 - €40.00</option>
 </select>
-<p id="peso-vecchio-capraro" style="font-size: 0.85em; color: #666; margin-top: 6px;">
-      1/8 di forma = circa 500g
-    </p>
-
-<button onclick="addToCart('Vecchio Capraro', 1/8 di forma = circa 500g, parseFloat(document.getElementById('quantita-vecchio-capraro').value))" style="margin-top: 10px;">
-      Aggiungi al carrello
-    </button>
+<button onclick="aggiungiShop('Provola di Orotelli', 'provola-di-orotelli-qty')">Aggiungi al carrello</button>
 </div>
-</div>
-
-
-
-  
-<div class="card" style="width: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-<img alt="Cuore del Sulcis" src="Cuore.png" style="width: 100%; height: auto;"/>
-<div style="padding: 10px;">
-<h4 style="margin: 0 0 5px;">Cuore del Sulcis</h4>
-<p style="margin: 0 0 5px; font-size: 0.9em; color: #333;">Pecorino da tavola, sapore leggero e profumato, ideale anche grattugiato.</p>
-<p style="margin: 0; font-weight: bold; color: #444;">€18,00/kg</p>
-<label for="quantita-cuore-del-sulcis">Seleziona quantità:</label><br/>
-<select id="quantita-cuore-del-sulcis" onchange="aggiornaPesoGenerico('quantita-cuore-del-sulcis', 'peso-cuore-del-sulcis')" style="width: 100%; margin-top: 4px;">
-<option value="0.125">1/8 di forma</option>
-<option value="0.25">1/4 di forma</option>
-<option value="0.5">1/2 forma</option>
-<option value="1">1 forma intera</option>
+<div class="product">
+<img src="img/gran_sirai.png" style="width:100%;border-radius:8px;"/><h4>Gran Sirai</h4><p>Formaggio a pasta dura e lunga stagionatura, per grattugia o tavola.</p>
+<select id="gran-sirai-qty">
+<option data-price="6.0" value="1/8">1/8 - €6.00</option>
+<option data-price="11.5" value="1/4">1/4 - €11.50</option>
+<option data-price="22.0" value="1/2">1/2 - €22.00</option>
+<option data-price="42.0" value="1">1 - €42.00</option>
 </select>
-<p id="peso-cuore-del-sulcis" style="font-size: 0.85em; color: #666; margin-top: 6px;">
-      1/8 di forma = circa 500g
-    </p>
-
-  
-<button onclick="addToCart('Cuore del Sulcis', 1/8 di forma = circa 500g, parseFloat(document.getElementById('quantita-cuore-del-sulcis').value))" style="margin-top: 10px;">
-      Aggiungi al carrello
-    </button>
+<button onclick="aggiungiShop('Gran Sirai', 'gran-sirai-qty')">Aggiungi al carrello</button>
+</div>
+<div class="product">
+<img src="img/biancoarrosto.png" style="width:100%;border-radius:8px;"/><h4>Biancoarrosto del Sulcis</h4><p>Formaggio bianco da griglia, dal sapore pieno e leggero.</p>
+<select id="biancoarrosto-del-sulcis-qty">
+<option data-price="5.1" value="1/8">1/8 - €5.10</option>
+<option data-price="9.9" value="1/4">1/4 - €9.90</option>
+<option data-price="19.0" value="1/2">1/2 - €19.00</option>
+<option data-price="37.0" value="1">1 - €37.00</option>
+</select>
+<button onclick="aggiungiShop('Biancoarrosto del Sulcis', 'biancoarrosto-del-sulcis-qty')">Aggiungi al carrello</button>
 </div>
 </div>
-
-
-  
-</div>
-
 </section>
-
-
-    <section id="contatti" class="section">
-      <h2>Contatti</h2>
-      <p>Per informazioni, ordini o richieste particolari, contattaci via email  <strong> info@zaraformaggi.com  </strong>     </p>
-    </section>
-  
 </main>
 <footer>
 <p>© 2025 ZARA FORMAGGI di Zara Maurizio - Tutti i diritti riservati</p>
 </footer>
 <!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
-    const cart = [];
-
-    function toggleCart() {
-      const cartSection = document.getElementById("cart-section");
-      cartSection.style.display = cartSection.style.display === "block" ? "none" : "block";
-      renderCart();
-    }
-
-    function addToCart(name, price, quantity) {
-      const existing = cart.find(item => item.name === name);
-      if (existing) {
-        existing.quantity += quantity;
-      } else {
-        cart.push({ name, price, quantity });
-      }
-      renderCart();
-    }
-
-    function renderCart() {
-      const container = document.getElementById("cart-items");
-      container.innerHTML = "";
-      cart.forEach((item, i) => {
-        const div = document.createElement("div");
-        div.className = "cart-item";
-        div.innerHTML = `
-          ${item.name} (${item.quantity}) €${(item.price * item.quantity).toFixed(2)}
-          <div>
-            <button onclick="changeQty(${i}, 1)">+</button>
-            <button onclick="changeQty(${i}, -1)">-</button>
-            <button onclick="removeItem(${i})">x</button>
-          </div>`;
-        container.appendChild(div);
-      });
-    }
-
-    function changeQty(index, delta) {
-      cart[index].quantity += delta;
-      if (cart[index].quantity <= 0) cart.splice(index, 1);
-      renderCart();
-    }
-
-    function removeItem(index) {
-      cart.splice(index, 1);
-      renderCart();
-    }
-
-    function submitOrder() {
-      alert("Ordine inviato! (funzione dimostrativa)");
-    }
-
-    function downloadPDF() {
-      let content = "Ordine Zara Formaggi\n\n";
-      cart.forEach(item => {
-        content += `${item.name} - Quantità: ${item.quantity}, Prezzo totale: €${(item.price * item.quantity).toFixed(2)}\n`;
-      });
-      const blob = new Blob([content], { type: "application/pdf" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = "ordine_zara_formaggi.pdf";
-      link.click();
-    }
-
-
-    function simulatePayment() {
-      alert("Pagamento effettuato con successo (simulato).");
-      submitOrder();
-    }
-
-    function submitOrder() {
-      const name = document.getElementById("first-name").value;
-      const surname = document.getElementById("last-name").value;
-      const phone = document.getElementById("phone").value;
-      const email = document.getElementById("email").value;
-      const address = document.getElementById("address").value;
-      const pickup = document.getElementById("pickup").checked;
-
-      let content = `Ordine da: ${name} ${surname}\nEmail: ${email}\nTelefono: ${phone}\n`;
-      content += pickup ? "Ritiro in negozio\n" : `Consegna a: ${address}\n`;
-      content += "\nProdotti:\n";
-
-      cart.forEach(item => {
-        content += `- ${item.name} x${item.quantity} (€${(item.price * item.quantity).toFixed(2)})\n`;
-      });
-
-      alert("Email inviata (simulazione):\n\n" + content);
-      // Qui si integrerebbe invio email reale via backend
-    }
-
-</script>
-<script>
-    let mapInitialized = false;
-    let map;
-
-    function showSection(id) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.getElementById(id)?.classList.add('active');
-
-      if (id === 'dove') {
-        if (!mapInitialized) {
-          const coords = [39.3117602, 8.5351056];
-          map = L.map('map').setView(coords, 18);
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-          }).addTo(map);
-          L.marker(coords).addTo(map).bindPopup('Via Gramsci, Mercato Civico - Iglesias, Sardegna').openPopup();
-          mapInitialized = true;
-        } else {
-          setTimeout(() => map.invalidateSize(), 200);
-        }
-      }
-    }
-  
-    const cart = [];
-
-    function toggleCart() {
-      const cartSection = document.getElementById("cart-section");
-      cartSection.style.display = cartSection.style.display === "block" ? "none" : "block";
-      renderCart();
-    }
-
-    function addToCart(name, price, quantity) {
-      const existing = cart.find(item => item.name === name);
-      if (existing) {
-        existing.quantity += quantity;
-      } else {
-        cart.push({ name, price, quantity });
-      }
-      renderCart();
-    }
-
-    function renderCart() {
-      const container = document.getElementById("cart-items");
-      container.innerHTML = "";
-      cart.forEach((item, i) => {
-        const div = document.createElement("div");
-        div.className = "cart-item";
-        div.innerHTML = `
-          ${item.name} (${item.quantity}) €${(item.price * item.quantity).toFixed(2)}
-          <div>
-            <button onclick="changeQty(${i}, 1)">+</button>
-            <button onclick="changeQty(${i}, -1)">-</button>
-            <button onclick="removeItem(${i})">x</button>
-          </div>`;
-        container.appendChild(div);
-      });
-    }
-
-    function changeQty(index, delta) {
-      cart[index].quantity += delta;
-      if (cart[index].quantity <= 0) cart.splice(index, 1);
-      renderCart();
-    }
-
-    function removeItem(index) {
-      cart.splice(index, 1);
-      renderCart();
-    }
-
-    function submitOrder() {
-      alert("Ordine inviato! (funzione dimostrativa)");
-    }
-
-    function downloadPDF() {
-      let content = "Ordine Zara Formaggi\n\n";
-      cart.forEach(item => {
-        content += `${item.name} - Quantità: ${item.quantity}, Prezzo totale: €${(item.price * item.quantity).toFixed(2)}\n`;
-      });
-      const blob = new Blob([content], { type: "application/pdf" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = "ordine_zara_formaggi.pdf";
-      link.click();
-    }
-
-
-    function simulatePayment() {
-      alert("Pagamento effettuato con successo (simulato).");
-      submitOrder();
-    }
-
-    function submitOrder() {
-      const name = document.getElementById("first-name").value;
-      const surname = document.getElementById("last-name").value;
-      const phone = document.getElementById("phone").value;
-      const email = document.getElementById("email").value;
-      const address = document.getElementById("address").value;
-      const pickup = document.getElementById("pickup").checked;
-
-      let content = `Ordine da: ${name} ${surname}\nEmail: ${email}\nTelefono: ${phone}\n`;
-      content += pickup ? "Ritiro in negozio\n" : `Consegna a: ${address}\n`;
-      content += "\nProdotti:\n";
-
-      cart.forEach(item => {
-        content += `- ${item.name} x${item.quantity} (€${(item.price * item.quantity).toFixed(2)})\n`;
-      });
-
-      alert("Email inviata (simulazione):\n\n" + content);
-      // Qui si integrerebbe invio email reale via backend
-    }
-
-</script>
 <script src="https://www.paypal.com/sdk/js?client-id=sb¤cy=EUR"></script>
 <script>
       function prepareOrder() {
@@ -866,66 +559,6 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 </style>
 <script>
-function renderCart() {
-  const cartSection = document.getElementById("cart-items");
-  cartSection.innerHTML = "";
-  let total = 0;
-
-  cart.forEach((item, index) => {
-    const itemDiv = document.createElement("div");
-    itemDiv.innerHTML = `
-      <strong>${item.name}</strong> - Quantità: ${item.quantity} - Prezzo: €${(item.price * item.quantity).toFixed(2)}
-      <button onclick="changeQuantity(${index}, 1)">+</button>
-      <button onclick="changeQuantity(${index}, -1)">-</button>
-      <button onclick="removeFromCart(${index})">x</button>
-    `;
-    cartSection.appendChild(itemDiv);
-    total += item.price * item.quantity;
-  });
-
-  // Extra costi
-  if (document.getElementById("confezione-regalo")?.checked) {
-    total += 5;
-  }
-  if (document.getElementById("sottovuoto")?.checked) {
-    total += 0.5;
-  }
-
-  document.getElementById("cart-total").innerText = "Totale: €" + total.toFixed(2);
-}
-
-function addToCart(name, price, quantity) {
-  const existing = cart.findIndex(i => i.name === name);
-  if (existing >= 0) {
-    cart[existing].quantity += quantity;
-  } else {
-    cart.push({ name, price, quantity });
-  }
-  renderCart();
-}
-
-function removeFromCart(index) {
-  cart.splice(index, 1);
-  renderCart();
-}
-
-function changeQuantity(index, delta) {
-  cart[index].quantity += delta;
-  if (cart[index].quantity <= 0) {
-    removeFromCart(index);
-  } else {
-    renderCart();
-  }
-}
-
-let cart = [];
-
-function aggiornaTotale() {
-  renderCart(); // Riusa renderCart per aggiornare i costi
-}
-</script>
-
-<script>
 function inviaOrdine() {
   let total = 0;
   cart.forEach(item => total += item.price * item.quantity);
@@ -944,13 +577,11 @@ function inviaOrdine() {
   return false;
 }
 </script>
-
 <section id="riepilogo-ordine" style="display:none; margin-top: 40px;">
 <h2>🧾 Riepilogo Ordine</h2>
 <div id="riepilogo-dettagli" style="margin-bottom: 20px;"></div>
 <button onclick="finalizzaOrdine()">Conferma e Invia Ordine</button>
 </section>
-
 <script>
 function mostraRiepilogoOrdine() {
   const div = document.getElementById("riepilogo-dettagli");
@@ -979,5 +610,147 @@ function finalizzaOrdine() {
   location.reload();  // simula invio e reset
 }
 </script>
+<section id="carrello" style="margin-top: 40px;">
+<h2>🛒 Il tuo carrello</h2>
+<div id="cart-container"></div>
+<div style="margin-top: 20px;">
+<strong id="cart-total">Totale: €0.00</strong>
+<button onclick="proseguiOrdine()" style="margin-left: 20px;">Procedi all'acquisto</button>
+</div>
+</section>
+<section id="form-ordine" style="display:none; margin-top:40px;">
+<h2>📦 Dati per la spedizione</h2>
+<form onsubmit="submitOrdine(event)">
+<label>Nome: <input id="nome" required="" type="text"/></label><br/>
+<label>Cognome: <input id="cognome" required="" type="text"/></label><br/>
+<label>Email: <input id="email" required="" type="email"/></label><br/>
+<label>Telefono: <input id="telefono" required="" type="tel"/></label><br/>
+<label>Indirizzo: <input id="indirizzo" required="" type="text"/></label><br/>
+<label>CAP: <input id="cap" required="" type="text"/></label><br/>
+<label>Città: <input id="citta" required="" type="text"/></label><br/>
+<label>Paese: <input id="paese" required="" type="text"/></label><br/><br/>
+<button type="submit">Conferma Ordine</button>
+</form>
+<div id="invia-ordine-opzioni" style="margin-top: 20px; text-align: center;">
+<button onclick="inviaOrdineEmail()" style="padding: 10px 20px; background: #007BFF; color: white; border: none; border-radius: 6px; margin-right: 10px; cursor: pointer;">
+        📧 Invia ordine via Email
+      </button>
+<button onclick="inviaOrdineWhatsApp()" style="padding: 10px 20px; background: #25D366; color: white; border: none; border-radius: 6px; cursor: pointer;">
+        💬 Invia ordine via WhatsApp
+      </button>
+</div>
+</section>
+<script>
+let cart = [];
+
+function addToCart(name, qtyLabel, price) {
+  cart.push({ name, qtyLabel, price });
+  updateCart();
+}
+
+function updateCart() {
+  const cartContainer = document.getElementById("cart-container");
+  const cartTotal = document.getElementById("cart-total");
+  let total = 0;
+  cartContainer.innerHTML = "";
+
+  cart.forEach((item, i) => {
+    const div = document.createElement("div");
+    div.style = "padding: 10px; border-bottom: 1px solid #ccc;";
+    div.innerHTML = `
+      <strong>${item.name}</strong> – Quantità: ${item.qtyLabel}<br>
+      Prezzo: €${item.price.toFixed(2)}
+      <button onclick="removeItem(${i})" style="margin-left: 10px;">Rimuovi</button>
+    `;
+    cartContainer.appendChild(div);
+    total += item.price;
+  });
+
+  cartTotal.innerText = "Totale: €" + total.toFixed(2);
+  document.getElementById("cart-button").innerText = `🛒 Carrello (${cart.length}) – Totale: €${total.toFixed(2)}`;
+}
+
+function removeItem(index) {
+  cart.splice(index, 1);
+  updateCart();
+}
+
+function proseguiOrdine() {
+  document.getElementById("form-ordine").style.display = "block";
+  document.getElementById("form-ordine").scrollIntoView({ behavior: 'smooth' });
+}
+
+function submitOrdine(event) {
+  event.preventDefault();
+  alert("Ordine inviato! Grazie per l'acquisto.");
+  cart = [];
+  updateCart();
+  document.getElementById("form-ordine").style.display = "none";
+}
+</script>
+<script>
+function aggiungiShop(nome, selectId) {
+  const sel = document.getElementById(selectId);
+  const formato = sel.value;
+  const prezzo = parseFloat(sel.options[sel.selectedIndex].dataset.price);
+  addToCart(nome, formato, prezzo);
+}
+</script>
+<script>
+function inviaOrdineEmail() {
+  const messaggio = generaMessaggioOrdine();
+  const mailtoLink = `mailto:titolare@email.it?subject=Nuovo Ordine Zara&body=${encodeURIComponent(messaggio)}`;
+  window.location.href = mailtoLink;
+}
+
+function inviaOrdineWhatsApp() {
+  const messaggio = generaMessaggioOrdine();
+  const numero = "393123456789"; // Inserisci il tuo numero in formato internazionale
+  const link = `https://wa.me/${numero}?text=${encodeURIComponent(messaggio)}`;
+  window.open(link, '_blank');
+}
+
+function generaMessaggioOrdine() {
+  let messaggio = "🧀 *Nuovo ordine Zara Formaggi*\n\n";
+  cart.forEach((item, i) => {
+    messaggio += `• ${item.name} - ${item.qtyLabel} - €${item.price.toFixed(2)}\n`;
+  });
+
+  const totale = cart.reduce((sum, item) => sum + item.price, 0);
+  messaggio += `\n💶 Totale: €${totale.toFixed(2)}\n\n`;
+
+  messaggio += "📦 Dati cliente:\n";
+  messaggio += `Nome: ${document.getElementById("nome").value}\n`;
+  messaggio += `Cognome: ${document.getElementById("cognome").value}\n`;
+  messaggio += `Email: ${document.getElementById("email").value}\n`;
+  messaggio += `Telefono: ${document.getElementById("telefono").value}\n`;
+  messaggio += `Indirizzo: ${document.getElementById("indirizzo").value}, ${document.getElementById("cap").value}, ${document.getElementById("citta").value}, ${document.getElementById("paese").value}`;
+  return messaggio;
+}
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  function mostraSezione(id) {
+    document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+    document.querySelectorAll("nav a").forEach(a => a.classList.remove("active-link"));
+    const sezione = document.querySelector(id);
+    const link = document.querySelector('nav a[href="' + id + '"]');
+    if (sezione) sezione.classList.add("active");
+    if (link) link.classList.add("active-link");
+  }
+
+  mostraSezione(location.hash || "#home");
+
+  document.querySelectorAll("nav a").forEach(link => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      const id = this.getAttribute("href");
+      mostraSezione(id);
+      history.pushState(null, "", id);
+    });
+  });
+});
+</script>
 </body>
 </html>
+
