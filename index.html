@@ -3,6 +3,13 @@
 <html lang="it">
 <head>
 <style>
+.indicatore-tacche .tacca {
+  transition: background-color 0.3s ease;
+}
+.indicatore-tacche[data-disp*='low'] .tacca.attiva {
+  background-color: red;
+}
+
 .card-overlay {
   position: relative;
   width: 200px;
@@ -55,6 +62,13 @@
 <title>ZARA FORMAGGI di Zara Maurizio</title>
 <!-- Leaflet CSS -->
 <style>
+.indicatore-tacche .tacca {
+  transition: background-color 0.3s ease;
+}
+.indicatore-tacche[data-disp*='low'] .tacca.attiva {
+  background-color: red;
+}
+
     :root {
       --verde-scuro: #2f4f2f;
       --verde-chiaro: #8fbc8f;
@@ -242,10 +256,24 @@
 
 </style>
 <style>
+.indicatore-tacche .tacca {
+  transition: background-color 0.3s ease;
+}
+.indicatore-tacche[data-disp*='low'] .tacca.attiva {
+  background-color: red;
+}
+
 .section { display: none; }
 .section.active { display: block; }
 </style>
 <style>
+.indicatore-tacche .tacca {
+  transition: background-color 0.3s ease;
+}
+.indicatore-tacche[data-disp*='low'] .tacca.attiva {
+  background-color: red;
+}
+
 nav {
   background: #333;
   padding: 12px;
@@ -280,6 +308,13 @@ nav a.active-link {
 }
 </style>
 <style>
+.indicatore-tacche .tacca {
+  transition: background-color 0.3s ease;
+}
+.indicatore-tacche[data-disp*='low'] .tacca.attiva {
+  background-color: red;
+}
+
 @media (max-width: 768px) {
   #cart-sidebar { width: 350px !important; }
   #cart-sidebar.open {
@@ -287,7 +322,29 @@ nav a.active-link {
   }
 }
 </style>
-</head>
+<style>
+.indicatore-tacche .tacca {
+  transition: background-color 0.3s ease;
+}
+.indicatore-tacche[data-disp*='low'] .tacca.attiva {
+  background-color: red;
+}
+
+.indicatore-tacche {
+  display: flex;
+  gap: 2px;
+  margin-top: 4px;
+}
+.indicatore-tacche .tacca {
+  width: 6px;
+  height: 16px;
+  border-radius: 2px;
+  background-color: gray;
+}
+.indicatore-tacche .tacca.attiva {
+  background-color: green;
+}
+</style></head>
 <body>
 <!-- Bottone carrello fisso -->
 <div id="floating-cart" onclick="toggleCartSidebar()" style="position:fixed;top:20px;right:20px;background:#c9a602;color:#fff;padding:15px 20px;border-radius:50px;font-size:16px;font-weight:bold;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:9999;cursor:pointer;" title="Clicca per vedere il carrello">
@@ -575,6 +632,13 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 <style>
+.indicatore-tacche .tacca {
+  transition: background-color 0.3s ease;
+}
+.indicatore-tacche[data-disp*='low'] .tacca.attiva {
+  background-color: red;
+}
+
 .menu-prodotti a.active {
   font-weight: bold;
   text-decoration: underline;
@@ -652,7 +716,7 @@ function finalizzaOrdine() {
 <div id="cart-container"></div>
 <div id="peso-totale" style="margin-top: 10px; font-weight: bold;"></div>
 <div style="margin-top: 20px;">
-<strong id="cart-total">Totale: €0.00</strong>
+
 <button onclick="proseguiOrdine()" style="margin-left: 20px;">Procedi all'acquisto</button>
 </div>
 <h3 style="text-align:right;">Totale: <span id="carrello-totale">€0.00</span></h3></section>
@@ -861,7 +925,7 @@ function inviaOrdineWhatsApp() {
   const pesoTot = cart.reduce((sum, i) => sum + i.pesoUnitario * i.quantity, 0).toFixed(2);
   msg += `%0A📦 Totale: €${totale} - Peso: ${pesoTot} kg`;
 
-  const url = "https://wa.me/393333333333?text=" + encodeURIComponent(msg);
+  const url = "https://wa.me/393488802099?text=" + encodeURIComponent(msg);
   window.open(url, "_blank");
 (link, '_blank');
 }
@@ -971,9 +1035,6 @@ function toggleRitiroNegozio() {
 <div id="cart-sidebar-container"></div>
 <div id="peso-sidebar" style="margin-top:10px;font-weight:bold;"></div>
 <div id="cart-sidebar-total" style="font-weight: bold; margin-top: 10px;">Totale: €0.00</div>
-
-
-
 </div>
 <script>
   function toggleCartSidebar() {
@@ -981,7 +1042,6 @@ function toggleRitiroNegozio() {
     sidebar.style.right = sidebar.style.right === "0px" ? "-400px" : "0px";
   }
 </script>
-
 <script>
 const disponibilitaProdotti = {
   "Nuraghe": {"1/8":10,"1/4":10,"1/2":10,"1":10},
@@ -1046,8 +1106,64 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".product").forEach(prod => {
+    const nome = prod.querySelector(".peso-forma")?.dataset.product;
+    const pesoForma = parseFloat(prod.querySelector(".peso-forma")?.value || 5);
+    const contenitore = prod.querySelector(".scelte-formati");
+    if (!nome || !contenitore) return;
 
-</body>
+    const frazioni = Object.keys(disponibilitaProdotti[nome] || {});
+    contenitore.innerHTML = "";
+
+    frazioni.forEach(frazione => {
+      const disponibilita = disponibilitaProdotti[nome][frazione];
+      const frazMap = { "1/32":1/32, "1/16":1/16, "1/8":1/8, "1/4":1/4, "1/2":1/2, "1":1 };
+      const peso = (pesoForma * (frazMap[frazione] || 0)).toFixed(2);
+      const prezzo = prezziProdotti[nome]?.[frazione] ?? "-";
+
+      const wrapper = document.createElement("div");
+      wrapper.style.marginBottom = "10px";
+
+      const btn = document.createElement("button");
+      btn.textContent = `${frazione} – €${prezzo} – ${peso} kg – Qta disponibile: ${disponibilita}`;
+      btn.disabled = disponibilita <= 0;
+      btn.style = "margin:4px;padding:6px 10px;font-size:14px;border-radius:6px;cursor:pointer;";
+      wrapper.appendChild(btn);
+
+      const taccheContainer = document.createElement("div");
+      taccheContainer.className = "indicatore-tacche";
+      taccheContainer.dataset.disp = disponibilita <= 3 ? 'low' : 'ok';
+      const percentuale = Math.round((disponibilita / 10) * 100);
+      const percentSpan = document.createElement("span");
+      percentSpan.textContent = ` ${percentuale}%`;
+      percentSpan.style = "margin-left: 6px; font-weight: bold;";
+      taccheContainer.appendChild(percentSpan);
+      for (let i = 0; i < 10; i++) {
+        const tacca = document.createElement("div");
+        tacca.className = "tacca" + (i < disponibilita ? " attiva" : "");
+        taccheContainer.appendChild(tacca);
+      }
+      wrapper.appendChild(taccheContainer);
+      contenitore.appendChild(wrapper);
+
+      btn.onclick = () => {
+        addToCart(nome, frazione, prezzo, parseFloat(peso));
+        disponibilitaProdotti[nome][frazione]--;
+        btn.disabled = disponibilitaProdotti[nome][frazione] <= 0;
+        btn.textContent = `${frazione} – €${prezzo} – ${peso} kg – Qta disponibile: ${disponibilitaProdotti[nome][frazione]}`;
+        const tacche = taccheContainer.querySelectorAll(".tacca");
+        tacche.forEach((t, i) => {
+          t.classList.toggle("attiva", i < disponibilitaProdotti[nome][frazione]);
+        });
+        taccheContainer.dataset.disp = disponibilitaProdotti[nome][frazione] <= 3 ? 'low' : 'ok';
+        taccheContainer.querySelector("span").textContent = ` ${Math.round((disponibilitaProdotti[nome][frazione] / 10) * 100)}%`;
+      };
+    });
+  });
+});
+</script></body>
 </html>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
