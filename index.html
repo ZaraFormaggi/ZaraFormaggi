@@ -277,11 +277,9 @@ nav a.active-link {
 <a href="#dove">📍 Dove ci trovi</a>
 <a href="#servizi">🛠️ Servizi</a>
 <a href="#galleria">🖼️ Galleria</a>
-<a href="#shop">🧀🥓 Shop</a>
+<a href="#shop">🧀 Shop</a>
 <a href="#contatti">📞 Contatti</a>
 </nav>
-
-
 <button id="cart-button" onclick="toggleCart()">🛒 Carrello</button>
 <div id="cart-section">
 <h3>Il tuo carrello</h3>
@@ -320,10 +318,10 @@ nav a.active-link {
 <div class="search-bar">
 <input placeholder="Cerca nel sito..." type="text"/>
 </div>
-<main><section class="section" id="contatti">
+<main><section class="section" id="contatti" style="display: none;">
 <h2>Contatti</h2>
 <p>Per informazioni, ordini o richieste particolari, contattaci via email  <strong> info@zaraformaggi.com  </strong> </p>
-</section><section class="section" id="servizi">
+</section><section class="section" id="servizi" style="display: none;">
 <h2>I nostri servizi</h2>
 <ul>
 <li>Vendita al dettaglio di prodotti tipici sardi</li>
@@ -332,14 +330,14 @@ nav a.active-link {
 <li>Possibilità di mettere sottovuoto i prodotti </li>
 <li>Regala un  Voucher "ZaraFormaggi " </li>
 </ul>
-</section><section class="section" id="chi-siamo">
+</section><section class="section" id="chi-siamo" style="display: none;">
 <h2>Chi siamo</h2>
 <p>ZARA FORMAGGI nasce dalla passione per i sapori autentici della Sardegna. Fondata da Maurizio Zara, l’attività si dedica alla selezione e vendita di prodotti tipici come formaggi, salumi, dolci e molto altro. Tradizione e qualità sono il nostro marchio.</p>
-</section><section class="section active" id="home">
+</section><section class="section active" id="home" style="display: block;">
 <h2>Benvenuti!</h2>
 <p>Visita il sito per scoprire i nostri prodotti. Offriamo una selezione di eccellenze enogastronomiche sarde, con attenzione alla qualità, alla tradizione e al gusto autentico.</p>
 </section>
-<section class="section" id="dove">
+<section class="section" id="dove" style="display: none;">
 <h2>Dove ci trovi</h2>
 <p>Ci trovi in <strong>Via Gramsci, Iglesias (CI), Sardegna</strong>, presso il Mercato Civico Box N° 27.</p>
 <h3>Orari di apertura</h3>
@@ -354,13 +352,13 @@ nav a.active-link {
 </ul>
 <div id="map"></div>
 </section>
-<section class="section" id="galleria">
+<section class="section" id="galleria" style="display: none;">
 <h2>Galleria</h2>
 <div class="gallery-placeholder">
 <p>Qui sarà inserita la galleria di foto e video dei nostri prodotti e del punto vendita.</p>
 </div>
 </section>
-<section class="section" id="shop">
+<section class="section" id="shop" style="display: none;">
 <h2>🧀 Shop</h2>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
 <div class="product">
@@ -610,14 +608,14 @@ function finalizzaOrdine() {
   location.reload();  // simula invio e reset
 }
 </script>
-<section id="carrello" style="margin-top: 40px;">
+<section class="section" id="carrello" style="display: none;">
 <h2>🛒 Il tuo carrello</h2>
 <div id="cart-container"></div>
 <div style="margin-top: 20px;">
 <strong id="cart-total">Totale: €0.00</strong>
 <button onclick="proseguiOrdine()" style="margin-left: 20px;">Procedi all'acquisto</button>
 </div>
-</section>
+<h3 style="text-align:right;">Totale: <span id="carrello-totale">€0.00</span></h3></section>
 <section id="form-ordine" style="display:none; margin-top:40px;">
 <h2>📦 Dati per la spedizione</h2>
 <form onsubmit="submitOrdine(event)">
@@ -705,7 +703,7 @@ function inviaOrdineEmail() {
 
 function inviaOrdineWhatsApp() {
   const messaggio = generaMessaggioOrdine();
-  const numero = "393488802099"; // Inserisci il tuo numero in formato internazionale
+  const numero = "393123456789"; // Inserisci il tuo numero in formato internazionale
   const link = `https://wa.me/${numero}?text=${encodeURIComponent(messaggio)}`;
   window.open(link, '_blank');
 }
@@ -728,29 +726,34 @@ function generaMessaggioOrdine() {
   return messaggio;
 }
 </script>
+
+
+
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  function mostraSezione(id) {
-    document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
-    document.querySelectorAll("nav a").forEach(a => a.classList.remove("active-link"));
-    const sezione = document.querySelector(id);
-    const link = document.querySelector('nav a[href="' + id + '"]');
-    if (sezione) sezione.classList.add("active");
-    if (link) link.classList.add("active-link");
+function mostraSezione(id) {
+  document.querySelectorAll(".section").forEach(sec => {
+    sec.classList.remove("active");
+    sec.style.display = "none";
+  });
+  const sezioneAttiva = document.getElementById(id);
+  if (sezioneAttiva) {
+    sezioneAttiva.classList.add("active");
+    sezioneAttiva.style.display = "block";
+    if (id === 'carrello') aggiornaCarrello?.();
   }
-
-  mostraSezione(location.hash || "#home");
-
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const hash = window.location.hash.replace("#", "") || "home";
+  mostraSezione(hash);
   document.querySelectorAll("nav a").forEach(link => {
-    link.addEventListener("click", function (e) {
+    link.addEventListener("click", e => {
       e.preventDefault();
-      const id = this.getAttribute("href");
+      const id = link.getAttribute("href").replace("#", "");
+      history.pushState(null, "", `#${id}`);
       mostraSezione(id);
-      history.pushState(null, "", id);
     });
   });
 });
 </script>
 </body>
 </html>
-
