@@ -282,6 +282,15 @@ nav a.active-link {
 </style>
 </head>
 <body>
+
+<!-- Bottone carrello fisso -->
+<div id="floating-cart"
+     onclick="toggleCartSidebar()"
+     style="position:fixed;top:20px;right:20px;background:#c9a602;color:#fff;padding:15px 20px;border-radius:50px;font-size:16px;font-weight:bold;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:9999;cursor:pointer;"
+     title="Clicca per vedere il carrello">
+  🛒 Carrello: <span id="floating-total">€0.00</span>
+</div>
+
 <header style="background-color: #2f4f2f; color: white; padding: 1rem 0; text-align: center;">
 <div class="header-logo">
 <img alt="ZARA FORMAGGI Logo" src="logo.png" style="width: 100px; height: auto; margin-bottom: 0.5rem;"/>
@@ -304,7 +313,7 @@ nav a.active-link {
   🛒 Carrello (<span id="menu-cart-count">0</span>) – €<span id="menu-cart-total">0.00</span>
 </a>
 </nav>
-<button id="cart-button" onclick="toggleCart()">🛒 Carrello</button>
+
 <div id="cart-section">
 <h3>Il tuo carrello</h3>
 <div id="cart-items"></div><button onclick="document.getElementById('ordine-form').scrollIntoView();" style="margin-top: 20px;">📦 Procedi all'ordine</button>
@@ -339,7 +348,9 @@ nav a.active-link {
 <div id="cart-total" style="margin-top:10px; font-weight:bold;"></div></div>
 <nav>
 </nav>
-
+<div class="search-bar">
+<input placeholder="Cerca nel sito..." type="text"/>
+</div>
 <main><section class="section" id="contatti" style="display: none;">
 <h2>Contatti</h2>
 <p>Per informazioni, ordini o richieste particolari, contattaci via email  <strong> info@zaraformaggi.com  </strong> </p>
@@ -399,7 +410,7 @@ nav a.active-link {
     <p>Cuor Di Latte</p>
   </div>
   <div class="card">
-    <img src="cuore.png" alt="cuore_sulcis.png" />
+    <img src="cuore_sulcis.png" alt="cuore_sulcis.png" />
     <p>Cuore Sulcis</p>
   </div>
   <div class="card">
@@ -454,7 +465,7 @@ nav a.active-link {
 <button onclick="aggiungiShop('Sirai Gigante', 'sirai-gigante-qty')">Aggiungi al carrello</button>
 </div>
 <div class="product">
-<img src="cuore.png" style="width:100%;border-radius:8px;"/><h4>Cuore del Sulcis</h4>
+<img src="cuore_sulcis.png" style="width:100%;border-radius:8px;"/><h4>Cuore del Sulcis</h4>
 <input type="hidden" class="peso-forma" value="5" data-product="Cuore del Sulcis"><p>Pecorino semistagionato, dal cuore morbido e sapore equilibrato.</p>
 <select id="cuore-del-sulcis-qty">
 <option data-price="4.5" value="1/8">1/8 - €4.50</option>
@@ -521,14 +532,14 @@ nav a.active-link {
 </div>
 <div class="product">
 <img src="gran_sirai.png" style="width:100%;border-radius:8px;"/><h4>Gran Sirai</h4>
-<input type="hidden" class="peso-forma" value="10" data-product="Gran Sirai"><p>Formaggio a pasta dura e lunga stagionatura, per grattugia o tavola.</p>
+<input type="hidden" class="peso-forma" value="11" data-product="Gran Sirai"><p>Formaggio a pasta dura e lunga stagionatura, per grattugia o tavola.</p>
 <select id="gran-sirai-qty">
 <option data-price="7.5" value="1/32">1/32 - €7,5.00</option> 
 <option data-price="15.0" value="1/16">1/16 - €15.00</option>  
-<option data-price="30.0" value="1/8">1/8 - €30.00</option>
-<option data-price="60..0" value="1/4">1/4 - €60.00</option>
-<option data-price="120.0" value="1/2">1/2 - €120.00</option>
-<option data-price="240.0" value="1">1 - €240.00</option>
+<option data-price="6.0" value="1/8">1/8 - €6.00</option>
+<option data-price="11.5" value="1/4">1/4 - €11.50</option>
+<option data-price="22.0" value="1/2">1/2 - €22.00</option>
+<option data-price="42.0" value="1">1 - €42.00</option>
 </select>
 <button onclick="aggiungiShop('Gran Sirai', 'gran-sirai-qty')">Aggiungi al carrello</button>
 </div>
@@ -746,12 +757,34 @@ function finalizzaOrdine() {
 <script>
 let cart = [];
 
-function addToCart(name, qtyLabel, price) {
-  cart.push({ name, qtyLabel, price, quantity: 1 });
+function addToCart(name, qtyLabel, price, pesoUnitario) {
+  cart.push({ name, qtyLabel, price, quantity: 1, pesoUnitario });
   updateCart();
 }
 
 function updateCart() {
+  const sidebarContainer = document.getElementById("cart-sidebar-container");
+  const pesoSidebar = document.getElementById("peso-sidebar");
+  if (sidebarContainer) sidebarContainer.innerHTML = "";
+
+  // Sincronizza con sidebar
+  const sidebarList = document.getElementById("cart-items");
+  const sidebarTotal = document.getElementById("cart-sidebar-total");
+  const floatingTotal = document.getElementById("floating-total");
+  if (sidebarList && sidebarTotal && floatingTotal) {
+    sidebarList.innerHTML = "";
+    let total = 0;
+    cart.forEach(item => {
+      const li = document.createElement("li");
+      const subtot = item.price * item.quantity;
+      total += subtot;
+      li.textContent = `${item.name} x${item.quantity} - €${subtot.toFixed(2)}`;
+      sidebarList.appendChild(li);
+    });
+    sidebarTotal.textContent = "€" + total.toFixed(2);
+    floatingTotal.textContent = "€" + total.toFixed(2);
+  }
+
   const pesoKgMap = {
     "1/8": 0.5,
     "1/4": 1.0,
@@ -772,6 +805,22 @@ function updateCart() {
   cartContainer.innerHTML = "";
 
   cart.forEach((item, i) => {
+    if (sidebarContainer) {
+      const pesoMap = { "1/8": "≈ 500g", "1/4": "≈ 1kg", "1/2": "≈ 2kg", "1": "≈ 4kg" };
+      const divSidebar = document.createElement("div");
+      divSidebar.style = "padding: 10px; border-bottom: 1px solid #ccc;";
+      divSidebar.innerHTML = `
+        <strong>${item.name}</strong><br>
+        Formato: ${item.qtyLabel} (${pesoMap[item.qtyLabel] || ""}) – Quantità: 
+        <button onclick="decrementItem(${i})">-</button> 
+        ${item.quantity} 
+        <button onclick="incrementItem(${i})">+</button><br>
+        Prezzo: €${(item.price * item.quantity).toFixed(2)}
+        <button onclick="removeItem(${i})" style="margin-left: 10px;">Rimuovi</button>
+      `;
+      sidebarContainer.appendChild(divSidebar);
+    }
+
     const div = document.createElement("div");
     div.style = "padding: 10px; border-bottom: 1px solid #ccc;";
     div.innerHTML = `
@@ -816,6 +865,7 @@ function updateCart() {
   if (pesoTotDiv) {
     pesoTotDiv.innerText = "Peso totale: " + pesoTotaleKg.toFixed(2) + " kg";
   }
+  if (pesoSidebar) pesoSidebar.innerText = "Peso totale: " + pesoTotaleKg.toFixed(2) + " kg";
 
 }
 
@@ -856,9 +906,11 @@ function decrementItem(index) {
 
 function aggiungiShop(nome, selectId) {
   const sel = document.getElementById(selectId);
+  if (!sel) return;
   const formato = sel.value;
   const prezzo = parseFloat(sel.options[sel.selectedIndex].dataset.price);
-  addToCart(nome, formato, prezzo);
+  const pesoUnitario = parseFloat(sel.options[sel.selectedIndex].dataset.pesounitario);
+  addToCart(nome, formato, prezzo, pesoUnitario);
 }
 </script>
 <script>
@@ -878,6 +930,22 @@ function inviaOrdineWhatsApp() {
 function generaMessaggioOrdine() {
   let messaggio = "🧀 *Nuovo ordine Zara Formaggi*\n\n";
   cart.forEach((item, i) => {
+    if (sidebarContainer) {
+      const pesoMap = { "1/8": "≈ 500g", "1/4": "≈ 1kg", "1/2": "≈ 2kg", "1": "≈ 4kg" };
+      const divSidebar = document.createElement("div");
+      divSidebar.style = "padding: 10px; border-bottom: 1px solid #ccc;";
+      divSidebar.innerHTML = `
+        <strong>${item.name}</strong><br>
+        Formato: ${item.qtyLabel} (${pesoMap[item.qtyLabel] || ""}) – Quantità: 
+        <button onclick="decrementItem(${i})">-</button> 
+        ${item.quantity} 
+        <button onclick="incrementItem(${i})">+</button><br>
+        Prezzo: €${(item.price * item.quantity).toFixed(2)}
+        <button onclick="removeItem(${i})" style="margin-left: 10px;">Rimuovi</button>
+      `;
+      sidebarContainer.appendChild(divSidebar);
+    }
+
     messaggio += `• ${item.name} - ${item.qtyLabel} - €${item.price.toFixed(2)}\n`;
   });
 
@@ -964,6 +1032,29 @@ function toggleRitiroNegozio() {
 
   window.addEventListener("DOMContentLoaded", () => showSection("dove"));
 </script>
+
+
+<!-- Sidebar carrello COMPLETA -->
+<div id="cart-sidebar"
+     style="position:fixed;top:0;right:-400px;width:350px;height:100%;background:#fff;border-left:2px solid #ccc;box-shadow:-2px 0 5px rgba(0,0,0,0.1);z-index:9999;padding:1rem;transition:right 0.3s;overflow-y:auto;">
+  <h3>🛒 Il tuo carrello</h3>
+  <div id="cart-sidebar-container"></div>
+  <div id="peso-sidebar" style="margin-top:10px;font-weight:bold;"></div>
+  <div id="cart-sidebar-total" style="font-weight: bold; margin-top: 10px;">Totale: €0.00</div>
+  <button onclick="svuotaCarrello()" style="background:#c00;color:white;padding:8px 12px;border:none;border-radius:5px;">🧹 Svuota</button>
+  <button onclick="proseguiOrdine()" style="margin-top:10px;background:#2f4f2f;color:white;padding:8px 12px;border:none;border-radius:5px;">📦 Procedi all'acquisto</button>
+  <button onclick="toggleCartSidebar()" style="margin-top:10px;">Chiudi</button>
+</div>
+
+
+
+<script>
+  function toggleCartSidebar() {
+    const sidebar = document.getElementById("cart-sidebar");
+    sidebar.style.right = sidebar.style.right === "0px" ? "-400px" : "0px";
+  }
+</script>
+
 </body>
 </html>
 
@@ -977,7 +1068,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     select.querySelectorAll("option").forEach(opt => {
       const frazione = opt.value.trim();
-      const frazioni = { "1/32": 1/32,"1/16": 1/16,"1/8": 1/8, "1/4": 1/4, "1/2": 1/2, "1": 1 };     
+      const frazioni = { "1/32": 1/32,"1/16": 1/16,"1/8": 1/8, "1/4": 1/4, "1/2": 1/2, "1": 1 };
       const pesoCalcolato = (pesoForma * (frazioni[frazione] || 0)).toFixed(2);
       const prezzo = opt.dataset.price;
       opt.dataset.pesounitario = pesoCalcolato;
