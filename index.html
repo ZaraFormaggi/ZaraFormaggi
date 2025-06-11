@@ -344,7 +344,61 @@ nav a.active-link {
 .indicatore-tacche .tacca.attiva {
   background-color: green;
 }
-</style></head>
+</style>
+<style>
+.shop-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.product-card {
+  width: 300px;
+  border: 2px solid #d9d9d9;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  background-color: #ffffff;
+}
+.product-card h3 {
+  margin-top: 0;
+}
+.scelte-formati {
+  margin-top: 12px;
+}
+</style>
+
+
+<style>
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+.tooltip .tooltip-text {
+  visibility: hidden;
+  width: max-content;
+  max-width: 240px;
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 13px;
+}
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+
+</head>
 <body>
 <!-- Bottone carrello fisso -->
 <div id="floating-cart" onclick="toggleCartSidebar()" style="position:fixed;top:20px;right:20px;background:#c9a602;color:#fff;padding:15px 20px;border-radius:50px;font-size:16px;font-weight:bold;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:9999;cursor:pointer;" title="Clicca per vedere il carrello">
@@ -493,52 +547,52 @@ nav a.active-link {
 <section class="section" id="shop" style="display: none;">
 <h4>🧀 🥓  Shop</h4>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
-<div class="product">
+<div class="product-card product">
 <img src="nuraghe.png" style="width:100%;border-radius:8px;"/><h4>Nuraghe</h4>
 <input class="peso-forma" data-product="Nuraghe" type="hidden" value="5"/><p>Pecorino stagionato dal gusto intenso, prodotto con latte ovino.</p>
 <div class="scelte-formati"></div>
 </div>
-<div class="product">
+<div class="product-card product">
 <img src="sirai_gigante.png" style="width:100%;border-radius:8px;"/><h4>Sirai Gigante</h4>
 <input class="peso-forma" data-product="Sirai Gigante" type="hidden" value="5"/><p>Formaggio a lunga stagionatura, pasta dura, sapore ricco.</p>
 <div class="scelte-formati"></div>
 </div>
-<div class="product">
+<div class="product-card product">
 <img src="cuore.png" style="width:100%;border-radius:8px;"/><h4>Cuore del Sulcis</h4>
 <input class="peso-forma" data-product="Cuore del Sulcis" type="hidden" value="5"/><p>Pecorino semistagionato, dal cuore morbido e sapore equilibrato.</p>
 <div class="scelte-formati"></div>
 </div>
-<div class="product">
+<div class="product-card product">
 <img src="cuor_di_latte.png" style="width:100%;border-radius:8px;"/><h4>Cuor di Latte</h4>
 <input class="peso-forma" data-product="Cuor di Latte" type="hidden" value="5"/><p>Formaggio fresco e dolce, perfetto per spalmare o accompagnare miele.</p>
 <div class="scelte-formati"></div>
 </div>
-<div class="product">
+<div class="product-card product">
 <img src="vecchio_capraro.png" style="width:100%;border-radius:8px;"/><h4>Vecchio Capraro</h4>
 <input class="peso-forma" data-product="Vecchio Capraro" type="hidden" value="5"/><p>Caprino stagionato, forte e aromatico, 100% latte di capra.</p>
 <div class="scelte-formati"></div>
 </div>
-<div class="product">
+<div class="product-card product">
 <img src="crablu.png" style="width:100%;border-radius:8px;"/><h4>Crablu</h4>
 <input class="peso-forma" data-product="Crablu" type="hidden" value="5"/><p>Formaggio erborinato con venature blu, sapore deciso e complesso.</p>
 <div class="scelte-formati"></div>
 </div>
-<div class="product">
+<div class="product-card product">
 <img src="sulcitano.png" style="width:100%;border-radius:8px;"/><h4>Sulcitano</h4>
 <input class="peso-forma" data-product="Sulcitano" type="hidden" value="5"/><p>Pecorino fresco tipico del Sulcis, ideale da tavola.</p>
 <div class="scelte-formati"></div>
 </div>
-<div class="product">
+<div class="product-card product">
 <img src="provola_orotelli.png" style="width:100%;border-radius:8px;"/><h4>Provola di Orotelli</h4>
 <input class="peso-forma" data-product="Provola di Orotelli" type="hidden" value="5"/><p>Formaggio affumicato, dalla crosta dorata e pasta filante.</p>
 <div class="scelte-formati"></div>
 </div>
-<div class="product">
+<div class="product-card product">
 <img src="gran_sirai.png" style="width:100%;border-radius:8px;"/><h4>Gran Sirai</h4>
 <input class="peso-forma" data-product="Gran Sirai" type="hidden" value="11"/><p>Formaggio a pasta dura e lunga stagionatura, per grattugia o tavola.</p>
 <div class="scelte-formati"></div>
 </div>
-<div class="product">
+<div class="product-card product">
 <img src="biancoarrosto.png" style="width:100%;border-radius:8px;"/><h4>Biancoarrosto del Sulcis</h4>
 <input class="peso-forma" data-product="Biancoarrosto del Sulcis" type="hidden" value="5"/><p>Formaggio bianco da griglia, dal sapore pieno e leggero.</p>
 <div class="scelte-formati"></div>
@@ -925,7 +979,7 @@ function inviaOrdineWhatsApp() {
   const pesoTot = cart.reduce((sum, i) => sum + i.pesoUnitario * i.quantity, 0).toFixed(2);
   msg += `%0A📦 Totale: €${totale} - Peso: ${pesoTot} kg`;
 
-  const url = "https://wa.me/393488802099?text=" + encodeURIComponent(msg);
+  const url = "https://wa.me/393333333333?text=" + encodeURIComponent(msg);
   window.open(url, "_blank");
 (link, '_blank');
 }
@@ -1163,7 +1217,160 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-</script></body>
+</script>
+<!-- Selettore modalità consegna -->
+<div style="text-align:center; margin-top:2rem;">
+  <button onclick="toggleRitiro()" id="btn-toggle-ritiro" style="padding: 10px 20px; font-weight: bold; border-radius: 8px; background-color: #007f5f; color: white; border: none; cursor: pointer;">
+    🚚 Clicca per ritiro in negozio
+  </button>
+</div>
+
+<!-- Form ordine completo -->
+<form id="form-completo" style="margin-top:2rem;">
+  <h2>Dati per la spedizione</h2>
+  <label>Nome: <input name="nome" required></label><br>
+  <label>Cognome: <input name="cognome" required></label><br>
+  <label>Telefono: <input name="telefono" required></label><br>
+  <label>Email: <input name="email" required></label><br>
+  <label>Indirizzo: <input name="indirizzo" required></label><br>
+  <label>CAP: <input name="cap" required></label><br>
+  <label>Città: <input name="citta" required></label><br>
+  <label>Paese: <input name="paese" required></label><br>
+</form>
+
+<!-- Form ritiro in negozio -->
+<form id="form-ritiro" style="display:none; margin-top:2rem;">
+  <h2>Dati per il ritiro in negozio</h2>
+  <label>Nome: <input name="nome" required></label><br>
+  <label>Cognome: <input name="cognome" required></label><br>
+  <label>Telefono: <input name="telefono" required></label><br>
+  <label>Email: <input name="email" required></label><br>
+</form>
+
+<!-- Pulsante WhatsApp -->
+<div style="margin-top: 1rem; text-align:center;">
+  <a href="#" onclick="inviaOrdineWhatsapp()" id="wa-btn" style="background-color: #25d366; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">
+    📦 Invia Ordine via WhatsApp
+  </a>
+</div>
+
+
+<script>
+function toggleRitiro() {
+  const btn = document.getElementById("btn-toggle-ritiro");
+  const completo = document.getElementById("form-completo");
+  const ritiro = document.getElementById("form-ritiro");
+  const attivo = ritiro.style.display === "block";
+
+  if (attivo) {
+    ritiro.style.display = "none";
+    completo.style.display = "block";
+    btn.textContent = "🚚 Clicca per ritiro in negozio";
+  } else {
+    ritiro.style.display = "block";
+    completo.style.display = "none";
+    btn.textContent = "🏬 Modalità ritiro attiva";
+  }
+}
+
+function inviaOrdineWhatsapp() {
+  let dati = "";
+  const form = document.getElementById("form-ritiro").style.display === "block"
+    ? document.getElementById("form-ritiro")
+    : document.getElementById("form-completo");
+
+  const inputs = form.querySelectorAll("input");
+  inputs.forEach(input => {
+    dati += `${input.name}: ${input.value}%0A`;
+  });
+
+  // Inserisce un messaggio simulato ordine (qui puoi espandere con carrello reale)
+  const messaggio = `*Nuovo ordine ricevuto*%0A${dati}`;
+  const link = `https://wa.me/?text=${encodeURIComponent(messaggio)}`;
+  window.open(link, '_blank');
+}
+</script>
+
+
+<!-- Invio ordine via Formspree -->
+<div style="text-align:center; margin-top: 1rem;">
+  <button type="button" onclick="inviaOrdineFormspree()" style="background-color: #004080; color: white; padding: 10px 20px; border-radius: 6px; font-weight: bold; border: none;">
+    📧 Invia Ordine via Email
+  </button>
+</div>
+<form id="form-invio" action="https://formspree.io/f/xpwrplgn" method="POST" style="display:none;"></form>
+
+
+<script>
+function inviaOrdineFormspree() {
+  const form = document.getElementById("form-ritiro").style.display === "block"
+    ? document.getElementById("form-ritiro")
+    : document.getElementById("form-completo");
+  const inputs = form.querySelectorAll("input");
+  const targetForm = document.getElementById("form-invio");
+  targetForm.innerHTML = "";
+
+  inputs.forEach(input => {
+    const hidden = document.createElement("input");
+    hidden.name = input.name;
+    hidden.value = input.value;
+    hidden.type = "hidden";
+    targetForm.appendChild(hidden);
+  });
+
+  // Simulazione carrello per invio (espandibile)
+  const prodotti = [];
+  document.querySelectorAll(".product").forEach(prod => {
+    const nome = prod.querySelector(".peso-forma")?.dataset.product;
+    const blocchi = prod.querySelectorAll(".scelte-formati button");
+    blocchi.forEach(btn => {
+      if (btn.disabled && btn.textContent.includes("Qta disponibile: 0") === false) {
+        prodotti.push(btn.textContent);
+      }
+    });
+  });
+
+  const ordine = document.createElement("input");
+  ordine.type = "hidden";
+  ordine.name = "Ordine";
+  ordine.value = prodotti.join(" | ");
+  targetForm.appendChild(ordine);
+
+  targetForm.submit();
+}
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".product-card").forEach(prod => {
+    const nome = prod.querySelector(".peso-forma")?.dataset.product;
+    const pesoForma = parseFloat(prod.querySelector(".peso-forma")?.value || 5);
+    const contenitore = prod.querySelector(".scelte-formati");
+    if (!nome || !contenitore) return;
+
+    const frazioni = Object.keys(disponibilitaProdotti[nome] || {});
+    contenitore.querySelectorAll("button").forEach(btn => {
+      const testo = btn.textContent;
+      const match = testo.match(/^([\d/]+).*€([\d\.]+).*([\d\.]+) kg/);
+      if (!match) return;
+      const [_, formato, prezzo, peso] = match;
+
+      const tooltip = document.createElement("div");
+      tooltip.className = "tooltip-text";
+      tooltip.innerHTML = `<strong>Formato ${formato}</strong><br>Prezzo: €${prezzo}<br>Peso medio: ${peso} kg<br>Prodotto: ${nome}`;
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "tooltip";
+      btn.replaceWith(wrapper);
+      wrapper.appendChild(btn);
+      wrapper.appendChild(tooltip);
+    });
+  });
+});
+</script>
+
+</body>
 </html>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
