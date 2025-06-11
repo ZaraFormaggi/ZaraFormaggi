@@ -355,6 +355,10 @@ nav a.active-link {
 <li>Regala un  Voucher "ZaraFormaggi " </li>
 </ul>
 </section><section class="section" id="chi-siamo" style="display: none;">
+
+
+
+  
 <h2>Chi siamo</h2>
 <p>ZARA FORMAGGI nasce dalla passione per i sapori autentici della Sardegna. Fondata da Maurizio Zara, l’attività si dedica alla selezione e vendita di prodotti tipici come formaggi, salumi, dolci e molto altro. Tradizione e qualità sono il nostro marchio.</p>
 </section><section class="section active" id="home" style="display: block;">
@@ -362,6 +366,8 @@ nav a.active-link {
 <p>Visita il sito per scoprire i nostri prodotti. Offriamo una selezione di eccellenze enogastronomiche sarde, con attenzione alla qualità, alla tradizione e al gusto autentico.</p>
 </section>
 <section class="section" id="dove" style="display: none;">
+
+  
 <h2>Dove ci trovi</h2>
 <p>Ci trovi in <strong>Via Gramsci, Iglesias (CI), Sardegna</strong>, presso il Mercato Civico Box N° 27.</p>
 <h3>Orari di apertura</h3>
@@ -547,6 +553,45 @@ nav a.active-link {
 <footer>
 <p>© 2025 ZARA FORMAGGI di Zara Maurizio - Tutti i diritti riservati</p>
 </footer>
+<!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    let mapInitialized = false;
+    let map;
+
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.getElementById(id)?.classList.add('active');
+
+      if (id === 'dove') {
+        if (!mapInitialized) {
+          const coords = [39.3117602, 8.5351056];
+          map = L.map('map').setView(coords, 18);
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+          }).addTo(map);
+          L.marker(coords).addTo(map).bindPopup('Via Gramsci, Mercato Civico - Iglesias, Sardegna').openPopup();
+          mapInitialized = true;
+        } else {
+          setTimeout(() => map.invalidateSize(), 200);
+        }
+      }
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
 <!-- Leaflet JS -->
 <script src="https://www.paypal.com/sdk/js?client-id=sb¤cy=EUR"></script>
 <script>
@@ -932,6 +977,12 @@ function toggleRitiroNegozio() {
 }
 </script>
 
+
+
+
+
+
+  
 </body>
 </html>
 
