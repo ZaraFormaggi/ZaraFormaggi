@@ -421,16 +421,11 @@ nav a.active-link {
 </style>
 
 </head>
-
-  
 <body>
 <!-- Bottone carrello fisso -->
 <div id="floating-cart" onclick="toggleCartSidebar()" style="position:fixed;top:20px;right:20px;background:#c9a602;color:#fff;padding:15px 20px;border-radius:50px;font-size:16px;font-weight:bold;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:9999;cursor:pointer;" title="Clicca per vedere il carrello">
   🛒 Carrello: <span id="floating-total">€0.00</span>
 </div>
-
-
-  
 <header style="background-color: #2f4f2f; color: white; padding: 1rem 0; text-align: center;">
 <div class="header-logo">
 <img alt="ZARA FORMAGGI Logo" src="logo.png" style="width: 100px; height: auto; margin-bottom: 0.5rem;"/>
@@ -450,24 +445,47 @@ nav a.active-link {
 <a href="#shop">🧀 🥓 Shop</a>
 <a href="#contatti">📞 Contatti</a>
 <a href="#carrello" id="menu-carrello">
-
-  
   🛒 Carrello (<span id="menu-cart-count">0</span>) – €<span id="menu-cart-total">0.00</span>
 </a>
 </nav>
-
-
-  
-
-<main>
-  
-  <section class="section" id="contatti" style="display: none;">
+<div id="cart-section">
+<h3>Il tuo carrello</h3>
+<div id="cart-items"></div><button onclick="document.getElementById('ordine-form').scrollIntoView();" style="margin-top: 20px;">📦 Procedi all'ordine</button>
+<hr/>
+<form action="https://formspree.io/f/xpwrplgn" id="checkout-form" method="POST">
+<label><input id="ritiro-loco" onchange="toggleSottovuoto()" type="checkbox"/> Ritiro in loco</label><br/>
+<div id="sottovuoto-opzione" style="display:none; margin-top:6px;">
+<label><input id="sottovuoto" onchange="aggiornaTotale()" type="checkbox"/> Richiedi sottovuoto (+€0.50)</label>
+</div>
+<input name="Nome" placeholder="Nome" required="" type="text"/>
+<input name="Cognome" placeholder="Cognome" required="" type="text"/>
+<input name="Telefono" placeholder="Numero di telefono" required="" type="tel"/>
+<input name="Email" placeholder="Email" required="" type="email"/>
+<input name="Indirizzo" placeholder="Indirizzo di consegna (se richiesto)" type="text"/>
+<label><input name="Ritiro in loco" type="checkbox"/> Ritiro in loco presso il negozio</label>
+<input id="ordine-dettaglio" name="Ordine" type="hidden"/>
+<button onclick="prepareOrder()" type="submit">Invia Ordine</button>
+<button onclick="downloadPDF()" type="button">Salva in PDF</button>
+<div style="margin-top:1rem;">
+<div id="paypal-button-container"></div>
+<button onclick="alert('Simulazione Stripe')" type="button">Paga con Stripe</button>
+</div>
+<p><strong>Destinazione:</strong><br/>
+<label><input checked="" id="destinazione-italia" name="destinazione" type="radio"/> Italia</label><br/>
+<label><input id="destinazione-europa" name="destinazione" type="radio"/> Europa</label>
+</p>
+<button onclick="return inviaOrdine()" type="submit">Procedi al pagamento</button>
+</form>
+<div style="margin-top:10px;">
+<label><input id="confezione-regalo" onchange="aggiornaTotale()" type="checkbox"/> Aggiungi confezione regalo (+€5)</label>
+</div>
+<div id="cart-total" style="margin-top:10px; font-weight:bold;"></div></div>
+<nav>
+</nav>
+<main><section class="section" id="contatti" style="display: none;">
 <h2>Contatti</h2>
 <p>Per informazioni, ordini o richieste particolari, contattaci via email  <strong> info@zaraformaggi.com  </strong> </p>
-</section>
-  
-  
-<section class="section" id="servizi" style="display: none;">
+</section><section class="section" id="servizi" style="display: none;">
 <h2>I nostri servizi</h2>
 <ul>
 <li>Vendita al dettaglio di prodotti tipici sardi</li>
@@ -476,16 +494,10 @@ nav a.active-link {
 <li>Possibilità di mettere sottovuoto i prodotti </li>
 <li>Regala un  Voucher "ZaraFormaggi " </li>
 </ul>
-</section>
-  
-  
-  <section class="section" id="chi-siamo" style="display: none;">
+</section><section class="section" id="chi-siamo" style="display: none;">
 <h2>Chi siamo</h2>
 <p>ZARA FORMAGGI nasce dalla passione per i sapori autentici della Sardegna. Fondata da Maurizio Zara, l’attività si dedica alla selezione e vendita di prodotti tipici come formaggi, salumi, dolci e molto altro. Tradizione e qualità sono il nostro marchio.</p>
-</section>
-  
-  
- <section class="section active" id="home" style="display: block;">
+</section><section class="section active" id="home" style="display: block;">
 <h2>Benvenuti!</h2>
 <p>Visita il sito per scoprire i nostri prodotti. Offriamo una selezione di eccellenze enogastronomiche sarde, con attenzione alla qualità, alla tradizione e al gusto autentico.</p>
 </section>
@@ -613,10 +625,6 @@ nav a.active-link {
 <footer>
 <p>© 2025 ZARA FORMAGGI di Zara Maurizio - Tutti i diritti riservati</p>
 </footer>
-
-
-
-  
 <!-- Leaflet JS -->
 <script src="https://www.paypal.com/sdk/js?client-id=sb¤cy=EUR"></script>
 <script>
@@ -780,7 +788,6 @@ function finalizzaOrdine() {
 }
 </script>
 
-
   
 <section class="section" id="carrello" style="display: none;">
 <h2>🛒 Il tuo carrello</h2>
@@ -788,19 +795,12 @@ function finalizzaOrdine() {
 <div id="peso-totale" style="margin-top: 10px; font-weight: bold;"></div>
 <div style="margin-top: 20px;">
 
-</div>
-<h3 style="text-align:right;">Totale: <span id="carrello-totale">€0.00</span></h3>
-  
 <!-- Selettore modalità consegna -->
 <div style="text-align:center; margin-top:2rem;">
 <button id="btn-toggle-ritiro" onclick="toggleRitiro()" style="padding: 10px 20px; font-weight: bold; border-radius: 8px; background-color: #007f5f; color: white; border: none; cursor: pointer;">
     🚚 Clicca per ritiro in negozio
   </button>
 </div>
-
-
-
-  
 <!-- Form ordine completo -->
 <form id="form-completo" style="display:none;" style="margin-top:2rem;">
 <h2>Dati per la spedizione</h2>
@@ -816,27 +816,52 @@ function finalizzaOrdine() {
 <!-- Form ritiro in negozio -->
 <form id="form-ritiro" style="display:none;" style="display:none; margin-top:2rem;">
 <h2>Dati per il ritiro in negozio</h2>
-
-
-<div id="sottovuoto-opzione" style="display:none; margin-top:6px;">
-  
-<label><input id="sottovuoto" onchange="aggiornaTotale()" type="checkbox"/> Richiedi sottovuoto (+€0.50)</label>
-
-  
 <label>Nome: <input name="nome" required=""/></label><br/>
 <label>Cognome: <input name="cognome" required=""/></label><br/>
 <label>Telefono: <input name="telefono" required=""/></label><br/>
 <label>Email: <input name="email" required=""/></label><br/>
 </form>
-
-  
 <!-- Pulsante WhatsApp -->
 <div style="margin-top: 1rem; text-align:center;">
 <a href="#" id="wa-btn" onclick="inviaOrdineWhatsapp()" style="background-color: #25d366; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">
     📦 Invia Ordine via WhatsApp
   </a>
 </div>
+<script>
+function toggleRitiro() {
+  const btn = document.getElementById("btn-toggle-ritiro");
+  const completo = document.getElementById("form-completo");
+  const ritiro = document.getElementById("form-ritiro");
+  const attivo = ritiro.style.display === "block";
 
+  if (attivo) {
+    ritiro.style.display = "none";
+    completo.style.display = "block";
+    btn.textContent = "🚚 Clicca per ritiro in negozio";
+  } else {
+    ritiro.style.display = "block";
+    completo.style.display = "none";
+    btn.textContent = "🏬 Modalità ritiro attiva";
+  }
+}
+
+function inviaOrdineWhatsapp() {
+  let dati = "";
+  const form = document.getElementById("form-ritiro").style.display === "block"
+    ? document.getElementById("form-ritiro")
+    : document.getElementById("form-completo");
+
+  const inputs = form.querySelectorAll("input");
+  inputs.forEach(input => {
+    dati += `${input.name}: ${input.value}%0A`;
+  });
+
+  // Inserisce un messaggio simulato ordine (qui puoi espandere con carrello reale)
+  const messaggio = `*Nuovo ordine ricevuto*%0A${dati}`;
+  const link = `https://wa.me/?text=${encodeURIComponent(messaggio)}`;
+  window.open(link, '_blank');
+}
+</script>
 <!-- Invio ordine via Formspree -->
 <div style="text-align:center; margin-top: 1rem;">
 <button onclick="inviaOrdineFormspree()" style="background-color: #004080; color: white; padding: 10px 20px; border-radius: 6px; font-weight: bold; border: none;" type="button">
@@ -845,12 +870,13 @@ function finalizzaOrdine() {
 </div>
 <form action="https://formspree.io/f/xpwrplgn" id="form-invio" method="POST" style="display:none;"></form>
 
-
   
+
+</div>
+<h3 style="text-align:right;">Totale: <span id="carrello-totale">€0.00</span></h3></section>
+<section class="section" id="form-ordine" style="display: none;">
+
 </section>
-
-
-  
 <script>
 let cart = [];
 
@@ -1012,18 +1038,6 @@ function aggiungiShop(nome, selectId) {
 </script>
 <script>
 function inviaOrdineEmail() {
-   let total = 0;
-  cart.forEach(item => total += item.price * item.quantity);
-  if (document.getElementById("confezione-regalo")?.checked) total += 5;
-  if (document.getElementById("sottovuoto")?.checked) total += 0.5;
-
-  const europa = document.getElementById("destinazione-europa")?.checked;
-  const minimo = europa ? 140 : 90;
-
-  if (total < minimo) {
-    alert("L'ordine minimo è di €" + minimo.toFixed(2) + (europa ? " per l'Europa." : " per l'Italia."));
-    return false;
-    
   const messaggio = generaMessaggioOrdine();
   const mailtoLink = `mailto:titolare@email.it?subject=Nuovo Ordine Zara&body=${encodeURIComponent(messaggio)}`;
   window.location.href = mailtoLink;
@@ -1050,13 +1064,13 @@ function inviaOrdineWhatsApp() {
   const pesoTot = cart.reduce((sum, i) => sum + i.pesoUnitario * i.quantity, 0).toFixed(2);
   msg += `%0A📦 Totale: €${totale} - Peso: ${pesoTot} kg`;
 
-  const url = "https://wa.me/39348802099?text=" + encodeURIComponent(msg);
+  const url = "https://wa.me/393333333333?text=" + encodeURIComponent(msg);
   window.open(url, "_blank");
 (link, '_blank');
 }
 
 function generaMessaggioOrdine() {
-  let messaggio = "🧀🥓 *Nuovo ordine Zara Formaggi*\n\n";
+  let messaggio = "🧀 *Nuovo ordine Zara Formaggi*\n\n";
   cart.forEach((item, i) => {
     if (sidebarContainer) {
       const pesoMap = { "1/8": "≈ 500g", "1/4": "≈ 1kg", "1/2": "≈ 2kg", "1": "≈ 4kg" };
@@ -1300,44 +1314,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-
-  
-<script>
-function toggleRitiro() {
-  const btn = document.getElementById("btn-toggle-ritiro");
-  const completo = document.getElementById("form-completo");
-  const ritiro = document.getElementById("form-ritiro");
-  const attivo = ritiro.style.display === "block";
-
-  if (attivo) {
-    ritiro.style.display = "none";
-    completo.style.display = "block";
-    btn.textContent = "🚚 Clicca per ritiro in negozio";
-  } else {
-    ritiro.style.display = "block";
-    completo.style.display = "none";
-    btn.textContent = "🏬 Modalità ritiro attiva";
-  }
-}
-
-function inviaOrdineWhatsapp() {
-  let dati = "";
-  const form = document.getElementById("form-ritiro").style.display === "block"
-    ? document.getElementById("form-ritiro")
-    : document.getElementById("form-completo");
-
-  const inputs = form.querySelectorAll("input");
-  inputs.forEach(input => {
-    dati += `${input.name}: ${input.value}%0A`;
-  });
-
-  // Inserisce un messaggio simulato ordine (qui puoi espandere con carrello reale)
-  const messaggio = `*Nuovo ordine ricevuto*%0A${dati}`;
-  const link = `https://wa.me/?text=${encodeURIComponent(messaggio)}`;
-  window.open(link, '_blank');
-}
-</script>
-
 <script>
 function inviaOrdineFormspree() {
   const form = document.getElementById("form-ritiro").style.display === "block"
@@ -1469,7 +1445,7 @@ function inviaOrdineWhatsApp() {
   const pesoTot = cart.reduce((sum, i) => sum + i.pesoUnitario * i.quantity, 0).toFixed(2);
   msg += `%0A📦 Totale: €${totale} - Peso: ${pesoTot} kg`;
 
-  const url = "https://wa.me/393488802099?text=" + encodeURIComponent(msg);
+  const url = "https://wa.me/393333333333?text=" + encodeURIComponent(msg);
   window.open(url, "_blank");
 (url, "_blank");
 }
