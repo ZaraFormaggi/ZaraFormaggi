@@ -464,9 +464,8 @@ nav a.active-link {
 <div id="cart-items"></div><button onclick="document.getElementById('ordine-form').scrollIntoView();" style="margin-top: 20px;">📦 Procedi all'ordine</button>
 <hr/>
 <form action="https://formspree.io/f/xpwrplgn" id="checkout-form" method="POST">
-<label><input id="ritiro-loco" onchange="toggleSottovuoto()" type="checkbox"/> Ritiro in loco</label><br/>
-<div id="sottovuoto-opzione" style="display:none; margin-top:6px;">
-<label><input id="sottovuoto" onchange="aggiornaTotale()" type="checkbox"/> Richiedi sottovuoto (+€0.50)</label>
+  
+
 </div>
 <input name="Nome" placeholder="Nome" required="" type="text"/>
 <input name="Cognome" placeholder="Cognome" required="" type="text"/>
@@ -850,11 +849,20 @@ function finalizzaOrdine() {
 <!-- Form ritiro in negozio -->
 <form id="form-ritiro" style="display:none;" style="display:none; margin-top:2rem;">
 <h2>Dati per il ritiro in negozio</h2>
+
+
+<div id="sottovuoto-opzione" style="display:none; margin-top:6px;">
+  
+<label><input id="sottovuoto" onchange="aggiornaTotale()" type="checkbox"/> Richiedi sottovuoto (+€0.50)</label>
+
+  
 <label>Nome: <input name="nome" required=""/></label><br/>
 <label>Cognome: <input name="cognome" required=""/></label><br/>
 <label>Telefono: <input name="telefono" required=""/></label><br/>
 <label>Email: <input name="email" required=""/></label><br/>
 </form>
+
+  
 <!-- Pulsante WhatsApp -->
 <div style="margin-top: 1rem; text-align:center;">
 <a href="#" id="wa-btn" onclick="inviaOrdineWhatsapp()" style="background-color: #25d366; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">
@@ -1037,6 +1045,18 @@ function aggiungiShop(nome, selectId) {
 </script>
 <script>
 function inviaOrdineEmail() {
+   let total = 0;
+  cart.forEach(item => total += item.price * item.quantity);
+  if (document.getElementById("confezione-regalo")?.checked) total += 5;
+  if (document.getElementById("sottovuoto")?.checked) total += 0.5;
+
+  const europa = document.getElementById("destinazione-europa")?.checked;
+  const minimo = europa ? 140 : 90;
+
+  if (total < minimo) {
+    alert("L'ordine minimo è di €" + minimo.toFixed(2) + (europa ? " per l'Europa." : " per l'Italia."));
+    return false;
+    
   const messaggio = generaMessaggioOrdine();
   const mailtoLink = `mailto:titolare@email.it?subject=Nuovo Ordine Zara&body=${encodeURIComponent(messaggio)}`;
   window.location.href = mailtoLink;
@@ -1063,13 +1083,13 @@ function inviaOrdineWhatsApp() {
   const pesoTot = cart.reduce((sum, i) => sum + i.pesoUnitario * i.quantity, 0).toFixed(2);
   msg += `%0A📦 Totale: €${totale} - Peso: ${pesoTot} kg`;
 
-  const url = "https://wa.me/393333333333?text=" + encodeURIComponent(msg);
+  const url = "https://wa.me/39348802099?text=" + encodeURIComponent(msg);
   window.open(url, "_blank");
 (link, '_blank');
 }
 
 function generaMessaggioOrdine() {
-  let messaggio = "🧀 *Nuovo ordine Zara Formaggi*\n\n";
+  let messaggio = "🧀🥓 *Nuovo ordine Zara Formaggi*\n\n";
   cart.forEach((item, i) => {
     if (sidebarContainer) {
       const pesoMap = { "1/8": "≈ 500g", "1/4": "≈ 1kg", "1/2": "≈ 2kg", "1": "≈ 4kg" };
