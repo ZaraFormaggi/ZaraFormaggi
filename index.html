@@ -458,40 +458,7 @@ nav a.active-link {
 
 
   
-<div id="cart-section">
 
-<h3>Il tuo carrello</h3>
-<div id="cart-items"></div><button onclick="document.getElementById('ordine-form').scrollIntoView();" style="margin-top: 20px;">📦 Procedi all'ordine</button>
-<hr/>
-<form action="https://formspree.io/f/xpwrplgn" id="checkout-form" method="POST">
-  
-
-</div>
-<input name="Nome" placeholder="Nome" required="" type="text"/>
-<input name="Cognome" placeholder="Cognome" required="" type="text"/>
-<input name="Telefono" placeholder="Numero di telefono" required="" type="tel"/>
-<input name="Email" placeholder="Email" required="" type="email"/>
-<input name="Indirizzo" placeholder="Indirizzo di consegna (se richiesto)" type="text"/>
-<label><input name="Ritiro in loco" type="checkbox"/> Ritiro in loco presso il negozio</label>
-<input id="ordine-dettaglio" name="Ordine" type="hidden"/>
-<button onclick="prepareOrder()" type="submit">Invia Ordine</button>
-<button onclick="downloadPDF()" type="button">Salva in PDF</button>
-<div style="margin-top:1rem;">
-<div id="paypal-button-container"></div>
-<button onclick="alert('Simulazione Stripe')" type="button">Paga con Stripe</button>
-</div>
-<p><strong>Destinazione:</strong><br/>
-<label><input checked="" id="destinazione-italia" name="destinazione" type="radio"/> Italia</label><br/>
-<label><input id="destinazione-europa" name="destinazione" type="radio"/> Europa</label>
-</p>
-<button onclick="return inviaOrdine()" type="submit">Procedi al pagamento</button>
-</form>
-<div style="margin-top:10px;">
-<label><input id="confezione-regalo" onchange="aggiornaTotale()" type="checkbox"/> Aggiungi confezione regalo (+€5)</label>
-</div>
-<div id="cart-total" style="margin-top:10px; font-weight:bold;"></div></div>
-<nav>
-</nav>
 <main>
   
   <section class="section" id="contatti" style="display: none;">
