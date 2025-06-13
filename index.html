@@ -537,7 +537,7 @@ nav a.active-link {
 <a href="#contatti">📞 Contatti</a>
 <a href="#carrello" id="menu-carrello">
   
- <!-- 
+
   🛒 Carrello (<span id="menu-cart-count">0</span>) – €<span id="menu-cart-total">0.00</span>
 </a>
 </nav>
@@ -706,7 +706,9 @@ nav a.active-link {
 </section>
 </main>
 <!-- ⚓ Footer del sito -->
-
+<footer>
+<p>© 2025 ZARA FORMAGGI di Zara Maurizio - Tutti i diritti riservati</p>
+</footer>
   
 <!-- SEZIONE GALLERIA PRODOTTI -->
 <section id="galleria" style="padding: 3rem 1rem; background: #fff; display: none;; display: none">
@@ -1129,41 +1131,7 @@ function inviaOrdine() {
 // Mostra i dettagli del carrello in una lista HTML con immagini e prezzi
 // 📋 Crea un riepilogo visivo dell'ordine con immagini, nomi, quantità e totali.
 
-function mostraRiepilogoOrdine() {
-  const div = document.getElementById("riepilogo-dettagli");
-    const imageMap = {
-    "nuraghe": "img/nuraghe.png",
-    "sirai gigante": "img/sirai_gigante.png",
-    "cuore del sulcis": "img/cuore_sulcis.png",
-    "cuor di latte": "img/cuor_di_latte.png",
-    "vecchio capraro": "img/vecchio_capraro.png",
-    "crablu": "img/crablu.png",
-    "sulcitano": "img/sulcitano.png",
-    "provola di orotelli": "img/provola_orotelli.png",
-    "gran sirai": "img/gran_sirai.png",
-    "biancoarrosto del sulcis": "img/biancoarrosto.png"
-  };
-  let html = "<ul>";
-  let total = 0;
-  cart.forEach(item => {
-    const subtot = item.price * item.quantity;
-    total += subtot;
-    const nome = item.name.toLowerCase().replace(/\s/g, "_").replace(/[^a-z0-9_]/g, "");
-    const imgSrc = `img/${nome}.png`;
-    html += `<li><img src="${imgSrc}" alt="${item.name}" style="height:40px; vertical-align:middle; margin-right:10px; border-radius:4px;"> ${item.name} x${item.quantity} = €${subtot.toFixed(2)}</li>`;
-  });
-  if (document.getElementById("confezione-regalo")?.checked) {
-    html += "<li>Confezione regalo = €5.00</li>";
-    total += 5;
-  }
-  if (document.getElementById("sottovuoto")?.checked) {
-    html += "<li>Sottovuoto = €0.50</li>";
-    total += 0.5;
-  }
-  html += `</ul><strong>Totale: €${total.toFixed(2)}</strong>`;
-  div.innerHTML = html;
-  document.getElementById("riepilogo-ordine").style.display = "block";
-}
+
 // Mostra un messaggio di conferma ordine e ricarica la pagina
 // Mostra un messaggio di conferma ordine e ricarica la pagina
 // ✅ Mostra messaggio di conferma ordine e ricarica la pagina (simulazione invio).
@@ -1987,6 +1955,4 @@ function preparaRiepilogoOrdine() {
 }
 <!-- 📜 Fine script JavaScript -->
 </script>
-<footer>
-<p>© 2025 ZARA FORMAGGI di Zara Maurizio - Tutti i diritti riservati</p>
-</footer>
+
