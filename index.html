@@ -74,7 +74,7 @@
 </style>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>ZARA FORMAGGI di Zara Maurizio</title>
+<title>Zara Formaggi | Formaggi tipici sardi a Iglesias</title>
 <!-- Leaflet CSS -->
 <!-- 🎨 Inizio sezione di stile CSS -->
 <style>
@@ -477,7 +477,37 @@ nav a.active-link {
 }
 <!-- 🎨 Fine sezione di stile CSS -->
 </style>
-</head>
+<meta content="Zara Formaggi - Negozio di prodotti tipici sardi a Iglesias. Pecorini, caprini, stagionati e freschi artigianali. Ritiro in negozio o spedizione." name="description"/><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Zara Formaggi",
+  "image": "https://www.zaraformaggi.com/logo.png",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Via Gramsci, Mercato Civico Box N° 27",
+    "addressLocality": "Iglesias",
+    "addressRegion": "CI",
+    "postalCode": "09016",
+    "addressCountry": "IT"
+  },
+  "url": "https://www.zaraformaggi.com",
+  "telephone": "+393401234567",
+  "openingHours": [
+    "Tu 08:00-13:00",
+    "We 08:00-13:00",
+    "Th 08:00-13:00",
+    "Fr 07:30-13:00",
+    "Sa 07:30-13:00"
+  ],
+  "priceRange": "$$",
+  "servesCuisine": "Prodotti tipici sardi",
+  "sameAs": [
+    "https://www.facebook.com/zaraformaggi",
+    "https://www.instagram.com/zaraformaggi"
+  ]
+}
+</script></head>
 <body>
 <!-- Bottone carrello fisso -->
 <div id="floating-cart" onclick="toggleCartSidebar()" style="position:fixed;top:20px;right:20px;background:#c9a602;color:#fff;padding:15px 20px;border-radius:50px;font-size:16px;font-weight:bold;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:9999;cursor:pointer;" title="Clicca per vedere il carrello">
@@ -514,9 +544,9 @@ nav a.active-link {
 <form action="invia-ordine.php" id="checkout-form" method="POST">
 <input id="ordine-dettaglio" name="ordine" type="hidden" value=""/>
 <input id="ordine-totale" name="totale" type="hidden" value=""/>
-<label><input id="ritiro-loco" onchange="toggleSottovuoto()" type="checkbox"> Ritiro in loco</input></label><br/>
+<label><input id="ritiro-loco" onchange="toggleSottovuoto()" type="checkbox"/> Ritiro in loco</label><br/>
 <div id="sottovuoto-opzione" style="display:none; margin-top:6px;">
-<label><input id="sottovuoto" onchange="aggiornaTotale()" type="checkbox"> Richiedi sottovuoto (+€0.50)</input></label>
+<label><input id="sottovuoto" onchange="aggiornaTotale()" type="checkbox"/> Richiedi sottovuoto (+€0.50)</label>
 </div>
 <input name="Nome" placeholder="Nome" required="" type="text"/>
 <input name="Cognome" placeholder="Cognome" required="" type="text"/>
@@ -634,7 +664,9 @@ nav a.active-link {
 </div>
 </section>
 <!-- 🧀 Sezione Shop: prodotti acquistabili -->
+
 <!--
+  
 <section class="section" id="shop" style="display: none;">
 <h4>🧀 🥓  Shop</h4>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
@@ -691,7 +723,6 @@ nav a.active-link {
 </div>
 </section>
 --!>
-
   
 </main>
 <!-- ⚓ Footer del sito -->
@@ -890,12 +921,7 @@ function finalizzaOrdine() {
 }
 <!-- 📜 Fine script JavaScript -->
 </script>
-
-
-
-  
 <!-- 🛒 Sezione Carrello -->
-<!--
 <section class="section" id="carrello" style="display: none;">
 <h2>🛒 Il tuo carrello</h2>
 <div id="cart-container"></div>
@@ -905,14 +931,10 @@ function finalizzaOrdine() {
 <!-- Selettore modalità consegna con 3 fasi -->
 <div style="text-align:center; margin-top:2rem;">
 <!-- Primo bottone -->
-<!--
-  
 <button id="btn-step-1" onclick="mostraScelteConsegna()" style="padding: 10px 20px; font-weight: bold; border-radius: 8px; background-color: #007f5f; color: white; border: none; cursor: pointer;">
     📝 Prosegui con i dati dell'ordine
   </button>
 <!-- Bottoni ritiro/spedizione -->
-
-<!--  
 <div id="scelte-consegna" style="display:none; margin-top: 1rem;">
 <button onclick="selezionaConsegna('ritiro')" style="padding: 10px 15px; margin: 5px; background: #3f704d; color: white; border: none; border-radius: 6px; cursor: pointer;">🏬 Ritiro in negozio</button>
 <button onclick="selezionaConsegna('spedizione')" style="padding: 10px 15px; margin: 5px; background: #3367d6; color: white; border: none; border-radius: 6px; cursor: pointer;">🚚 Spedizione</button>
@@ -943,11 +965,12 @@ function finalizzaOrdine() {
 <label>Telefono: <input name="telefono" required=""/></label><br/>
 <label>Email: <input name="email" required=""/></label><br/>
 </form>
-
-
-
-
-  
+<!-- Pulsante WhatsApp -->
+<div style="margin-top: 1rem; text-align:center;">
+<a href="#" id="wa-btn" onclick="inviaOrdineWhatsapp()" style="background-color: #25d366; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">
+    📦 Invia Ordine via WhatsApp
+  </a>
+</div>
 <!-- 📜 Inizio script JavaScript -->
 <script>// Mostra o nasconde il modulo per il ritiro in negozio oppure spedizione
 // Mostra o nasconde il modulo per il ritiro in negozio oppure spedizione
@@ -1676,8 +1699,6 @@ document.addEventListener("DOMContentLoaded", () => {
 <!-- 📜 Fine script JavaScript -->
 </script>
 <!-- 📜 Inizio script JavaScript -->
-
-<!--
 <script>
 function inviaOrdineWhatsApp() {
   let nome = document.getElementById("nome2")?.value || "";
@@ -1706,8 +1727,6 @@ function inviaOrdineWhatsApp() {
 }
 <!-- 📜 Fine script JavaScript -->
 </script>
--->
-  
 <!-- 📜 Inizio script JavaScript -->
 <script>
 // 📄 Prepara un riepilogo dell'ordine in formato testo leggibile.
