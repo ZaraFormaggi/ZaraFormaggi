@@ -508,6 +508,8 @@ nav a.active-link {
   ]
 }
 </script></head>
+
+  
 <body>
 <!-- Bottone carrello fisso -->
 <div id="floating-cart" onclick="toggleCartSidebar()" style="position:fixed;top:20px;right:20px;background:#c9a602;color:#fff;padding:15px 20px;border-radius:50px;font-size:16px;font-weight:bold;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:9999;cursor:pointer;" title="Clicca per vedere il carrello">
@@ -516,7 +518,7 @@ nav a.active-link {
 <!-- 🔝 Intestazione del sito: logo e titolo -->
 <header style="background-color: #2f4f2f; color: white; padding: 1rem 0; text-align: center;">
 <div class="header-logo">
-<img alt="ZARA FORMAGGI Logo" src="logo.png" style="width: 100px; height: auto; margin-bottom: 0.5rem;"/>
+<img alt="ZARA FORMAGGI Logo" src="logo.png.png" style="width: 100px; height: auto; margin-bottom: 0.5rem;"/>
 </div>
 <div class="header-title">
 <h1 style="margin: 0;">ZARA FORMAGGI</h1>
@@ -534,6 +536,8 @@ nav a.active-link {
 <a href="#shop">🧀 🥓 Shop</a>
 <a href="#contatti">📞 Contatti</a>
 <a href="#carrello" id="menu-carrello">
+  
+ <!-- 
   🛒 Carrello (<span id="menu-cart-count">0</span>) – €<span id="menu-cart-total">0.00</span>
 </a>
 </nav>
@@ -544,7 +548,8 @@ nav a.active-link {
 <form action="invia-ordine.php" id="checkout-form" method="post">
 <input id="ordine-dettaglio" name="ordine" type="hidden" value=""/>
 <input id="ordine-totale" name="totale" type="hidden" value=""/>
-<label><input id="ritiro-loco" onchange="toggleSottovuoto()" type="checkbox"/> Ritiro in loco</label><br/>
+<label>
+  <input id="ritiro-loco" onchange="toggleSottovuoto()" type="checkbox"/> Ritiro in loco</label><br/>
 <div id="sottovuoto-opzione" style="display:none; margin-top:6px;">
 <label><input id="sottovuoto" onchange="aggiornaTotale()" type="checkbox"/> Richiedi sottovuoto (+€0.50)</label>
 </div>
@@ -558,9 +563,7 @@ nav a.active-link {
 <button onclick="prepareOrder()" type="submit">Invia ordine</button>
 <button onclick="downloadPDF()" type="button">Salva in PDF</button>
 <div style="margin-top:1rem;">
-<div id="paypal-button-container"></div>
-<button onclick="alert('Simulazione Stripe')" type="button">Paga con Stripe</button>
-</div>
+
 <p><strong>Destinazione:</strong><br/>
 <label><input checked="" id="destinazione-italia" name="destinazione" type="radio"/> Italia</label><br/>
 <label><input id="destinazione-europa" name="destinazione" type="radio"/> Europa</label>
@@ -579,11 +582,18 @@ nav a.active-link {
 <label><input id="confezione-regalo" onchange="aggiornaTotale()" type="checkbox"/> Aggiungi confezione regalo (+€5)</label>
 </div>
 <div id="cart-total" style="margin-top:10px; font-weight:bold;"></div></div>
+
+ 
+
+  
 <!-- 🧭 Navigazione principale del sito -->
 <nav>
 </nav>
 <!-- 📞 Sezione Contatti -->
-<main><section class="section" id="contatti" style="display: none;">
+<main>
+  
+  
+  <section class="section" id="contatti" style="display: none;">
 <h2>Contatti</h2>
 <p>Per informazioni, ordini o richieste particolari, contattaci via email  <strong> info@zaraformaggi.com  </strong> </p>
 </section><section class="section" id="servizi" style="display: none;; display: none">
@@ -595,6 +605,8 @@ nav a.active-link {
 <li>Possibilità di mettere sottovuoto i prodotti </li>
 <li>Regala un  Voucher "ZaraFormaggi " </li>
 </ul>
+
+  
 <!-- 👤 Sezione Chi siamo -->
 </section><section class="section" id="chi-siamo" style="display: none;; display: none">
 <h2>Chi siamo</h2>
@@ -604,7 +616,12 @@ nav a.active-link {
 <h2>Benvenuti!</h2>
 <p>Visita il sito per scoprire i nostri prodotti. Offriamo una selezione di eccellenze enogastronomiche sarde, con attenzione alla qualità, alla tradizione e al gusto autentico.</p>
 </section>
+
+
+
+  
 <!-- 📍 Sezione Dove ci trovi: indirizzo, orari, mappa -->
+  
 <section class="section" id="dove" style="display: none;; display: none">
 <h2>Dove ci trovi</h2>
 <p>Ci trovi in <strong>Via Gramsci, Iglesias (CI), Sardegna</strong>, presso il Mercato Civico Box N° 27.</p>
@@ -625,7 +642,12 @@ nav a.active-link {
   </a>
 </div>
 </section>
+
+
+  
 <!-- 🖼️ Sezione Galleria con immagini dei prodotti -->
+
+  
 <!-- 🧀 Sezione Shop: prodotti acquistabili -->
 <section class="section" id="shop" style="display: none;; display: none">
 <h4>🧀 🥓  Shop</h4>
@@ -684,6 +706,8 @@ nav a.active-link {
 </section>
 </main>
 <!-- ⚓ Footer del sito -->
+
+  
 <!-- SEZIONE GALLERIA PRODOTTI -->
 <section id="galleria" style="padding: 3rem 1rem; background: #fff; display: none;; display: none">
 <h2 style="text-align: center; margin-bottom: 2rem;">I nostri formaggi</h2>
@@ -691,7 +715,7 @@ nav a.active-link {
 <!-- CARD PRODOTTO: Gran Sirai -->
 <div class="product-card">
 <div class="product-front">
-<img alt="Gran Sirai" src="prodotti/gran-sirai.jpg"/>
+<img alt="Gran Sirai" src="gran_sirai.jpg"/>
 <h3>Gran Sirai</h3>
 <button class="discover-btn">Scopri →</button>
 </div>
@@ -709,7 +733,7 @@ nav a.active-link {
 <!-- CARD PRODOTTO: Cuor di Latte -->
 <div class="product-card">
 <div class="product-front">
-<img alt="Cuor di Latte" src="prodotti/cuor-di-latte.jpg"/>
+<img alt="Cuor di Latte" src="cuor_di_latte.jpg"/>
 <h3>Cuor di Latte</h3>
 <button class="discover-btn">Scopri →</button>
 </div>
@@ -727,7 +751,7 @@ nav a.active-link {
 <!-- CARD PRODOTTO: Crablu -->
 <div class="product-card">
 <div class="product-front">
-<img alt="Crablu" src="prodotti/crablu.jpg"/>
+<img alt="Crablu" src="crablu.jpg"/>
 <h3>Crablu</h3>
 <button class="discover-btn">Scopri →</button>
 </div>
@@ -745,7 +769,7 @@ nav a.active-link {
 <!-- CARD PRODOTTO: Biancoarrosto -->
 <div class="product-card">
 <div class="product-front">
-<img alt="Biancoarrosto" src="prodotti/biancoarrosto.jpg"/>
+<img alt="Biancoarrosto" src="biancoarrosto.jpg"/>
 <h3>Biancoarrosto</h3>
 <button class="discover-btn">Scopri →</button>
 </div>
@@ -763,7 +787,7 @@ nav a.active-link {
 <!-- CARD PRODOTTO: Cuore Sulcis -->
 <div class="product-card">
 <div class="product-front">
-<img alt="Cuore Sulcis" src="prodotti/cuore-sulcis.jpg"/>
+<img alt="Cuore Sulcis" src=cuore.jpg"/>
 <h3>Cuore Sulcis</h3>
 <button class="discover-btn">Scopri →</button>
 </div>
@@ -781,7 +805,7 @@ nav a.active-link {
 <!-- CARD PRODOTTO: Nuraghe -->
 <div class="product-card">
 <div class="product-front">
-<img alt="Nuraghe" src="prodotti/nuraghe.jpg"/>
+<img alt="Nuraghe" src="nuraghe.jpg"/>
 <h3>Nuraghe</h3>
 <button class="discover-btn">Scopri →</button>
 </div>
@@ -799,7 +823,7 @@ nav a.active-link {
 <!-- CARD PRODOTTO: Provola Orotelli -->
 <div class="product-card">
 <div class="product-front">
-<img alt="Provola Orotelli" src="prodotti/provola-orotelli.jpg"/>
+<img alt="Provola Orotelli" src="provola_orotelli.jpg"/>
 <h3>Provola Orotelli</h3>
 <button class="discover-btn">Scopri →</button>
 </div>
@@ -817,7 +841,7 @@ nav a.active-link {
 <!-- CARD PRODOTTO: Sirai Gigante -->
 <div class="product-card">
 <div class="product-front">
-<img alt="Sirai Gigante" src="prodotti/sirai-gigante.jpg"/>
+<img alt="Sirai Gigante" src="sirai_gigante.jpg"/>
 <h3>Sirai Gigante</h3>
 <button class="discover-btn">Scopri →</button>
 </div>
@@ -835,7 +859,7 @@ nav a.active-link {
 <!-- CARD PRODOTTO: Sulcitano -->
 <div class="product-card">
 <div class="product-front">
-<img alt="Sulcitano" src="prodotti/sulcitano.jpg"/>
+<img alt="Sulcitano" src="sulcitano.jpg"/>
 <h3>Sulcitano</h3>
 <button class="discover-btn">Scopri →</button>
 </div>
@@ -853,7 +877,7 @@ nav a.active-link {
 <!-- CARD PRODOTTO: Vecchio Capraro -->
 <div class="product-card">
 <div class="product-front">
-<img alt="Vecchio Capraro" src="prodotti/vecchio-capraro.jpg"/>
+<img alt="Vecchio Capraro" src="vecchio_capraro.jpg"/>
 <h3>Vecchio Capraro</h3>
 <button class="discover-btn">Scopri →</button>
 </div>
@@ -957,9 +981,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
-<footer>
-<p>© 2025 ZARA FORMAGGI di Zara Maurizio - Tutti i diritti riservati</p>
-</footer>
+
 <!-- Leaflet JS -->
 <!-- 📜 Inizio script JavaScript -->
 <script src="https://www.paypal.com/sdk/js?client-id=sb¤cy=EUR"></script>
@@ -1196,12 +1218,9 @@ function finalizzaOrdine() {
 <label>Telefono: <input name="telefono" required=""/></label><br/>
 <label>Email: <input name="email" required=""/></label><br/>
 </form>
-<!-- Pulsante WhatsApp -->
-<div style="margin-top: 1rem; text-align:center;">
-<a href="#" id="wa-btn" onclick="inviaOrdineWhatsapp()" style="background-color: #25d366; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">
-    📦 Invia Ordine via WhatsApp
-  </a>
-</div>
+  
+
+  
 <!-- 📜 Inizio script JavaScript -->
 <script>// Mostra o nasconde il modulo per il ritiro in negozio oppure spedizione
 // Mostra o nasconde il modulo per il ritiro in negozio oppure spedizione
@@ -1248,7 +1267,7 @@ function inviaOrdineWhatsapp() {
 <!-- Invio ordine via Formspree -->
 <div style="text-align:center; margin-top: 1rem;">
 <button onclick="inviaOrdineFormspree()" style="background-color: #004080; color: white; padding: 10px 20px; border-radius: 6px; font-weight: bold; border: none;" type="button">
-    📧 Invia Ordine via Email
+    📧 Invia Ordine 
   </button>
 </div>
 <form action="invia-ordine.php" id="form-invio" method="POST" style="display:none;">
@@ -1442,35 +1461,12 @@ function aggiungiShop(nome, selectId) {
 
 function inviaOrdineEmail() {
   const messaggio = generaMessaggioOrdine();
-  const mailtoLink = `mailto:titolare@email.it?subject=Nuovo Ordine Zara&body=${encodeURIComponent(messaggio)}`;
+  const mailtoLink = `mailto:info@zaraformaggi.com?subject=Nuovo Ordine Zara&body=${encodeURIComponent(messaggio)}`;
   window.location.href = mailtoLink;
 }
+  
 
-function inviaOrdineWhatsApp() {
-  let nome = document.getElementById("nome2")?.value || "";
-  let indirizzo = document.getElementById("indirizzo2")?.value || "";
-  let città = document.getElementById("città2")?.value || "";
-  let cap = document.getElementById("cap2")?.value || "";
-  let telefono = document.getElementById("telefono2")?.value || "";
-  let note = document.getElementById("note2")?.value || "";
-
-  let msg = `🧀 🥓Ordine Zara Formaggi:%0A`;
-  msg += `👤 ${nome}%0A📍 ${indirizzo}, ${cap} ${città}%0A📞 ${telefono}%0A📝 Note: ${note}%0A%0A`;
-
-  cart.forEach(item => {
-    const subtot = (item.price * item.quantity).toFixed(2);
-    const peso = (item.pesoUnitario * item.quantity).toFixed(2);
-    msg += `• ${item.name} (${item.qtyLabel}) x${item.quantity} - €${subtot} - ${peso} kg%0A`;
-  });
-
-  const totale = cart.reduce((sum, i) => sum + i.price * i.quantity, 0).toFixed(2);
-  const pesoTot = cart.reduce((sum, i) => sum + i.pesoUnitario * i.quantity, 0).toFixed(2);
-  msg += `%0A📦 Totale: €${totale} - Peso: ${pesoTot} kg`;
-
-  const url = "https://wa.me/393333333333?text=" + encodeURIComponent(msg);
-  window.open(url, "_blank");
-(link, '_blank');
-}
+// function ordine whatsapp
 
 // 📝 Genera il testo dell'ordine per email, includendo dati cliente e prodotti.
 
@@ -1738,6 +1734,8 @@ document.addEventListener("DOMContentLoaded", () => {
 <!-- 📜 Fine script JavaScript -->
 </script>
 <!-- 📜 Inizio script JavaScript -->
+
+<!--
 <script>// Copia i dati dei moduli e li invia tramite Formspree come ordine email
 // Copia i dati dei moduli e li invia tramite Formspree come ordine email
 // 📧 Invia i dati dell'ordine compilato via email tramite Formspree.
@@ -1780,6 +1778,8 @@ function inviaOrdineFormspree() {
 }
 <!-- 📜 Fine script JavaScript -->
 </script>
+
+  
 <!-- 📜 Inizio script JavaScript -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -1947,34 +1947,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <!-- 📜 Fine script JavaScript -->
 </script>
 <!-- 📜 Inizio script JavaScript -->
-<script>
-function inviaOrdineWhatsApp() {
-  let nome = document.getElementById("nome2")?.value || "";
-  let indirizzo = document.getElementById("indirizzo2")?.value || "";
-  let città = document.getElementById("città2")?.value || "";
-  let cap = document.getElementById("cap2")?.value || "";
-  let telefono = document.getElementById("telefono2")?.value || "";
-  let note = document.getElementById("note2")?.value || "";
 
-  let msg = `🧀 Ordine Zara Formaggi:%0A`;
-  msg += `👤 ${nome}%0A📍 ${indirizzo}, ${cap} ${città}%0A📞 ${telefono}%0A📝 Note: ${note}%0A%0A`;
-
-  cart.forEach(item => {
-    const subtot = (item.price * item.quantity).toFixed(2);
-    const peso = (item.pesoUnitario * item.quantity).toFixed(2);
-    msg += `• ${item.name} (${item.qtyLabel}) x${item.quantity} - €${subtot} - ${peso} kg%0A`;
-  });
-
-  const totale = cart.reduce((sum, i) => sum + i.price * i.quantity, 0).toFixed(2);
-  const pesoTot = cart.reduce((sum, i) => sum + i.pesoUnitario * i.quantity, 0).toFixed(2);
-  msg += `%0A📦 Totale: €${totale} - Peso: ${pesoTot} kg`;
-
-  const url = "https://wa.me/393333333333?text=" + encodeURIComponent(msg);
-  window.open(url, "_blank");
-(url, "_blank");
-}
-<!-- 📜 Fine script JavaScript -->
-</script>
 <!-- 📜 Inizio script JavaScript -->
 <script>
 // 📄 Prepara un riepilogo dell'ordine in formato testo leggibile.
@@ -1984,6 +1957,7 @@ function preparaRiepilogoOrdine() {
   let indirizzo = document.getElementById("indirizzo2")?.value || "";
   let città = document.getElementById("città2")?.value || "";
   let cap = document.getElementById("cap2")?.value || "";
+  let paese = document.getElementById("paese2")?.value || "";
   let telefono = document.getElementById("telefono2")?.value || "";
   let note = document.getElementById("note2")?.value || "";
 
@@ -2013,3 +1987,6 @@ function preparaRiepilogoOrdine() {
 }
 <!-- 📜 Fine script JavaScript -->
 </script>
+<footer>
+<p>© 2025 ZARA FORMAGGI di Zara Maurizio - Tutti i diritti riservati</p>
+</footer>
