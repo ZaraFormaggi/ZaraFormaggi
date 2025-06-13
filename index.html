@@ -2,6 +2,7 @@
 
 <html lang="it">
 <head>
+<!-- 🎨 Inizio sezione di stile CSS -->
 <style>
 .indicatore-tacche .tacca {
   transition: background-color 0.3s ease;
@@ -10,6 +11,7 @@
   background-color: red;
 }
 
+/* Stile per le card dei prodotti o immagini */
 .card-overlay {
   position: relative;
   width: 200px;
@@ -17,10 +19,12 @@
   border-radius: 10px;
   text-align: center;
 }
+/* Stile per le card dei prodotti o immagini */
 .card-overlay img {
   width: 100%;
   display: block;
 }
+/* Stile per le card dei prodotti o immagini */
 .card-overlay .info {
   position: absolute;
   bottom: 0;
@@ -32,16 +36,19 @@
   transition: 0.3s ease-in-out;
   font-size: 0.9rem;
 }
+/* Stile per le card dei prodotti o immagini */
 .card-overlay:hover .info {
   opacity: 1;
 }
 
+/* Stile per le card dei prodotti o immagini */
 .card-container {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
 }
+/* Stile per le card dei prodotti o immagini */
 .card {
   background-color: #fff;
   border: 1px solid #ccc;
@@ -50,17 +57,26 @@
   padding: 0.5rem;
   text-align: center;
 }
+/* Stile per le card dei prodotti o immagini */
 .card img {
   width: 100%;
   height: auto;
   border-radius: 6px;
 }
 
+<!-- 🎨 Fine sezione di stile CSS -->
+
+/* Evidenzia la scelta effettuata */
+.scelta-attiva {
+  outline: 3px solid limegreen !important;
+  box-shadow: 0 0 10px limegreen;
+}
 </style>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>ZARA FORMAGGI di Zara Maurizio</title>
 <!-- Leaflet CSS -->
+<!-- 🎨 Inizio sezione di stile CSS -->
 <style>
 .indicatore-tacche .tacca {
   transition: background-color 0.3s ease;
@@ -76,6 +92,7 @@
       --caldo: #f4e2d8;
     }
 
+/* Impostazioni generali del corpo della pagina */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -83,6 +100,7 @@
       color: #333;
     }
 
+/* Stile dell'intestazione */
     header {
       background-color: var(--verde-scuro);
       color: white;
@@ -90,21 +108,25 @@
       text-align: center;
     }
 
+/* Stile dell'intestazione */
     .header-logo img {
       width: 100px;
       height: auto;
       margin-bottom: 0.5rem;
     }
 
+/* Stile dell'intestazione */
     .header-title h1 {
       margin: 0;
     }
 
+/* Stile dell'intestazione */
     .header-subtitle {
       margin-top: 0.5rem;
       font-size: 1.1rem;
     }
 
+/* Stile del menu di navigazione */
     nav {
       background-color: var(--verde-chiaro);
       display: flex;
@@ -112,6 +134,7 @@
       flex-wrap: wrap;
     }
 
+/* Stile del menu di navigazione */
     nav a {
       color: white;
       padding: 1rem;
@@ -120,6 +143,7 @@
       cursor: pointer;
     }
 
+/* Stile del menu di navigazione */
     nav a:hover {
       background-color: var(--giallo-ocra);
     }
@@ -170,6 +194,7 @@
       border-radius: 8px;
     }
 
+/* Stile per le card dei prodotti o immagini */
     .card-container {
       display: flex;
       flex-wrap: wrap;
@@ -177,6 +202,7 @@
       justify-content: center;
     }
 
+/* Stile per le card dei prodotti o immagini */
     .card {
       background-color: #fff8ed;
       border: 1px solid #ccc;
@@ -186,27 +212,33 @@
       text-align: center;
     }
 
+/* Stile per le card dei prodotti o immagini */
     .card img {
       width: 100%;
       border-radius: 8px;
       height: auto;
     }
 
+/* Stile per le card dei prodotti o immagini */
     .card h3 {
       margin-top: 0.5rem;
       color: #5d4037;
     }
 
+/* Stile per le card dei prodotti o immagini */
     .card p {
       font-size: 0.95em;
       color: #4e342e;
     }
 
     @media (max-width: 600px) {
+/* Stile del menu di navigazione */
       nav a { padding: 0.5rem; }
+/* Stile per le card dei prodotti o immagini */
       .card { width: 100%; }
     }
   
+/* Bottone fisso del carrello */
     #cart-button {
       position: fixed;
       top: 1rem;
@@ -221,6 +253,7 @@
       z-index: 1000;
     }
 
+/* Sidebar del carrello e modulo d'ordine */
     #cart-section {
       position: fixed;
       top: 5rem;
@@ -254,7 +287,9 @@
       padding: 0.5rem;
     }
 
+<!-- 🎨 Fine sezione di stile CSS -->
 </style>
+<!-- 🎨 Inizio sezione di stile CSS -->
 <style>
 .indicatore-tacche .tacca {
   transition: background-color 0.3s ease;
@@ -265,7 +300,9 @@
 
 .section { display: none; }
 .section.active { display: block; }
+<!-- 🎨 Fine sezione di stile CSS -->
 </style>
+<!-- 🎨 Inizio sezione di stile CSS -->
 <style>
 .indicatore-tacche .tacca {
   transition: background-color 0.3s ease;
@@ -274,11 +311,13 @@
   background-color: red;
 }
 
+/* Stile del menu di navigazione */
 nav {
   background: #333;
   padding: 12px;
   text-align: center;
 }
+/* Stile del menu di navigazione */
 nav a {
   color: white;
   text-decoration: none;
@@ -287,9 +326,11 @@ nav a {
   font-size: 16px;
   transition: color 0.3s ease;
 }
+/* Stile del menu di navigazione */
 nav a:hover {
   color: #FFD700;
 }
+/* Stile del menu di navigazione */
 nav a.active-link {
   border-bottom: 2px solid #FFD700;
   padding-bottom: 4px;
@@ -306,7 +347,9 @@ nav a.active-link {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+<!-- 🎨 Fine sezione di stile CSS -->
 </style>
+<!-- 🎨 Inizio sezione di stile CSS -->
 <style>
 .indicatore-tacche .tacca {
   transition: background-color 0.3s ease;
@@ -321,7 +364,9 @@ nav a.active-link {
     right: 0 !important;
   }
 }
+<!-- 🎨 Fine sezione di stile CSS -->
 </style>
+<!-- 🎨 Inizio sezione di stile CSS -->
 <style>
 .indicatore-tacche .tacca {
   transition: background-color 0.3s ease;
@@ -344,16 +389,20 @@ nav a.active-link {
 .indicatore-tacche .tacca.attiva {
   background-color: green;
 }
+<!-- 🎨 Fine sezione di stile CSS -->
 </style>
+<!-- 🎨 Inizio sezione di stile CSS -->
 <style>
 .shop-container {
   display: block;
   margin: 2rem auto;
   max-width: 600px;
 }
+/* Stile per ogni prodotto nel negozio */
 .product-card {
   margin-bottom: 2rem;
 }
+/* Stile per ogni prodotto nel negozio */
 .product-card {
   width: 300px;
   border: 2px solid #d9d9d9;
@@ -362,18 +411,23 @@ nav a.active-link {
   box-shadow: 0 0 10px rgba(0,0,0,0.05);
   background-color: #ffffff;
 }
+/* Stile per ogni prodotto nel negozio */
 .product-card h3 {
   margin-top: 0;
 }
 .scelte-formati {
   margin-top: 12px;
 }
+<!-- 🎨 Fine sezione di stile CSS -->
 </style>
+<!-- 🎨 Inizio sezione di stile CSS -->
 <style>
+/* Tooltip informativo sui formati e prezzi */
 .tooltip {
   position: relative;
   display: inline-block;
 }
+/* Tooltip informativo sui formati e prezzi */
 .tooltip .tooltip-text {
   visibility: hidden;
   width: max-content;
@@ -391,21 +445,24 @@ nav a.active-link {
   transition: opacity 0.3s;
   font-size: 13px;
 }
+/* Tooltip informativo sui formati e prezzi */
 .tooltip:hover .tooltip-text {
   visibility: visible;
   opacity: 1;
 }
+<!-- 🎨 Fine sezione di stile CSS -->
 </style>
-
+<!-- 🎨 Inizio sezione di stile CSS -->
 <style>
+/* Evidenzia il formato selezionato del prodotto */
 .formato-attivo {
   background-color: #004aad !important;
   color: #fff !important;
   border: 2px solid #004aad;
 }
+<!-- 🎨 Fine sezione di stile CSS -->
 </style>
-
-
+<!-- 🎨 Inizio sezione di stile CSS -->
 <style>
 .fade-in {
   opacity: 0;
@@ -418,14 +475,15 @@ nav a.active-link {
     transform: translateY(0);
   }
 }
+<!-- 🎨 Fine sezione di stile CSS -->
 </style>
-
 </head>
 <body>
 <!-- Bottone carrello fisso -->
 <div id="floating-cart" onclick="toggleCartSidebar()" style="position:fixed;top:20px;right:20px;background:#c9a602;color:#fff;padding:15px 20px;border-radius:50px;font-size:16px;font-weight:bold;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:9999;cursor:pointer;" title="Clicca per vedere il carrello">
   🛒 Carrello: <span id="floating-total">€0.00</span>
 </div>
+<!-- 🔝 Intestazione del sito: logo e titolo -->
 <header style="background-color: #2f4f2f; color: white; padding: 1rem 0; text-align: center;">
 <div class="header-logo">
 <img alt="ZARA FORMAGGI Logo" src="logo.png" style="width: 100px; height: auto; margin-bottom: 0.5rem;"/>
@@ -436,6 +494,7 @@ nav a.active-link {
 <p class="header-subtitle">Rivendita di prodotti tipici sardi e molto altro</p>
 </div>
 </header>
+<!-- 🧭 Navigazione principale del sito -->
 <nav style="background-color: #3f704d; display: flex; flex-wrap: wrap; justify-content: center;">
 <a href="#home">🏠 Home</a>
 <a href="#chi-siamo">👤 Chi siamo</a>
@@ -452,10 +511,12 @@ nav a.active-link {
 <h3>Il tuo carrello</h3>
 <div id="cart-items"></div><button onclick="document.getElementById('ordine-form').scrollIntoView();" style="margin-top: 20px;">📦 Procedi all'ordine</button>
 <hr/>
-<form action="https://formspree.io/f/xpwrplgn" id="checkout-form" method="POST">
-<label><input id="ritiro-loco" onchange="toggleSottovuoto()" type="checkbox"/> Ritiro in loco</label><br/>
+<form action="invia-ordine.php" id="checkout-form" method="POST">
+<input id="ordine-dettaglio" name="ordine" type="hidden" value=""/>
+<input id="ordine-totale" name="totale" type="hidden" value=""/>
+<label><input id="ritiro-loco" onchange="toggleSottovuoto()" type="checkbox"> Ritiro in loco</input></label><br/>
 <div id="sottovuoto-opzione" style="display:none; margin-top:6px;">
-<label><input id="sottovuoto" onchange="aggiornaTotale()" type="checkbox"/> Richiedi sottovuoto (+€0.50)</label>
+<label><input id="sottovuoto" onchange="aggiornaTotale()" type="checkbox"> Richiedi sottovuoto (+€0.50)</input></label>
 </div>
 <input name="Nome" placeholder="Nome" required="" type="text"/>
 <input name="Cognome" placeholder="Cognome" required="" type="text"/>
@@ -480,8 +541,10 @@ nav a.active-link {
 <label><input id="confezione-regalo" onchange="aggiornaTotale()" type="checkbox"/> Aggiungi confezione regalo (+€5)</label>
 </div>
 <div id="cart-total" style="margin-top:10px; font-weight:bold;"></div></div>
+<!-- 🧭 Navigazione principale del sito -->
 <nav>
 </nav>
+<!-- 📞 Sezione Contatti -->
 <main><section class="section" id="contatti" style="display: none;">
 <h2>Contatti</h2>
 <p>Per informazioni, ordini o richieste particolari, contattaci via email  <strong> info@zaraformaggi.com  </strong> </p>
@@ -494,13 +557,16 @@ nav a.active-link {
 <li>Possibilità di mettere sottovuoto i prodotti </li>
 <li>Regala un  Voucher "ZaraFormaggi " </li>
 </ul>
+<!-- 👤 Sezione Chi siamo -->
 </section><section class="section" id="chi-siamo" style="display: none;">
 <h2>Chi siamo</h2>
 <p>ZARA FORMAGGI nasce dalla passione per i sapori autentici della Sardegna. Fondata da Maurizio Zara, l’attività si dedica alla selezione e vendita di prodotti tipici come formaggi, salumi, dolci e molto altro. Tradizione e qualità sono il nostro marchio.</p>
+<!-- 🏠 Sezione Home: messaggio di benvenuto -->
 </section><section class="section active" id="home" style="display: block;">
 <h2>Benvenuti!</h2>
 <p>Visita il sito per scoprire i nostri prodotti. Offriamo una selezione di eccellenze enogastronomiche sarde, con attenzione alla qualità, alla tradizione e al gusto autentico.</p>
 </section>
+<!-- 📍 Sezione Dove ci trovi: indirizzo, orari, mappa -->
 <section class="section" id="dove" style="display: none;">
 <h2>Dove ci trovi</h2>
 <p>Ci trovi in <strong>Via Gramsci, Iglesias (CI), Sardegna</strong>, presso il Mercato Civico Box N° 27.</p>
@@ -521,55 +587,54 @@ nav a.active-link {
   </a>
 </div>
 </section>
+<!-- 🖼️ Sezione Galleria con immagini dei prodotti -->
 <section class="section" id="galleria" style="display: none;">
 <h2>Galleria</h2>
 <div class="card-container">
 <div class="card">
 <img alt="biancoarrosto.png" src="biancoarrosto.png"/>
-<p>Biancoarrosto</p>
+<p>Biancoarrosto</p><p>Formaggio bianco da griglia, dal sapore pieno e leggero.</p>
 </div>
 <div class="card">
 <img alt="crablu.png" src="crablu.png"/>
-<p>Crablu</p>
+<p>Crablu</p><p>Formaggio erborinato con venature blu, sapore deciso e complesso.</p>
 </div>
 <div class="card">
 <img alt="cuor_di_latte.png" src="cuor_di_latte.png"/>
-<p>Cuor Di Latte</p>
+<p>Cuor Di Latte</p><p>Formaggio fresco e dolce, perfetto per spalmare o accompagnare miele.</p>
 </div>
 <div class="card">
 <img alt="cuore_sulcis.png" src="cuore.png"/>
-<p>Cuore Sulcis</p>
+<p>Cuore Sulcis</p><p>Pecorino semistagionato, dal cuore morbido e sapore equilibrato.</p>
 </div>
 <div class="card">
 <img alt="gran_sirai.png" src="gran_sirai.png"/>
-<p>Gran Sirai</p>
+<p>Gran Sirai</p><p>Formaggio a pasta dura e lunga stagionatura, per grattugia o tavola.</p>
 </div>
 <div class="card">
 <img alt="nuraghe.png" src="nuraghe.png"/>
-<p>Nuraghe</p>
+<p>Nuraghe</p><p>Pecorino stagionato dal gusto intenso, prodotto con latte ovino.</p>
 </div>
 <div class="card">
 <img alt="provola_orotelli.png" src="provola_orotelli.png"/>
-<p>Provola Orotelli</p>
+<p>Provola Orotelli</p><p>Formaggio affumicato, dalla crosta dorata e pasta filante.</p>
 </div>
 <div class="card">
 <img alt="sirai_gigante.png" src="sirai_gigante.png"/>
-<p>Sirai Gigante</p>
+<p>Sirai Gigante</p><p>Formaggio a lunga stagionatura, pasta dura, sapore ricco.</p>
 </div>
 <div class="card">
 <img alt="sulcitano.png" src="sulcitano.png"/>
-<p>Sulcitano</p>
+<p>Sulcitano</p><p>Pecorino fresco tipico del Sulcis, ideale da tavola.</p>
 </div>
 <div class="card">
 <img alt="vecchio_capraro.png" src="vecchio_capraro.png"/>
-<p>Vecchio Capraro</p>
+<p>Vecchio Capraro</p><p>Caprino stagionato, forte e aromatico, 100% latte di capra.</p>
 </div>
 </div>
 </section>
-
-
-
-<!--   
+<!-- 🧀 Sezione Shop: prodotti acquistabili -->
+<!--
 <section class="section" id="shop" style="display: none;">
 <h4>🧀 🥓  Shop</h4>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
@@ -625,23 +690,29 @@ nav a.active-link {
 </div>
 </div>
 </section>
-
 --!>
 
   
 </main>
+<!-- ⚓ Footer del sito -->
 <footer>
 <p>© 2025 ZARA FORMAGGI di Zara Maurizio - Tutti i diritti riservati</p>
 </footer>
 <!-- Leaflet JS -->
+<!-- 📜 Inizio script JavaScript -->
 <script src="https://www.paypal.com/sdk/js?client-id=sb¤cy=EUR"></script>
+<!-- 📜 Inizio script JavaScript -->
 <script>
-      function prepareOrder() {
+      // Prepara una stringa con l'elenco dei prodotti nel carrello e la inserisce nel campo nascosto per l'ordine
+// 🧾 Prepara la stringa con il riepilogo dei prodotti acquistati, da inviare nel form.
+
+function prepareOrder() {
         let content = "";
         cart.forEach(item => {
           content += `${item.name} x${item.quantity} (€${(item.price * item.quantity).toFixed(2)})\n`;
         });
         document.getElementById("ordine-dettaglio").value = content;
+  document.getElementById("ordine-totale").value = total.toFixed(2);
       }
 
       paypal.Buttons({
@@ -661,7 +732,9 @@ nav a.active-link {
           });
         }
       }).render('#paypal-button-container');
+<!-- 📜 Fine script JavaScript -->
     </script>
+<!-- 📜 Inizio script JavaScript -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   const cards = document.querySelectorAll('.card-overlay');
@@ -682,8 +755,12 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.card-overlay .info').forEach(i => i.style.opacity = '0');
   });
 });
+<!-- 📜 Fine script JavaScript -->
 </script>
+<!-- 📜 Inizio script JavaScript -->
 <script>
+// ⚖️ Aggiorna la descrizione del peso selezionato in base alla porzione scelta.
+
 function aggiornaPesoGenerico(selectId, labelId) {
   const pesoTesto = {
     "0.125": "1/8 di forma = circa 500g",
@@ -694,7 +771,9 @@ function aggiornaPesoGenerico(selectId, labelId) {
   const valore = document.getElementById(selectId).value;
   document.getElementById(labelId).innerText = pesoTesto[valore];
 }
+<!-- 📜 Fine script JavaScript -->
 </script>
+<!-- 📜 Inizio script JavaScript -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const sections = ["formaggi", "salumi", "altri-prodotti"];
@@ -714,7 +793,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("scroll", highlightSection);
 });
+<!-- 📜 Fine script JavaScript -->
 </script>
+<!-- 🎨 Inizio sezione di stile CSS -->
 <style>
 .indicatore-tacche .tacca {
   transition: background-color 0.3s ease;
@@ -728,8 +809,13 @@ document.addEventListener("DOMContentLoaded", () => {
   text-decoration: underline;
   color: #c00;
 }
+<!-- 🎨 Fine sezione di stile CSS -->
 </style>
-<script>
+<!-- 📜 Inizio script JavaScript -->
+<script>// Controlla il totale dell'ordine e mostra un riepilogo se supera il minimo richiesto per Italia o Europa
+// Controlla il totale dell'ordine e mostra un riepilogo se supera il minimo richiesto per Italia o Europa
+// 📤 Controlla se l'ordine raggiunge il minimo (Italia o Europa) e mostra il riepilogo.
+
 function inviaOrdine() {
   let total = 0;
   cart.forEach(item => total += item.price * item.quantity);
@@ -747,13 +833,18 @@ function inviaOrdine() {
   mostraRiepilogoOrdine();
   return false;
 }
+<!-- 📜 Fine script JavaScript -->
 </script>
 <section id="riepilogo-ordine" style="display:none; margin-top: 40px;">
 <h2>🧾 Riepilogo Ordine</h2>
 <div id="riepilogo-dettagli" style="margin-bottom: 20px;"></div>
 <button onclick="finalizzaOrdine()">Conferma e Invia Ordine</button>
 </section>
-<script>
+<!-- 📜 Inizio script JavaScript -->
+<script>// Mostra i dettagli del carrello in una lista HTML con immagini e prezzi
+// Mostra i dettagli del carrello in una lista HTML con immagini e prezzi
+// 📋 Crea un riepilogo visivo dell'ordine con immagini, nomi, quantità e totali.
+
 function mostraRiepilogoOrdine() {
   const div = document.getElementById("riepilogo-dettagli");
     const imageMap = {
@@ -789,28 +880,49 @@ function mostraRiepilogoOrdine() {
   div.innerHTML = html;
   document.getElementById("riepilogo-ordine").style.display = "block";
 }
+// Mostra un messaggio di conferma ordine e ricarica la pagina
+// Mostra un messaggio di conferma ordine e ricarica la pagina
+// ✅ Mostra messaggio di conferma ordine e ricarica la pagina (simulazione invio).
 
 function finalizzaOrdine() {
   alert("Ordine confermato! Grazie per l'acquisto.");
   location.reload();  // simula invio e reset
 }
+<!-- 📜 Fine script JavaScript -->
 </script>
 
+
+
   
+<!-- 🛒 Sezione Carrello -->
+<!--
 <section class="section" id="carrello" style="display: none;">
 <h2>🛒 Il tuo carrello</h2>
 <div id="cart-container"></div>
 <div id="peso-totale" style="margin-top: 10px; font-weight: bold;"></div>
 <div style="margin-top: 20px;">
-
 <!-- Selettore modalità consegna -->
+<!-- Selettore modalità consegna con 3 fasi -->
 <div style="text-align:center; margin-top:2rem;">
-<button id="btn-toggle-ritiro" onclick="toggleRitiro()" style="padding: 10px 20px; font-weight: bold; border-radius: 8px; background-color: #007f5f; color: white; border: none; cursor: pointer;">
-    🚚 Clicca per ritiro in negozio
+<!-- Primo bottone -->
+<!--
+  
+<button id="btn-step-1" onclick="mostraScelteConsegna()" style="padding: 10px 20px; font-weight: bold; border-radius: 8px; background-color: #007f5f; color: white; border: none; cursor: pointer;">
+    📝 Prosegui con i dati dell'ordine
   </button>
+<!-- Bottoni ritiro/spedizione -->
+
+<!--  
+<div id="scelte-consegna" style="display:none; margin-top: 1rem;">
+<button onclick="selezionaConsegna('ritiro')" style="padding: 10px 15px; margin: 5px; background: #3f704d; color: white; border: none; border-radius: 6px; cursor: pointer;">🏬 Ritiro in negozio</button>
+<button onclick="selezionaConsegna('spedizione')" style="padding: 10px 15px; margin: 5px; background: #3367d6; color: white; border: none; border-radius: 6px; cursor: pointer;">🚚 Spedizione</button>
+</div>
+</div>
 </div>
 <!-- Form ordine completo -->
-<form id="form-completo" style="display:none;" style="margin-top:2rem;">
+<form id="form-completo" style="display: none; margin-top: 1rem;">
+<input id="ordine-dettaglio" name="ordine" type="hidden" value=""/>
+<input id="ordine-totale" name="totale" type="hidden" value=""/>
 <h2>Dati per la spedizione</h2>
 <label>Nome: <input name="nome" required=""/></label><br/>
 <label>Cognome: <input name="cognome" required=""/></label><br/>
@@ -822,20 +934,25 @@ function finalizzaOrdine() {
 <label>Paese: <input name="paese" required=""/></label><br/>
 </form>
 <!-- Form ritiro in negozio -->
-<form id="form-ritiro" style="display:none;" style="display:none; margin-top:2rem;">
+<form id="form-ritiro" style="display: none; margin-top: 1rem;">
+<input id="ordine-dettaglio" name="ordine" type="hidden" value=""/>
+<input id="ordine-totale" name="totale" type="hidden" value=""/>
 <h2>Dati per il ritiro in negozio</h2>
 <label>Nome: <input name="nome" required=""/></label><br/>
 <label>Cognome: <input name="cognome" required=""/></label><br/>
 <label>Telefono: <input name="telefono" required=""/></label><br/>
 <label>Email: <input name="email" required=""/></label><br/>
 </form>
-<!-- Pulsante WhatsApp -->
-<div style="margin-top: 1rem; text-align:center;">
-<a href="#" id="wa-btn" onclick="inviaOrdineWhatsapp()" style="background-color: #25d366; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">
-    📦 Invia Ordine via WhatsApp
-  </a>
-</div>
-<script>
+
+
+
+
+  
+<!-- 📜 Inizio script JavaScript -->
+<script>// Mostra o nasconde il modulo per il ritiro in negozio oppure spedizione
+// Mostra o nasconde il modulo per il ritiro in negozio oppure spedizione
+// 🔄 Alterna tra visualizzazione del modulo per spedizione e ritiro in negozio.
+
 function toggleRitiro() {
   const btn = document.getElementById("btn-toggle-ritiro");
   const completo = document.getElementById("form-completo");
@@ -845,13 +962,16 @@ function toggleRitiro() {
   if (attivo) {
     ritiro.style.display = "none";
     completo.style.display = "block";
-    btn.textContent = "🚚 Clicca per ritiro in negozio";
+    btn.textContent = "📝 Prosegui con i dati dell'ordine";
   } else {
     ritiro.style.display = "block";
     completo.style.display = "none";
     btn.textContent = "🏬 Modalità ritiro attiva";
   }
 }
+// Genera un messaggio con i dati dell'ordine e apre WhatsApp per inviarlo
+// Genera un messaggio con i dati dell'ordine e apre WhatsApp per inviarlo
+// 💬 Invia l'ordine tramite WhatsApp costruendo un messaggio con i dettagli cliente e prodotti.
 
 function inviaOrdineWhatsapp() {
   let dati = "";
@@ -869,6 +989,7 @@ function inviaOrdineWhatsapp() {
   const link = `https://wa.me/?text=${encodeURIComponent(messaggio)}`;
   window.open(link, '_blank');
 }
+<!-- 📜 Fine script JavaScript -->
 </script>
 <!-- Invio ordine via Formspree -->
 <div style="text-align:center; margin-top: 1rem;">
@@ -876,22 +997,27 @@ function inviaOrdineWhatsapp() {
     📧 Invia Ordine via Email
   </button>
 </div>
-<form action="https://formspree.io/f/xpwrplgn" id="form-invio" method="POST" style="display:none;"></form>
-
-  
-
-</div>
+<form action="invia-ordine.php" id="form-invio" method="POST" style="display:none;">
+<input id="ordine-dettaglio" name="ordine" type="hidden" value=""/>
+<input id="ordine-totale" name="totale" type="hidden" value=""/>
+</form>
 <h3 style="text-align:right;">Totale: <span id="carrello-totale">€0.00</span></h3></section>
 <section class="section" id="form-ordine" style="display: none;">
-
 </section>
+<!-- 📜 Inizio script JavaScript -->
 <script>
 let cart = [];
+// Aggiunge un prodotto al carrello con formato, prezzo e peso
+// Aggiunge un prodotto al carrello con formato, prezzo e peso
+// ✅ Aggiunge un prodotto al carrello: salva nome, formato scelto, prezzo e peso, e aggiorna il carrello visivo.
 
 function addToCart(name, qtyLabel, price, pesoUnitario) {
   cart.push({ name, qtyLabel, price, quantity: 1, pesoUnitario });
   updateCart();
 }
+// Aggiorna la visualizzazione del carrello (quantità, prezzi, peso totale)
+// Aggiorna la visualizzazione del carrello (quantità, prezzi, peso totale)
+// 🔄 Aggiorna la visualizzazione del carrello (quantità, prezzo totale, peso totale e interfacce correlate).
 
 function updateCart() {
   const sidebarContainer = document.getElementById("cart-sidebar-container");
@@ -999,6 +1125,9 @@ function updateCart() {
   if (pesoSidebar) pesoSidebar.innerText = "Peso totale: " + pesoTotaleKg.toFixed(2) + " kg";
 
 }
+// Rimuove un elemento dal carrello
+// Rimuove un elemento dal carrello
+// ❌ Rimuove un elemento dal carrello in base all'indice.
 
 function removeItem(index) {
   cart.splice(index, 1);
@@ -1017,13 +1146,21 @@ function submitOrdine(event) {
   updateCart();
   document.getElementById("form-ordine").style.display = "none";
 }
+<!-- 📜 Fine script JavaScript -->
 </script>
+<!-- 📜 Inizio script JavaScript -->
 <script>
+// Aumenta la quantità di un elemento nel carrello
+// Aumenta la quantità di un elemento nel carrello
+// ➕ Aumenta la quantità di un elemento nel carrello.
 
 function incrementItem(index) {
   cart[index].quantity += 1;
   updateCart();
 }
+// Diminuisce la quantità o rimuove un prodotto se la quantità scende sotto 1
+// Diminuisce la quantità o rimuove un prodotto se la quantità scende sotto 1
+// ➖ Diminuisce la quantità oppure rimuove l'elemento se raggiunge zero.
 
 function decrementItem(index) {
   if (cart[index].quantity > 1) {
@@ -1043,8 +1180,12 @@ function aggiungiShop(nome, selectId) {
   const pesoUnitario = parseFloat(sel.options[sel.selectedIndex].dataset.pesounitario);
   addToCart(nome, formato, prezzo, pesoUnitario);
 }
+<!-- 📜 Fine script JavaScript -->
 </script>
+<!-- 📜 Inizio script JavaScript -->
 <script>
+// 📧 Costruisce un link mailto per inviare ordine via email.
+
 function inviaOrdineEmail() {
   const messaggio = generaMessaggioOrdine();
   const mailtoLink = `mailto:titolare@email.it?subject=Nuovo Ordine Zara&body=${encodeURIComponent(messaggio)}`;
@@ -1076,6 +1217,8 @@ function inviaOrdineWhatsApp() {
   window.open(url, "_blank");
 (link, '_blank');
 }
+
+// 📝 Genera il testo dell'ordine per email, includendo dati cliente e prodotti.
 
 function generaMessaggioOrdine() {
   let messaggio = "🧀 *Nuovo ordine Zara Formaggi*\n\n";
@@ -1110,8 +1253,12 @@ function generaMessaggioOrdine() {
   messaggio += `Indirizzo: ${document.getElementById("indirizzo").value}, ${document.getElementById("cap").value}, ${document.getElementById("citta").value}, ${document.getElementById("paese").value}`;
   return messaggio;
 }
+<!-- 📜 Fine script JavaScript -->
 </script>
+<!-- 📜 Inizio script JavaScript -->
 <script>
+// 🗂️ Mostra la sezione corrispondente all'ancora (es. #shop, #carrello, etc.).
+
 function mostraSezione(id) {
   document.querySelectorAll(".section").forEach(sec => {
     sec.classList.remove("active");
@@ -1136,7 +1283,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+<!-- 📜 Fine script JavaScript -->
 </script>
+<!-- 📜 Inizio script JavaScript -->
 <script>
 function toggleRitiroNegozio() {
   const ritiroCheckbox = document.querySelector('input[name="Ritiro in loco"]');
@@ -1146,9 +1295,12 @@ function toggleRitiroNegozio() {
   btn.innerText = attivo ? "✅ Ritiro in Negozio Attivo" : "🚶‍♂️ Attiva Ritiro in Negozio";
   btn.style.backgroundColor = attivo ? "#4caf50" : "#2f4f2f";
 }
+<!-- 📜 Fine script JavaScript -->
 </script>
 <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/>
+<!-- 📜 Inizio script JavaScript -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- 📜 Inizio script JavaScript -->
 <script>
   let mapInitialized = false;
   let map;
@@ -1175,6 +1327,7 @@ function toggleRitiroNegozio() {
   }
 
   window.addEventListener("DOMContentLoaded", () => showSection("dove"));
+<!-- 📜 Fine script JavaScript -->
 </script>
 <!-- Sidebar carrello COMPLETA -->
 <div id="cart-sidebar" style="position:fixed;top:0;right:-400px;width:350px;height:100%;background:#fff;border-left:2px solid #ccc;box-shadow:-2px 0 5px rgba(0,0,0,0.1);z-index:9999;padding:1rem;transition:right 0.3s;overflow-y:auto;">
@@ -1183,12 +1336,18 @@ function toggleRitiroNegozio() {
 <div id="peso-sidebar" style="margin-top:10px;font-weight:bold;"></div>
 <div id="cart-sidebar-total" style="font-weight: bold; margin-top: 10px;">Totale: €0.00</div>
 </div>
+<!-- 📜 Inizio script JavaScript -->
 <script>
-  function toggleCartSidebar() {
+  // Mostra o nasconde la barra laterale del carrello
+// 📦 Mostra o nasconde la sidebar del carrello a destra.
+
+function toggleCartSidebar() {
     const sidebar = document.getElementById("cart-sidebar");
     sidebar.style.right = sidebar.style.right === "0px" ? "-400px" : "0px";
   }
+<!-- 📜 Fine script JavaScript -->
 </script>
+<!-- 📜 Inizio script JavaScript -->
 <script>
 const disponibilitaProdotti = {
   "Nuraghe": {"1/8":10,"1/4":10,"1/2":10,"1":10},
@@ -1257,7 +1416,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+<!-- 📜 Fine script JavaScript -->
 </script>
+<!-- 📜 Inizio script JavaScript -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".product").forEach(prod => {
@@ -1320,9 +1481,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+<!-- 📜 Fine script JavaScript -->
 </script>
+<!-- 📜 Inizio script JavaScript -->
+<script>// Copia i dati dei moduli e li invia tramite Formspree come ordine email
+// Copia i dati dei moduli e li invia tramite Formspree come ordine email
+// 📧 Invia i dati dell'ordine compilato via email tramite Formspree.
 
-<script>
 function inviaOrdineFormspree() {
   const form = document.getElementById("form-ritiro").style.display === "block"
     ? document.getElementById("form-ritiro")
@@ -1359,7 +1524,9 @@ function inviaOrdineFormspree() {
 
   targetForm.submit();
 }
+<!-- 📜 Fine script JavaScript -->
 </script>
+<!-- 📜 Inizio script JavaScript -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".product-card").forEach(prod => {
@@ -1390,8 +1557,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+<!-- 📜 Fine script JavaScript -->
 </script>
-
+<!-- 📜 Inizio script JavaScript -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const hash = window.location.hash;
@@ -1408,10 +1576,85 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+<!-- 📜 Fine script JavaScript -->
 </script>
+<script>
+// Mostra i due pulsanti di scelta tra ritiro e spedizione con effetto fade-in
+function mostraScelteConsegna() {
+  const scelte = document.getElementById("scelte-consegna");
+  if (scelte) {
+    scelte.style.display = "block";
+    scelte.classList.add("fade-in");
+  }
+}
 
+// Mostra il form corretto in base alla scelta (ritiro o spedizione)
+
+function selezionaConsegna(tipo) {
+  const ritiroBtn = document.querySelector("button[onclick*='ritiro']");
+  const spedBtn = document.querySelector("button[onclick*='spedizione']");
+  ritiroBtn.classList.remove("scelta-attiva");
+  spedBtn.classList.remove("scelta-attiva");
+
+  if (tipo === "ritiro") {
+    ritiroBtn.classList.add("scelta-attiva");
+  } else {
+    spedBtn.classList.add("scelta-attiva");
+  }
+
+  const formRitiro = document.getElementById("form-ritiro");
+  const formSped = document.getElementById("form-completo");
+  if (tipo === "ritiro") {
+    formRitiro.style.display = "block";
+    formSped.style.display = "none";
+  } else {
+    formSped.style.display = "block";
+    formRitiro.style.display = "none";
+  }
+}
+</script>
+<script>
+// Mostra i due bottoni dopo il primo clic
+function mostraScelteConsegna() {
+  const step1 = document.getElementById("btn-step-1");
+  const scelte = document.getElementById("scelte-consegna");
+  const formRitiro = document.getElementById("form-ritiro");
+  const formSped = document.getElementById("form-completo");
+
+  if (scelte) scelte.style.display = "flex";
+  if (step1) step1.style.display = "none";
+  if (formRitiro) formRitiro.style.display = "none";
+  if (formSped) formSped.style.display = "none";
+}
+
+// Mostra il form corretto in base alla scelta
+
+function selezionaConsegna(tipo) {
+  const ritiroBtn = document.querySelector("button[onclick*='ritiro']");
+  const spedBtn = document.querySelector("button[onclick*='spedizione']");
+  ritiroBtn.classList.remove("scelta-attiva");
+  spedBtn.classList.remove("scelta-attiva");
+
+  if (tipo === "ritiro") {
+    ritiroBtn.classList.add("scelta-attiva");
+  } else {
+    spedBtn.classList.add("scelta-attiva");
+  }
+
+  const formRitiro = document.getElementById("form-ritiro");
+  const formSped = document.getElementById("form-completo");
+  if (tipo === "ritiro") {
+    formRitiro.style.display = "block";
+    formSped.style.display = "none";
+  } else {
+    formSped.style.display = "block";
+    formRitiro.style.display = "none";
+  }
+}
+</script>
 </body>
 </html>
+<!-- 📜 Inizio script JavaScript -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".product").forEach(prod => {
@@ -1430,7 +1673,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+<!-- 📜 Fine script JavaScript -->
 </script>
+<!-- 📜 Inizio script JavaScript -->
 <script>
 function inviaOrdineWhatsApp() {
   let nome = document.getElementById("nome2")?.value || "";
@@ -1457,8 +1702,12 @@ function inviaOrdineWhatsApp() {
   window.open(url, "_blank");
 (url, "_blank");
 }
+<!-- 📜 Fine script JavaScript -->
 </script>
+<!-- 📜 Inizio script JavaScript -->
 <script>
+// 📄 Prepara un riepilogo dell'ordine in formato testo leggibile.
+
 function preparaRiepilogoOrdine() {
   let nome = document.getElementById("nome2")?.value || "";
   let indirizzo = document.getElementById("indirizzo2")?.value || "";
@@ -1491,4 +1740,5 @@ function preparaRiepilogoOrdine() {
   document.getElementById("riepilogo-ordine").value = riepilogo;
 
 }
+<!-- 📜 Fine script JavaScript -->
 </script>
