@@ -541,7 +541,7 @@ nav a.active-link {
 <h3>Il tuo carrello</h3>
 <div id="cart-items"></div><button onclick="document.getElementById('ordine-form').scrollIntoView();" style="margin-top: 20px;">📦 Procedi all'ordine</button>
 <hr/>
-<form action="invia-ordine.php" id="checkout-form" method="POST">
+<form action="invia-ordine.php" id="checkout-form" method="post">
 <input id="ordine-dettaglio" name="ordine" type="hidden" value=""/>
 <input id="ordine-totale" name="totale" type="hidden" value=""/>
 <label><input id="ritiro-loco" onchange="toggleSottovuoto()" type="checkbox"/> Ritiro in loco</label><br/>
@@ -555,7 +555,7 @@ nav a.active-link {
 <input name="Indirizzo" placeholder="Indirizzo di consegna (se richiesto)" type="text"/>
 <label><input name="Ritiro in loco" type="checkbox"/> Ritiro in loco presso il negozio</label>
 <input id="ordine-dettaglio" name="Ordine" type="hidden"/>
-<button onclick="prepareOrder()" type="submit">Invia Ordine</button>
+<button onclick="prepareOrder()" type="submit">Invia ordine</button>
 <button onclick="downloadPDF()" type="button">Salva in PDF</button>
 <div style="margin-top:1rem;">
 <div id="paypal-button-container"></div>
@@ -566,6 +566,14 @@ nav a.active-link {
 <label><input id="destinazione-europa" name="destinazione" type="radio"/> Europa</label>
 </p>
 <button onclick="return inviaOrdine()" type="submit">Procedi al pagamento</button>
+
+<!-- CAMPI NASCOSTI PER INVIO PRODOTTI - Da popolare dinamicamente -->
+<input name="prodotti[0][nome]" type="hidden" value="Gran Sirai"/>
+<input name="prodotti[0][quantita]" type="hidden" value="2"/>
+<input name="prodotti[0][prezzo]" type="hidden" value="6.50"/>
+<input name="prodotti[1][nome]" type="hidden" value="Cuor di Latte"/>
+<input name="prodotti[1][quantita]" type="hidden" value="1"/>
+<input name="prodotti[1][prezzo]" type="hidden" value="4.00"/>
 </form>
 <div style="margin-top:10px;">
 <label><input id="confezione-regalo" onchange="aggiornaTotale()" type="checkbox"/> Aggiungi confezione regalo (+€5)</label>
@@ -578,7 +586,7 @@ nav a.active-link {
 <main><section class="section" id="contatti" style="display: none;">
 <h2>Contatti</h2>
 <p>Per informazioni, ordini o richieste particolari, contattaci via email  <strong> info@zaraformaggi.com  </strong> </p>
-</section><section class="section" id="servizi" style="display: none;">
+</section><section class="section" id="servizi" style="display: none;; display: none">
 <h2>I nostri servizi</h2>
 <ul>
 <li>Vendita al dettaglio di prodotti tipici sardi</li>
@@ -588,16 +596,16 @@ nav a.active-link {
 <li>Regala un  Voucher "ZaraFormaggi " </li>
 </ul>
 <!-- 👤 Sezione Chi siamo -->
-</section><section class="section" id="chi-siamo" style="display: none;">
+</section><section class="section" id="chi-siamo" style="display: none;; display: none">
 <h2>Chi siamo</h2>
 <p>ZARA FORMAGGI nasce dalla passione per i sapori autentici della Sardegna. Fondata da Maurizio Zara, l’attività si dedica alla selezione e vendita di prodotti tipici come formaggi, salumi, dolci e molto altro. Tradizione e qualità sono il nostro marchio.</p>
 <!-- 🏠 Sezione Home: messaggio di benvenuto -->
-</section><section class="section active" id="home" style="display: block;">
+</section><section class="section active" id="home" style="display: block;; display: none">
 <h2>Benvenuti!</h2>
 <p>Visita il sito per scoprire i nostri prodotti. Offriamo una selezione di eccellenze enogastronomiche sarde, con attenzione alla qualità, alla tradizione e al gusto autentico.</p>
 </section>
 <!-- 📍 Sezione Dove ci trovi: indirizzo, orari, mappa -->
-<section class="section" id="dove" style="display: none;">
+<section class="section" id="dove" style="display: none;; display: none">
 <h2>Dove ci trovi</h2>
 <p>Ci trovi in <strong>Via Gramsci, Iglesias (CI), Sardegna</strong>, presso il Mercato Civico Box N° 27.</p>
 <h3>Orari di apertura</h3>
@@ -618,56 +626,8 @@ nav a.active-link {
 </div>
 </section>
 <!-- 🖼️ Sezione Galleria con immagini dei prodotti -->
-<section class="section" id="galleria" style="display: none;">
-<h2>Galleria</h2>
-<div class="card-container">
-<div class="card">
-<img alt="biancoarrosto.png" src="biancoarrosto.png"/>
-<p>Biancoarrosto</p><p>Formaggio bianco da griglia, dal sapore pieno e leggero.</p>
-</div>
-<div class="card">
-<img alt="crablu.png" src="crablu.png"/>
-<p>Crablu</p><p>Formaggio erborinato con venature blu, sapore deciso e complesso.</p>
-</div>
-<div class="card">
-<img alt="cuor_di_latte.png" src="cuor_di_latte.png"/>
-<p>Cuor Di Latte</p><p>Formaggio fresco e dolce, perfetto per spalmare o accompagnare miele.</p>
-</div>
-<div class="card">
-<img alt="cuore_sulcis.png" src="cuore.png"/>
-<p>Cuore Sulcis</p><p>Pecorino semistagionato, dal cuore morbido e sapore equilibrato.</p>
-</div>
-<div class="card">
-<img alt="gran_sirai.png" src="gran_sirai.png"/>
-<p>Gran Sirai</p><p>Formaggio a pasta dura e lunga stagionatura, per grattugia o tavola.</p>
-</div>
-<div class="card">
-<img alt="nuraghe.png" src="nuraghe.png"/>
-<p>Nuraghe</p><p>Pecorino stagionato dal gusto intenso, prodotto con latte ovino.</p>
-</div>
-<div class="card">
-<img alt="provola_orotelli.png" src="provola_orotelli.png"/>
-<p>Provola Orotelli</p><p>Formaggio affumicato, dalla crosta dorata e pasta filante.</p>
-</div>
-<div class="card">
-<img alt="sirai_gigante.png" src="sirai_gigante.png"/>
-<p>Sirai Gigante</p><p>Formaggio a lunga stagionatura, pasta dura, sapore ricco.</p>
-</div>
-<div class="card">
-<img alt="sulcitano.png" src="sulcitano.png"/>
-<p>Sulcitano</p><p>Pecorino fresco tipico del Sulcis, ideale da tavola.</p>
-</div>
-<div class="card">
-<img alt="vecchio_capraro.png" src="vecchio_capraro.png"/>
-<p>Vecchio Capraro</p><p>Caprino stagionato, forte e aromatico, 100% latte di capra.</p>
-</div>
-</div>
-</section>
 <!-- 🧀 Sezione Shop: prodotti acquistabili -->
-
-<!--
-  
-<section class="section" id="shop" style="display: none;">
+<section class="section" id="shop" style="display: none;; display: none">
 <h4>🧀 🥓  Shop</h4>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
 <div class="product-card product">
@@ -722,10 +682,281 @@ nav a.active-link {
 </div>
 </div>
 </section>
---!>
-  
 </main>
 <!-- ⚓ Footer del sito -->
+<!-- SEZIONE GALLERIA PRODOTTI -->
+<section id="galleria" style="padding: 3rem 1rem; background: #fff; display: none;; display: none">
+<h2 style="text-align: center; margin-bottom: 2rem;">I nostri formaggi</h2>
+<div class="gallery-container">
+<!-- CARD PRODOTTO: Gran Sirai -->
+<div class="product-card">
+<div class="product-front">
+<img alt="Gran Sirai" src="prodotti/gran-sirai.jpg"/>
+<h3>Gran Sirai</h3>
+<button class="discover-btn">Scopri →</button>
+</div>
+<div class="product-back">
+<p>Formaggio stagionato a lunga maturazione, dal gusto intenso e deciso.</p>
+<table>
+<tr><th>Valori nutrizionali</th><th>Per 100g</th></tr>
+<tr><td>Energia</td><td>--- kcal</td></tr>
+<tr><td>Grassi</td><td>--- g</td></tr>
+<tr><td>Proteine</td><td>--- g</td></tr>
+<tr><td>Sale</td><td>--- g</td></tr>
+</table>
+</div>
+</div>
+<!-- CARD PRODOTTO: Cuor di Latte -->
+<div class="product-card">
+<div class="product-front">
+<img alt="Cuor di Latte" src="prodotti/cuor-di-latte.jpg"/>
+<h3>Cuor di Latte</h3>
+<button class="discover-btn">Scopri →</button>
+</div>
+<div class="product-back">
+<p>Formaggio fresco, delicato e morbido, perfetto per ogni palato.</p>
+<table>
+<tr><th>Valori nutrizionali</th><th>Per 100g</th></tr>
+<tr><td>Energia</td><td>--- kcal</td></tr>
+<tr><td>Grassi</td><td>--- g</td></tr>
+<tr><td>Proteine</td><td>--- g</td></tr>
+<tr><td>Sale</td><td>--- g</td></tr>
+</table>
+</div>
+</div>
+<!-- CARD PRODOTTO: Crablu -->
+<div class="product-card">
+<div class="product-front">
+<img alt="Crablu" src="prodotti/crablu.jpg"/>
+<h3>Crablu</h3>
+<button class="discover-btn">Scopri →</button>
+</div>
+<div class="product-back">
+<p>Formaggio erborinato con note aromatiche, ideale per i più esigenti.</p>
+<table>
+<tr><th>Valori nutrizionali</th><th>Per 100g</th></tr>
+<tr><td>Energia</td><td>--- kcal</td></tr>
+<tr><td>Grassi</td><td>--- g</td></tr>
+<tr><td>Proteine</td><td>--- g</td></tr>
+<tr><td>Sale</td><td>--- g</td></tr>
+</table>
+</div>
+</div>
+<!-- CARD PRODOTTO: Biancoarrosto -->
+<div class="product-card">
+<div class="product-front">
+<img alt="Biancoarrosto" src="prodotti/biancoarrosto.jpg"/>
+<h3>Biancoarrosto</h3>
+<button class="discover-btn">Scopri →</button>
+</div>
+<div class="product-back">
+<p>Formaggio bianco da griglia, saporito e leggero.</p>
+<table>
+<tr><th>Valori nutrizionali</th><th>Per 100g</th></tr>
+<tr><td>Energia</td><td>--- kcal</td></tr>
+<tr><td>Grassi</td><td>--- g</td></tr>
+<tr><td>Proteine</td><td>--- g</td></tr>
+<tr><td>Sale</td><td>--- g</td></tr>
+</table>
+</div>
+</div>
+<!-- CARD PRODOTTO: Cuore Sulcis -->
+<div class="product-card">
+<div class="product-front">
+<img alt="Cuore Sulcis" src="prodotti/cuore-sulcis.jpg"/>
+<h3>Cuore Sulcis</h3>
+<button class="discover-btn">Scopri →</button>
+</div>
+<div class="product-back">
+<p>Pecorino semistagionato, cuore tenero e sapore equilibrato.</p>
+<table>
+<tr><th>Valori nutrizionali</th><th>Per 100g</th></tr>
+<tr><td>Energia</td><td>--- kcal</td></tr>
+<tr><td>Grassi</td><td>--- g</td></tr>
+<tr><td>Proteine</td><td>--- g</td></tr>
+<tr><td>Sale</td><td>--- g</td></tr>
+</table>
+</div>
+</div>
+<!-- CARD PRODOTTO: Nuraghe -->
+<div class="product-card">
+<div class="product-front">
+<img alt="Nuraghe" src="prodotti/nuraghe.jpg"/>
+<h3>Nuraghe</h3>
+<button class="discover-btn">Scopri →</button>
+</div>
+<div class="product-back">
+<p>Pecorino stagionato, dal gusto ricco e persistente.</p>
+<table>
+<tr><th>Valori nutrizionali</th><th>Per 100g</th></tr>
+<tr><td>Energia</td><td>--- kcal</td></tr>
+<tr><td>Grassi</td><td>--- g</td></tr>
+<tr><td>Proteine</td><td>--- g</td></tr>
+<tr><td>Sale</td><td>--- g</td></tr>
+</table>
+</div>
+</div>
+<!-- CARD PRODOTTO: Provola Orotelli -->
+<div class="product-card">
+<div class="product-front">
+<img alt="Provola Orotelli" src="prodotti/provola-orotelli.jpg"/>
+<h3>Provola Orotelli</h3>
+<button class="discover-btn">Scopri →</button>
+</div>
+<div class="product-back">
+<p>Formaggio affumicato, pasta filante e gusto deciso.</p>
+<table>
+<tr><th>Valori nutrizionali</th><th>Per 100g</th></tr>
+<tr><td>Energia</td><td>--- kcal</td></tr>
+<tr><td>Grassi</td><td>--- g</td></tr>
+<tr><td>Proteine</td><td>--- g</td></tr>
+<tr><td>Sale</td><td>--- g</td></tr>
+</table>
+</div>
+</div>
+<!-- CARD PRODOTTO: Sirai Gigante -->
+<div class="product-card">
+<div class="product-front">
+<img alt="Sirai Gigante" src="prodotti/sirai-gigante.jpg"/>
+<h3>Sirai Gigante</h3>
+<button class="discover-btn">Scopri →</button>
+</div>
+<div class="product-back">
+<p>Formaggio extra stagionato, ideale da tavola.</p>
+<table>
+<tr><th>Valori nutrizionali</th><th>Per 100g</th></tr>
+<tr><td>Energia</td><td>--- kcal</td></tr>
+<tr><td>Grassi</td><td>--- g</td></tr>
+<tr><td>Proteine</td><td>--- g</td></tr>
+<tr><td>Sale</td><td>--- g</td></tr>
+</table>
+</div>
+</div>
+<!-- CARD PRODOTTO: Sulcitano -->
+<div class="product-card">
+<div class="product-front">
+<img alt="Sulcitano" src="prodotti/sulcitano.jpg"/>
+<h3>Sulcitano</h3>
+<button class="discover-btn">Scopri →</button>
+</div>
+<div class="product-back">
+<p>Pecorino fresco, tipico della zona del Sulcis.</p>
+<table>
+<tr><th>Valori nutrizionali</th><th>Per 100g</th></tr>
+<tr><td>Energia</td><td>--- kcal</td></tr>
+<tr><td>Grassi</td><td>--- g</td></tr>
+<tr><td>Proteine</td><td>--- g</td></tr>
+<tr><td>Sale</td><td>--- g</td></tr>
+</table>
+</div>
+</div>
+<!-- CARD PRODOTTO: Vecchio Capraro -->
+<div class="product-card">
+<div class="product-front">
+<img alt="Vecchio Capraro" src="prodotti/vecchio-capraro.jpg"/>
+<h3>Vecchio Capraro</h3>
+<button class="discover-btn">Scopri →</button>
+</div>
+<div class="product-back">
+<p>Caprino stagionato, sapore intenso e deciso.</p>
+<table>
+<tr><th>Valori nutrizionali</th><th>Per 100g</th></tr>
+<tr><td>Energia</td><td>--- kcal</td></tr>
+<tr><td>Grassi</td><td>--- g</td></tr>
+<tr><td>Proteine</td><td>--- g</td></tr>
+<tr><td>Sale</td><td>--- g</td></tr>
+</table>
+</div>
+</div>
+</div>
+</section>
+<!-- STILI GALLERIA PRODOTTI -->
+<style>
+.gallery-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+.product-card {
+  width: 260px;
+  background: #f8f4ef;
+  border-radius: 1rem;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  text-align: center;
+}
+.product-front img {
+  max-width: 100%;
+  border-radius: 0.5rem;
+}
+.product-front h3 {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: #643e2c;
+}
+.discover-btn {
+  margin-top: 1rem;
+  background-color: #643e2c;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.discover-btn:hover {
+  background-color: #8a5a3c;
+}
+.product-back {
+  display: none;
+  margin-top: 1rem;
+  animation: fadeIn 0.3s ease-in-out;
+}
+.product-back table {
+  margin-top: 0.8rem;
+  width: 100%;
+  font-size: 0.9rem;
+  border-collapse: collapse;
+}
+.product-back table td, .product-back table th {
+  border: 1px solid #ccc;
+  padding: 4px;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+</style>
+<!-- SCRIPT PER MOSTRARE DESCRIZIONE E GESTIRE MENU -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Mostra/nasconde la sezione galleria dal menu
+  const linkGalleria = document.querySelector('a[href="#galleria"]');
+  const galleria = document.getElementById("galleria");
+  if (linkGalleria && galleria) {
+    linkGalleria.addEventListener("click", function (e) {
+      e.preventDefault();
+      document.querySelectorAll("section").forEach(sec => {
+        if (sec.id !== "galleria") sec.style.display = "none";
+      });
+      galleria.style.display = "block";
+      window.scrollTo({ top: galleria.offsetTop - 80, behavior: "smooth" });
+    });
+  }
+
+  // Mostra/nasconde descrizione cliccando su "Scopri"
+  document.querySelectorAll(".discover-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const card = btn.closest(".product-card");
+      const back = card.querySelector(".product-back");
+      back.style.display = back.style.display === "block" ? "none" : "block";
+    });
+  });
+});
+</script>
 <footer>
 <p>© 2025 ZARA FORMAGGI di Zara Maurizio - Tutti i diritti riservati</p>
 </footer>
@@ -866,7 +1097,7 @@ function inviaOrdine() {
 }
 <!-- 📜 Fine script JavaScript -->
 </script>
-<section id="riepilogo-ordine" style="display:none; margin-top: 40px;">
+<section id="riepilogo-ordine" style="display:none; margin-top: 40px;; display: none">
 <h2>🧾 Riepilogo Ordine</h2>
 <div id="riepilogo-dettagli" style="margin-bottom: 20px;"></div>
 <button onclick="finalizzaOrdine()">Conferma e Invia Ordine</button>
@@ -922,7 +1153,7 @@ function finalizzaOrdine() {
 <!-- 📜 Fine script JavaScript -->
 </script>
 <!-- 🛒 Sezione Carrello -->
-<section class="section" id="carrello" style="display: none;">
+<section class="section" id="carrello" style="display: none;; display: none">
 <h2>🛒 Il tuo carrello</h2>
 <div id="cart-container"></div>
 <div id="peso-totale" style="margin-top: 10px; font-weight: bold;"></div>
@@ -1025,7 +1256,7 @@ function inviaOrdineWhatsapp() {
 <input id="ordine-totale" name="totale" type="hidden" value=""/>
 </form>
 <h3 style="text-align:right;">Totale: <span id="carrello-totale">€0.00</span></h3></section>
-<section class="section" id="form-ordine" style="display: none;">
+<section class="section" id="form-ordine" style="display: none;; display: none">
 </section>
 <!-- 📜 Inizio script JavaScript -->
 <script>
@@ -1674,6 +1905,23 @@ function selezionaConsegna(tipo) {
     formRitiro.style.display = "none";
   }
 }
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Gestisce tutti i link del menu che puntano a ID di sezioni
+  document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      const id = this.getAttribute("href").substring(1);
+      const section = document.getElementById(id);
+      if (section) {
+        document.querySelectorAll("section").forEach(sec => sec.style.display = "none");
+        section.style.display = "block";
+        window.scrollTo({ top: section.offsetTop - 80, behavior: "smooth" });
+      }
+    });
+  });
+});
 </script>
 </body>
 </html>
