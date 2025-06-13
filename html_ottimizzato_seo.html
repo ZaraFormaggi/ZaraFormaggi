@@ -1,0 +1,1762 @@
+<!DOCTYPE html>
+
+<html lang="it">
+<head>
+<!-- 🎨 Inizio sezione di stile CSS -->
+<style>
+.indicatore-tacche .tacca {
+  transition: background-color 0.3s ease;
+}
+.indicatore-tacche[data-disp*='low'] .tacca.attiva {
+  background-color: red;
+}
+
+/* Stile per le card dei prodotti o immagini */
+.card-overlay {
+  position: relative;
+  width: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+  text-align: center;
+}
+/* Stile per le card dei prodotti o immagini */
+.card-overlay img {
+  width: 100%;
+  display: block;
+}
+/* Stile per le card dei prodotti o immagini */
+.card-overlay .info {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  width: 100%;
+  padding: 10px;
+  opacity: 0;
+  transition: 0.3s ease-in-out;
+  font-size: 0.9rem;
+}
+/* Stile per le card dei prodotti o immagini */
+.card-overlay:hover .info {
+  opacity: 1;
+}
+
+/* Stile per le card dei prodotti o immagini */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+/* Stile per le card dei prodotti o immagini */
+.card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 220px;
+  padding: 0.5rem;
+  text-align: center;
+}
+/* Stile per le card dei prodotti o immagini */
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+<!-- 🎨 Fine sezione di stile CSS -->
+
+/* Evidenzia la scelta effettuata */
+.scelta-attiva {
+  outline: 3px solid limegreen !important;
+  box-shadow: 0 0 10px limegreen;
+}
+</style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zara Formaggi | Formaggi tipici sardi a Iglesias</title>
+<!-- Leaflet CSS -->
+<!-- 🎨 Inizio sezione di stile CSS -->
+<style>
+.indicatore-tacche .tacca {
+  transition: background-color 0.3s ease;
+}
+.indicatore-tacche[data-disp*='low'] .tacca.attiva {
+  background-color: red;
+}
+
+    :root {
+      --verde-scuro: #2f4f2f;
+      --verde-chiaro: #8fbc8f;
+      --giallo-ocra: #c9a602;
+      --caldo: #f4e2d8;
+    }
+
+/* Impostazioni generali del corpo della pagina */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--caldo);
+      color: #333;
+    }
+
+/* Stile dell'intestazione */
+    header {
+      background-color: var(--verde-scuro);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+/* Stile dell'intestazione */
+    .header-logo img {
+      width: 100px;
+      height: auto;
+      margin-bottom: 0.5rem;
+    }
+
+/* Stile dell'intestazione */
+    .header-title h1 {
+      margin: 0;
+    }
+
+/* Stile dell'intestazione */
+    .header-subtitle {
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+/* Stile del menu di navigazione */
+    nav {
+      background-color: var(--verde-chiaro);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+/* Stile del menu di navigazione */
+    nav a {
+      color: white;
+      padding: 1rem;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+/* Stile del menu di navigazione */
+    nav a:hover {
+      background-color: var(--giallo-ocra);
+    }
+
+    .section {
+      padding: 2rem;
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .gallery-placeholder {
+      border: 2px dashed var(--verde-scuro);
+      padding: 2rem;
+      text-align: center;
+      background-color: #fff;
+    }
+
+    footer {
+      background-color: var(--verde-scuro);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .search-bar {
+      margin: 1rem auto;
+      text-align: center;
+    }
+
+    .search-bar input {
+      padding: 0.5rem;
+      width: 80%;
+      max-width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    #map {
+      width: 100%;
+      max-width: 800px;
+      height: 50vh;
+      min-height: 300px;
+      margin: 1rem auto;
+      border: 2px solid var(--verde-scuro);
+      border-radius: 8px;
+    }
+
+/* Stile per le card dei prodotti o immagini */
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+/* Stile per le card dei prodotti o immagini */
+    .card {
+      background-color: #fff8ed;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      width: 300px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+/* Stile per le card dei prodotti o immagini */
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+      height: auto;
+    }
+
+/* Stile per le card dei prodotti o immagini */
+    .card h3 {
+      margin-top: 0.5rem;
+      color: #5d4037;
+    }
+
+/* Stile per le card dei prodotti o immagini */
+    .card p {
+      font-size: 0.95em;
+      color: #4e342e;
+    }
+
+    @media (max-width: 600px) {
+/* Stile del menu di navigazione */
+      nav a { padding: 0.5rem; }
+/* Stile per le card dei prodotti o immagini */
+      .card { width: 100%; }
+    }
+  
+/* Bottone fisso del carrello */
+    #cart-button {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background-color: var(--giallo-ocra);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+/* Sidebar del carrello e modulo d'ordine */
+    #cart-section {
+      position: fixed;
+      top: 5rem;
+      right: 1rem;
+      background: white;
+      border: 2px solid var(--verde-scuro);
+      border-radius: 12px;
+      width: 320px;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 1rem;
+      display: none;
+      z-index: 999;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .cart-item button {
+      margin: 0 0.25rem;
+    }
+
+    #checkout-form input, #checkout-form button {
+      display: block;
+      width: 100%;
+      margin-top: 0.5rem;
+      padding: 0.5rem;
+    }
+
+<!-- 🎨 Fine sezione di stile CSS -->
+</style>
+<!-- 🎨 Inizio sezione di stile CSS -->
+<style>
+.indicatore-tacche .tacca {
+  transition: background-color 0.3s ease;
+}
+.indicatore-tacche[data-disp*='low'] .tacca.attiva {
+  background-color: red;
+}
+
+.section { display: none; }
+.section.active { display: block; }
+<!-- 🎨 Fine sezione di stile CSS -->
+</style>
+<!-- 🎨 Inizio sezione di stile CSS -->
+<style>
+.indicatore-tacche .tacca {
+  transition: background-color 0.3s ease;
+}
+.indicatore-tacche[data-disp*='low'] .tacca.attiva {
+  background-color: red;
+}
+
+/* Stile del menu di navigazione */
+nav {
+  background: #333;
+  padding: 12px;
+  text-align: center;
+}
+/* Stile del menu di navigazione */
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: 500;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+/* Stile del menu di navigazione */
+nav a:hover {
+  color: #FFD700;
+}
+/* Stile del menu di navigazione */
+nav a.active-link {
+  border-bottom: 2px solid #FFD700;
+  padding-bottom: 4px;
+}
+.section {
+  display: none;
+  padding: 20px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+.section.active {
+  display: block;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+<!-- 🎨 Fine sezione di stile CSS -->
+</style>
+<!-- 🎨 Inizio sezione di stile CSS -->
+<style>
+.indicatore-tacche .tacca {
+  transition: background-color 0.3s ease;
+}
+.indicatore-tacche[data-disp*='low'] .tacca.attiva {
+  background-color: red;
+}
+
+@media (max-width: 768px) {
+  #cart-sidebar { width: 350px !important; }
+  #cart-sidebar.open {
+    right: 0 !important;
+  }
+}
+<!-- 🎨 Fine sezione di stile CSS -->
+</style>
+<!-- 🎨 Inizio sezione di stile CSS -->
+<style>
+.indicatore-tacche .tacca {
+  transition: background-color 0.3s ease;
+}
+.indicatore-tacche[data-disp*='low'] .tacca.attiva {
+  background-color: red;
+}
+
+.indicatore-tacche {
+  display: flex;
+  gap: 2px;
+  margin-top: 4px;
+}
+.indicatore-tacche .tacca {
+  width: 6px;
+  height: 16px;
+  border-radius: 2px;
+  background-color: gray;
+}
+.indicatore-tacche .tacca.attiva {
+  background-color: green;
+}
+<!-- 🎨 Fine sezione di stile CSS -->
+</style>
+<!-- 🎨 Inizio sezione di stile CSS -->
+<style>
+.shop-container {
+  display: block;
+  margin: 2rem auto;
+  max-width: 600px;
+}
+/* Stile per ogni prodotto nel negozio */
+.product-card {
+  margin-bottom: 2rem;
+}
+/* Stile per ogni prodotto nel negozio */
+.product-card {
+  width: 300px;
+  border: 2px solid #d9d9d9;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  background-color: #ffffff;
+}
+/* Stile per ogni prodotto nel negozio */
+.product-card h3 {
+  margin-top: 0;
+}
+.scelte-formati {
+  margin-top: 12px;
+}
+<!-- 🎨 Fine sezione di stile CSS -->
+</style>
+<!-- 🎨 Inizio sezione di stile CSS -->
+<style>
+/* Tooltip informativo sui formati e prezzi */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+/* Tooltip informativo sui formati e prezzi */
+.tooltip .tooltip-text {
+  visibility: hidden;
+  width: max-content;
+  max-width: 240px;
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 13px;
+}
+/* Tooltip informativo sui formati e prezzi */
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+<!-- 🎨 Fine sezione di stile CSS -->
+</style>
+<!-- 🎨 Inizio sezione di stile CSS -->
+<style>
+/* Evidenzia il formato selezionato del prodotto */
+.formato-attivo {
+  background-color: #004aad !important;
+  color: #fff !important;
+  border: 2px solid #004aad;
+}
+<!-- 🎨 Fine sezione di stile CSS -->
+</style>
+<!-- 🎨 Inizio sezione di stile CSS -->
+<style>
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.6s ease-out forwards;
+}
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+<!-- 🎨 Fine sezione di stile CSS -->
+</style>
+<meta content="Zara Formaggi - Negozio di prodotti tipici sardi a Iglesias. Pecorini, caprini, stagionati e freschi artigianali. Ritiro in negozio o spedizione." name="description"/><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Zara Formaggi",
+  "image": "https://www.zaraformaggi.com/logo.png",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Via Gramsci, Mercato Civico Box N° 27",
+    "addressLocality": "Iglesias",
+    "addressRegion": "CI",
+    "postalCode": "09016",
+    "addressCountry": "IT"
+  },
+  "url": "https://www.zaraformaggi.com",
+  "telephone": "+393401234567",
+  "openingHours": [
+    "Tu 08:00-13:00",
+    "We 08:00-13:00",
+    "Th 08:00-13:00",
+    "Fr 07:30-13:00",
+    "Sa 07:30-13:00"
+  ],
+  "priceRange": "$$",
+  "servesCuisine": "Prodotti tipici sardi",
+  "sameAs": [
+    "https://www.facebook.com/zaraformaggi",
+    "https://www.instagram.com/zaraformaggi"
+  ]
+}
+</script></head>
+<body>
+<!-- Bottone carrello fisso -->
+<div id="floating-cart" onclick="toggleCartSidebar()" style="position:fixed;top:20px;right:20px;background:#c9a602;color:#fff;padding:15px 20px;border-radius:50px;font-size:16px;font-weight:bold;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:9999;cursor:pointer;" title="Clicca per vedere il carrello">
+  🛒 Carrello: <span id="floating-total">€0.00</span>
+</div>
+<!-- 🔝 Intestazione del sito: logo e titolo -->
+<header style="background-color: #2f4f2f; color: white; padding: 1rem 0; text-align: center;">
+<div class="header-logo">
+<img alt="ZARA FORMAGGI Logo" src="logo.png" style="width: 100px; height: auto; margin-bottom: 0.5rem;"/>
+</div>
+<div class="header-title">
+<h1 style="margin: 0;">ZARA FORMAGGI</h1>
+<p class="header-subtitle">di Zara Maurizio</p>
+<p class="header-subtitle">Rivendita di prodotti tipici sardi e molto altro</p>
+</div>
+</header>
+<!-- 🧭 Navigazione principale del sito -->
+<nav style="background-color: #3f704d; display: flex; flex-wrap: wrap; justify-content: center;">
+<a href="#home">🏠 Home</a>
+<a href="#chi-siamo">👤 Chi siamo</a>
+<a href="#dove">📍 Dove ci trovi</a>
+<a href="#servizi">🛠️ Servizi</a>
+<a href="#galleria">🖼️ Galleria</a>
+<a href="#shop">🧀 🥓 Shop</a>
+<a href="#contatti">📞 Contatti</a>
+<a href="#carrello" id="menu-carrello">
+  🛒 Carrello (<span id="menu-cart-count">0</span>) – €<span id="menu-cart-total">0.00</span>
+</a>
+</nav>
+<div id="cart-section">
+<h3>Il tuo carrello</h3>
+<div id="cart-items"></div><button onclick="document.getElementById('ordine-form').scrollIntoView();" style="margin-top: 20px;">📦 Procedi all'ordine</button>
+<hr/>
+<form action="invia-ordine.php" id="checkout-form" method="POST">
+<input id="ordine-dettaglio" name="ordine" type="hidden" value=""/>
+<input id="ordine-totale" name="totale" type="hidden" value=""/>
+<label><input id="ritiro-loco" onchange="toggleSottovuoto()" type="checkbox"/> Ritiro in loco</label><br/>
+<div id="sottovuoto-opzione" style="display:none; margin-top:6px;">
+<label><input id="sottovuoto" onchange="aggiornaTotale()" type="checkbox"/> Richiedi sottovuoto (+€0.50)</label>
+</div>
+<input name="Nome" placeholder="Nome" required="" type="text"/>
+<input name="Cognome" placeholder="Cognome" required="" type="text"/>
+<input name="Telefono" placeholder="Numero di telefono" required="" type="tel"/>
+<input name="Email" placeholder="Email" required="" type="email"/>
+<input name="Indirizzo" placeholder="Indirizzo di consegna (se richiesto)" type="text"/>
+<label><input name="Ritiro in loco" type="checkbox"/> Ritiro in loco presso il negozio</label>
+<input id="ordine-dettaglio" name="Ordine" type="hidden"/>
+<button onclick="prepareOrder()" type="submit">Invia Ordine</button>
+<button onclick="downloadPDF()" type="button">Salva in PDF</button>
+<div style="margin-top:1rem;">
+<div id="paypal-button-container"></div>
+<button onclick="alert('Simulazione Stripe')" type="button">Paga con Stripe</button>
+</div>
+<p><strong>Destinazione:</strong><br/>
+<label><input checked="" id="destinazione-italia" name="destinazione" type="radio"/> Italia</label><br/>
+<label><input id="destinazione-europa" name="destinazione" type="radio"/> Europa</label>
+</p>
+<button onclick="return inviaOrdine()" type="submit">Procedi al pagamento</button>
+</form>
+<div style="margin-top:10px;">
+<label><input id="confezione-regalo" onchange="aggiornaTotale()" type="checkbox"/> Aggiungi confezione regalo (+€5)</label>
+</div>
+<div id="cart-total" style="margin-top:10px; font-weight:bold;"></div></div>
+<!-- 🧭 Navigazione principale del sito -->
+<nav>
+</nav>
+<!-- 📞 Sezione Contatti -->
+<main><section class="section" id="contatti" style="display: none;">
+<h2>Contatti</h2>
+<p>Per informazioni, ordini o richieste particolari, contattaci via email  <strong> info@zaraformaggi.com  </strong> </p>
+</section><section class="section" id="servizi" style="display: none;">
+<h2>I nostri servizi</h2>
+<ul>
+<li>Vendita al dettaglio di prodotti tipici sardi</li>
+<li>Confezioni regalo personalizzate</li>
+<li>Spedizioni in tutta Italia e Europa</li>
+<li>Possibilità di mettere sottovuoto i prodotti </li>
+<li>Regala un  Voucher "ZaraFormaggi " </li>
+</ul>
+<!-- 👤 Sezione Chi siamo -->
+</section><section class="section" id="chi-siamo" style="display: none;">
+<h2>Chi siamo</h2>
+<p>ZARA FORMAGGI nasce dalla passione per i sapori autentici della Sardegna. Fondata da Maurizio Zara, l’attività si dedica alla selezione e vendita di prodotti tipici come formaggi, salumi, dolci e molto altro. Tradizione e qualità sono il nostro marchio.</p>
+<!-- 🏠 Sezione Home: messaggio di benvenuto -->
+</section><section class="section active" id="home" style="display: block;">
+<h2>Benvenuti!</h2>
+<p>Visita il sito per scoprire i nostri prodotti. Offriamo una selezione di eccellenze enogastronomiche sarde, con attenzione alla qualità, alla tradizione e al gusto autentico.</p>
+</section>
+<!-- 📍 Sezione Dove ci trovi: indirizzo, orari, mappa -->
+<section class="section" id="dove" style="display: none;">
+<h2>Dove ci trovi</h2>
+<p>Ci trovi in <strong>Via Gramsci, Iglesias (CI), Sardegna</strong>, presso il Mercato Civico Box N° 27.</p>
+<h3>Orari di apertura</h3>
+<ul>
+<li>Lunedì: Chiuso</li>
+<li>Martedì: 8:00 - 13:00</li>
+<li>Mercoledì: 8:00 - 13:00</li>
+<li>Giovedì: 8:00 - 13:00</li>
+<li>Venerdì: 7:30 - 13:00</li>
+<li>Sabato: 7:30 - 13:00</li>
+<li>Domenica: Chiuso</li>
+</ul>
+<div id="map"></div>
+<div style="text-align: center; margin-top: 10px;">
+<a href="https://www.google.com/maps?q=39.3117602,8.5351056" style="display: inline-block; padding: 10px 20px; background: #3367d6; color: white; text-decoration: none; border-radius: 8px; font-weight: bold;" target="_blank">
+    📍 Apri in Google Maps
+  </a>
+</div>
+</section>
+<!-- 🖼️ Sezione Galleria con immagini dei prodotti -->
+<section class="section" id="galleria" style="display: none;">
+<h2>Galleria</h2>
+<div class="card-container">
+<div class="card">
+<img alt="biancoarrosto.png" src="biancoarrosto.png"/>
+<p>Biancoarrosto</p><p>Formaggio bianco da griglia, dal sapore pieno e leggero.</p>
+</div>
+<div class="card">
+<img alt="crablu.png" src="crablu.png"/>
+<p>Crablu</p><p>Formaggio erborinato con venature blu, sapore deciso e complesso.</p>
+</div>
+<div class="card">
+<img alt="cuor_di_latte.png" src="cuor_di_latte.png"/>
+<p>Cuor Di Latte</p><p>Formaggio fresco e dolce, perfetto per spalmare o accompagnare miele.</p>
+</div>
+<div class="card">
+<img alt="cuore_sulcis.png" src="cuore.png"/>
+<p>Cuore Sulcis</p><p>Pecorino semistagionato, dal cuore morbido e sapore equilibrato.</p>
+</div>
+<div class="card">
+<img alt="gran_sirai.png" src="gran_sirai.png"/>
+<p>Gran Sirai</p><p>Formaggio a pasta dura e lunga stagionatura, per grattugia o tavola.</p>
+</div>
+<div class="card">
+<img alt="nuraghe.png" src="nuraghe.png"/>
+<p>Nuraghe</p><p>Pecorino stagionato dal gusto intenso, prodotto con latte ovino.</p>
+</div>
+<div class="card">
+<img alt="provola_orotelli.png" src="provola_orotelli.png"/>
+<p>Provola Orotelli</p><p>Formaggio affumicato, dalla crosta dorata e pasta filante.</p>
+</div>
+<div class="card">
+<img alt="sirai_gigante.png" src="sirai_gigante.png"/>
+<p>Sirai Gigante</p><p>Formaggio a lunga stagionatura, pasta dura, sapore ricco.</p>
+</div>
+<div class="card">
+<img alt="sulcitano.png" src="sulcitano.png"/>
+<p>Sulcitano</p><p>Pecorino fresco tipico del Sulcis, ideale da tavola.</p>
+</div>
+<div class="card">
+<img alt="vecchio_capraro.png" src="vecchio_capraro.png"/>
+<p>Vecchio Capraro</p><p>Caprino stagionato, forte e aromatico, 100% latte di capra.</p>
+</div>
+</div>
+</section>
+<!-- 🧀 Sezione Shop: prodotti acquistabili -->
+<section class="section" id="shop" style="display: none;">
+<h4>🧀 🥓  Shop</h4>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+<div class="product-card product">
+<img src="nuraghe.png" style="width:100%;border-radius:8px;"/><h4>Nuraghe</h4>
+<input class="peso-forma" data-product="Nuraghe" type="hidden" value="4.0"/><p>Pecorino stagionato dal gusto intenso, prodotto con latte ovino.</p>
+<div class="scelte-formati"></div>
+</div>
+<div class="product-card product">
+<img src="sirai_gigante.png" style="width:100%;border-radius:8px;"/><h4>Sirai Gigante</h4>
+<input class="peso-forma" data-product="Sirai Gigante" type="hidden" value="4.5"/><p>Formaggio a lunga stagionatura, pasta dura, sapore ricco.</p>
+<div class="scelte-formati"></div>
+</div>
+<div class="product-card product">
+<img src="cuore.png" style="width:100%;border-radius:8px;"/><h4>Cuore del Sulcis</h4>
+<input class="peso-forma" data-product="Cuore del Sulcis" type="hidden" value="3.5"/><p>Pecorino semistagionato, dal cuore morbido e sapore equilibrato.</p>
+<div class="scelte-formati"></div>
+</div>
+<div class="product-card product">
+<img src="cuor_di_latte.png" style="width:100%;border-radius:8px;"/><h4>Cuor di Latte</h4>
+<input class="peso-forma" data-product="Cuor di Latte" type="hidden" value="3.0"/><p>Formaggio fresco e dolce, perfetto per spalmare o accompagnare miele.</p>
+<div class="scelte-formati"></div>
+</div>
+<div class="product-card product">
+<img src="vecchio_capraro.png" style="width:100%;border-radius:8px;"/><h4>Vecchio Capraro</h4>
+<input class="peso-forma" data-product="Vecchio Capraro" type="hidden" value="4.2"/><p>Caprino stagionato, forte e aromatico, 100% latte di capra.</p>
+<div class="scelte-formati"></div>
+</div>
+<div class="product-card product">
+<img src="crablu.png" style="width:100%;border-radius:8px;"/><h4>Crablu</h4>
+<input class="peso-forma" data-product="Crablu" type="hidden" value="2.8"/><p>Formaggio erborinato con venature blu, sapore deciso e complesso.</p>
+<div class="scelte-formati"></div>
+</div>
+<div class="product-card product">
+<img src="sulcitano.png" style="width:100%;border-radius:8px;"/><h4>Sulcitano</h4>
+<input class="peso-forma" data-product="Sulcitano" type="hidden" value="3.8"/><p>Pecorino fresco tipico del Sulcis, ideale da tavola.</p>
+<div class="scelte-formati"></div>
+</div>
+<div class="product-card product">
+<img src="provola_orotelli.png" style="width:100%;border-radius:8px;"/><h4>Provola di Orotelli</h4>
+<input class="peso-forma" data-product="Provola di Orotelli" type="hidden" value="3.6"/><p>Formaggio affumicato, dalla crosta dorata e pasta filante.</p>
+<div class="scelte-formati"></div>
+</div>
+<div class="product-card product">
+<img src="gran_sirai.png" style="width:100%;border-radius:8px;"/><h4>Gran Sirai</h4>
+<input class="peso-forma" data-product="Gran Sirai" type="hidden" value="5.0"/><p>Formaggio a pasta dura e lunga stagionatura, per grattugia o tavola.</p>
+<div class="scelte-formati"></div>
+</div>
+<div class="product-card product">
+<img src="biancoarrosto.png" style="width:100%;border-radius:8px;"/><h4>Biancoarrosto del Sulcis</h4>
+<input class="peso-forma" data-product="Biancoarrosto del Sulcis" type="hidden" value="4.6"/><p>Formaggio bianco da griglia, dal sapore pieno e leggero.</p>
+<div class="scelte-formati"></div>
+</div>
+</div>
+</section>
+</main>
+<!-- ⚓ Footer del sito -->
+<footer>
+<p>© 2025 ZARA FORMAGGI di Zara Maurizio - Tutti i diritti riservati</p>
+</footer>
+<!-- Leaflet JS -->
+<!-- 📜 Inizio script JavaScript -->
+<script src="https://www.paypal.com/sdk/js?client-id=sb¤cy=EUR"></script>
+<!-- 📜 Inizio script JavaScript -->
+<script>
+      // Prepara una stringa con l'elenco dei prodotti nel carrello e la inserisce nel campo nascosto per l'ordine
+// 🧾 Prepara la stringa con il riepilogo dei prodotti acquistati, da inviare nel form.
+
+function prepareOrder() {
+        let content = "";
+        cart.forEach(item => {
+          content += `${item.name} x${item.quantity} (€${(item.price * item.quantity).toFixed(2)})\n`;
+        });
+        document.getElementById("ordine-dettaglio").value = content;
+  document.getElementById("ordine-totale").value = total.toFixed(2);
+      }
+
+      paypal.Buttons({
+        createOrder: function(data, actions) {
+          const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
+          return actions.order.create({
+            purchase_units: [{
+              amount: { value: total }
+            }]
+          });
+        },
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+            alert('Pagamento completato da ' + details.payer.name.given_name);
+            prepareOrder();
+            document.getElementById("checkout-form").submit();
+          });
+        }
+      }).render('#paypal-button-container');
+<!-- 📜 Fine script JavaScript -->
+    </script>
+<!-- 📜 Inizio script JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const cards = document.querySelectorAll('.card-overlay');
+  cards.forEach(card => {
+    card.addEventListener('click', function (e) {
+      const infoBox = this.querySelector('.info');
+      const alreadyVisible = infoBox.style.opacity === '1';
+      // Nascondi tutte le info
+      document.querySelectorAll('.card-overlay .info').forEach(i => i.style.opacity = '0');
+      // Mostra solo se non già visibile
+      if (!alreadyVisible) {
+        infoBox.style.opacity = '1';
+        e.stopPropagation();
+      }
+    });
+  });
+  document.body.addEventListener('click', function () {
+    document.querySelectorAll('.card-overlay .info').forEach(i => i.style.opacity = '0');
+  });
+});
+<!-- 📜 Fine script JavaScript -->
+</script>
+<!-- 📜 Inizio script JavaScript -->
+<script>
+// ⚖️ Aggiorna la descrizione del peso selezionato in base alla porzione scelta.
+
+function aggiornaPesoGenerico(selectId, labelId) {
+  const pesoTesto = {
+    "0.125": "1/8 di forma = circa 500g",
+    "0.25":  "1/4 di forma = circa 1kg",
+    "0.5":   "1/2 forma = circa 2kg",
+    "1":     "1 forma intera = circa 4kg"
+  };
+  const valore = document.getElementById(selectId).value;
+  document.getElementById(labelId).innerText = pesoTesto[valore];
+}
+<!-- 📜 Fine script JavaScript -->
+</script>
+<!-- 📜 Inizio script JavaScript -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const sections = ["formaggi", "salumi", "altri-prodotti"];
+  const navLinks = document.querySelectorAll(".menu-prodotti a");
+
+  function highlightSection() {
+    let scrollY = window.pageYOffset;
+    sections.forEach(id => {
+      const section = document.getElementById(id);
+      if (section && scrollY >= section.offsetTop - 60) {
+        navLinks.forEach(link => link.classList.remove("active"));
+        const activeLink = document.querySelector(`.menu-prodotti a[href="#${id}"]`);
+        if (activeLink) activeLink.classList.add("active");
+      }
+    });
+  }
+
+  window.addEventListener("scroll", highlightSection);
+});
+<!-- 📜 Fine script JavaScript -->
+</script>
+<!-- 🎨 Inizio sezione di stile CSS -->
+<style>
+.indicatore-tacche .tacca {
+  transition: background-color 0.3s ease;
+}
+.indicatore-tacche[data-disp*='low'] .tacca.attiva {
+  background-color: red;
+}
+
+.menu-prodotti a.active {
+  font-weight: bold;
+  text-decoration: underline;
+  color: #c00;
+}
+<!-- 🎨 Fine sezione di stile CSS -->
+</style>
+<!-- 📜 Inizio script JavaScript -->
+<script>// Controlla il totale dell'ordine e mostra un riepilogo se supera il minimo richiesto per Italia o Europa
+// Controlla il totale dell'ordine e mostra un riepilogo se supera il minimo richiesto per Italia o Europa
+// 📤 Controlla se l'ordine raggiunge il minimo (Italia o Europa) e mostra il riepilogo.
+
+function inviaOrdine() {
+  let total = 0;
+  cart.forEach(item => total += item.price * item.quantity);
+  if (document.getElementById("confezione-regalo")?.checked) total += 5;
+  if (document.getElementById("sottovuoto")?.checked) total += 0.5;
+
+  const europa = document.getElementById("destinazione-europa")?.checked;
+  const minimo = europa ? 140 : 90;
+
+  if (total < minimo) {
+    alert("L'ordine minimo è di €" + minimo.toFixed(2) + (europa ? " per l'Europa." : " per l'Italia."));
+    return false;
+  }
+
+  mostraRiepilogoOrdine();
+  return false;
+}
+<!-- 📜 Fine script JavaScript -->
+</script>
+<section id="riepilogo-ordine" style="display:none; margin-top: 40px;">
+<h2>🧾 Riepilogo Ordine</h2>
+<div id="riepilogo-dettagli" style="margin-bottom: 20px;"></div>
+<button onclick="finalizzaOrdine()">Conferma e Invia Ordine</button>
+</section>
+<!-- 📜 Inizio script JavaScript -->
+<script>// Mostra i dettagli del carrello in una lista HTML con immagini e prezzi
+// Mostra i dettagli del carrello in una lista HTML con immagini e prezzi
+// 📋 Crea un riepilogo visivo dell'ordine con immagini, nomi, quantità e totali.
+
+function mostraRiepilogoOrdine() {
+  const div = document.getElementById("riepilogo-dettagli");
+    const imageMap = {
+    "nuraghe": "img/nuraghe.png",
+    "sirai gigante": "img/sirai_gigante.png",
+    "cuore del sulcis": "img/cuore_sulcis.png",
+    "cuor di latte": "img/cuor_di_latte.png",
+    "vecchio capraro": "img/vecchio_capraro.png",
+    "crablu": "img/crablu.png",
+    "sulcitano": "img/sulcitano.png",
+    "provola di orotelli": "img/provola_orotelli.png",
+    "gran sirai": "img/gran_sirai.png",
+    "biancoarrosto del sulcis": "img/biancoarrosto.png"
+  };
+  let html = "<ul>";
+  let total = 0;
+  cart.forEach(item => {
+    const subtot = item.price * item.quantity;
+    total += subtot;
+    const nome = item.name.toLowerCase().replace(/\s/g, "_").replace(/[^a-z0-9_]/g, "");
+    const imgSrc = `img/${nome}.png`;
+    html += `<li><img src="${imgSrc}" alt="${item.name}" style="height:40px; vertical-align:middle; margin-right:10px; border-radius:4px;"> ${item.name} x${item.quantity} = €${subtot.toFixed(2)}</li>`;
+  });
+  if (document.getElementById("confezione-regalo")?.checked) {
+    html += "<li>Confezione regalo = €5.00</li>";
+    total += 5;
+  }
+  if (document.getElementById("sottovuoto")?.checked) {
+    html += "<li>Sottovuoto = €0.50</li>";
+    total += 0.5;
+  }
+  html += `</ul><strong>Totale: €${total.toFixed(2)}</strong>`;
+  div.innerHTML = html;
+  document.getElementById("riepilogo-ordine").style.display = "block";
+}
+// Mostra un messaggio di conferma ordine e ricarica la pagina
+// Mostra un messaggio di conferma ordine e ricarica la pagina
+// ✅ Mostra messaggio di conferma ordine e ricarica la pagina (simulazione invio).
+
+function finalizzaOrdine() {
+  alert("Ordine confermato! Grazie per l'acquisto.");
+  location.reload();  // simula invio e reset
+}
+<!-- 📜 Fine script JavaScript -->
+</script>
+<!-- 🛒 Sezione Carrello -->
+<section class="section" id="carrello" style="display: none;">
+<h2>🛒 Il tuo carrello</h2>
+<div id="cart-container"></div>
+<div id="peso-totale" style="margin-top: 10px; font-weight: bold;"></div>
+<div style="margin-top: 20px;">
+<!-- Selettore modalità consegna -->
+<!-- Selettore modalità consegna con 3 fasi -->
+<div style="text-align:center; margin-top:2rem;">
+<!-- Primo bottone -->
+<button id="btn-step-1" onclick="mostraScelteConsegna()" style="padding: 10px 20px; font-weight: bold; border-radius: 8px; background-color: #007f5f; color: white; border: none; cursor: pointer;">
+    📝 Prosegui con i dati dell'ordine
+  </button>
+<!-- Bottoni ritiro/spedizione -->
+<div id="scelte-consegna" style="display:none; margin-top: 1rem;">
+<button onclick="selezionaConsegna('ritiro')" style="padding: 10px 15px; margin: 5px; background: #3f704d; color: white; border: none; border-radius: 6px; cursor: pointer;">🏬 Ritiro in negozio</button>
+<button onclick="selezionaConsegna('spedizione')" style="padding: 10px 15px; margin: 5px; background: #3367d6; color: white; border: none; border-radius: 6px; cursor: pointer;">🚚 Spedizione</button>
+</div>
+</div>
+</div>
+<!-- Form ordine completo -->
+<form id="form-completo" style="display: none; margin-top: 1rem;">
+<input id="ordine-dettaglio" name="ordine" type="hidden" value=""/>
+<input id="ordine-totale" name="totale" type="hidden" value=""/>
+<h2>Dati per la spedizione</h2>
+<label>Nome: <input name="nome" required=""/></label><br/>
+<label>Cognome: <input name="cognome" required=""/></label><br/>
+<label>Telefono: <input name="telefono" required=""/></label><br/>
+<label>Email: <input name="email" required=""/></label><br/>
+<label>Indirizzo: <input name="indirizzo" required=""/></label><br/>
+<label>CAP: <input name="cap" required=""/></label><br/>
+<label>Città: <input name="citta" required=""/></label><br/>
+<label>Paese: <input name="paese" required=""/></label><br/>
+</form>
+<!-- Form ritiro in negozio -->
+<form id="form-ritiro" style="display: none; margin-top: 1rem;">
+<input id="ordine-dettaglio" name="ordine" type="hidden" value=""/>
+<input id="ordine-totale" name="totale" type="hidden" value=""/>
+<h2>Dati per il ritiro in negozio</h2>
+<label>Nome: <input name="nome" required=""/></label><br/>
+<label>Cognome: <input name="cognome" required=""/></label><br/>
+<label>Telefono: <input name="telefono" required=""/></label><br/>
+<label>Email: <input name="email" required=""/></label><br/>
+</form>
+<!-- Pulsante WhatsApp -->
+<div style="margin-top: 1rem; text-align:center;">
+<a href="#" id="wa-btn" onclick="inviaOrdineWhatsapp()" style="background-color: #25d366; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">
+    📦 Invia Ordine via WhatsApp
+  </a>
+</div>
+<!-- 📜 Inizio script JavaScript -->
+<script>// Mostra o nasconde il modulo per il ritiro in negozio oppure spedizione
+// Mostra o nasconde il modulo per il ritiro in negozio oppure spedizione
+// 🔄 Alterna tra visualizzazione del modulo per spedizione e ritiro in negozio.
+
+function toggleRitiro() {
+  const btn = document.getElementById("btn-toggle-ritiro");
+  const completo = document.getElementById("form-completo");
+  const ritiro = document.getElementById("form-ritiro");
+  const attivo = ritiro.style.display === "block";
+
+  if (attivo) {
+    ritiro.style.display = "none";
+    completo.style.display = "block";
+    btn.textContent = "📝 Prosegui con i dati dell'ordine";
+  } else {
+    ritiro.style.display = "block";
+    completo.style.display = "none";
+    btn.textContent = "🏬 Modalità ritiro attiva";
+  }
+}
+// Genera un messaggio con i dati dell'ordine e apre WhatsApp per inviarlo
+// Genera un messaggio con i dati dell'ordine e apre WhatsApp per inviarlo
+// 💬 Invia l'ordine tramite WhatsApp costruendo un messaggio con i dettagli cliente e prodotti.
+
+function inviaOrdineWhatsapp() {
+  let dati = "";
+  const form = document.getElementById("form-ritiro").style.display === "block"
+    ? document.getElementById("form-ritiro")
+    : document.getElementById("form-completo");
+
+  const inputs = form.querySelectorAll("input");
+  inputs.forEach(input => {
+    dati += `${input.name}: ${input.value}%0A`;
+  });
+
+  // Inserisce un messaggio simulato ordine (qui puoi espandere con carrello reale)
+  const messaggio = `*Nuovo ordine ricevuto*%0A${dati}`;
+  const link = `https://wa.me/?text=${encodeURIComponent(messaggio)}`;
+  window.open(link, '_blank');
+}
+<!-- 📜 Fine script JavaScript -->
+</script>
+<!-- Invio ordine via Formspree -->
+<div style="text-align:center; margin-top: 1rem;">
+<button onclick="inviaOrdineFormspree()" style="background-color: #004080; color: white; padding: 10px 20px; border-radius: 6px; font-weight: bold; border: none;" type="button">
+    📧 Invia Ordine via Email
+  </button>
+</div>
+<form action="invia-ordine.php" id="form-invio" method="POST" style="display:none;">
+<input id="ordine-dettaglio" name="ordine" type="hidden" value=""/>
+<input id="ordine-totale" name="totale" type="hidden" value=""/>
+</form>
+<h3 style="text-align:right;">Totale: <span id="carrello-totale">€0.00</span></h3></section>
+<section class="section" id="form-ordine" style="display: none;">
+</section>
+<!-- 📜 Inizio script JavaScript -->
+<script>
+let cart = [];
+// Aggiunge un prodotto al carrello con formato, prezzo e peso
+// Aggiunge un prodotto al carrello con formato, prezzo e peso
+// ✅ Aggiunge un prodotto al carrello: salva nome, formato scelto, prezzo e peso, e aggiorna il carrello visivo.
+
+function addToCart(name, qtyLabel, price, pesoUnitario) {
+  cart.push({ name, qtyLabel, price, quantity: 1, pesoUnitario });
+  updateCart();
+}
+// Aggiorna la visualizzazione del carrello (quantità, prezzi, peso totale)
+// Aggiorna la visualizzazione del carrello (quantità, prezzi, peso totale)
+// 🔄 Aggiorna la visualizzazione del carrello (quantità, prezzo totale, peso totale e interfacce correlate).
+
+function updateCart() {
+  const sidebarContainer = document.getElementById("cart-sidebar-container");
+  const pesoSidebar = document.getElementById("peso-sidebar");
+  if (sidebarContainer) sidebarContainer.innerHTML = "";
+
+  // Sincronizza con sidebar
+  const sidebarList = document.getElementById("cart-items");
+  const sidebarTotal = document.getElementById("cart-sidebar-total");
+  const floatingTotal = document.getElementById("floating-total");
+  if (sidebarList && sidebarTotal && floatingTotal) {
+    sidebarList.innerHTML = "";
+    let total = 0;
+    cart.forEach(item => {
+      const li = document.createElement("li");
+      const subtot = item.price * item.quantity;
+      total += subtot;
+      li.textContent = `${item.name} x${item.quantity} - €${subtot.toFixed(2)}`;
+      sidebarList.appendChild(li);
+    });
+    sidebarTotal.textContent = "€" + total.toFixed(2);
+    floatingTotal.textContent = "€" + total.toFixed(2);
+  }
+
+  const pesoKgMap = {
+    "1/8": 0.5,
+    "1/4": 1.0,
+    "1/2": 2.0,
+    "1":   4.0
+  };
+
+  const pesoStimato = {
+    "1/8": "≈ 500g",
+    "1/4": "≈ 1kg",
+    "1/2": "≈ 2kg",
+    "1":   "≈ 4kg"
+  };
+
+  const cartContainer = document.getElementById("cart-container");
+  const cartTotal = document.getElementById("cart-total");
+  let total = 0;
+  cartContainer.innerHTML = "";
+
+  cart.forEach((item, i) => {
+    if (sidebarContainer) {
+      const pesoMap = { "1/8": "≈ 500g", "1/4": "≈ 1kg", "1/2": "≈ 2kg", "1": "≈ 4kg" };
+      const divSidebar = document.createElement("div");
+      divSidebar.style = "padding: 10px; border-bottom: 1px solid #ccc;";
+      divSidebar.innerHTML = `
+        <strong>${item.name}</strong><br>
+        Formato: ${item.qtyLabel} (${pesoMap[item.qtyLabel] || ""}) – Quantità: 
+        <button onclick="decrementItem(${i})">-</button> 
+        ${item.quantity} 
+        <button onclick="incrementItem(${i})">+</button><br>
+        Prezzo: €${(item.price * item.quantity).toFixed(2)}
+        <button onclick="removeItem(${i})" style="margin-left: 10px;">Rimuovi</button>
+      `;
+      sidebarContainer.appendChild(divSidebar);
+    }
+
+    const div = document.createElement("div");
+    div.style = "padding: 10px; border-bottom: 1px solid #ccc;";
+    div.innerHTML = `
+      <strong>${item.name}</strong><br>
+      Formato: ${item.qtyLabel} (${pesoStimato[item.qtyLabel] || ""}) – Quantità: 
+      <button onclick="decrementItem(${i})">-</button> 
+      ${item.quantity} 
+      <button onclick="incrementItem(${i})">+</button><br>
+      Prezzo: €${(item.price * item.quantity).toFixed(2)}
+      <button onclick="removeItem(${i})" style="margin-left: 10px;">Rimuovi</button>
+    `;
+    cartContainer.appendChild(div);
+    total += item.price * item.quantity;
+  });
+
+  cartTotal.innerText = "Totale: €" + total.toFixed(2);
+
+  const countEl = document.getElementById("menu-cart-count");
+  const totalEl = document.getElementById("menu-cart-total");
+  if (countEl && totalEl) {
+    countEl.innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
+    totalEl.innerText = total.toFixed(2);
+  }
+
+  const fixedBtn = document.getElementById("cart-button");
+  if (fixedBtn) {
+    fixedBtn.innerText = `🛒 Carrello (${cart.length}) – Totale: €${total.toFixed(2)}`;
+  }
+
+  const bottomTotal = document.getElementById("carrello-totale");
+  if (bottomTotal) {
+    bottomTotal.innerText = "€" + total.toFixed(2);
+  }
+
+
+  let pesoTotaleKg = 0;
+  cart.forEach(item => {
+    const pesoKg = pesoKgMap[item.qtyLabel] || 0;
+    pesoTotaleKg += pesoKg * item.quantity;
+  });
+  const pesoTotDiv = document.getElementById("peso-totale");
+  if (pesoTotDiv) {
+    pesoTotDiv.innerText = "Peso totale: " + pesoTotaleKg.toFixed(2) + " kg";
+  }
+  if (pesoSidebar) pesoSidebar.innerText = "Peso totale: " + pesoTotaleKg.toFixed(2) + " kg";
+
+}
+// Rimuove un elemento dal carrello
+// Rimuove un elemento dal carrello
+// ❌ Rimuove un elemento dal carrello in base all'indice.
+
+function removeItem(index) {
+  cart.splice(index, 1);
+  updateCart();
+}
+
+function proseguiOrdine() {
+  document.getElementById("form-ordine").style.display = "block";
+  document.getElementById("form-ordine").scrollIntoView({ behavior: 'smooth' });
+}
+
+function submitOrdine(event) {
+  event.preventDefault();
+  alert("Ordine inviato! Grazie per l'acquisto.");
+  cart = [];
+  updateCart();
+  document.getElementById("form-ordine").style.display = "none";
+}
+<!-- 📜 Fine script JavaScript -->
+</script>
+<!-- 📜 Inizio script JavaScript -->
+<script>
+// Aumenta la quantità di un elemento nel carrello
+// Aumenta la quantità di un elemento nel carrello
+// ➕ Aumenta la quantità di un elemento nel carrello.
+
+function incrementItem(index) {
+  cart[index].quantity += 1;
+  updateCart();
+}
+// Diminuisce la quantità o rimuove un prodotto se la quantità scende sotto 1
+// Diminuisce la quantità o rimuove un prodotto se la quantità scende sotto 1
+// ➖ Diminuisce la quantità oppure rimuove l'elemento se raggiunge zero.
+
+function decrementItem(index) {
+  if (cart[index].quantity > 1) {
+    cart[index].quantity -= 1;
+  } else {
+    cart.splice(index, 1); // rimuove l'elemento se quantità scende sotto 1
+  }
+  updateCart();
+}
+
+
+function aggiungiShop(nome, selectId) {
+  const sel = document.getElementById(selectId);
+  if (!sel) return;
+  const formato = sel.value;
+  const prezzo = parseFloat(sel.options[sel.selectedIndex].dataset.price);
+  const pesoUnitario = parseFloat(sel.options[sel.selectedIndex].dataset.pesounitario);
+  addToCart(nome, formato, prezzo, pesoUnitario);
+}
+<!-- 📜 Fine script JavaScript -->
+</script>
+<!-- 📜 Inizio script JavaScript -->
+<script>
+// 📧 Costruisce un link mailto per inviare ordine via email.
+
+function inviaOrdineEmail() {
+  const messaggio = generaMessaggioOrdine();
+  const mailtoLink = `mailto:titolare@email.it?subject=Nuovo Ordine Zara&body=${encodeURIComponent(messaggio)}`;
+  window.location.href = mailtoLink;
+}
+
+function inviaOrdineWhatsApp() {
+  let nome = document.getElementById("nome2")?.value || "";
+  let indirizzo = document.getElementById("indirizzo2")?.value || "";
+  let città = document.getElementById("città2")?.value || "";
+  let cap = document.getElementById("cap2")?.value || "";
+  let telefono = document.getElementById("telefono2")?.value || "";
+  let note = document.getElementById("note2")?.value || "";
+
+  let msg = `🧀 🥓Ordine Zara Formaggi:%0A`;
+  msg += `👤 ${nome}%0A📍 ${indirizzo}, ${cap} ${città}%0A📞 ${telefono}%0A📝 Note: ${note}%0A%0A`;
+
+  cart.forEach(item => {
+    const subtot = (item.price * item.quantity).toFixed(2);
+    const peso = (item.pesoUnitario * item.quantity).toFixed(2);
+    msg += `• ${item.name} (${item.qtyLabel}) x${item.quantity} - €${subtot} - ${peso} kg%0A`;
+  });
+
+  const totale = cart.reduce((sum, i) => sum + i.price * i.quantity, 0).toFixed(2);
+  const pesoTot = cart.reduce((sum, i) => sum + i.pesoUnitario * i.quantity, 0).toFixed(2);
+  msg += `%0A📦 Totale: €${totale} - Peso: ${pesoTot} kg`;
+
+  const url = "https://wa.me/393333333333?text=" + encodeURIComponent(msg);
+  window.open(url, "_blank");
+(link, '_blank');
+}
+
+// 📝 Genera il testo dell'ordine per email, includendo dati cliente e prodotti.
+
+function generaMessaggioOrdine() {
+  let messaggio = "🧀 *Nuovo ordine Zara Formaggi*\n\n";
+  cart.forEach((item, i) => {
+    if (sidebarContainer) {
+      const pesoMap = { "1/8": "≈ 500g", "1/4": "≈ 1kg", "1/2": "≈ 2kg", "1": "≈ 4kg" };
+      const divSidebar = document.createElement("div");
+      divSidebar.style = "padding: 10px; border-bottom: 1px solid #ccc;";
+      divSidebar.innerHTML = `
+        <strong>${item.name}</strong><br>
+        Formato: ${item.qtyLabel} (${pesoMap[item.qtyLabel] || ""}) – Quantità: 
+        <button onclick="decrementItem(${i})">-</button> 
+        ${item.quantity} 
+        <button onclick="incrementItem(${i})">+</button><br>
+        Prezzo: €${(item.price * item.quantity).toFixed(2)}
+        <button onclick="removeItem(${i})" style="margin-left: 10px;">Rimuovi</button>
+      `;
+      sidebarContainer.appendChild(divSidebar);
+    }
+
+    messaggio += `• ${item.name} - ${item.qtyLabel} - €${item.price.toFixed(2)}\n`;
+  });
+
+  const totale = cart.reduce((sum, item) => sum + item.price, 0);
+  messaggio += `\n💶 Totale: €${totale.toFixed(2)}\n\n`;
+
+  messaggio += "📦 Dati cliente:\n";
+  messaggio += `Nome: ${document.getElementById("nome").value}\n`;
+  messaggio += `Cognome: ${document.getElementById("cognome").value}\n`;
+  messaggio += `Email: ${document.getElementById("email").value}\n`;
+  messaggio += `Telefono: ${document.getElementById("telefono").value}\n`;
+  messaggio += `Indirizzo: ${document.getElementById("indirizzo").value}, ${document.getElementById("cap").value}, ${document.getElementById("citta").value}, ${document.getElementById("paese").value}`;
+  return messaggio;
+}
+<!-- 📜 Fine script JavaScript -->
+</script>
+<!-- 📜 Inizio script JavaScript -->
+<script>
+// 🗂️ Mostra la sezione corrispondente all'ancora (es. #shop, #carrello, etc.).
+
+function mostraSezione(id) {
+  document.querySelectorAll(".section").forEach(sec => {
+    sec.classList.remove("active");
+    sec.style.display = "none";
+  });
+  const sezioneAttiva = document.getElementById(id);
+  if (sezioneAttiva) {
+    sezioneAttiva.classList.add("active");
+    sezioneAttiva.style.display = "block";
+    if (id === 'carrello') aggiornaCarrello?.();
+  }
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const hash = window.location.hash.replace("#", "") || "home";
+  mostraSezione(hash);
+  document.querySelectorAll("nav a").forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      const id = link.getAttribute("href").replace("#", "");
+      history.pushState(null, "", `#${id}`);
+      mostraSezione(id);
+    });
+  });
+});
+<!-- 📜 Fine script JavaScript -->
+</script>
+<!-- 📜 Inizio script JavaScript -->
+<script>
+function toggleRitiroNegozio() {
+  const ritiroCheckbox = document.querySelector('input[name="Ritiro in loco"]');
+  const btn = document.getElementById("btn-ritiro");
+  if (!ritiroCheckbox || !btn) return;
+  const attivo = ritiroCheckbox.checked = !ritiroCheckbox.checked;
+  btn.innerText = attivo ? "✅ Ritiro in Negozio Attivo" : "🚶‍♂️ Attiva Ritiro in Negozio";
+  btn.style.backgroundColor = attivo ? "#4caf50" : "#2f4f2f";
+}
+<!-- 📜 Fine script JavaScript -->
+</script>
+<link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/>
+<!-- 📜 Inizio script JavaScript -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- 📜 Inizio script JavaScript -->
+<script>
+  let mapInitialized = false;
+  let map;
+
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id)?.classList.add('active');
+
+    if (id === 'dove') {
+      if (!mapInitialized) {
+        const coords = [39.3117602, 8.5351056];
+        map = L.map('map').setView(coords, 18);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+        L.marker(coords).addTo(map).bindPopup(
+          'Zara Formaggi Box n°27<br>Via Gramsci, Mercato Civico - Iglesias, Sardegna'
+        ).openPopup();
+        mapInitialized = true;
+      } else {
+        setTimeout(() => map.invalidateSize(), 200);
+      }
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", () => showSection("dove"));
+<!-- 📜 Fine script JavaScript -->
+</script>
+<!-- Sidebar carrello COMPLETA -->
+<div id="cart-sidebar" style="position:fixed;top:0;right:-400px;width:350px;height:100%;background:#fff;border-left:2px solid #ccc;box-shadow:-2px 0 5px rgba(0,0,0,0.1);z-index:9999;padding:1rem;transition:right 0.3s;overflow-y:auto;">
+<button onclick="toggleCartSidebar()" style="margin-top:10px;">Chiudi</button><button onclick="svuotaCarrello()" style="background:#c00;color:white;padding:8px 12px;border:none;border-radius:5px;">🧹 Svuota</button><h3>🛒 Il tuo carrello</h3>
+<div id="cart-sidebar-container"></div>
+<div id="peso-sidebar" style="margin-top:10px;font-weight:bold;"></div>
+<div id="cart-sidebar-total" style="font-weight: bold; margin-top: 10px;">Totale: €0.00</div>
+</div>
+<!-- 📜 Inizio script JavaScript -->
+<script>
+  // Mostra o nasconde la barra laterale del carrello
+// 📦 Mostra o nasconde la sidebar del carrello a destra.
+
+function toggleCartSidebar() {
+    const sidebar = document.getElementById("cart-sidebar");
+    sidebar.style.right = sidebar.style.right === "0px" ? "-400px" : "0px";
+  }
+<!-- 📜 Fine script JavaScript -->
+</script>
+<!-- 📜 Inizio script JavaScript -->
+<script>
+const disponibilitaProdotti = {
+  "Nuraghe": {"1/8":10,"1/4":10,"1/2":10,"1":10},
+  "Sirai Gigante": {"1/8":10,"1/4":10,"1/2":10,"1":10},
+  "Cuore del Sulcis": {"1/8":10,"1/4":10,"1/2":10,"1":10},
+  "Cuor di Latte": {"1/8":10,"1/4":10,"1/2":10,"1":10},
+  "Vecchio Capraro": {"1/8":10,"1/4":10,"1/2":10,"1":10},
+  "Crablu": {"1/8":10,"1/4":10,"1/2":10,"1":10},
+  "Sulcitano": {"1/8":10,"1/4":10,"1/2":10,"1":10},
+  "Provola di Orotelli": {"1/8":10,"1/4":10,"1/2":10,"1":10},
+  "Gran Sirai": {"1/32":10,"1/16":10,"1/8":10,"1/4":10,"1/2":10,"1":10},
+  "Biancoarrosto del Sulcis": {"1/8":10,"1/4":10,"1/2":10,"1":10}
+};
+
+const prezziProdotti = {
+  "Nuraghe": { "1/8": 8.00, "1/4": 15.00, "1/2": 28.00, "1": 55.00 },
+  "Sirai Gigante": { "1/8": 9.00, "1/4": 17.00, "1/2": 32.00, "1": 62.00 },
+  "Cuore del Sulcis": { "1/8": 9.50, "1/4": 18.50, "1/2": 35.00, "1": 70.00 },
+  "Cuor di Latte": { "1/8": 7.50, "1/4": 14.50, "1/2": 27.00, "1": 52.00 },
+  "Vecchio Capraro": { "1/8": 10.00, "1/4": 19.00, "1/2": 37.00, "1": 72.00 },
+  "Crablu": { "1/8": 9.20, "1/4": 17.80, "1/2": 34.00, "1": 66.00 },
+  "Sulcitano": { "1/8": 8.80, "1/4": 16.70, "1/2": 31.50, "1": 60.00 },
+  "Provola di Orotelli": { "1/8": 8.90, "1/4": 17.10, "1/2": 32.00, "1": 61.00 },
+  "Gran Sirai": { "1/32": 2.50, "1/16": 5.00, "1/8": 9.80, "1/4": 18.80, "1/2": 36.00, "1": 72.00 },
+  "Biancoarrosto del Sulcis": { "1/8": 8.30, "1/4": 15.90, "1/2": 30.00, "1": 58.00 }
+};
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".product").forEach(prod => {
+    const nome = prod.querySelector(".peso-forma")?.dataset.product;
+    const pesoForma = parseFloat(prod.querySelector(".peso-forma")?.value || 5);
+    const contenitore = prod.querySelector(".scelte-formati");
+    if (!nome || !contenitore) return;
+
+    const frazioni = Object.keys(disponibilitaProdotti[nome] || {}).sort((a, b) => {
+  const ordine = ['1', '1/2', '1/4', '1/8', '1/16', '1/32'];
+  return ordine.indexOf(a) - ordine.indexOf(b);
+});
+    const prezzi = {};
+    prod.querySelectorAll("option")?.forEach(opt => {
+      prezzi[opt.value] = parseFloat(opt.dataset.price);
+    });
+
+    contenitore.innerHTML = "";
+    frazioni.forEach(frazione => {
+      const disponibilita = disponibilitaProdotti[nome][frazione];
+      const frazMap = { "1/32":1/32, "1/16":1/16, "1/8":1/8, "1/4":1/4, "1/2":1/2, "1":1 };
+      const peso = (pesoForma * (frazMap[frazione] || 0)).toFixed(2);
+      const prezzo = (prezziProdotti[nome]?.[frazione] ?? "-");
+
+      const btn = document.createElement("button");
+      btn.textContent = `${frazione} – €${prezzo} – ${peso} kg – Qta disponibile: ${disponibilita}`;
+      btn.disabled = disponibilita <= 0;
+      btn.style = "margin:4px;padding:6px 10px;font-size:14px;border-radius:6px;cursor:pointer;";
+      btn.onclick = () => {
+        contenitore.querySelectorAll("button").forEach(b => b.classList.remove("formato-attivo"));
+        btn.classList.add("formato-attivo");
+        addToCart(nome, frazione, prezzo, parseFloat(peso));
+        disponibilitaProdotti[nome][frazione]--;
+        btn.disabled = disponibilitaProdotti[nome][frazione] <= 0;
+        btn.textContent = `${frazione} – €${prezzo} – ${peso} kg – Qta disponibile: ${disponibilitaProdotti[nome][frazione]}`;
+      };
+
+      contenitore.appendChild(btn);
+    });
+  });
+});
+<!-- 📜 Fine script JavaScript -->
+</script>
+<!-- 📜 Inizio script JavaScript -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".product").forEach(prod => {
+    const nome = prod.querySelector(".peso-forma")?.dataset.product;
+    const pesoForma = parseFloat(prod.querySelector(".peso-forma")?.value || 5);
+    const contenitore = prod.querySelector(".scelte-formati");
+    if (!nome || !contenitore) return;
+
+    const frazioni = Object.keys(disponibilitaProdotti[nome] || {}).sort((a, b) => {
+  const ordine = ['1', '1/2', '1/4', '1/8', '1/16', '1/32'];
+  return ordine.indexOf(a) - ordine.indexOf(b);
+});
+    contenitore.innerHTML = "";
+
+    frazioni.forEach(frazione => {
+      const disponibilita = disponibilitaProdotti[nome][frazione];
+      const frazMap = { "1/32":1/32, "1/16":1/16, "1/8":1/8, "1/4":1/4, "1/2":1/2, "1":1 };
+      const peso = (pesoForma * (frazMap[frazione] || 0)).toFixed(2);
+      const prezzo = prezziProdotti[nome]?.[frazione] ?? "-";
+
+      const wrapper = document.createElement("div");
+      wrapper.style.marginBottom = "10px";
+
+      const btn = document.createElement("button");
+      btn.textContent = `${frazione} – €${prezzo} – ${peso} kg – Qta disponibile: ${disponibilita}`;
+      btn.disabled = disponibilita <= 0;
+      btn.style = "margin:4px;padding:6px 10px;font-size:14px;border-radius:6px;cursor:pointer;";
+      wrapper.appendChild(btn);
+
+      const taccheContainer = document.createElement("div");
+      taccheContainer.className = "indicatore-tacche";
+      taccheContainer.dataset.disp = disponibilita <= 3 ? 'low' : 'ok';
+      const percentuale = Math.round((disponibilita / 10) * 100);
+      const percentSpan = document.createElement("span");
+      percentSpan.textContent = ` ${percentuale}%`;
+      percentSpan.style = "margin-left: 6px; font-weight: bold;";
+      taccheContainer.appendChild(percentSpan);
+      for (let i = 0; i < 10; i++) {
+        const tacca = document.createElement("div");
+        tacca.className = "tacca" + (i < disponibilita ? " attiva" : "");
+        taccheContainer.appendChild(tacca);
+      }
+      wrapper.appendChild(taccheContainer);
+      contenitore.appendChild(wrapper);
+
+      btn.onclick = () => {
+        contenitore.querySelectorAll("button").forEach(b => b.classList.remove("formato-attivo"));
+        btn.classList.add("formato-attivo");
+        addToCart(nome, frazione, prezzo, parseFloat(peso));
+        disponibilitaProdotti[nome][frazione]--;
+        btn.disabled = disponibilitaProdotti[nome][frazione] <= 0;
+        btn.textContent = `${frazione} – €${prezzo} – ${peso} kg – Qta disponibile: ${disponibilitaProdotti[nome][frazione]}`;
+        const tacche = taccheContainer.querySelectorAll(".tacca");
+        tacche.forEach((t, i) => {
+          t.classList.toggle("attiva", i < disponibilitaProdotti[nome][frazione]);
+        });
+        taccheContainer.dataset.disp = disponibilitaProdotti[nome][frazione] <= 3 ? 'low' : 'ok';
+        taccheContainer.querySelector("span").textContent = ` ${Math.round((disponibilitaProdotti[nome][frazione] / 10) * 100)}%`;
+      };
+    });
+  });
+});
+<!-- 📜 Fine script JavaScript -->
+</script>
+<!-- 📜 Inizio script JavaScript -->
+<script>// Copia i dati dei moduli e li invia tramite Formspree come ordine email
+// Copia i dati dei moduli e li invia tramite Formspree come ordine email
+// 📧 Invia i dati dell'ordine compilato via email tramite Formspree.
+
+function inviaOrdineFormspree() {
+  const form = document.getElementById("form-ritiro").style.display === "block"
+    ? document.getElementById("form-ritiro")
+    : document.getElementById("form-completo");
+  const inputs = form.querySelectorAll("input");
+  const targetForm = document.getElementById("form-invio");
+  targetForm.innerHTML = "";
+
+  inputs.forEach(input => {
+    const hidden = document.createElement("input");
+    hidden.name = input.name;
+    hidden.value = input.value;
+    hidden.type = "hidden";
+    targetForm.appendChild(hidden);
+  });
+
+  // Simulazione carrello per invio (espandibile)
+  const prodotti = [];
+  document.querySelectorAll(".product").forEach(prod => {
+    const nome = prod.querySelector(".peso-forma")?.dataset.product;
+    const blocchi = prod.querySelectorAll(".scelte-formati button");
+    blocchi.forEach(btn => {
+      if (btn.disabled && btn.textContent.includes("Qta disponibile: 0") === false) {
+        prodotti.push(btn.textContent);
+      }
+    });
+  });
+
+  const ordine = document.createElement("input");
+  ordine.type = "hidden";
+  ordine.name = "Ordine";
+  ordine.value = prodotti.join(" | ");
+  targetForm.appendChild(ordine);
+
+  targetForm.submit();
+}
+<!-- 📜 Fine script JavaScript -->
+</script>
+<!-- 📜 Inizio script JavaScript -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".product-card").forEach(prod => {
+    const nome = prod.querySelector(".peso-forma")?.dataset.product;
+    const pesoForma = parseFloat(prod.querySelector(".peso-forma")?.value || 5);
+    const contenitore = prod.querySelector(".scelte-formati");
+    if (!nome || !contenitore) return;
+
+    const frazioni = Object.keys(disponibilitaProdotti[nome] || {}).sort((a, b) => {
+  const ordine = ['1', '1/2', '1/4', '1/8', '1/16', '1/32'];
+  return ordine.indexOf(a) - ordine.indexOf(b);
+});
+    contenitore.querySelectorAll("button").forEach(btn => {
+      const testo = btn.textContent;
+      const match = testo.match(/^([\d/]+).*€([\d\.]+).*([\d\.]+) kg/);
+      if (!match) return;
+      const [_, formato, prezzo, peso] = match;
+
+      const tooltip = document.createElement("div");
+      tooltip.className = "tooltip-text";
+      tooltip.innerHTML = `<strong>Formato ${formato}</strong><br>Prezzo: €${prezzo}<br>Peso medio: ${peso} kg<br>Prodotto: ${nome}`;
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "tooltip";
+      btn.replaceWith(wrapper);
+      wrapper.appendChild(btn);
+      wrapper.appendChild(tooltip);
+    });
+  });
+});
+<!-- 📜 Fine script JavaScript -->
+</script>
+<!-- 📜 Inizio script JavaScript -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const hash = window.location.hash;
+  const spedizione = document.getElementById("form-completo");
+  const ritiro = document.getElementById("form-ritiro");
+  const invio = document.getElementById("blocco-invio");
+
+  if (hash === "#carrello") {
+    [spedizione, ritiro, invio].forEach(el => {
+      if (el) {
+        el.style.display = "block";
+        el.classList.add("fade-in");
+      }
+    });
+  }
+});
+<!-- 📜 Fine script JavaScript -->
+</script>
+<script>
+// Mostra i due pulsanti di scelta tra ritiro e spedizione con effetto fade-in
+function mostraScelteConsegna() {
+  const scelte = document.getElementById("scelte-consegna");
+  if (scelte) {
+    scelte.style.display = "block";
+    scelte.classList.add("fade-in");
+  }
+}
+
+// Mostra il form corretto in base alla scelta (ritiro o spedizione)
+
+function selezionaConsegna(tipo) {
+  const ritiroBtn = document.querySelector("button[onclick*='ritiro']");
+  const spedBtn = document.querySelector("button[onclick*='spedizione']");
+  ritiroBtn.classList.remove("scelta-attiva");
+  spedBtn.classList.remove("scelta-attiva");
+
+  if (tipo === "ritiro") {
+    ritiroBtn.classList.add("scelta-attiva");
+  } else {
+    spedBtn.classList.add("scelta-attiva");
+  }
+
+  const formRitiro = document.getElementById("form-ritiro");
+  const formSped = document.getElementById("form-completo");
+  if (tipo === "ritiro") {
+    formRitiro.style.display = "block";
+    formSped.style.display = "none";
+  } else {
+    formSped.style.display = "block";
+    formRitiro.style.display = "none";
+  }
+}
+</script>
+<script>
+// Mostra i due bottoni dopo il primo clic
+function mostraScelteConsegna() {
+  const step1 = document.getElementById("btn-step-1");
+  const scelte = document.getElementById("scelte-consegna");
+  const formRitiro = document.getElementById("form-ritiro");
+  const formSped = document.getElementById("form-completo");
+
+  if (scelte) scelte.style.display = "flex";
+  if (step1) step1.style.display = "none";
+  if (formRitiro) formRitiro.style.display = "none";
+  if (formSped) formSped.style.display = "none";
+}
+
+// Mostra il form corretto in base alla scelta
+
+function selezionaConsegna(tipo) {
+  const ritiroBtn = document.querySelector("button[onclick*='ritiro']");
+  const spedBtn = document.querySelector("button[onclick*='spedizione']");
+  ritiroBtn.classList.remove("scelta-attiva");
+  spedBtn.classList.remove("scelta-attiva");
+
+  if (tipo === "ritiro") {
+    ritiroBtn.classList.add("scelta-attiva");
+  } else {
+    spedBtn.classList.add("scelta-attiva");
+  }
+
+  const formRitiro = document.getElementById("form-ritiro");
+  const formSped = document.getElementById("form-completo");
+  if (tipo === "ritiro") {
+    formRitiro.style.display = "block";
+    formSped.style.display = "none";
+  } else {
+    formSped.style.display = "block";
+    formRitiro.style.display = "none";
+  }
+}
+</script>
+</body>
+</html>
+<!-- 📜 Inizio script JavaScript -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".product").forEach(prod => {
+    const pesoInput = prod.querySelector(".peso-forma");
+    const pesoForma = parseFloat(pesoInput?.value || 4);
+    const select = prod.querySelector("select");
+    if (!select) return;
+
+    select.querySelectorAll("option").forEach(opt => {
+      const frazione = opt.value.trim();
+      const frazioni = { "1/32": 1/32,"1/16": 1/16,"1/8": 1/8, "1/4": 1/4, "1/2": 1/2, "1": 1 };
+      const pesoCalcolato = (pesoForma * (frazioni[frazione] || 0)).toFixed(2);
+      const prezzo = opt.dataset.price;
+      opt.dataset.pesounitario = pesoCalcolato;
+      opt.textContent = `${frazione} - €${prezzo} (${pesoCalcolato} kg)`;
+    });
+  });
+});
+<!-- 📜 Fine script JavaScript -->
+</script>
+<!-- 📜 Inizio script JavaScript -->
+<script>
+function inviaOrdineWhatsApp() {
+  let nome = document.getElementById("nome2")?.value || "";
+  let indirizzo = document.getElementById("indirizzo2")?.value || "";
+  let città = document.getElementById("città2")?.value || "";
+  let cap = document.getElementById("cap2")?.value || "";
+  let telefono = document.getElementById("telefono2")?.value || "";
+  let note = document.getElementById("note2")?.value || "";
+
+  let msg = `🧀 Ordine Zara Formaggi:%0A`;
+  msg += `👤 ${nome}%0A📍 ${indirizzo}, ${cap} ${città}%0A📞 ${telefono}%0A📝 Note: ${note}%0A%0A`;
+
+  cart.forEach(item => {
+    const subtot = (item.price * item.quantity).toFixed(2);
+    const peso = (item.pesoUnitario * item.quantity).toFixed(2);
+    msg += `• ${item.name} (${item.qtyLabel}) x${item.quantity} - €${subtot} - ${peso} kg%0A`;
+  });
+
+  const totale = cart.reduce((sum, i) => sum + i.price * i.quantity, 0).toFixed(2);
+  const pesoTot = cart.reduce((sum, i) => sum + i.pesoUnitario * i.quantity, 0).toFixed(2);
+  msg += `%0A📦 Totale: €${totale} - Peso: ${pesoTot} kg`;
+
+  const url = "https://wa.me/393333333333?text=" + encodeURIComponent(msg);
+  window.open(url, "_blank");
+(url, "_blank");
+}
+<!-- 📜 Fine script JavaScript -->
+</script>
+<!-- 📜 Inizio script JavaScript -->
+<script>
+// 📄 Prepara un riepilogo dell'ordine in formato testo leggibile.
+
+function preparaRiepilogoOrdine() {
+  let nome = document.getElementById("nome2")?.value || "";
+  let indirizzo = document.getElementById("indirizzo2")?.value || "";
+  let città = document.getElementById("città2")?.value || "";
+  let cap = document.getElementById("cap2")?.value || "";
+  let telefono = document.getElementById("telefono2")?.value || "";
+  let note = document.getElementById("note2")?.value || "";
+
+  let riepilogo = `🧀 Ordine Zara Formaggi:
+`;
+  riepilogo += `👤 ${nome}
+📍 ${indirizzo}, ${cap} ${città}
+📞 ${telefono}
+📝 Note: ${note}
+
+`;
+
+  cart.forEach(item => {
+    const subtot = (item.price * item.quantity).toFixed(2);
+    const peso = (item.pesoUnitario * item.quantity).toFixed(2);
+    riepilogo += `• ${item.name} (${item.qtyLabel}) x${item.quantity} - €${subtot} - ${peso} kg
+`;
+  });
+
+  const totale = cart.reduce((sum, i) => sum + i.price * i.quantity, 0).toFixed(2);
+  const pesoTot = cart.reduce((sum, i) => sum + i.pesoUnitario * i.quantity, 0).toFixed(2);
+  riepilogo += `
+📦 Totale: €${totale} - Peso: ${pesoTot} kg`;
+
+  document.getElementById("riepilogo-ordine").value = riepilogo;
+
+}
+<!-- 📜 Fine script JavaScript -->
+</script>
