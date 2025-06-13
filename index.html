@@ -509,26 +509,29 @@ nav a.active-link {
 }
 </script></head>
 <body>
-<div style="text-align: center; margin-top: 10px;">
-<a href="register.php" style="margin: 0 15px; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 8px;">Registrati</a>
-<a href="login.php" style="margin: 0 15px; padding: 10px 20px; background-color: #2196F3; color: white; text-decoration: none; border-radius: 8px;">Accedi</a>
-</div>
+
 
 <!-- Bottone carrello fisso -->
 <div id="floating-cart" onclick="toggleCartSidebar()" style="position:fixed;top:20px;right:20px;background:#c9a602;color:#fff;padding:15px 20px;border-radius:50px;font-size:16px;font-weight:bold;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:9999;cursor:pointer;" title="Clicca per vedere il carrello">
   🛒 Carrello: <span id="floating-total">€0.00</span>
 </div>
 <!-- 🔝 Intestazione del sito: logo e titolo -->
-<header style="background-color: #2f4f2f; color: white; padding: 1rem 0; text-align: center;">
-<div class="header-logo">
-<img alt="ZARA FORMAGGI Logo" src="logo.png" style="width: 100px; height: auto; margin-bottom: 0.5rem;"/>
+
+<header style="background-color: #2f4f2f; color: white; padding: 1rem; display: flex; align-items: center; justify-content: space-between;">
+<div style="flex: 1;">
+<img alt="Logo Zara Formaggi" src="logo.png" style="height: 80px;"/>
 </div>
-<div class="header-title">
-<h1 style="margin: 0;">ZARA FORMAGGI</h1>
-<p class="header-subtitle">di Zara Maurizio</p>
-<p class="header-subtitle">Rivendita di prodotti tipici sardi e molto altro</p>
+<div style="flex: 2; text-align: center; line-height: 1.4;">
+<div style="font-size: 22px; font-weight: bold;">ZARA FORMAGGI</div>
+<div style="font-size: 18px;">di Zara Maurizio</div>
+<div style="font-size: 16px;">Rivendita di prodotti tipici sardi e molto altro</div>
+</div>
+<div style="flex: 1; text-align: right;">
+<a href="register.php" style="margin: 0 5px; padding: 8px 16px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 6px;">Registrati</a>
+<a href="login.php" style="margin: 0 5px; padding: 8px 16px; background-color: #2196F3; color: white; text-decoration: none; border-radius: 6px;">Accedi</a>
 </div>
 </header>
+
 <!-- 🧭 Navigazione principale del sito -->
 <nav style="background-color: #3f704d; display: flex; flex-wrap: wrap; justify-content: center;">
 <a href="#home">🏠 Home</a>
@@ -694,7 +697,7 @@ nav a.active-link {
 <!-- CARD PRODOTTO: Gran Sirai -->
 <div class="product-card">
 <div class="product-front">
-<img alt="Gran Sirai" src="prodotti/gran-sirai.jpg"/>
+<img alt="Gran Sirai" src="gran_sirai.jpg"/>
 <h3>Gran Sirai</h3>
 <button class="discover-btn">Scopri →</button>
 </div>
@@ -712,7 +715,7 @@ nav a.active-link {
 <!-- CARD PRODOTTO: Cuor di Latte -->
 <div class="product-card">
 <div class="product-front">
-<img alt="Cuor di Latte" src="prodotti/cuor-di-latte.jpg"/>
+<img alt="Cuor di Latte" src="cuor_di_latte.jpg"/>
 <h3>Cuor di Latte</h3>
 <button class="discover-btn">Scopri →</button>
 </div>
@@ -730,7 +733,7 @@ nav a.active-link {
 <!-- CARD PRODOTTO: Crablu -->
 <div class="product-card">
 <div class="product-front">
-<img alt="Crablu" src="prodotti/crablu.jpg"/>
+<img alt="Crablu" src="crablu.jpg"/>
 <h3>Crablu</h3>
 <button class="discover-btn">Scopri →</button>
 </div>
@@ -748,7 +751,7 @@ nav a.active-link {
 <!-- CARD PRODOTTO: Biancoarrosto -->
 <div class="product-card">
 <div class="product-front">
-<img alt="Biancoarrosto" src="prodotti/biancoarrosto.jpg"/>
+<img alt="Biancoarrosto" src="biancoarrosto.jpg"/>
 <h3>Biancoarrosto</h3>
 <button class="discover-btn">Scopri →</button>
 </div>
@@ -766,7 +769,7 @@ nav a.active-link {
 <!-- CARD PRODOTTO: Cuore Sulcis -->
 <div class="product-card">
 <div class="product-front">
-<img alt="Cuore Sulcis" src="prodotti/cuore-sulcis.jpg"/>
+<img alt="Cuore Sulcis" src="cuore.jpg"/>
 <h3>Cuore Sulcis</h3>
 <button class="discover-btn">Scopri →</button>
 </div>
@@ -784,7 +787,7 @@ nav a.active-link {
 <!-- CARD PRODOTTO: Nuraghe -->
 <div class="product-card">
 <div class="product-front">
-<img alt="Nuraghe" src="prodotti/nuraghe.jpg"/>
+<img alt="Nuraghe" src="nuraghe.jpg"/>
 <h3>Nuraghe</h3>
 <button class="discover-btn">Scopri →</button>
 </div>
@@ -802,7 +805,7 @@ nav a.active-link {
 <!-- CARD PRODOTTO: Provola Orotelli -->
 <div class="product-card">
 <div class="product-front">
-<img alt="Provola Orotelli" src="prodotti/provola-orotelli.jpg"/>
+<img alt="Provola Orotelli" src="provola_orotelli.jpg"/>
 <h3>Provola Orotelli</h3>
 <button class="discover-btn">Scopri →</button>
 </div>
@@ -820,7 +823,7 @@ nav a.active-link {
 <!-- CARD PRODOTTO: Sirai Gigante -->
 <div class="product-card">
 <div class="product-front">
-<img alt="Sirai Gigante" src="prodotti/sirai-gigante.jpg"/>
+<img alt="Sirai Gigante" src="sirai_gigante.jpg"/>
 <h3>Sirai Gigante</h3>
 <button class="discover-btn">Scopri →</button>
 </div>
@@ -838,7 +841,7 @@ nav a.active-link {
 <!-- CARD PRODOTTO: Sulcitano -->
 <div class="product-card">
 <div class="product-front">
-<img alt="Sulcitano" src="prodotti/sulcitano.jpg"/>
+<img alt="Sulcitano" src="sulcitano.jpg"/>
 <h3>Sulcitano</h3>
 <button class="discover-btn">Scopri →</button>
 </div>
@@ -856,7 +859,7 @@ nav a.active-link {
 <!-- CARD PRODOTTO: Vecchio Capraro -->
 <div class="product-card">
 <div class="product-front">
-<img alt="Vecchio Capraro" src="prodotti/vecchio-capraro.jpg"/>
+<img alt="Vecchio Capraro" src="vecchio_capraro.jpg"/>
 <h3>Vecchio Capraro</h3>
 <button class="discover-btn">Scopri →</button>
 </div>
